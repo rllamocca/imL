@@ -1,4 +1,4 @@
-﻿#if (NET45 || NETSTANDARD1_0 || NETSTANDARD1_1 || NETSTANDARD1_2 || NETSTANDARD1_3 || NETSTANDARD2_0)
+﻿#if (NET35 || NET40) == false
 using System.Threading;
 using System.Threading.Tasks;
 #endif
@@ -11,14 +11,14 @@ namespace imL.Contract
     {
         int TimeOut { set; get; }
         bool Constraints { set; get; }
-#if (NET45 || NETSTANDARD1_0 || NETSTANDARD1_1 || NETSTANDARD1_2 || NETSTANDARD1_3 || NETSTANDARD2_0)
+#if (NET35 || NET40) == false
         CancellationToken Token { set; get; }
 #endif
 
         void Open();
         void Close();
 
-#if (NET45 || NETSTANDARD1_0 || NETSTANDARD1_1 || NETSTANDARD1_2 || NETSTANDARD1_3 || NETSTANDARD2_0)
+#if (NET35 || NET40) == false
         Task OpenAsync();
 #endif
     }

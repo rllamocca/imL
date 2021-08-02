@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>0.8.8.8</Version>
+		<Version>0.8.8.9</Version>
 		<Authors>r.llamocca@outlook.com</Authors>
 		<Company>imL</Company>
 		<Description>Not so free tools.</Description>
@@ -19,16 +19,15 @@
 			net35
 			;net40
 			;net45
-			;netstandard1.0
-			;netstandard1.1
-			;netstandard1.2
-			;netstandard1.3
 			;netstandard2.0
 		</TargetFrameworks>
-
-		<AssemblyVersion>1.0.0.0</AssemblyVersion>
-
-		<FileVersion>1.0.0.0</FileVersion>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\imL.Utility.Ftp\imL.Utility.Ftp.csproj" />
+		<ProjectReference Include="..\imL.Utility.Mail\imL.Utility.Mail.csproj" />
+		<ProjectReference Include="..\imL.Utility.Terminal\imL.Utility.Terminal.csproj" />
+		<ProjectReference Include="..\imL.Utility\imL.Utility.csproj" />
+	</ItemGroup>
 
 </Project>

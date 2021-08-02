@@ -11,7 +11,7 @@ namespace imL.Utility.Terminal
 {
     public static class ConsoleHelper
     {
-        public static void Init(bool _enc = true, string _title = null)
+        public static void Starts(bool _enc = true, string _title = null)
         {
             Console.WriteLine();
             if (_enc)
@@ -19,16 +19,17 @@ namespace imL.Utility.Terminal
                 Console.InputEncoding = Encoding.UTF8;
                 Console.OutputEncoding = Encoding.UTF8;
             }
-            if (_title != null)
+            if (_title.HasValue())
                 Console.Title = _title;
 
             Console.WriteLine(@" Start the magic trick ... ♪♫ ");
             Console.WriteLine();
         }
 
-        public static void End(bool _rk = false, bool _card = true)
+        public static void Ends(bool _rk = false, bool _card = true)
         {
             Console.WriteLine();
+
             if (_card)
                 Console.WriteLine(@" ♫♪ ... {0}", StringHelper.MyFortuneCard());
             else
@@ -39,6 +40,7 @@ namespace imL.Utility.Terminal
                 Console.WriteLine(@" (Press any key to exit) ");
                 Console.ReadKey();
             }
+
             Console.WriteLine();
         }
 
