@@ -35,6 +35,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{65AF
 		content\readme.txt = content\readme.txt
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL", "src\imL\imL.csproj", "{621560F2-6F8C-4452-AB58-F06DF7C04F94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{9BB4EAC8-D9D0-4BA8-8E3A-CAF105903E0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BB4EAC8-D9D0-4BA8-8E3A-CAF105903E0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BB4EAC8-D9D0-4BA8-8E3A-CAF105903E0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{621560F2-6F8C-4452-AB58-F06DF7C04F94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{621560F2-6F8C-4452-AB58-F06DF7C04F94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{621560F2-6F8C-4452-AB58-F06DF7C04F94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{621560F2-6F8C-4452-AB58-F06DF7C04F94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,6 +97,7 @@ Global
 		{5607B621-4243-465F-9C9F-206BB066D938} = {2F6DC260-3FAB-412D-BDB9-E7B3B0CC5F75}
 		{863C0135-F1DB-4709-B366-2B329F245E9D} = {2F6DC260-3FAB-412D-BDB9-E7B3B0CC5F75}
 		{9BB4EAC8-D9D0-4BA8-8E3A-CAF105903E0B} = {2F6DC260-3FAB-412D-BDB9-E7B3B0CC5F75}
+		{621560F2-6F8C-4452-AB58-F06DF7C04F94} = {2F6DC260-3FAB-412D-BDB9-E7B3B0CC5F75}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {54DB6333-0D76-4704-9E07-04D8AB0D02CA}
