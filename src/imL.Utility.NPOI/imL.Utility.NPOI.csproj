@@ -17,6 +17,11 @@
 		</TargetFrameworks>
 	</PropertyGroup>
 
+	<ItemGroup>
+		<ProjectReference Include="..\imL.Core\imL.Core.csproj" />
+		<ProjectReference Include="..\imL.Utility\imL.Utility.csproj" />
+	</ItemGroup>
+
 	<ItemGroup Condition="'$(TargetFramework)' == 'net35'">
 		<PackageReference Include="NPOI">
 			<Version>2.3.0</Version>
@@ -37,9 +42,4 @@
 			<Version>2.5.*</Version>
 		</PackageReference>
 	</ItemGroup>
-	<ItemGroup>
-	  <ProjectReference Include="..\imL.Core\imL.Core.csproj" />
-	  <ProjectReference Include="..\imL.Utility\imL.Utility.csproj" />
-	</ItemGroup>
-
 </Project>

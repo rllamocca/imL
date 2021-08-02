@@ -18,6 +18,10 @@
 		</TargetFrameworks>
 	</PropertyGroup>
 
+	<ItemGroup>
+		<ProjectReference Include="..\imL.Core\imL.Core.csproj" />
+	</ItemGroup>
+
 	<ItemGroup Condition="'$(TargetFramework)' == 'net35'">
 		<Reference Include="MySql.Data">
 			<HintPath>rsrc\dll\MySql.Data.dll</HintPath>
@@ -43,8 +47,4 @@
 			<Version>8.0.*</Version>
 		</PackageReference>
 	</ItemGroup>
-	<ItemGroup>
-	  <ProjectReference Include="..\imL.Core\imL.Core.csproj" />
-	</ItemGroup>
-
 </Project>

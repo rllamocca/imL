@@ -18,6 +18,10 @@
 		</TargetFrameworks>
 	</PropertyGroup>
 
+	<ItemGroup>
+		<ProjectReference Include="..\imL.Core\imL.Core.csproj" />
+	</ItemGroup>
+
 	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.3'">
 		<PackageReference Include="System.Data.SqlClient">
 			<Version>4.8.*</Version>
@@ -28,8 +32,4 @@
 			<Version>4.8.*</Version>
 		</PackageReference>
 	</ItemGroup>
-	<ItemGroup>
-	  <ProjectReference Include="..\imL.Core\imL.Core.csproj" />
-	</ItemGroup>
-
 </Project>
