@@ -9,21 +9,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2F6DC260-3FA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL.Core", "src\imL.Core\imL.Core.csproj", "{A59B8701-A310-46C0-800E-65D193489650}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "imL.Utility", "src\imL.Utility\imL.Utility.csproj", "{B8672A8D-22F9-4AF1-8522-33200F513AF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL.Utility", "src\imL.Utility\imL.Utility.csproj", "{B8672A8D-22F9-4AF1-8522-33200F513AF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "imL.Utility.Http", "src\imL.Utility.Http\imL.Utility.Http.csproj", "{38153D87-7485-471C-BB1E-CFF543AEF81A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL.Utility.Http", "src\imL.Utility.Http\imL.Utility.Http.csproj", "{38153D87-7485-471C-BB1E-CFF543AEF81A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL.Utility.Ftp", "src\imL.Utility.Ftp\imL.Utility.Ftp.csproj", "{5B9FCA96-E458-4DF0-ACD9-65904988C08D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "imL.Utility.Mail", "src\imL.Utility.Mail\imL.Utility.Mail.csproj", "{E1602C3E-2ECD-4546-AA25-AA87DC4B01F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL.Utility.Mail", "src\imL.Utility.Mail\imL.Utility.Mail.csproj", "{E1602C3E-2ECD-4546-AA25-AA87DC4B01F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "imL.Utility.MySql", "src\imL.Utility.MySql\imL.Utility.MySql.csproj", "{9BF59078-ADBA-481B-92FE-99C4D7F84449}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL.Utility.MySql", "src\imL.Utility.MySql\imL.Utility.MySql.csproj", "{9BF59078-ADBA-481B-92FE-99C4D7F84449}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "imL.Utility.NPOI", "src\imL.Utility.NPOI\imL.Utility.NPOI.csproj", "{5607B621-4243-465F-9C9F-206BB066D938}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL.Utility.NPOI", "src\imL.Utility.NPOI\imL.Utility.NPOI.csproj", "{5607B621-4243-465F-9C9F-206BB066D938}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "imL.Utility.Terminal", "src\imL.Utility.Terminal\imL.Utility.Terminal.csproj", "{863C0135-F1DB-4709-B366-2B329F245E9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL.Utility.Terminal", "src\imL.Utility.Terminal\imL.Utility.Terminal.csproj", "{863C0135-F1DB-4709-B366-2B329F245E9D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL.Utility.Sql", "src\imL.Utility.Sql\imL.Utility.Sql.csproj", "{9BB4EAC8-D9D0-4BA8-8E3A-CAF105903E0B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspecs", "nuspecs", "{BA93C0E3-1040-4346-B971-67A81D81DB8E}"
+	ProjectSection(SolutionItems) = preProject
+		nuspecs\imL.Core.nuspec = nuspecs\imL.Core.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{65AF9E2E-0008-4209-8527-77B8848F70D2}"
+	ProjectSection(SolutionItems) = preProject
+		content\readme.txt = content\readme.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

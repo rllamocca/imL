@@ -1,11 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>0.0.0.1</Version>
-		<Authors>rllamocca@outlook.com</Authors>
+		<Version>0.0.0.2</Version>
+		<Authors>r.llamocca@outlook.com</Authors>
 		<Company>imL</Company>
 		<Description>Not so free tools.</Description>
 		<Copyright>© 1984 - 8888</Copyright>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>imL iml.Utility.Terminal terminal console shell utilities</PackageTags>
+		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
@@ -19,7 +25,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\imL.Core\imL.Core.csproj" />
+		<ProjectReference Include="..\imL.Core\imL.Core.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package>
+	<metadata>
+		<id>imL.Core</id>
+		<version>0.0.0.1</version>
+		<title>imL.Core</title>
+		<authors>Ricardo Llamocca</authors>
+		<owners>r.llamocca@outlook.com</owners>
+		<projectUrl>https://github.com/rllamocca/imL</projectUrl>
+		<repository type="git" url="https://github.com/rllamocca/imL.git" />
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<licenseUrl>https://github.com/rllamocca/imL/master/LICENSE.md</licenseUrl>
+		<summary>summary.</summary>
+		<description>
+			description.
+		</description>
+		<copyright>© 1984 - 8888</copyright>
+		<tags></tags>
+		<releaseNotes>
+			releaseNotes.
+		</releaseNotes>
+		<dependencies>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="content\readme.txt" target="readme.txt" />
+	</files>
+</package>
