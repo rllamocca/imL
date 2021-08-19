@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\imL.Rest.Frotcom\imL.Rest.Frotcom.csproj" />
+    <ProjectReference Include="..\imL.Rest.Google\imL.Rest.Google.csproj" />
+  </ItemGroup>
+
+</Project>
