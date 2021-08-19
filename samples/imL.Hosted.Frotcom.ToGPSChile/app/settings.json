@@ -1,0 +1,27 @@
+{
+  "GPSProvider": null,
+  "GPSProviderRUT": null,
+  "GPSProviderDV": null,
+  "Supplier": null,
+  "SupplierRUT": null,
+  "SupplierDV": null,
+  "Endpoint": {
+    "Endpoint": null,
+    "UserName": null,
+    "Password": null,
+    "Period": 30
+  },
+  "Google": {
+    "URI": null,
+    "Key": null
+  },
+  "Frotcom": {
+    "URI": null,
+    "Authorize": {
+      "provider": null,
+      "username": null,
+      "password": null
+    },
+    "LicensePlates": null
+  }
+}

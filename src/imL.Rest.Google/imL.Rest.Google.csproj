@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>0.8.8.9</Version>
+		<Version>0.0.0.1</Version>
 		<Authors>r.llamocca@outlook.com</Authors>
 		<Company>imL</Company>
 		<Description>Not so free tools.</Description>
@@ -10,16 +10,20 @@
 		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>imL iml.Utility.Http http utilities</PackageTags>
+		<PackageTags>imL iml.Rest.Google Rest Google Maps</PackageTags>
 		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-
-		<TargetFramework>netstandard1.1</TargetFramework>
+		
+		<TargetFrameworks>netstandard2.0</TargetFrameworks>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\imL.Core\imL.Core.csproj" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\imL.Utility.Http\imL.Utility.Http.csproj" />
 	</ItemGroup>
 
 </Project>
