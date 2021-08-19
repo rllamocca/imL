@@ -2,7 +2,7 @@
 
 using imL.Rest.Frotcom.Schema;
 
-namespace imL.Rest.Frotcom.imL
+namespace imL.Rest.Frotcom
 {
     public class FrotcomClient
     {

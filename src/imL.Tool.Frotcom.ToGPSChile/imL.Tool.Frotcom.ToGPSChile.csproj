@@ -1,12 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
-  </PropertyGroup>
+	<PropertyGroup>
+		<Version>0.0.0.1</Version>
+		<Authors>r.llamocca@outlook.com</Authors>
+		<Company>imL</Company>
+		<Description>Not so free tools.</Description>
+		<Copyright>© 1984 - 8888</Copyright>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>imL iml.Tool.Frotcom.GPSChile Tool Frotcom GPSChile</PackageTags>
+		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
 
-  <ItemGroup>
-    <ProjectReference Include="..\imL.Rest.Frotcom\imL.Rest.Frotcom.csproj" />
-    <ProjectReference Include="..\imL.Rest.Google\imL.Rest.Google.csproj" />
-  </ItemGroup>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		
+		<TargetFrameworks>netstandard2.0</TargetFrameworks>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\imL.Rest.Frotcom\imL.Rest.Frotcom.csproj" />
+		<ProjectReference Include="..\imL.Rest.Google\imL.Rest.Google.csproj" />
+	</ItemGroup>
 
 </Project>

@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-using imL.Rest.Frotcom.imL;
 using imL.Rest.Frotcom.Schema;
 
 using Newtonsoft.Json;
@@ -25,6 +24,9 @@ namespace imL.Rest.Frotcom
                 _token = await FrotcomV2Helper.AuthorizeUser(_client, _auth.Authorize);
                 File.WriteAllText(_path, JsonConvert.SerializeObject(_token));
 
+                if (_token == null || string.IsNullOrWhiteSpace(_token.token))
+                    throw new Exception("RetriveToken null");
+
                 return _token;
             }
             else
@@ -36,6 +38,9 @@ namespace imL.Rest.Frotcom
                 {
                     _token = await FrotcomV2Helper.AuthorizeUser(_client, _auth.Authorize);
                     File.WriteAllText(_path, JsonConvert.SerializeObject(_token));
+
+                    if (_token == null || string.IsNullOrWhiteSpace(_token.token))
+                        throw new Exception("RetriveToken null");
 
                     return _token;
                 }
@@ -51,7 +56,7 @@ namespace imL.Rest.Frotcom
                 _res.EnsureSuccessStatusCode();
                 string _body = await _res.Content.ReadAsStringAsync();
 
-                if (_body == null)
+                if (string.IsNullOrWhiteSpace(_body))
                     throw new Exception("ReadAsStringAsync null");
 
                 Authorize _return = JsonConvert.DeserializeObject<Authorize>(_body);
@@ -66,25 +71,17 @@ namespace imL.Rest.Frotcom
 
             StringContent _content = new StringContent(_token, Encoding.UTF8, "application/json");
 
-            try
+            using (HttpResponseMessage _res = await _client.Http.PutAsync(_client.URI + "/v2/authorize", _content))
             {
-                using (HttpResponseMessage _res = await _client.Http.PutAsync(_client.URI + "/v2/authorize", _content))
-                {
-                    _res.EnsureSuccessStatusCode();
-                    string _body = await _res.Content.ReadAsStringAsync();
+                _res.EnsureSuccessStatusCode();
+                string _body = await _res.Content.ReadAsStringAsync();
 
-                    if (_body == null)
-                        throw new Exception("ReadAsStringAsync null");
+                if (string.IsNullOrWhiteSpace(_body))
+                    throw new Exception("ReadAsStringAsync null");
 
-                    Authorize _return = JsonConvert.DeserializeObject<Authorize>(_body);
-                    return _return;
-                }
+                Authorize _return = JsonConvert.DeserializeObject<Authorize>(_body);
+                return _return;
             }
-            catch (Exception _ex)
-            {
-                return new Authorize();
-            }
-
         }
 
         public async static Task<Vehicle[]> GetVehicles(FrotcomClient _client)
@@ -107,29 +104,22 @@ namespace imL.Rest.Frotcom
         }
         public async static Task<Location[]> GetVehicleLocations(FrotcomClient _client, Vehicle _vehicle)
         {
-            try
+            DateTime _now = DateTime.Now;
+
+            string _uri = _client.URI + "/v2/vehicles/{1}/locations?api_key={0}&df={2}%3a{3}&allPositions=true&loadLastPosition=true";
+            _uri = string.Format(_uri, _client.Authorize.token, _vehicle.id, _now.ToUniversalTime().ToString("HH"), _now.ToUniversalTime().ToString("mm"));
+
+            using (HttpResponseMessage _res = await _client.Http.GetAsync(_uri))
             {
-                DateTime _now = DateTime.Now;
+                _res.EnsureSuccessStatusCode();
+                string _body = await _res.Content.ReadAsStringAsync();
 
-                string _uri = _client.URI + "/v2/vehicles/{1}/locations?api_key={0}&df={2}%3a{3}&allPositions=true&loadLastPosition=true";
-                _uri = string.Format(_uri, _client.Authorize.token, _vehicle.id, _now.ToUniversalTime().ToString("HH"), _now.ToUniversalTime().ToString("mm"));
+                if (string.IsNullOrWhiteSpace(_body))
+                    throw new Exception("ReadAsStringAsync null");
 
-                using (HttpResponseMessage _res = await _client.Http.GetAsync(_uri))
-                {
-                    _res.EnsureSuccessStatusCode();
-                    string _body = await _res.Content.ReadAsStringAsync();
+                Location[] _return = JsonConvert.DeserializeObject<Location[]>(_body);
 
-                    if (_body == null)
-                        throw new Exception("ReadAsStringAsync null");
-
-                    Location[] _return = JsonConvert.DeserializeObject<Location[]>(_body);
-
-                    return _return;
-                }
-            }
-            catch (Exception _ex)
-            {
-                return null;
+                return _return;
             }
         }
         public async static Task<Account> GetAccount(FrotcomClient _client)
@@ -142,7 +132,7 @@ namespace imL.Rest.Frotcom
                 _res.EnsureSuccessStatusCode();
                 string _body = await _res.Content.ReadAsStringAsync();
 
-                if (_body == null)
+                if (string.IsNullOrWhiteSpace(_body))
                     throw new Exception("ReadAsStringAsync null");
 
                 Account _return = JsonConvert.DeserializeObject<Account>(_body);

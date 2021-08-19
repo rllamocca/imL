@@ -1,15 +1,29 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
-  </PropertyGroup>
+	<PropertyGroup>
+		<Version>0.0.0.1</Version>
+		<Authors>r.llamocca@outlook.com</Authors>
+		<Company>imL</Company>
+		<Description>Not so free tools.</Description>
+		<Copyright>© 1984 - 8888</Copyright>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>imL iml.Rest.Frotcom Rest Frotcom</PackageTags>
+		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
 
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
-  <ItemGroup>
-    <ProjectReference Include="..\imL.Utility.Http\imL.Utility.Http.csproj" />
-  </ItemGroup>
+		<TargetFrameworks>netstandard2.0</TargetFrameworks>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\imL.Utility.Http\imL.Utility.Http.csproj" />
+	</ItemGroup>
 
 </Project>
