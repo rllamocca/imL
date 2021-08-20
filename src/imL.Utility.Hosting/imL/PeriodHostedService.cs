@@ -14,8 +14,8 @@ namespace imL.Utility.Hosting
     {
         private bool _DISPOSED = false;
 
-        private readonly IPeriodSetting _SETTING;
-        private readonly IPeriodWork _SERVICE;
+        private readonly IHostPeriodWork _WORKER;
+        private readonly IHostPeriodSetting _SETTING;
         private readonly ILogger<PeriodHostedService> _LOGGER;
 
         private long _EXECUTION_COUNT;
@@ -24,25 +24,25 @@ namespace imL.Utility.Hosting
         private async void DoWork(object _state)
         {
             long _count = Interlocked.Increment(ref this._EXECUTION_COUNT);
-            this._LOGGER?.LogInformation("WORKING DO: {_count}", _count);
+            this._LOGGER?.LogDebug("WORKING DO: {_count}", _count);
 
-            await this._SERVICE?.DoWork(this._LOGGER);
+            await this._WORKER?.DoWork(this._SETTING, this._LOGGER);
 
             this._LOGGER?.LogInformation("STANDING WORK: {_count}", _count);
         }
 
 
         public PeriodHostedService(
-            IPeriodSetting _sett,
             IServiceProvider _services,
+            IHostPeriodSetting _sett,
             ILogger<PeriodHostedService> _logger
             )
         {
+            using (IServiceScope _scope = _services.CreateScope())
+                this._WORKER = _scope.ServiceProvider.GetRequiredService<IHostPeriodWork>();
+
             this._SETTING = _sett;
             this._LOGGER = _logger;
-
-            using (IServiceScope _scope = _services.CreateScope())
-                this._SERVICE = _scope.ServiceProvider.GetRequiredService<IPeriodWork>();
         }
         public Task StartAsync(CancellationToken _ct)
         {

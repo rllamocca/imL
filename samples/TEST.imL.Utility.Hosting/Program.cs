@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 using imL.Contract.Hosting;
 using imL.Utility.Hosting;
@@ -18,14 +17,16 @@ namespace TEST.imL.Utility.Hosting
         {
             //ConsoleHelper.Starts();
 
+            _args = new string[] { "Richie", "Tepes" };
+
             AppLocked.Init(_args);
             await CreateHostBuilder(_args).RunConsoleAsync();
 
-//#if DEBUG
-//            ConsoleHelper.PressAnyKeyToExit();
-//#else
-//            ConsoleHelper.Ends();
-//#endif
+            //#if DEBUG
+            //            ConsoleHelper.PressAnyKeyToExit();
+            //#else
+            //            ConsoleHelper.Ends();
+            //#endif
         }
 
         static IHostBuilder CreateHostBuilder(string[] _args)
@@ -44,8 +45,8 @@ namespace TEST.imL.Utility.Hosting
                 })
                 .ConfigureServices(_ss =>
                 {
-                    _ss.AddSingleton<IHostSetting, HostedSetting>(_s => AppLocked.Setting.Hosted);
-                    _ss.AddScoped<IPeriodWork, TestWork>();
+                    _ss.AddSingleton<IHostPeriodSetting, HostedSetting>(_s => AppLocked.Setting.Hosted);
+                    _ss.AddScoped<IHostPeriodWork, TestWork>();
                     _ss.AddHostedService<PeriodHostedService>();
                 });
         }

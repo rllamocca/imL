@@ -7,7 +7,7 @@ namespace TEST.imL.Utility.Hosting
         public HostedSetting Hosted { set; get; }
     }
 
-    public class HostedSetting : IPeriodSetting
+    public class HostedSetting : IHostPeriodSetting
     {
         public string[] Args { set; get; }
         public double Period { set; get; }

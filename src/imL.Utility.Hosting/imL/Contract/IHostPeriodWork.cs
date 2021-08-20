@@ -4,8 +4,8 @@ using Microsoft.Extensions.Logging;
 
 namespace imL.Contract.Hosting
 {
-    public interface IPeriodWork
+    public interface IHostPeriodWork
     {
-        Task DoWork(ILogger _logger);
+        Task DoWork(IHostPeriodSetting _setting, ILogger _logger);
     }
 }
