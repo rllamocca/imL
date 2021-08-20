@@ -9,7 +9,6 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
-    <PackageReference Include="NLog" Version="4.7.11" />
     <PackageReference Include="NLog.Extensions.Logging" Version="1.7.3" />
     <PackageReference Include="System.ServiceModel.Duplex" Version="4.8.*" />
     <PackageReference Include="System.ServiceModel.Http" Version="4.8.*" />
@@ -24,7 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\imL.Tool.Frotcom.ToGPSChile\imL.Tool.Frotcom.ToGPSChile.csproj" />
+    <ProjectReference Include="..\..\src\imL.Rest.Frotcom\imL.Rest.Frotcom.csproj" />
+    <ProjectReference Include="..\..\src\imL.Rest.Google\imL.Rest.Google.csproj" />
+    <ProjectReference Include="..\..\src\imL.Utility.Hosting\imL.Utility.Hosting.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -10,7 +10,7 @@
 		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>imL imL.Core utilities</PackageTags>
+		<PackageTags>imL imL.Core</PackageTags>
 		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>

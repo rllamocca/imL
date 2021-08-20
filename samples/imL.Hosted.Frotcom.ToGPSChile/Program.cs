@@ -2,6 +2,9 @@
 using System.Text;
 using System.Threading.Tasks;
 
+using imL.Utility.Contract.Hosting;
+using imL.Utility.Hosting;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -43,6 +46,8 @@ var config = new ConfigurationBuilder()
                 })
                 .ConfigureServices(_ss =>
                 {
+                    _ss.AddSingleton<IPeriodSetting, PeriodSetting>(_s => AppLocked.Setting.Period);
+                    _ss.AddScoped<IPeriodWork, TestWork>();
                     _ss.AddHostedService<PeriodHostedService>();
                 });
         }

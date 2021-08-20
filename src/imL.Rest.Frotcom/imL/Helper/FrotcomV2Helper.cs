@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,11 +59,9 @@ namespace imL.Rest.Frotcom
                 string _body = await _res.Content.ReadAsStringAsync();
 
                 if (string.IsNullOrWhiteSpace(_body))
-                    throw new Exception("ReadAsStringAsync null");
+                    return null;
 
-                Authorize _return = JsonConvert.DeserializeObject<Authorize>(_body);
-
-                return _return;
+                return JsonConvert.DeserializeObject<Authorize>(_body);
             }
         }
 
@@ -77,13 +77,11 @@ namespace imL.Rest.Frotcom
                 string _body = await _res.Content.ReadAsStringAsync();
 
                 if (string.IsNullOrWhiteSpace(_body))
-                    throw new Exception("ReadAsStringAsync null");
+                    return null;
 
-                Authorize _return = JsonConvert.DeserializeObject<Authorize>(_body);
-                return _return;
+                return JsonConvert.DeserializeObject<Authorize>(_body);
             }
         }
-
         public async static Task<Vehicle[]> GetVehicles(FrotcomClient _client)
         {
             string _uri = _client.URI + "/v2/vehicles?api_key={0}";
@@ -95,13 +93,12 @@ namespace imL.Rest.Frotcom
                 string _body = await _res.Content.ReadAsStringAsync();
 
                 if (string.IsNullOrWhiteSpace(_body))
-                    throw new Exception("ReadAsStringAsync null");
+                    return null;
 
-                Vehicle[] _return = JsonConvert.DeserializeObject<Vehicle[]>(_body);
-
-                return _return;
+                return JsonConvert.DeserializeObject<Vehicle[]>(_body);
             }
         }
+
         public async static Task<Location[]> GetVehicleLocations(FrotcomClient _client, Vehicle _vehicle)
         {
             DateTime _now = DateTime.Now;
@@ -115,11 +112,9 @@ namespace imL.Rest.Frotcom
                 string _body = await _res.Content.ReadAsStringAsync();
 
                 if (string.IsNullOrWhiteSpace(_body))
-                    throw new Exception("ReadAsStringAsync null");
+                    return null;
 
-                Location[] _return = JsonConvert.DeserializeObject<Location[]>(_body);
-
-                return _return;
+                return JsonConvert.DeserializeObject<Location[]>(_body);
             }
         }
         public async static Task<Account> GetAccount(FrotcomClient _client)
@@ -133,12 +128,43 @@ namespace imL.Rest.Frotcom
                 string _body = await _res.Content.ReadAsStringAsync();
 
                 if (string.IsNullOrWhiteSpace(_body))
-                    throw new Exception("ReadAsStringAsync null");
+                    return null;
 
-                Account _return = JsonConvert.DeserializeObject<Account>(_body);
-
-                return _return;
+                return JsonConvert.DeserializeObject<Account>(_body);
             }
+        }
+
+        public async static Task<Dough[]> Prepare(FormatFrotcom _setting, FrotcomClient _frotcom)
+        {
+            Vehicle[] _vehicles = await FrotcomV2Helper.GetVehicles(_frotcom);
+            if (_vehicles == null || _vehicles.Length == 0)
+                return null;
+
+            string[] _licenseplates = _vehicles.Select(_s => _s.licensePlate).ToArray();
+
+            //_logger.LogDebug("_licenseplates:");
+            //_logger.LogDebug(JsonConvert.SerializeObject(_licenseplates));
+
+            List<Dough> _return = new List<Dough>();
+
+            foreach (Vehicle _item in _vehicles)
+            {
+                if (_item.lastCommunication.HasValue == false)
+                    continue;
+
+                if (_setting.LicensePlates != null)
+                    if (Array.Exists(_setting.LicensePlates, _w => _w == _item.licensePlate) == false)
+                        continue;
+
+                Location[] _locations = await FrotcomV2Helper.GetVehicleLocations(_frotcom, _item);
+                Location _location = null;
+                if (_locations != null)
+                    _location = _locations.FirstOrDefault();
+
+                _return.Add(new Dough(_item, _location));
+            }
+
+            return _return.ToArray();
         }
     }
 }

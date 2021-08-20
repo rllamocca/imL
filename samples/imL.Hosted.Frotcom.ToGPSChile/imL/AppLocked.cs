@@ -4,8 +4,6 @@ using System.Net.Http;
 using System.ServiceModel;
 using System.Text.Json;
 
-using imL.Tool.Frotcom.ToGPSChile;
-
 using NLog;
 
 using SOAP_Registro;

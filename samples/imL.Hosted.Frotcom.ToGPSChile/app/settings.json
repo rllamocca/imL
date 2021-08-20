@@ -8,7 +8,9 @@
   "Endpoint": {
     "Endpoint": null,
     "UserName": null,
-    "Password": null,
+    "Password": null
+  },
+  "Period": {
     "Period": 30
   },
   "Google": {
