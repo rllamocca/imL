@@ -1,6 +1,6 @@
-﻿namespace imL.Utility.Contract.Hosting
+﻿namespace imL.Contract.Hosting
 {
-    public interface IPeriodSetting
+    public interface IPeriodSetting : IHostSetting
     {
         double Period { set; get; }
     }

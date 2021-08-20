@@ -1,6 +1,6 @@
-﻿using imL.Rest.Frotcom;
+﻿using imL.Contract.Hosting;
+using imL.Rest.Frotcom;
 using imL.Rest.Google;
-using imL.Utility.Contract.Hosting;
 using imL.Utility.Http;
 
 namespace imL.Hosted.Frotcom.ToGPSChile
@@ -14,14 +14,15 @@ namespace imL.Hosted.Frotcom.ToGPSChile
         public string SupplierRUT { set; get; }
         public string SupplierDV { set; get; }
 
-        public PeriodSetting Period { set; get; }
+        public HostedSetting Hosted { set; get; }
         public FormatEndpoint Endpoint { set; get; }
         public FormatGoogle Google { set; get; }
         public FormatFrotcom Frotcom { set; get; }
     }
 
-    public class PeriodSetting : IPeriodSetting
+    public class HostedSetting : IPeriodSetting
     {
+        public string[] Args { set; get; }
         public double Period { set; get; }
     }
 }

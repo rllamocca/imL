@@ -2,7 +2,7 @@
 
 using Microsoft.Extensions.Logging;
 
-namespace imL.Utility.Contract.Hosting
+namespace imL.Contract.Hosting
 {
     public interface IPeriodWork
     {

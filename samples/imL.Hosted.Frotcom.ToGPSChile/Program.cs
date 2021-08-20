@@ -2,7 +2,7 @@
 using System.Text;
 using System.Threading.Tasks;
 
-using imL.Utility.Contract.Hosting;
+using imL.Contract.Hosting;
 using imL.Utility.Hosting;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -25,7 +25,7 @@ var config = new ConfigurationBuilder()
 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
 .Build();
              */
-            AppLocked.Init();
+            AppLocked.Init(_args);
 
             await CreateHostBuilder(_args).RunConsoleAsync();
         }
@@ -46,7 +46,7 @@ var config = new ConfigurationBuilder()
                 })
                 .ConfigureServices(_ss =>
                 {
-                    _ss.AddSingleton<IPeriodSetting, PeriodSetting>(_s => AppLocked.Setting.Period);
+                    _ss.AddSingleton<IHostSetting, HostedSetting>(_s => AppLocked.Setting.Hosted);
                     _ss.AddScoped<IPeriodWork, TestWork>();
                     _ss.AddHostedService<PeriodHostedService>();
                 });

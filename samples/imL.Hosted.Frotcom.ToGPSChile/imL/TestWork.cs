@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-using imL.Utility.Contract.Hosting;
+using imL.Contract.Hosting;
 
 using Microsoft.Extensions.Logging;
 

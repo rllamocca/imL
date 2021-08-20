@@ -34,7 +34,7 @@ namespace imL.Hosted.Frotcom.ToGPSChile
         public static RegistroClient Soap { get { lock (AppLocked._LOCKED) { return AppLocked._SOAP; } } }
 
 
-        public static void Init(string _basedirectory = null, bool _tmpdefault = false)
+        public static void Init(string[] _args, string _basedirectory = null, bool _tmpdefault = false)
         {
             if (string.IsNullOrWhiteSpace(_basedirectory))
                 _basedirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "app");
@@ -48,6 +48,7 @@ namespace imL.Hosted.Frotcom.ToGPSChile
                 AppLocked._PATH_APP_TMP = Path.Combine(AppLocked._PATH_APP, "tmp"); ;
 
             AppLocked._SETTING = JsonSerializer.Deserialize<Settings>(File.ReadAllText(Path.Combine(AppLocked._PATH_APP, "settings.json")));
+            AppLocked._SETTING.Hosted.Args = _args;
             AppLocked._HTTP = new HttpClient();
 
             AppLocked._SOAP = new();

@@ -140,11 +140,6 @@ namespace imL.Rest.Frotcom
             if (_vehicles == null || _vehicles.Length == 0)
                 return null;
 
-            string[] _licenseplates = _vehicles.Select(_s => _s.licensePlate).ToArray();
-
-            //_logger.LogDebug("_licenseplates:");
-            //_logger.LogDebug(JsonConvert.SerializeObject(_licenseplates));
-
             List<Dough> _return = new List<Dough>();
 
             foreach (Vehicle _item in _vehicles)

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>0.8.8.9</Version>
+		<Version>0.8.8.10</Version>
 		<Authors>r.llamocca@outlook.com</Authors>
 		<Company>imL</Company>
 		<Description>Not so free tools.</Description>
@@ -10,7 +10,7 @@
 		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>imL iml.Utility.Terminal utilities terminal console shell</PackageTags>
+		<PackageTags>imL imL.Utility.Terminal utilities terminal console shell</PackageTags>
 		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
