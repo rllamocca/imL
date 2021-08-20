@@ -13,19 +13,22 @@ namespace imL.Utility.Terminal
     {
         public static void Starts(bool _enc = true, string _title = null)
         {
-            Console.WriteLine();
             if (_enc)
             {
                 Console.InputEncoding = Encoding.UTF8;
                 Console.OutputEncoding = Encoding.UTF8;
             }
+
             if (_title.HasValue())
                 Console.Title = _title;
 
-            Console.WriteLine(@" Start the magic trick ... ♪♫ ");
-            Console.WriteLine();
+            Console.WriteLine(Environment.NewLine + @" Start the magic trick ... ♪♫ " + Environment.NewLine);
         }
-
+        public static void PressAnyKeyToExit()
+        {
+            Console.WriteLine(@" (Press any key to exit) ");
+            Console.ReadKey();
+        }
         public static void Ends(bool _rk = false, bool _card = true)
         {
             Console.WriteLine();
@@ -36,10 +39,7 @@ namespace imL.Utility.Terminal
                 Console.WriteLine(@" ♫♪ ... {0}", StringHelper.MyFortune());
 
             if (_rk)
-            {
-                Console.WriteLine(@" (Press any key to exit) ");
-                Console.ReadKey();
-            }
+                ConsoleHelper.PressAnyKeyToExit();
 
             Console.WriteLine();
         }

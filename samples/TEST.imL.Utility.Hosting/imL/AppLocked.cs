@@ -1,16 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Net.Http;
-using System.ServiceModel;
 using System.Text.Json;
-
-using imL.Tool.Frotcom.ToGPSChile;
 
 using NLog;
 
-using SOAP_Registro;
-
-namespace imL.Hosted.Frotcom.ToGPSChile
+namespace TEST.imL.Utility.Hosting
 {
     public static class AppLocked
     {
@@ -23,7 +18,6 @@ namespace imL.Hosted.Frotcom.ToGPSChile
 
         private static Settings _SETTING;
         private static HttpClient _HTTP;
-        private static RegistroClient _SOAP;
 
         public static Logger Logger { get { lock (AppLocked._LOCKED) { return AppLocked._LOGGER; } } }
         public static string PathApp { get { lock (AppLocked._LOCKED) { return AppLocked._PATH_APP; } } }
@@ -33,10 +27,9 @@ namespace imL.Hosted.Frotcom.ToGPSChile
 
         public static Settings Setting { get { lock (AppLocked._LOCKED) { return AppLocked._SETTING; } } }
         public static HttpClient Http { get { lock (AppLocked._LOCKED) { return AppLocked._HTTP; } } }
-        public static RegistroClient Soap { get { lock (AppLocked._LOCKED) { return AppLocked._SOAP; } } }
 
 
-        public static void Init(string _basedirectory = null, bool _tmpdefault = false)
+        public static void Init(string[] _args, string _basedirectory = null, bool _tmpdefault = false)
         {
             if (string.IsNullOrWhiteSpace(_basedirectory))
                 _basedirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "app");
@@ -50,11 +43,8 @@ namespace imL.Hosted.Frotcom.ToGPSChile
                 AppLocked._PATH_APP_TMP = Path.Combine(AppLocked._PATH_APP, "tmp"); ;
 
             AppLocked._SETTING = JsonSerializer.Deserialize<Settings>(File.ReadAllText(Path.Combine(AppLocked._PATH_APP, "settings.json")));
+            AppLocked._SETTING.Hosted.Args = _args;
             AppLocked._HTTP = new HttpClient();
-
-            AppLocked._SOAP = new();
-            if (string.IsNullOrWhiteSpace(AppLocked._SETTING.Endpoint.Endpoint) == false)
-                AppLocked._SOAP.Endpoint.Address = new EndpointAddress(AppLocked._SETTING.Endpoint.Endpoint);
         }
     }
 }

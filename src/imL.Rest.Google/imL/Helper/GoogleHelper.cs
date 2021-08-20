@@ -25,11 +25,9 @@ namespace imL.Rest.Google
                 string _body = await _res.Content.ReadAsStringAsync();
 
                 if (string.IsNullOrWhiteSpace(_body))
-                    throw new Exception("ReadAsStringAsync null");
+                    return null;
 
-                Geocoding _return = JsonConvert.DeserializeObject<Geocoding>(_body);
-
-                return _return;
+                return JsonConvert.DeserializeObject<Geocoding>(_body); ;
             }
         }
     }

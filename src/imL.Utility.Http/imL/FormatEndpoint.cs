@@ -5,6 +5,5 @@
         public string Endpoint { set; get; }
         public string UserName { set; get; }
         public string Password { set; get; }
-        public double Period { set; get; }
     }
 }

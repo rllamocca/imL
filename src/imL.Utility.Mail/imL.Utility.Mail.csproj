@@ -10,7 +10,7 @@
 		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>imL iml.Utility.Mail smtp mail utilities</PackageTags>
+		<PackageTags>imL imL.Utility.Mail utilities smtp mail</PackageTags>
 		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>

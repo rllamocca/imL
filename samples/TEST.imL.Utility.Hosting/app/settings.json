@@ -8,8 +8,10 @@
   "Endpoint": {
     "Endpoint": null,
     "UserName": null,
-    "Password": null,
-    "Period": 30
+    "Password": null
+  },
+  "Hosted": {
+    "Period": 5
   },
   "Google": {
     "URI": null,

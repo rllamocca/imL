@@ -1,22 +1,19 @@
 ﻿using imL.Rest.Frotcom.Schema;
 
-namespace imL.Tool.Frotcom.ToGPSChile
+namespace imL.Rest.Frotcom
 {
     public class Dough
     {
         public Vehicle Vehicle { get; }
         public Location Location { get; }
-        public Rest.Google.Schema.Maps.Result Result { get; }
 
         public Dough(
             Vehicle _vehicle,
-            Location _location,
-            Rest.Google.Schema.Maps.Result _result
+            Location _location
             )
         {
             this.Vehicle = _vehicle;
             this.Location = _location;
-            this.Result = _result;
         }
     }
 }

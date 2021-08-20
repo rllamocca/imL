@@ -10,7 +10,7 @@
 		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>imL iml.Utility.MySql mysql utilities</PackageTags>
+		<PackageTags>imL imL.Utility.MySql utilities mysql</PackageTags>
 		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
