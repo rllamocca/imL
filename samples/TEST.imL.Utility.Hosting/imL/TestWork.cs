@@ -4,7 +4,7 @@ using imL.Contract.Hosting;
 
 using Microsoft.Extensions.Logging;
 
-namespace imL.Hosted.Frotcom.ToGPSChile
+namespace TEST.imL.Utility.Hosting
 {
     public class TestWork : IPeriodWork
     {

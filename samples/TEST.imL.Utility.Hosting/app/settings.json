@@ -10,8 +10,8 @@
     "UserName": null,
     "Password": null
   },
-  "Period": {
-    "Period": 30
+  "Hosted": {
+    "Period": 5
   },
   "Google": {
     "URI": null,
