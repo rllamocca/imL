@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 
@@ -28,7 +29,6 @@ namespace TEST.imL.Utility.Hosting
         public static Settings Setting { get { lock (AppLocked._LOCKED) { return AppLocked._SETTING; } } }
         public static HttpClient Http { get { lock (AppLocked._LOCKED) { return AppLocked._HTTP; } } }
 
-
         public static void Init(string[] _args, string _basedirectory = null, bool _tmpdefault = false)
         {
             if (string.IsNullOrWhiteSpace(_basedirectory))
@@ -44,7 +44,7 @@ namespace TEST.imL.Utility.Hosting
 
             AppLocked._SETTING = JsonSerializer.Deserialize<Settings>(File.ReadAllText(Path.Combine(AppLocked._PATH_APP, "settings.json")));
             AppLocked._SETTING.Hosted.Args = _args;
-            AppLocked._HTTP = new HttpClient();
+            AppLocked._HTTP = new HttpClient(new HttpClientHandler() { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate });
         }
     }
 }

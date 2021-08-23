@@ -1,8 +1,8 @@
-﻿using imL.Contract;
-
-using System;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+
+using imL.Contract.DB;
 
 namespace imL.Utility.Sql.UserModel
 {

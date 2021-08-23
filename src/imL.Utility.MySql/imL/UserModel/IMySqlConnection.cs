@@ -3,12 +3,12 @@ using System.Threading;
 using System.Threading.Tasks;
 #endif
 
-using imL.Contract;
-
-using MySql.Data.MySqlClient;
-
 using System;
 using System.Data;
+
+using imL.Contract.DB;
+
+using MySql.Data.MySqlClient;
 
 namespace imL.Utility.MySql.UserModel
 {

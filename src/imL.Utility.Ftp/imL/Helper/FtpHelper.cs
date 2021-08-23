@@ -26,7 +26,7 @@ namespace imL.Utility.Ftp
             return _fwr;
         }
 
-        public static FtpStatusCode From_ListDirectory(out string[] _list, FormatFtp _format)
+        public static FtpStatusCode ListDirectory(out string[] _list, FormatFtp _format)
         {
             FtpWebRequest _ftp = FtpHelper.Create(_format);
             _ftp.Method = WebRequestMethods.Ftp.ListDirectory;
@@ -43,7 +43,7 @@ namespace imL.Utility.Ftp
             }
         }
 
-        public static FtpStatusCode From_DownloadFile(ref Stream _rec, FormatFtp _format)
+        public static FtpStatusCode DownloadFile(ref Stream _rec, FormatFtp _format)
         {
             FtpWebRequest _ftp = FtpHelper.Create(_format);
             _ftp.Method = WebRequestMethods.Ftp.DownloadFile;
@@ -60,7 +60,7 @@ namespace imL.Utility.Ftp
             }
         }
 
-        public static FtpStatusCode To_UploadFile(Stream _sub, FormatFtp _format)
+        public static FtpStatusCode UploadFile(Stream _sub, FormatFtp _format)
         {
             FtpWebRequest _ftp = FtpHelper.Create(_format);
             _ftp.Method = WebRequestMethods.Ftp.UploadFile;
@@ -81,7 +81,7 @@ namespace imL.Utility.Ftp
             }
         }
 
-        public static FtpStatusCode To_DeleteFile(FormatFtp _format)
+        public static FtpStatusCode DeleteFile(FormatFtp _format)
         {
             FtpWebRequest _ftp = FtpHelper.Create(_format);
             _ftp.Method = WebRequestMethods.Ftp.DeleteFile;

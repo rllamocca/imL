@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <Version>0.0.0.2</Version>
+        <Version>0.0.0.3</Version>
         <Authors>r.llamocca@outlook.com</Authors>
         <Company>imL</Company>
         <Description>Not so free tools.</Description>
@@ -10,7 +10,7 @@
         <PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
         <RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        <PackageTags>imL imL.Utility.Hosting hosting utilities</PackageTags>
+        <PackageTags>imL imL.Utility.Hosting utilities hosting</PackageTags>
         <PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
 
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

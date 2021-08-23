@@ -3,12 +3,12 @@ using System.Threading;
 using System.Threading.Tasks;
 #endif
 
-using imL.Contract;
-
 using System;
 using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
+
+using imL.Contract.DB;
 
 namespace imL.Utility.Sql.UserModel
 {

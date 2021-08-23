@@ -40,7 +40,6 @@ namespace imL.Utility.Mail
 #endif
             _ref.DeliveryNotificationOptions = _format.DeliveryNotificationOptions;
 
-
             _ref.From = new MailAddress(_format.FromAddress, _format.FromDisplayName, _enc);
             _ref.Sender = _ref.From;
 
@@ -53,6 +52,8 @@ namespace imL.Utility.Mail
             foreach (string _item2 in _format.BCC.DefaultOrEmpty())
                 _ref.Bcc.Add(new MailAddress(_item2));
 
+            _ref.Subject = _format.Subject;
+
             foreach (string _item2 in _format.PathAttachments.DefaultOrEmpty())
                 if (File.Exists(_item2))
                     _ref.Attachments.Add(new Attachment(_item2));
@@ -60,7 +61,6 @@ namespace imL.Utility.Mail
             foreach (StreamAttachment _item2 in _format.StreamAttachments.DefaultOrEmpty())
                 _ref.Attachments.Add(new Attachment(_item2.Content, _item2.Name));
 
-            _ref.Subject = _format.Subject;
             _ref.Body = _format.Body;
 
             if (_ref.IsBodyHtml)

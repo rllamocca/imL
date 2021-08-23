@@ -8,7 +8,7 @@ namespace imL.Utility.Mail
 {
     public static class SmtpHelperAsync
     {
-        public async static Task SendAsync(FormatSmtp _smtp, FormatMailMessage[] _messages, Encoding _enc = null)
+        public async static Task Send(FormatSmtp _smtp, FormatMailMessage[] _messages, Encoding _enc = null)
         {
             EncodingUtility.SolutionDefault(ref _enc);
 
