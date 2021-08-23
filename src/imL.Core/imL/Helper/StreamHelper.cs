@@ -1,10 +1,10 @@
 ﻿#if (NETSTANDARD1_0  == false)
 
-using imL.Enumeration;
-using imL.Utility;
-
 using System.IO;
 using System.IO.Compression;
+
+using imL.Enumeration.Http;
+using imL.Utility;
 
 namespace imL
 {

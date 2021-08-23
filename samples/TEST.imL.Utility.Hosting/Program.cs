@@ -15,18 +15,10 @@ namespace TEST.imL.Utility.Hosting
     {
         async static Task Main(string[] _args)
         {
-            //ConsoleHelper.Starts();
-
             _args = new string[] { "Richie", "Tepes" };
 
             AppLocked.Init(_args);
             await CreateHostBuilder(_args).RunConsoleAsync();
-
-            //#if DEBUG
-            //            ConsoleHelper.PressAnyKeyToExit();
-            //#else
-            //            ConsoleHelper.Ends();
-            //#endif
         }
 
         static IHostBuilder CreateHostBuilder(string[] _args)
@@ -52,37 +44,6 @@ namespace TEST.imL.Utility.Hosting
         }
     }
 }
-/*  
-CTRL_C_EVENT
-CTRL_BREAK_EVENT
-
-static void CancelKeyPress(object _sender, ConsoleCancelEventArgs _args)
-{
-    Console.WriteLine("CancelKeyPress ...");
-    Console.WriteLine($" SpecialKey pressed: {_args.SpecialKey}\n");
-
-    
-CTRL_LOGOFF_EVENT
-CTRL_SHUTDOWN_EVENT
-     
-
-    //Console.WriteLine($"  Cancel property: {_args.Cancel}");
-    // Set the Cancel property to true to prevent the process from terminating.
-    //_args.Cancel = true;
-}
-
-
-CTRL_CLOSE_EVENT
-
-static void ProcessExit(object _sender, EventArgs _args)
-{
-    Console.WriteLine("ProcessExit ...");
-}
-
-            Console.CancelKeyPress += new ConsoleCancelEventHandler(CancelKeyPress); //+C o +Pause
-            AppDomain.CurrentDomain.ProcessExit += new EventHandler(ProcessExit);
-
-*/
 
 /*
 var config = new ConfigurationBuilder()

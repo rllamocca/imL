@@ -1,9 +1,9 @@
-﻿using imL.Contract;
+﻿using System;
+using System.Data;
+
+using imL.Contract.DB;
 
 using MySql.Data.MySqlClient;
-
-using System;
-using System.Data;
 
 namespace imL.Utility.MySql.UserModel
 {

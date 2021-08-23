@@ -1,34 +1,40 @@
-﻿#if (NET35 || NET40 || NET45 || NETSTANDARD2_0)
+﻿#if NETSTANDARD1_3 == false
 using System.Data;
 #endif
-
-using imL.Enumeration;
-using imL.Contract;
 
 using System;
 using System.Data.SqlClient;
 
+using imL.Contract;
+using imL.Contract.DB;
+using imL.Enumeration.DB;
+
 namespace imL.Utility.Sql.UserModel
 {
-    public class SqlHelper : IDBHelper
+    public class SqlHelper : IHelper
     {
-        public Return Execute(
-            string _query,
-            IConnection _conn,
-            IParameter[] _pmts = null,
-            EExecute _exe = EExecute.NonQuery,
-            bool _throw = false
-            )
+        public IConnection Connection { get; }
+        public bool EThrow { get; }
+        public IProgress<int> Progress { get; }
+
+        public SqlHelper(IConnection _conn, bool _throw = false, IProgress<int> _progress = null)
+        {
+            this.Connection = _conn;
+            this.EThrow = _throw;
+            this.Progress = _progress;
+        }
+
+        public Return Execute(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[] _pmts)
         {
             try
             {
-                ISqlConnection _conn_raw = (ISqlConnection)_conn;
-                SqlParameter[] _pmts_raw = _pmts.GetSqlParameters().GetParameters();
+                ISqlConnection _conn_raw = (ISqlConnection)Connection;
+                SqlParameter[] _pmts_raw = _pmts.GetParameters().GetSqlParameters();
 
                 using (SqlCommand _cmd = new SqlCommand(_query, _conn_raw.Connection))
                 {
                     _cmd.Transaction = _conn_raw.Transaction;
-                    _cmd.CommandTimeout = _conn.TimeOut;
+                    _cmd.CommandTimeout = Connection.TimeOut;
 
                     if (_pmts_raw != null)
                         _cmd.Parameters.AddRange(_pmts_raw);
@@ -50,33 +56,27 @@ namespace imL.Utility.Sql.UserModel
             }
             catch (Exception _ex)
             {
-                if (_throw)
+                if (EThrow)
                     throw _ex;
 
                 return new Return(false, _ex);
             }
         }
-        public Return[] Execute(
-            string _query,
-            IConnection _conn,
-            IParameter[][] _pmts,
-            EExecute _exe = EExecute.NonQuery,
-            IProgress<int> _progress = null,
-            bool _throw = false
-            )
+
+        public Return[] Execute(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[][] _pmts)
         {
             try
             {
-                ISqlConnection _conn_raw = (ISqlConnection)_conn;
+                ISqlConnection _conn_raw = (ISqlConnection)Connection;
 
                 int _r = 0;
                 Return[] _returns = new Return[_pmts.Length];
-                SqlParameter[] _pmts_raw = _pmts[_r].GetSqlParameters().GetParameters();
+                SqlParameter[] _pmts_raw = _pmts[_r].GetParameters().GetSqlParameters();
 
                 using (SqlCommand _cmd = new SqlCommand(_query, _conn_raw.Connection))
                 {
                     _cmd.Transaction = _conn_raw.Transaction;
-                    _cmd.CommandTimeout = _conn.TimeOut;
+                    _cmd.CommandTimeout = Connection.TimeOut;
                     _cmd.Parameters.AddRange(_pmts_raw);
 
                     int _c_p = _cmd.Parameters.Count;
@@ -112,90 +112,75 @@ namespace imL.Utility.Sql.UserModel
                         }
                         catch (Exception _ex)
                         {
-                            if (_throw)
+                            if (EThrow)
                                 throw _ex;
 
                             _returns[_r] = new Return(false, _ex);
                         }
                         _r++;
-                        _progress?.Report(0);
+                        Progress?.Report(0);
                     } while (_r < _c_r);
                 }
                 return _returns;
             }
             catch (Exception _ex)
             {
-                if (_throw)
+                if (EThrow)
                     throw _ex;
 
                 return new Return[] { new Return(false, _ex) };
             }
         }
 
-        public virtual Return Get_DataTable(string _query, IConnection _conn, IParameter[] _pmts = null, bool _throw = false)
+#if NETSTANDARD1_3 == false
+
+        public Return LoadData(string _query, bool _dataset = true, params IParameter[] _pmts)
         {
-#if (NET35 || NET40 || NET45 || NETSTANDARD2_0)
             try
             {
-                Return _exe = Execute(_query, _conn, _pmts, EExecute.Reader);
+                Return _exe = Execute(_query, EExecute.Reader, _pmts);
                 _exe.TriggerErrorException();
 
-                DataTable _return = new DataTable("DataTable_0");
-
-                using (SqlDataReader _read = (SqlDataReader)_exe.Result)
-                    _return.Load(_read, LoadOption.OverwriteChanges);
-
-                return new Return(true, _return);
-            }
-            catch (Exception _ex)
-            {
-                if (_throw)
-                    throw _ex;
-
-                return new Return(false, _ex);
-            }
-#else
-            throw new NotImplementedException();
-#endif
-        }
-        public virtual Return Get_DataSet(string _query, IConnection _conn, IParameter[] _pmts = null, IProgress<int> _progress = null, bool _throw = false)
-        {
-#if (NET35 || NET40 || NET45 || NETSTANDARD2_0)
-            try
-            {
-                Return _exe = Execute(_query, _conn, _pmts, EExecute.Reader);
-                _exe.TriggerErrorException();
-
-                DataSet _return = new DataSet("DataSet_0")
+                if (_dataset)
                 {
-                    EnforceConstraints = _conn.Constraints
-                };
-                byte _n = 0;
+                    DataSet _return = new DataSet("DataSet_0") { EnforceConstraints = Connection.Constraints };
+                    byte _n = 0;
 
-                using (SqlDataReader _read = (SqlDataReader)_exe.Result)
-                {
-                    while (_read.IsClosed == false)
+                    using (SqlDataReader _read = (SqlDataReader)_exe.Result)
                     {
-                        DataTable _dt = new DataTable("DataTable_" + Convert.ToString(_n));
-                        _dt.Load(_read, LoadOption.OverwriteChanges);
-                        _return.Tables.Add(_dt);
-                        _n++;
-                        _progress?.Report(0);
-                    }
-                }
+                        while (_read.IsClosed == false)
+                        {
+                            DataTable _dt = new DataTable("DataTable_" + Convert.ToString(_n));
+                            _dt.Load(_read, LoadOption.OverwriteChanges);
+                            _return.Tables.Add(_dt);
+                            _n++;
 
-                return new Return(true, _return);
+                            Progress?.Report(0);
+                        }
+                    }
+
+                    return new Return(true, _return);
+                }
+                else
+                {
+                    DataTable _return = new DataTable("DataTable_0");
+
+                    using (SqlDataReader _read = (SqlDataReader)_exe.Result)
+                        _return.Load(_read, LoadOption.OverwriteChanges);
+
+                    return new Return(true, _return);
+                }
             }
             catch (Exception _ex)
             {
-                if (_throw)
+                if (EThrow)
                     throw _ex;
 
                 return new Return(false, _ex);
             }
-#else
-            throw new NotImplementedException();
-#endif
         }
+
+#endif
+
     }
 }

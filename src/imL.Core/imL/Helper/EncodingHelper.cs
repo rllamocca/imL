@@ -1,4 +1,4 @@
-﻿#if ((NETSTANDARD1_0 || NETSTANDARD1_1 || NETSTANDARD1_2)  == false)
+﻿#if (NETSTANDARD1_0 || NETSTANDARD1_1 || NETSTANDARD1_2)  == false
 
 using System.IO;
 using System.Text;
@@ -7,7 +7,7 @@ namespace imL
 {
     public static class EncodingHelper
     {
-        public static Encoding Get_Encoding(string _path)
+        public static Encoding ReadEncoding(string _path)
         {
             byte[] _b = new byte[5];
             using (FileStream _fs = new FileStream(_path, FileMode.Open, FileAccess.Read))

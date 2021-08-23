@@ -1,6 +1,6 @@
-﻿using imL.Contract;
+﻿using System.Linq;
 
-using System.Linq;
+using imL.Contract.DB;
 
 namespace imL.Pattern
 {

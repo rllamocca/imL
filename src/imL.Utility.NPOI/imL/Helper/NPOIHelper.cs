@@ -27,7 +27,7 @@ namespace imL.Utility.NPOI
             }
         }
 
-        public static DataTable To_DataTable(string _path,
+        public static DataTable LoadDataTable(string _path,
             int _isheet = 0,
             bool _columnnames = true,
             bool _xls = true,
@@ -76,7 +76,7 @@ namespace imL.Utility.NPOI
             return _return;
         }
 
-        public static DataSet To_DataSet(string _path,
+        public static DataSet LoadDataSet(string _path,
             bool _columnnames = true,
             bool _xls = true,
             IProgress<int> _dt_progress = null,
@@ -133,7 +133,7 @@ namespace imL.Utility.NPOI
             return _return;
         }
 
-        public static T[] To_Generic<T>(string _path,
+        public static T[] LoadGenerics<T>(string _path,
             int _isheet = 0,
             bool _columnnames = true,
             bool _xls = true,
