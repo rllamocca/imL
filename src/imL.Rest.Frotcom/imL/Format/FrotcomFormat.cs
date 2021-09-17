@@ -1,9 +1,9 @@
 ﻿namespace imL.Rest.Frotcom
 {
-    public class FormatFrotcom
+    public class FrotcomFormat
     {
         public string URI { set; get; }
-        public FormatAuthorize Authorize { set; get; }
+        public AuthorizeFormat Authorize { set; get; }
 
         public string[] LicensePlates { set; get; }
     }

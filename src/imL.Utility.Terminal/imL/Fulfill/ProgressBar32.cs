@@ -1,23 +1,23 @@
 ﻿using System;
 
-namespace imL.Utility.Terminal
+namespace imL.Utility.Terminal.Fulfill
 {
-    public class ProgressBarU32 : ProgressBar
+    public class ProgressBar32 : ProgressBar
 #if (NET35 || NET40)
-        , Contract.IProgress<uint>
+        , Contract.IProgress<int>
 #else
-        , IProgress<uint>
+        , IProgress<int>
 #endif
     {
         private bool _DISPOSED = false;
 
-        private uint _LENGTH;
-        private uint _VALUE = 0;
+        private int _LENGTH;
+        private int _VALUE = 0;
 
-        public uint Length { get { return this._LENGTH; } }
-        public uint Value { get { return this._VALUE; } }
+        public int Length { get { return this._LENGTH; } }
+        public int Value { get { return this._VALUE; } }
 
-        public ProgressBarU32(uint _length = 50, ProgressBar _parent = null)
+        public ProgressBar32(int _length = 50, ProgressBar _parent = null)
         {
             this._LENGTH = _length;
             this._PARENT = _parent;
@@ -31,7 +31,7 @@ namespace imL.Utility.Terminal
                 this.Init();
         }
 
-        public void Report(uint _value = 0)
+        public void Report(int _value = 0)
         {
             if (_value == 0)
                 this._VALUE++;
@@ -55,6 +55,14 @@ namespace imL.Utility.Terminal
             ConsoleHelper.Write(this._DRAW_END, _text);
         }
 
+        /*
+        ~ProgressBar32() => Dispose(false);
+        public new void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        */
         protected override void Dispose(bool _managed)
         {
             if (this._DISPOSED)

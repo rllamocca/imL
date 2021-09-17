@@ -1,6 +1,6 @@
 ﻿namespace imL.Rest.Google
 {
-    public class FormatGoogle
+    public class GoogleFormat
     {
         public string URI { set; get; }
         public string Key { set; get; }

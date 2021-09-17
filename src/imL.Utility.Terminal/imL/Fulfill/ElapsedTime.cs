@@ -3,7 +3,7 @@
 using System;
 using System.Timers;
 
-namespace imL.Utility.Terminal
+namespace imL.Utility.Terminal.Fulfill
 {
     public class ElapsedTime : ProgressBar
     {

@@ -12,9 +12,9 @@ using Newtonsoft.Json;
 
 namespace imL.Rest.Frotcom.V2
 {
-    public static class FrotcomHelper
+    public static class FrotcomAsyncHelper
     {
-        public async static Task<Authorize> RetriveToken(FrotcomClient _client, FormatFrotcom _auth, string _path)
+        public async static Task<Authorize> RetriveToken(FrotcomClient _client, FrotcomFormat _auth, string _path)
         {
             if (File.Exists(_path) == false)
                 File.WriteAllText(_path, "{}");
@@ -23,7 +23,7 @@ namespace imL.Rest.Frotcom.V2
 
             if (_token == null || string.IsNullOrWhiteSpace(_token.token))
             {
-                _token = await FrotcomHelper.AuthorizeUser(_client, _auth.Authorize);
+                _token = await FrotcomAsyncHelper.AuthorizeUser(_client, _auth.Authorize);
                 File.WriteAllText(_path, JsonConvert.SerializeObject(_token));
 
                 if (_token == null || string.IsNullOrWhiteSpace(_token.token))
@@ -33,12 +33,12 @@ namespace imL.Rest.Frotcom.V2
             }
             else
             {
-                Authorize _validar = await FrotcomHelper.ValidateToken(_client, _token.token);
+                Authorize _validar = await FrotcomAsyncHelper.ValidateToken(_client, _token.token);
                 if (_token.token == _validar.token)
                     return _validar;
                 else
                 {
-                    _token = await FrotcomHelper.AuthorizeUser(_client, _auth.Authorize);
+                    _token = await FrotcomAsyncHelper.AuthorizeUser(_client, _auth.Authorize);
                     File.WriteAllText(_path, JsonConvert.SerializeObject(_token));
 
                     if (_token == null || string.IsNullOrWhiteSpace(_token.token))
@@ -49,7 +49,7 @@ namespace imL.Rest.Frotcom.V2
             }
         }
 
-        public async static Task<Authorize> AuthorizeUser(FrotcomClient _client, FormatAuthorize _auth)
+        public async static Task<Authorize> AuthorizeUser(FrotcomClient _client, AuthorizeFormat _auth)
         {
             StringContent _content = new StringContent(JsonConvert.SerializeObject(_auth), Encoding.UTF8, "application/json");
 
@@ -133,9 +133,9 @@ namespace imL.Rest.Frotcom.V2
             }
         }
 
-        public async static Task<Dough[]> Prepare(FormatFrotcom _setting, FrotcomClient _frotcom)
+        public async static Task<Dough[]> Prepare(FrotcomFormat _setting, FrotcomClient _frotcom)
         {
-            Vehicle[] _vehicles = await FrotcomHelper.GetVehicles(_frotcom);
+            Vehicle[] _vehicles = await FrotcomAsyncHelper.GetVehicles(_frotcom);
 
             if (_vehicles == null || _vehicles.Length == 0)
                 return null;
@@ -148,7 +148,7 @@ namespace imL.Rest.Frotcom.V2
                     if (Array.Exists(_setting.LicensePlates, _w => _w == _item.licensePlate) == false)
                         continue;
 
-                Location[] _locations = await FrotcomHelper.GetVehicleLocations(_frotcom, _item.id);
+                Location[] _locations = await FrotcomAsyncHelper.GetVehicleLocations(_frotcom, _item.id);
                 Location _location = null;
                 if (_locations != null)
                     _location = _locations.FirstOrDefault();

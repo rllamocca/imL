@@ -8,7 +8,7 @@ namespace imL.Utility.Mail
 {
     public static class SmtpHelper
     {
-        public static void Init_SmtpClient(ref SmtpClient _ref, FormatSmtp _format)
+        public static void Init_SmtpClient(ref SmtpClient _ref, SmtpFormat _format)
         {
             _ref.Timeout = _format.Timeout ?? _ref.Timeout;
             _ref.TargetName = _format.TargetName ?? _ref.TargetName;
@@ -25,7 +25,7 @@ namespace imL.Utility.Mail
             if (_ref.UseDefaultCredentials == false)
                 _ref.Credentials = new NetworkCredential(_format.UserName, _format.Password);
         }
-        public static void Init_MailMessage(ref MailMessage _ref, FormatMailMessage _format, Encoding _enc)
+        public static void Init_MailMessage(ref MailMessage _ref, MailMessageFormat _format, Encoding _enc)
         {
 #if NET35 == false
             _ref.HeadersEncoding = _enc;
@@ -71,14 +71,14 @@ namespace imL.Utility.Mail
             }
         }
 
-        public static void Send(FormatSmtp _smtp, FormatMailMessage[] _messages, Encoding _enc = null)
+        public static void Send(SmtpFormat _smtp, MailMessageFormat[] _messages, Encoding _enc = null)
         {
             EncodingUtility.SolutionDefault(ref _enc);
 
             SmtpClient _sc = new SmtpClient();
             SmtpHelper.Init_SmtpClient(ref _sc, _smtp);
 
-            foreach (FormatMailMessage _item in _messages)
+            foreach (MailMessageFormat _item in _messages)
             {
                 MailMessage _mm = new MailMessage();
                 SmtpHelper.Init_MailMessage(ref _mm, _item, _enc);

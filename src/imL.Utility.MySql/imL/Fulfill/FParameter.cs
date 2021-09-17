@@ -5,9 +5,9 @@ using imL.Contract.DB;
 
 using MySql.Data.MySqlClient;
 
-namespace imL.Utility.MySql.UserModel
+namespace imL.Utility.MySql.Fulfill
 {
-    public class IMySqlParameter : IParameter
+    public class FParameter : IParameter
     {
         public string Source { set; get; }
         public object Value { set; get; }
@@ -15,7 +15,7 @@ namespace imL.Utility.MySql.UserModel
 
         public MySqlParameter Parameter { get; }
 
-        public IMySqlParameter(
+        public FParameter(
             string _affect,
             string _function
             )
@@ -26,7 +26,7 @@ namespace imL.Utility.MySql.UserModel
 
             this.Parameter = null;
         }
-        public IMySqlParameter(
+        public FParameter(
             string _source,
             object _value,
             MySqlDbType _dbtype,
@@ -45,7 +45,7 @@ namespace imL.Utility.MySql.UserModel
                 Direction = _direction
             };
         }
-        public IMySqlParameter(
+        public FParameter(
             string _source,
             object _value,
             MySqlDbType _dbtype,
@@ -55,7 +55,7 @@ namespace imL.Utility.MySql.UserModel
         {
             this.Parameter.Size = _size;
         }
-        public IMySqlParameter(
+        public FParameter(
             string _source,
             object _value,
             MySqlDbType _dbtype,

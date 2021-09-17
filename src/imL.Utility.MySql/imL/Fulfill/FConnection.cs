@@ -10,9 +10,9 @@ using imL.Contract.DB;
 
 using MySql.Data.MySqlClient;
 
-namespace imL.Utility.MySql.UserModel
+namespace imL.Utility.MySql.Fulfill
 {
-    public class IMySqlConnection : IConnection
+    public class FConnection : IConnection
     {
         private bool _DISPOSED = false;
         //private bool _STATISTICS = false;
@@ -30,11 +30,11 @@ namespace imL.Utility.MySql.UserModel
             get { return this._CN; }
         }
 
-        public IMySqlConnection(MySqlConnection _conn)
+        public FConnection(MySqlConnection _conn)
         {
             this._CN = _conn;
         }
-        public IMySqlConnection(string _conn)
+        public FConnection(string _conn)
         {
             this._CN = new MySqlConnection(_conn);
         }
@@ -52,7 +52,7 @@ namespace imL.Utility.MySql.UserModel
                 this._CN.Close();
         }
 
-        ~IMySqlConnection()
+        ~FConnection()
         {
             this.Dispose(false);
         }

@@ -2,7 +2,7 @@
 
 namespace imL.Utility.Mail
 {
-    public class FormatSmtp
+    public class SmtpFormat
     {
         public int? Timeout { set; get; }
         public string TargetName { set; get; }

@@ -3,24 +3,26 @@
 #if NETSTANDARD1_3 == false
 using System.Data;
 #endif
+#if NET35 || NET40
+using imL.Contract;
+#endif
 
 using System;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
-using imL.Contract;
 using imL.Contract.DB;
 using imL.Enumeration.DB;
 
-namespace imL.Utility.Sql.UserModel
+namespace imL.Utility.Sql.Fulfill
 {
-    public class SqlHelperAsync : IHelperAsync
+    public class FAsyncHelper : IAsyncHelper
     {
         public IConnection Connection { get; }
         public bool EThrow { get; }
         public IProgress<int> Progress { get; }
 
-        public SqlHelperAsync(IConnection _conn, bool _throw = false, IProgress<int> _progress = null)
+        public FAsyncHelper(IConnection _conn, bool _throw = false, IProgress<int> _progress = null)
         {
             this.Connection = _conn;
             this.EThrow = _throw;
@@ -31,7 +33,7 @@ namespace imL.Utility.Sql.UserModel
         {
             try
             {
-                ISqlConnection _conn_raw = (ISqlConnection)Connection;
+                FConnection _conn_raw = (FConnection)Connection;
                 SqlParameter[] _pmts_raw = _pmts.GetParameters().GetSqlParameters();
 
                 using (SqlCommand _cmd = new SqlCommand(_query, _conn_raw.Connection))
@@ -70,7 +72,7 @@ namespace imL.Utility.Sql.UserModel
         {
             try
             {
-                ISqlConnection _conn_raw = (ISqlConnection)Connection;
+                FConnection _conn_raw = (FConnection)Connection;
 
                 int _r = 0;
                 Return[] _returns = new Return[_pmts.Length];

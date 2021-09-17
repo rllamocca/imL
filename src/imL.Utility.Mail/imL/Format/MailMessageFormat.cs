@@ -4,7 +4,7 @@ using System.Net.Mime;
 
 namespace imL.Utility.Mail
 {
-    public class FormatMailMessage
+    public class MailMessageFormat
     {
         public string Subject { set; get; }
         public MailPriority Priority { set; get; }

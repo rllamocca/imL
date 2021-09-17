@@ -10,9 +10,9 @@ using System.Data.SqlClient;
 
 using imL.Contract.DB;
 
-namespace imL.Utility.Sql.UserModel
+namespace imL.Utility.Sql.Fulfill
 {
-    public class ISqlConnection : IConnection
+    public class FConnection : IConnection
     {
         private bool _DISPOSED = false;
         private bool _STATISTICS = false;
@@ -30,12 +30,12 @@ namespace imL.Utility.Sql.UserModel
             get { return this._CN; }
         }
 
-        public ISqlConnection(SqlConnection _conn)
+        public FConnection(SqlConnection _conn)
         {
             this._STATISTICS = this._CN.StatisticsEnabled;
             this._CN = _conn;
         }
-        public ISqlConnection(string _conn, bool _stat = false)
+        public FConnection(string _conn, bool _stat = false)
         {
             this._STATISTICS = _stat;
             this._CN = new SqlConnection(_conn)
@@ -65,7 +65,7 @@ namespace imL.Utility.Sql.UserModel
                 this._CN.Close();
         }
 
-        ~ISqlConnection()
+        ~FConnection()
         {
             this.Dispose(false);
         }

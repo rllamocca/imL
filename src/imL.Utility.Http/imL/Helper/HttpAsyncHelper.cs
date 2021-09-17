@@ -8,7 +8,7 @@ using imL.Enumeration.Http;
 
 namespace imL.Utility.Http
 {
-    public static class HttpHelper
+    public static class HttpAsyncHelper
     {
         public static async Task CompressContent(HttpResponseMessage _res, HttpHeaderValueCollection<StringWithQualityHeaderValue> _ae)
         {

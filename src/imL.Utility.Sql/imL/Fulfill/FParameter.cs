@@ -4,9 +4,9 @@ using System.Data.SqlClient;
 
 using imL.Contract.DB;
 
-namespace imL.Utility.Sql.UserModel
+namespace imL.Utility.Sql.Fulfill
 {
-    public class ISqlParameter : IParameter
+    public class FParameter : IParameter
     {
         public string Source { set; get; }
         public object Value { set; get; }
@@ -14,7 +14,7 @@ namespace imL.Utility.Sql.UserModel
 
         public SqlParameter Parameter { get; }
 
-        public ISqlParameter(
+        public FParameter(
             string _affect,
             string _function
             )
@@ -25,7 +25,7 @@ namespace imL.Utility.Sql.UserModel
 
             this.Parameter = null;
         }
-        public ISqlParameter(
+        public FParameter(
             string _source,
             object _value,
             SqlDbType _dbtype,
@@ -44,7 +44,7 @@ namespace imL.Utility.Sql.UserModel
                 Direction = _direction
             };
         }
-        public ISqlParameter(
+        public FParameter(
             string _source,
             object _value,
             SqlDbType _dbtype,
@@ -54,7 +54,7 @@ namespace imL.Utility.Sql.UserModel
         {
             this.Parameter.Size = _size;
         }
-        public ISqlParameter(
+        public FParameter(
             string _source,
             object _value,
             SqlDbType _dbtype,

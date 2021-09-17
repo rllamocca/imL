@@ -1,23 +1,23 @@
 ﻿using System;
 
-namespace imL.Utility.Terminal
+namespace imL.Utility.Terminal.Fulfill
 {
-    public class ProgressBarU64 : ProgressBar
+    public class ProgressBar64 : ProgressBar
 #if (NET35 || NET40)
-        , Contract.IProgress<ulong>
+        , Contract.IProgress<long>
 #else
-        , IProgress<ulong>
+        , IProgress<long>
 #endif
     {
         private bool _DISPOSED = false;
 
-        private ulong _LENGTH;
-        private ulong _VALUE = 0;
+        private long _LENGTH;
+        private long _VALUE = 0;
 
-        public ulong Length { get { return this._LENGTH; } }
-        public ulong Value { get { return this._VALUE; } }
+        public long Length { get { return this._LENGTH; } }
+        public long Value { get { return this._VALUE; } }
 
-        public ProgressBarU64(ulong _length = 50, ProgressBar _parent = null)
+        public ProgressBar64(long _length = 50, ProgressBar _parent = null)
         {
             this._LENGTH = _length;
             this._PARENT = _parent;
@@ -31,7 +31,7 @@ namespace imL.Utility.Terminal
                 this.Init();
         }
 
-        public void Report(ulong _value = 0)
+        public void Report(long _value = 0)
         {
             if (_value == 0)
                 this._VALUE++;

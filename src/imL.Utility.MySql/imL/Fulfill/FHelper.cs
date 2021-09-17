@@ -1,38 +1,37 @@
-﻿#if (NET45 || NETSTANDARD1_3 || NETSTANDARD2_0)
-
-#if NETSTANDARD1_3 == false
+﻿#if NETSTANDARD1_3 == false
 using System.Data;
+#endif
+#if NET35 || NET40
+using imL.Contract;
 #endif
 
 using imL.Enumeration.DB;
-using imL.Contract;
 using imL.Contract.DB;
 
 using MySql.Data.MySqlClient;
 
 using System;
-using System.Threading.Tasks;
 
-namespace imL.Utility.MySql.UserModel
+namespace imL.Utility.MySql.Fulfill
 {
-    public class MySqlHelperAsync : IHelperAsync
+    public class FHelper : IHelper
     {
         public IConnection Connection { get; }
         public bool EThrow { get; }
         public IProgress<int> Progress { get; }
 
-        public MySqlHelperAsync(IConnection _conn, bool _throw = false, IProgress<int> _progress = null)
+        public FHelper(IConnection _conn, bool _throw = false, IProgress<int> _progress = null)
         {
             this.Connection = _conn;
             this.EThrow = _throw;
             this.Progress = _progress;
         }
 
-        public async Task<Return> Execute(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[] _pmts)
+        public Return Execute(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[] _pmts)
         {
             try
             {
-                IMySqlConnection _conn_raw = (IMySqlConnection)Connection;
+                FConnection _conn_raw = (FConnection)Connection;
                 MySqlParameter[] _pmts_raw = _pmts.GetParameters().GetMySqlParameters();
 
                 using (MySqlCommand _cmd = new MySqlCommand(_query, _conn_raw.Connection))
@@ -46,11 +45,11 @@ namespace imL.Utility.MySql.UserModel
                     switch (_exe)
                     {
                         case EExecute.NonQuery:
-                            return new Return(true, await _cmd.ExecuteNonQueryAsync(Connection.Token));
+                            return new Return(true, _cmd.ExecuteNonQuery());
                         case EExecute.Scalar:
-                            return new Return(true, await _cmd.ExecuteScalarAsync(Connection.Token));
+                            return new Return(true, _cmd.ExecuteScalar());
                         case EExecute.Reader:
-                            return new Return(true, await _cmd.ExecuteReaderAsync(Connection.Token));
+                            return new Return(true, _cmd.ExecuteReader());
                         default:
                             return new Return(false);
                     }
@@ -65,11 +64,11 @@ namespace imL.Utility.MySql.UserModel
             }
         }
 
-        public async Task<Return[]> Execute(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[][] _pmts)
+        public Return[] Execute(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[][] _pmts)
         {
             try
             {
-                IMySqlConnection _conn_raw = (IMySqlConnection)Connection;
+                FConnection _conn_raw = (FConnection)Connection;
 
                 int _r = 0;
                 Return[] _returns = new Return[_pmts.Length];
@@ -96,13 +95,13 @@ namespace imL.Utility.MySql.UserModel
                             switch (_exe)
                             {
                                 case EExecute.NonQuery:
-                                    _returns[_r] = new Return(true, await _cmd.ExecuteNonQueryAsync(Connection.Token));
+                                    _returns[_r] = new Return(true, _cmd.ExecuteNonQuery());
                                     break;
                                 case EExecute.Scalar:
-                                    _returns[_r] = new Return(true, await _cmd.ExecuteScalarAsync(Connection.Token));
+                                    _returns[_r] = new Return(true, _cmd.ExecuteScalar());
                                     break;
                                 case EExecute.Reader:
-                                    _returns[_r] = new Return(true, await _cmd.ExecuteReaderAsync(Connection.Token));
+                                    _returns[_r] = new Return(true, _cmd.ExecuteReader());
                                     break;
                                 default:
                                     _returns[_r] = new Return(false);
@@ -133,11 +132,11 @@ namespace imL.Utility.MySql.UserModel
 
 #if NETSTANDARD1_3 == false
 
-        public async Task<Return> LoadData(string _query, bool _dataset = true, params IParameter[] _pmts)
+        public Return LoadData(string _query, bool _dataset = true, params IParameter[] _pmts)
         {
             try
             {
-                Return _exe = await Execute(_query, EExecute.Reader, _pmts);
+                Return _exe = Execute(_query, EExecute.Reader, _pmts);
                 _exe.TriggerErrorException();
 
                 if (_dataset)
@@ -183,5 +182,3 @@ namespace imL.Utility.MySql.UserModel
 
     }
 }
-
-#endif

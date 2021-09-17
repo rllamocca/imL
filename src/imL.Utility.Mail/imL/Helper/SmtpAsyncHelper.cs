@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace imL.Utility.Mail
 {
-    public static class SmtpHelperAsync
+    public static class SmtpAsyncHelper
     {
-        public async static Task Send(FormatSmtp _smtp, FormatMailMessage[] _messages, Encoding _enc = null)
+        public async static Task Send(SmtpFormat _smtp, MailMessageFormat[] _messages, Encoding _enc = null)
         {
             EncodingUtility.SolutionDefault(ref _enc);
 
             SmtpClient _sc = new SmtpClient();
             SmtpHelper.Init_SmtpClient(ref _sc, _smtp);
 
-            foreach (FormatMailMessage _item in _messages)
+            foreach (MailMessageFormat _item in _messages)
             {
                 MailMessage _mm = new MailMessage();
                 SmtpHelper.Init_MailMessage(ref _mm, _item, _enc);

@@ -6,7 +6,7 @@ namespace imL.Utility.Ftp
 {
     public static class FtpHelper
     {
-        public static void Init_FtpWebRequest(ref FtpWebRequest _ref, FormatFtp _format)
+        private static void Init_FtpWebRequest(ref FtpWebRequest _ref, FtpFormat _format)
         {
             _ref.UseBinary = _format.UseBinary ?? _ref.UseBinary;
             _ref.Timeout = _format.Timeout ?? _ref.Timeout;
@@ -18,7 +18,7 @@ namespace imL.Utility.Ftp
             _ref.Credentials = new NetworkCredential(_format.UserName, _format.Password);
         }
 
-        private static FtpWebRequest Create(FormatFtp _format)
+        private static FtpWebRequest Create(FtpFormat _format)
         {
             FtpWebRequest _fwr = (FtpWebRequest)FtpWebRequest.Create(_format.Host + _format.Path);
             FtpHelper.Init_FtpWebRequest(ref _fwr, _format);
@@ -26,7 +26,7 @@ namespace imL.Utility.Ftp
             return _fwr;
         }
 
-        public static FtpStatusCode ListDirectory(out string[] _list, FormatFtp _format)
+        public static FtpStatusCode ListDirectory(out string[] _list, FtpFormat _format)
         {
             FtpWebRequest _ftp = FtpHelper.Create(_format);
             _ftp.Method = WebRequestMethods.Ftp.ListDirectory;
@@ -43,7 +43,7 @@ namespace imL.Utility.Ftp
             }
         }
 
-        public static FtpStatusCode DownloadFile(ref Stream _rec, FormatFtp _format)
+        public static FtpStatusCode DownloadFile(ref Stream _rec, FtpFormat _format)
         {
             FtpWebRequest _ftp = FtpHelper.Create(_format);
             _ftp.Method = WebRequestMethods.Ftp.DownloadFile;
@@ -60,7 +60,7 @@ namespace imL.Utility.Ftp
             }
         }
 
-        public static FtpStatusCode UploadFile(Stream _sub, FormatFtp _format)
+        public static FtpStatusCode UploadFile(Stream _sub, FtpFormat _format)
         {
             FtpWebRequest _ftp = FtpHelper.Create(_format);
             _ftp.Method = WebRequestMethods.Ftp.UploadFile;
@@ -81,7 +81,7 @@ namespace imL.Utility.Ftp
             }
         }
 
-        public static FtpStatusCode DeleteFile(FormatFtp _format)
+        public static FtpStatusCode DeleteFile(FtpFormat _format)
         {
             FtpWebRequest _ftp = FtpHelper.Create(_format);
             _ftp.Method = WebRequestMethods.Ftp.DeleteFile;

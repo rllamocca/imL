@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace imL.Rest.Google
 {
-    public static class GoogleHelper
+    public static class GoogleAsyncHelper
     {
         public static async Task<Geocoding> GetGeocoding(GoogleClient _client, decimal _lat, decimal _lng)
         {

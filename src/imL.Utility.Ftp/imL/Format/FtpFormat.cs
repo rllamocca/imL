@@ -1,6 +1,6 @@
 ﻿namespace imL.Utility.Ftp
 {
-    public class FormatFtp
+    public class FtpFormat
     {
         public bool? UseBinary { get; set; }
         public int? Timeout { get; set; }

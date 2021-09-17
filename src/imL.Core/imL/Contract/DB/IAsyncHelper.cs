@@ -7,7 +7,7 @@ using imL.Enumeration.DB;
 
 namespace imL.Contract.DB
 {
-    public interface IHelperAsync
+    public interface IAsyncHelper
     {
         IConnection Connection { get; }
         bool EThrow { get; }

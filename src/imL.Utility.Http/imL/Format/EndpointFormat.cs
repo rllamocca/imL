@@ -2,7 +2,7 @@
 
 namespace imL.Utility.Http
 {
-    public class FormatEndpoint
+    public class EndpointFormat
     {
         public string Endpoint { set; get; }
         public EAuthentication Scheme { set; get; }
