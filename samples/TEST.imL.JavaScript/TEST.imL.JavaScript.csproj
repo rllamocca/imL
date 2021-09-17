@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\imL.JavaScript\imL.JavaScript.csproj" />
+    <ProjectReference Include="..\..\src\imL.Utility\imL.Utility.csproj" />
   </ItemGroup>
 
 </Project>

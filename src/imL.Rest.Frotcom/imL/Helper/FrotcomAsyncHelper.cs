@@ -6,11 +6,11 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-using imL.Rest.Frotcom.V2.Schema;
+using imL.Rest.Frotcom.Schema;
 
 using Newtonsoft.Json;
 
-namespace imL.Rest.Frotcom.V2
+namespace imL.Rest.Frotcom
 {
     public static class FrotcomAsyncHelper
     {

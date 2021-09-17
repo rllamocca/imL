@@ -1,4 +1,4 @@
-﻿namespace imL.Rest.Frotcom.V2.Schema
+﻿namespace imL.Rest.Frotcom.Schema
 {
     public class Sensor
     {

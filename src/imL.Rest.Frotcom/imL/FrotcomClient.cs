@@ -1,8 +1,8 @@
 ﻿using System.Net.Http;
 
-using imL.Rest.Frotcom.V2.Schema;
+using imL.Rest.Frotcom.Schema;
 
-namespace imL.Rest.Frotcom.V2
+namespace imL.Rest.Frotcom
 {
     public class FrotcomClient
     {

@@ -1,6 +1,6 @@
-﻿namespace imL.Rest.Frotcom.V2.Schema
+﻿namespace imL.Rest.Frotcom.Schema
 {
-    public class Message
+    public class Trip
     {
         public int total { get; set; }
         public int mileageGps { get; set; }
