@@ -7,7 +7,7 @@ namespace imL.Utility.Mail
     {
         public static bool IsMail(this string _this, bool _throw = false)
         {
-            if (_this == null)
+            if (string.IsNullOrEmpty(_this))
                 return false;
 
             try

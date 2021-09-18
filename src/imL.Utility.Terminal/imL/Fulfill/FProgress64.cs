@@ -1,8 +1,10 @@
 ﻿using System;
 
+using imL.Contract.Terminal;
+
 namespace imL.Utility.Terminal.Fulfill
 {
-    public class ProgressBar64 : ProgressBar
+    public sealed class FProgress64 : AProgress
 #if (NET35 || NET40)
         , Contract.IProgress<long>
 #else
@@ -17,7 +19,7 @@ namespace imL.Utility.Terminal.Fulfill
         public long Length { get { return this._LENGTH; } }
         public long Value { get { return this._VALUE; } }
 
-        public ProgressBar64(long _length = 50, ProgressBar _parent = null)
+        public FProgress64(long _length = 50, AProgress _parent = null)
         {
             this._LENGTH = _length;
             this._PARENT = _parent;
@@ -43,16 +45,10 @@ namespace imL.Utility.Terminal.Fulfill
             if (this._VALUE.Between(0, this._LENGTH))
             {
                 _per = (1.0m * this._VALUE / this._LENGTH);
-
                 this.DrawBar(_per);
             }
 
-            string _text = string.Format("{0}  {1}/{2}",
-                _per.ToString("P"),
-                this._VALUE,
-                this._LENGTH);
-
-            ConsoleHelper.Write(this._DRAW_END, _text);
+            this.DrawProgress(_per, this._VALUE, this._LENGTH);
         }
 
         protected override void Dispose(bool _managed)

@@ -110,7 +110,7 @@ namespace imL.Utility.Terminal.Process
                         break;
                 }
 
-                using (ProgressBar32 _pb = new ProgressBar32(_paths.Length))
+                using (FProgress32 _pb = new FProgress32(_paths.Length))
                 {
                     foreach (string _item in _paths)
                     {
@@ -120,7 +120,7 @@ namespace imL.Utility.Terminal.Process
                     }
                 }
 
-                using (ProgressBar32 _pb = new ProgressBar32(_list.Count))
+                using (FProgress32 _pb = new FProgress32(_list.Count))
                 {
                     foreach (FileInfo _item in _list)
                     {

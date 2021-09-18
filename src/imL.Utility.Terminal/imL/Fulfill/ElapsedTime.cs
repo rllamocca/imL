@@ -3,9 +3,11 @@
 using System;
 using System.Timers;
 
+using imL.Contract.Terminal;
+
 namespace imL.Utility.Terminal.Fulfill
 {
-    public class ElapsedTime : ProgressBar
+    public sealed class ElapsedTime : AProgress
     {
         private bool _DISPOSED = false;
 
@@ -13,17 +15,17 @@ namespace imL.Utility.Terminal.Fulfill
 
         private void ElapsedEvent(object _source, ElapsedEventArgs _e)
         {
-            this.DrawTime(_e.SignalTime);
+            this.DrawElapsed(_e.SignalTime);
         }
 
-        public ElapsedTime(ProgressBar _parent = null)
+        public ElapsedTime(AProgress _parent = null)
         {
             this._START = DateTime.Now;
             this._PARENT = _parent;
 
             this.Init(0);
 
-            this.DrawTime(this._START);
+            this.DrawElapsed(this._START);
 
             this._TIMER = new Timer(1000);
             this._TIMER.Elapsed += this.ElapsedEvent;
@@ -49,4 +51,5 @@ namespace imL.Utility.Terminal.Fulfill
         }
     }
 }
+
 #endif

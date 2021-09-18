@@ -4,18 +4,20 @@ using imL.Struct;
 using System.Drawing;
 #endif
 
-using imL.Enumeration;
-
 using System;
 using System.Collections.Generic;
 
-namespace imL.Utility.Terminal
+using imL.Enumeration;
+using imL.Utility.Terminal;
+using imL.Utility;
+
+namespace imL.Contract.Terminal
 {
-    public abstract class ProgressBar : IDisposable
+    public abstract class AProgress : IDisposable
     {
         private bool _DISPOSED = false;
 
-        protected ProgressBar _PARENT;
+        protected AProgress _PARENT;
         protected Point _DRAW_END;
         protected DateTime _START;
 
@@ -25,7 +27,7 @@ namespace imL.Utility.Terminal
         private Point _LINE;
         private Point _NEW_LINE;
         private Point _DRAW_START;
-        private List<decimal> _BAR = new List<decimal>();
+        private List<decimal> _BAR = new List<decimal>() { 0 };
 
         protected void Init(byte _blocks = 50)
         {
@@ -48,8 +50,6 @@ namespace imL.Utility.Terminal
 
                 ConsoleHelper.Write(this._DRAW_START, string.Format("[{0}]{1}", new string(' ', this._BLOCKS), new string(' ', 75)));
                 this._DRAW_START.X += 1;
-
-                this._BAR.Add(0);
             }
 
             this._NEW_LINE = new Point(this._LINE.X, this._LINE.Y + 1);
@@ -58,24 +58,33 @@ namespace imL.Utility.Terminal
         {
             if (_per.Between(0, 1, EInterval.Until))
             {
-                decimal _rou = Math.Round(_per * this._BLOCKS);
+                decimal _round = Math.Round(_per * this._BLOCKS);
 
-                if (this._BAR.Contains(_rou) == false)
+                if (this._BAR.Contains(_round) == false)
                 {
-                    this._BAR.Add(_rou);
+                    this._BAR.Add(_round);
 
-                    ConsoleHelper.Write(this._DRAW_START, ProgressBar._CHAR);
+                    ConsoleHelper.Write(this._DRAW_START, AProgress._CHAR);
                     this._DRAW_START.X += 1;
                 }
             }
         }
-        protected void DrawTime(DateTime _value)
+        protected void DrawProgress(decimal _per, object _value, object _length)
+        {
+            string _text = string.Format("{0}  {1} /{2}",
+                _per.ToString("P"),
+                _value,
+                _length);
+
+            ConsoleHelper.Write(this._DRAW_END, _text);
+        }
+        protected void DrawElapsed(DateTime _value)
         {
             TimeSpan _diff = _value - this._START;
 
             string _text = string.Format(
                 "[{0}]  {1}",
-                ProgressBar._BUCLE[this._BLOCKS++ % 4],
+                AProgress._BUCLE[this._BLOCKS++ % 4],
 #if (NET35)
                 _diff.ToString()
 #else
@@ -86,7 +95,7 @@ namespace imL.Utility.Terminal
             ConsoleHelper.Write(this._DRAW_START, _text);
         }
 
-        ~ProgressBar() => Dispose(false);
+        ~AProgress() => Dispose(false);
         public void Dispose()
         {
             Dispose(true);

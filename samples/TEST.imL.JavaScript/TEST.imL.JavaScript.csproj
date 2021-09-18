@@ -5,8 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\imL.JavaScript\imL.JavaScript.csproj" />
-    <ProjectReference Include="..\..\src\imL.Utility\imL.Utility.csproj" />
+    <ProjectReference Include="..\CORE.imL.JavaScript\CORE.imL.JavaScript.csproj" />
   </ItemGroup>
 
 </Project>

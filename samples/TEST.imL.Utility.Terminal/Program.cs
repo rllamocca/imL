@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Threading;
 
 using imL.Utility.Terminal;
+using imL.Utility.Terminal.Fulfill;
 
 namespace TEST.imL.Utility.Terminal
 {
@@ -12,6 +14,23 @@ namespace TEST.imL.Utility.Terminal
 
             Console.CancelKeyPress += new ConsoleCancelEventHandler(CancelKeyPress); //+C o +Pause
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(ProcessExit);
+
+            using (FProgress32 _pb = new(10))
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    using (FProgress32 _pb2 = new(15, _pb))
+                    {
+                        for (int j = 0; j < 15; j++)
+                        {
+                            _pb2.Report(j);
+                            Thread.Sleep(200);
+                        }
+                    }
+                    _pb.Report(i);
+                    Thread.Sleep(200);
+                }
+            }
 
 #if DEBUG
             ConsoleHelper.PressAnyKeyToExit();
