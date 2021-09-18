@@ -18,6 +18,7 @@ namespace imL.Contract.Terminal
         private bool _DISPOSED = false;
 
         protected AProgress _PARENT;
+        protected EReportProgress _REPORT;
         protected Point _DRAW_END;
         protected DateTime _START;
 
@@ -29,7 +30,15 @@ namespace imL.Contract.Terminal
         private Point _DRAW_START;
         private List<decimal> _BAR = new List<decimal>() { 0 };
 
-        protected void Init(byte _blocks = 50)
+        public DateTime Start { get { return this._START; } }
+
+        protected void Init(EReportProgress _report = EReportProgress.None, AProgress _parent = null)
+        {
+            this._START = DateTime.Now;
+            this._PARENT = _parent;
+            this._REPORT = _report;
+        }
+        protected void Init2(byte _blocks = 50)
         {
             if (this._PARENT == null)
             {

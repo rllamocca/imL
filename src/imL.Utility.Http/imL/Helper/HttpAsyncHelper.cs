@@ -10,7 +10,7 @@ namespace imL.Utility.Http
 {
     public static class HttpAsyncHelper
     {
-        public static async Task CompressContent(HttpResponseMessage _res, HttpHeaderValueCollection<StringWithQualityHeaderValue> _ae)
+        public async static Task CompressContent(HttpResponseMessage _res, HttpHeaderValueCollection<StringWithQualityHeaderValue> _ae)
         {
             if (_res.Content != null)
             {
@@ -40,7 +40,7 @@ namespace imL.Utility.Http
                 }
             }
         }
-        public static async Task DecompressContent(HttpRequestMessage _req)
+        public async static Task DecompressContent(HttpRequestMessage _req)
         {
             if (_req.Content != null)
             {

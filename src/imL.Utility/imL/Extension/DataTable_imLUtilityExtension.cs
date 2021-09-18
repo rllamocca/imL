@@ -52,16 +52,19 @@ namespace imL.Utility
                 _fw = true;
             }
 
-            foreach (DataRow _item in _this.Rows)
+            for (int _i = 0; _i < _this.Rows.Count; _i++)
             {
+                DataRow _item = _this.Rows[_i];
+
                 if (_fw)
                     _sw.WriteLine();
+
                 _sw.Write(string.Join(_sep, _item.ItemArray.DBToString()));
 
                 if (_fw == false)
                     _fw = true;
 
-                _progress?.Report(0);
+                _progress?.Report(_i);
             }
 
             _sw.Flush();

@@ -1,12 +1,17 @@
-﻿using System;
+﻿#if (NET35 || NET40)
+using imL.Contract;
+#endif
+
+using System;
 
 using imL.Contract.Terminal;
+using imL.Enumeration;
 
 namespace imL.Utility.Terminal.Fulfill
 {
     public sealed class FProgress64 : AProgress
 #if (NET35 || NET40)
-        , Contract.IProgress<long>
+        , IProgress<long>
 #else
         , IProgress<long>
 #endif
@@ -19,26 +24,34 @@ namespace imL.Utility.Terminal.Fulfill
         public long Length { get { return this._LENGTH; } }
         public long Value { get { return this._VALUE; } }
 
-        public FProgress64(long _length = 50, AProgress _parent = null)
+        public FProgress64(long _length = 50, EReportProgress _report = EReportProgress.Increment, AProgress _parent = null)
         {
-            this._LENGTH = _length;
-            this._PARENT = _parent;
-
-            if (this._LENGTH == 0)
+            if (_length == 0)
                 throw new ArgumentOutOfRangeException(nameof(_length), "_length == 0");
 
+            this.Init(_report, _parent);
+            this._LENGTH = _length;
+
             if (this._LENGTH < 50)
-                this.Init(Convert.ToByte(this._LENGTH));
+                this.Init2(Convert.ToByte(this._LENGTH));
             else
-                this.Init();
+                this.Init2();
         }
 
         public void Report(long _value = 0)
         {
-            if (_value == 0)
-                this._VALUE++;
-            else
-                this._VALUE = _value;
+            switch (this._REPORT)
+            {
+                case EReportProgress.StartsAtZero:
+                    this._VALUE = _value + 1;
+                    break;
+                case EReportProgress.Increment:
+                    this._VALUE++;
+                    break;
+                default:
+                    this._VALUE = _value;
+                    break;
+            }
 
             decimal _per = 1.0m;
 

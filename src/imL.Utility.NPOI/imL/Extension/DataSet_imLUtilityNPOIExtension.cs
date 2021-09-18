@@ -173,7 +173,7 @@ namespace imL.Utility.NPOI
                     }
                     _row++;
 
-                    _progress?.Report(0);
+                    _progress?.Report(_row);
                 }
 
                 //_col = 0;
@@ -334,7 +334,7 @@ namespace imL.Utility.NPOI
                     }
                     _row++;
 
-                    _progress?.Report(0);
+                    _progress?.Report(_row);
                 }
 
                 _dt_progress?.Report(0);

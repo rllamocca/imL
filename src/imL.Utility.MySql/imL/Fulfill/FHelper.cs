@@ -17,13 +17,13 @@ namespace imL.Utility.MySql.Fulfill
     public class FHelper : IHelper
     {
         public IConnection Connection { get; }
-        public bool EThrow { get; }
+        public bool Throw { get; }
         public IProgress<int> Progress { get; }
 
         public FHelper(IConnection _conn, bool _throw = false, IProgress<int> _progress = null)
         {
             this.Connection = _conn;
-            this.EThrow = _throw;
+            this.Throw = _throw;
             this.Progress = _progress;
         }
 
@@ -31,13 +31,13 @@ namespace imL.Utility.MySql.Fulfill
         {
             try
             {
-                FConnection _conn_raw = (FConnection)Connection;
+                FConnection _conn_raw = (FConnection)this.Connection;
                 MySqlParameter[] _pmts_raw = _pmts.GetParameters().GetMySqlParameters();
 
                 using (MySqlCommand _cmd = new MySqlCommand(_query, _conn_raw.Connection))
                 {
                     _cmd.Transaction = _conn_raw.Transaction;
-                    _cmd.CommandTimeout = Connection.TimeOut;
+                    _cmd.CommandTimeout = this.Connection.TimeOut;
 
                     if (_pmts_raw != null)
                         _cmd.Parameters.AddRange(_pmts_raw);
@@ -57,7 +57,7 @@ namespace imL.Utility.MySql.Fulfill
             }
             catch (Exception _ex)
             {
-                if (EThrow)
+                if (this.Throw)
                     throw _ex;
 
                 return new Return(false, _ex);
@@ -68,7 +68,7 @@ namespace imL.Utility.MySql.Fulfill
         {
             try
             {
-                FConnection _conn_raw = (FConnection)Connection;
+                FConnection _conn_raw = (FConnection)this.Connection;
 
                 int _r = 0;
                 Return[] _returns = new Return[_pmts.Length];
@@ -77,13 +77,14 @@ namespace imL.Utility.MySql.Fulfill
                 using (MySqlCommand _cmd = new MySqlCommand(_query, _conn_raw.Connection))
                 {
                     _cmd.Transaction = _conn_raw.Transaction;
-                    _cmd.CommandTimeout = Connection.TimeOut;
+                    _cmd.CommandTimeout = this.Connection.TimeOut;
                     _cmd.Parameters.AddRange(_pmts_raw);
 
                     int _c_p = _cmd.Parameters.Count;
                     int _c_r = _returns.Length;
 
                     _cmd.Prepare();
+
                     do
                     {
                         try
@@ -110,20 +111,22 @@ namespace imL.Utility.MySql.Fulfill
                         }
                         catch (Exception _ex)
                         {
-                            if (EThrow)
+                            if (this.Throw)
                                 throw _ex;
 
                             _returns[_r] = new Return(false, _ex);
                         }
+
                         _r++;
-                        Progress?.Report(0);
+                        this.Progress?.Report(_r);
+
                     } while (_r < _c_r);
                 }
                 return _returns;
             }
             catch (Exception _ex)
             {
-                if (EThrow)
+                if (this.Throw)
                     throw _ex;
 
                 return new Return[] { new Return(false, _ex) };
@@ -141,7 +144,7 @@ namespace imL.Utility.MySql.Fulfill
 
                 if (_dataset)
                 {
-                    DataSet _return = new DataSet("DataSet_0") { EnforceConstraints = Connection.Constraints };
+                    DataSet _return = new DataSet("DataSet_0") { EnforceConstraints = this.Connection.Constraints };
                     byte _n = 0;
 
                     using (MySqlDataReader _read = (MySqlDataReader)_exe.Result)
@@ -153,7 +156,7 @@ namespace imL.Utility.MySql.Fulfill
                             _return.Tables.Add(_dt);
                             _n++;
 
-                            Progress?.Report(0);
+                            this.Progress?.Report(_n);
                         }
                     }
 
@@ -171,7 +174,7 @@ namespace imL.Utility.MySql.Fulfill
             }
             catch (Exception _ex)
             {
-                if (EThrow)
+                if (this.Throw)
                     throw _ex;
 
                 return new Return(false, _ex);

@@ -10,7 +10,7 @@ namespace imL.Contract.DB
     public interface IAsyncHelper
     {
         IConnection Connection { get; }
-        bool EThrow { get; }
+        bool Throw { get; }
         IProgress<int> Progress { get; }
 
         Task<Return> Execute(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[] _pmts);

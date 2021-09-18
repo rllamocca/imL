@@ -11,7 +11,7 @@ namespace imL.Rest.Google
 {
     public static class GoogleAsyncHelper
     {
-        public static async Task<Geocoding> GetGeocoding(GoogleClient _client, decimal _lat, decimal _lng)
+        public async static Task<Geocoding> GetGeocoding(GoogleClient _client, decimal _lat, decimal _lng)
         {
             CultureInfo _ci = CultureInfo.GetCultureInfo("en-US");
 

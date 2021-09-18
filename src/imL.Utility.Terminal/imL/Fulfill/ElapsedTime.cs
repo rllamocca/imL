@@ -1,6 +1,5 @@
-﻿#if (NET35 || NET40 || NET45 || NETSTANDARD2_0)
+﻿#if (NETSTANDARD1_3) == false
 
-using System;
 using System.Timers;
 
 using imL.Contract.Terminal;
@@ -20,10 +19,8 @@ namespace imL.Utility.Terminal.Fulfill
 
         public ElapsedTime(AProgress _parent = null)
         {
-            this._START = DateTime.Now;
-            this._PARENT = _parent;
-
-            this.Init(0);
+            this.Init(_parent: _parent);
+            this.Init2(0);
 
             this.DrawElapsed(this._START);
 

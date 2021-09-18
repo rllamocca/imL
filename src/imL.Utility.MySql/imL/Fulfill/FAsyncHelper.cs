@@ -20,13 +20,13 @@ namespace imL.Utility.MySql.Fulfill
     public class FAsyncHelper : IAsyncHelper
     {
         public IConnection Connection { get; }
-        public bool EThrow { get; }
+        public bool Throw { get; }
         public IProgress<int> Progress { get; }
 
         public FAsyncHelper(IConnection _conn, bool _throw = false, IProgress<int> _progress = null)
         {
             this.Connection = _conn;
-            this.EThrow = _throw;
+            this.Throw = _throw;
             this.Progress = _progress;
         }
 
@@ -34,13 +34,13 @@ namespace imL.Utility.MySql.Fulfill
         {
             try
             {
-                FConnection _conn_raw = (FConnection)Connection;
+                FConnection _conn_raw = (FConnection)this.Connection;
                 MySqlParameter[] _pmts_raw = _pmts.GetParameters().GetMySqlParameters();
 
                 using (MySqlCommand _cmd = new MySqlCommand(_query, _conn_raw.Connection))
                 {
                     _cmd.Transaction = _conn_raw.Transaction;
-                    _cmd.CommandTimeout = Connection.TimeOut;
+                    _cmd.CommandTimeout = this.Connection.TimeOut;
 
                     if (_pmts_raw != null)
                         _cmd.Parameters.AddRange(_pmts_raw);
@@ -48,11 +48,11 @@ namespace imL.Utility.MySql.Fulfill
                     switch (_exe)
                     {
                         case EExecute.NonQuery:
-                            return new Return(true, await _cmd.ExecuteNonQueryAsync(Connection.Token));
+                            return new Return(true, await _cmd.ExecuteNonQueryAsync(this.Connection.Token));
                         case EExecute.Scalar:
-                            return new Return(true, await _cmd.ExecuteScalarAsync(Connection.Token));
+                            return new Return(true, await _cmd.ExecuteScalarAsync(this.Connection.Token));
                         case EExecute.Reader:
-                            return new Return(true, await _cmd.ExecuteReaderAsync(Connection.Token));
+                            return new Return(true, await _cmd.ExecuteReaderAsync(this.Connection.Token));
                         default:
                             return new Return(false);
                     }
@@ -60,7 +60,7 @@ namespace imL.Utility.MySql.Fulfill
             }
             catch (Exception _ex)
             {
-                if (EThrow)
+                if (this.Throw)
                     throw _ex;
 
                 return new Return(false, _ex);
@@ -71,7 +71,7 @@ namespace imL.Utility.MySql.Fulfill
         {
             try
             {
-                FConnection _conn_raw = (FConnection)Connection;
+                FConnection _conn_raw = (FConnection)this.Connection;
 
                 int _r = 0;
                 Return[] _returns = new Return[_pmts.Length];
@@ -80,7 +80,7 @@ namespace imL.Utility.MySql.Fulfill
                 using (MySqlCommand _cmd = new MySqlCommand(_query, _conn_raw.Connection))
                 {
                     _cmd.Transaction = _conn_raw.Transaction;
-                    _cmd.CommandTimeout = Connection.TimeOut;
+                    _cmd.CommandTimeout = this.Connection.TimeOut;
                     _cmd.Parameters.AddRange(_pmts_raw);
 
                     int _c_p = _cmd.Parameters.Count;
@@ -98,13 +98,13 @@ namespace imL.Utility.MySql.Fulfill
                             switch (_exe)
                             {
                                 case EExecute.NonQuery:
-                                    _returns[_r] = new Return(true, await _cmd.ExecuteNonQueryAsync(Connection.Token));
+                                    _returns[_r] = new Return(true, await _cmd.ExecuteNonQueryAsync(this.Connection.Token));
                                     break;
                                 case EExecute.Scalar:
-                                    _returns[_r] = new Return(true, await _cmd.ExecuteScalarAsync(Connection.Token));
+                                    _returns[_r] = new Return(true, await _cmd.ExecuteScalarAsync(this.Connection.Token));
                                     break;
                                 case EExecute.Reader:
-                                    _returns[_r] = new Return(true, await _cmd.ExecuteReaderAsync(Connection.Token));
+                                    _returns[_r] = new Return(true, await _cmd.ExecuteReaderAsync(this.Connection.Token));
                                     break;
                                 default:
                                     _returns[_r] = new Return(false);
@@ -113,20 +113,22 @@ namespace imL.Utility.MySql.Fulfill
                         }
                         catch (Exception _ex)
                         {
-                            if (EThrow)
+                            if (this.Throw)
                                 throw _ex;
 
                             _returns[_r] = new Return(false, _ex);
                         }
+
                         _r++;
-                        Progress?.Report(0);
+                        this.Progress?.Report(_r);
+
                     } while (_r < _c_r);
                 }
                 return _returns;
             }
             catch (Exception _ex)
             {
-                if (EThrow)
+                if (this.Throw)
                     throw _ex;
 
                 return new Return[] { new Return(false, _ex) };
@@ -144,7 +146,7 @@ namespace imL.Utility.MySql.Fulfill
 
                 if (_dataset)
                 {
-                    DataSet _return = new DataSet("DataSet_0") { EnforceConstraints = Connection.Constraints };
+                    DataSet _return = new DataSet("DataSet_0") { EnforceConstraints = this.Connection.Constraints };
                     byte _n = 0;
 
                     using (MySqlDataReader _read = (MySqlDataReader)_exe.Result)
@@ -156,7 +158,7 @@ namespace imL.Utility.MySql.Fulfill
                             _return.Tables.Add(_dt);
                             _n++;
 
-                            Progress?.Report(0);
+                            this.Progress?.Report(_n);
                         }
                     }
 
@@ -174,7 +176,7 @@ namespace imL.Utility.MySql.Fulfill
             }
             catch (Exception _ex)
             {
-                if (EThrow)
+                if (this.Throw)
                     throw _ex;
 
                 return new Return(false, _ex);

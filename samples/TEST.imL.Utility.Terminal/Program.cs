@@ -3,6 +3,7 @@ using System.Threading;
 
 using imL.Utility.Terminal;
 using imL.Utility.Terminal.Fulfill;
+using imL.Enumeration;
 
 namespace TEST.imL.Utility.Terminal
 {
@@ -11,24 +12,25 @@ namespace TEST.imL.Utility.Terminal
         static void Main(string[] args)
         {
             ConsoleHelper.Starts();
-
+            /*
             Console.CancelKeyPress += new ConsoleCancelEventHandler(CancelKeyPress); //+C o +Pause
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(ProcessExit);
+            */
 
-            using (FProgress32 _pb = new(10))
+            using (FProgress32 _pb = new(10, EReportProgress.StartsAtZero))
             {
-                for (int i = 0; i < 10; i++)
+                for (int _i = 0; _i < 10; _i++)
                 {
-                    using (FProgress32 _pb2 = new(15, _pb))
+                    IProgress<int> _pb2 = new FProgress32(15, EReportProgress.StartsAtZero, _pb);
+
+                    for (int _j = 0; _j < 15; _j++)
                     {
-                        for (int j = 0; j < 15; j++)
-                        {
-                            _pb2.Report(j);
-                            Thread.Sleep(200);
-                        }
+                        _pb2.Report(_j);
+                        Thread.Sleep(200);
                     }
-                    _pb.Report(i);
-                    Thread.Sleep(200);
+
+                    _pb.Report(_i);
+                    Thread.Sleep(800);
                 }
             }
 
