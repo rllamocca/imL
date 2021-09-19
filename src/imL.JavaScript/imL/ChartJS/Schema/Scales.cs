@@ -2,7 +2,7 @@
 {
     public class Scales
     {
-        public X x { get; set; }
-        public Y y { get; set; }
+        public X x { set; get; }
+        public Y y { set; get; }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class Interaction
     {
-        public bool? intersect { get; set; }
-        public string axis { get; set; }
+        public bool? intersect { set; get; }
+        public string axis { set; get; }
     }
 }

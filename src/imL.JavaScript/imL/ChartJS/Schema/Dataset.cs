@@ -2,22 +2,22 @@
 {
     public class Dataset
     {
-        public string label { get; set; }
-        public int[] data { get; set; }
-        public string[] backgroundColor { get; set; }
-        public string[] borderColor { get; set; }
-        public int? borderWidth { get; set; }
+        public string label { set; get; }
+        public int[] data { set; get; }
+        public string[] backgroundColor { set; get; }
+        public string[] borderColor { set; get; }
+        public int? borderWidth { set; get; }
 
-        public string stack { get; set; }
+        public string stack { set; get; }
 
-        public int? borderRadius { get; set; }
-        public bool? borderSkipped { get; set; }
+        public int? borderRadius { set; get; }
+        public bool? borderSkipped { set; get; }
 
-        public bool? fill { get; set; }
-        public bool? stepped { get; set; }
+        public bool? fill { set; get; }
+        public bool? stepped { set; get; }
 
-        public decimal? tension { get; set; }
+        public decimal? tension { set; get; }
 
-        public bool? hidden { get; set; }
+        public bool? hidden { set; get; }
 }
 }

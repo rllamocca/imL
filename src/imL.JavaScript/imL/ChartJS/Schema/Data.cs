@@ -2,7 +2,7 @@
 {
     public class Data
     {
-        public string[] labels { get; set; }
-        public Dataset[] datasets { get; set; }
+        public string[] labels { set; get; }
+        public Dataset[] datasets { set; get; }
     }
 }

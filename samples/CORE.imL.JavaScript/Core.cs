@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Threading;
 
 using imL.JavaScript.ChartJS;
@@ -13,9 +14,40 @@ namespace CORE.imL.JavaScript
 {
     public class Core : Controller
     {
+        private static int[] numbers(int _length, int _min = -100, int _max = 100)
+        {
+            int[] _return = new int[_length];
+
+            Random _r = new Random();
+            for (int _i = 0; _i < _length; _i++)
+            {
+                _return[_i] = _r.Next(_min, _max);
+            }
+
+            return _return;
+        }
+        private static string[] months(int _length)
+        {
+            string[] _months = new string[] {
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+            };
+
+            return _months.Take(_length).ToArray();
+        }
         private static Color[] MyColors()
         {
-            byte _por = Convert.ToByte(1 * 255);
+            byte _por = Convert.ToByte(0.8 * 255);
             Color[] _colors;
 
             //_colors = new Color[] {
@@ -45,12 +77,12 @@ namespace CORE.imL.JavaScript
 
             _colors = new Color[] {
                 Color.FromArgb(_por, 255, 99, 132),
-                Color.FromArgb(_por, 255, 159, 64),
+                //Color.FromArgb(_por, 255, 159, 64),
                 Color.FromArgb(_por, 255, 205, 86),
-                Color.FromArgb(_por, 75, 192, 192),
-                Color.FromArgb(_por, 54, 162, 235),
-                Color.FromArgb(_por, 153, 102, 255),
-                Color.FromArgb(_por, 201, 203, 207)
+                //Color.FromArgb(_por, 75, 192, 192),
+                Color.FromArgb(_por, 54, 162, 235)
+                //Color.FromArgb(_por, 153, 102, 255),
+                //Color.FromArgb(_por, 201, 203, 207)
             };
 
             //return _colors.Take(_length).ToArray();
@@ -124,8 +156,17 @@ namespace CORE.imL.JavaScript
             try
             {
                 Color[] _colors = Core.MyColors();
+                SerieFormat[] _series = new SerieFormat[_colors.Length];
 
-                return Ok(ChartJSHelper.LineCharts_SteppedLineCharts(_colors.ToStringRGB()));
+                for (int _i = 0; _i < _series.Length; _i++)
+                {
+                    Color _color = _colors[_i];
+                    _series[_i] = new SerieFormat(Core.numbers(8), _color.ToString(), _color.ToStringRGBA(), _color.ToStringRGB());
+                }
+
+                string[] _axis = Core.months(8);
+
+                return Ok(ChartJSHelper.BarCharts_VerticalBarChart(new ChartFormat { Title = "BarCharts_VerticalBarChart", Series = _series, XAxis = _axis }));
             }
             catch (Exception _ex)
             {

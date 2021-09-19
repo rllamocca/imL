@@ -2,12 +2,12 @@
 {
     public class FtpFormat
     {
-        public bool? UseBinary { get; set; }
-        public int? Timeout { get; set; }
-        public int? ReadWriteTimeout { get; set; }
-        public bool? KeepAlive { get; set; }
-        public bool? EnableSsl { get; set; }
-        public bool? UsePassive { get; set; }
+        public bool? UseBinary { set; get; }
+        public int? Timeout { set; get; }
+        public int? ReadWriteTimeout { set; get; }
+        public bool? KeepAlive { set; get; }
+        public bool? EnableSsl { set; get; }
+        public bool? UsePassive { set; get; }
         public bool? UseDefaultCredentials { set; get; }
 
         public int? Port { set; get; }

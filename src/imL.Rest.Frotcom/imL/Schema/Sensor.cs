@@ -2,34 +2,34 @@
 {
     public class Sensor
     {
-        public int vehicleId { get; set; }
-        public int companyId { get; set; }
-        public string[] sensors { get; set; }
-        public string fuelLevel { get; set; }
-        public string wireless { get; set; }
-        public string inputs { get; set; }
-        public string anA1Name { get; set; }
-        public string anA2Name { get; set; }
-        public string anA3Name { get; set; }
-        public string diN1Name { get; set; }
-        public string diN2Name { get; set; }
-        public string diN3Name { get; set; }
-        public string tP1Name { get; set; }
-        public string tP2Name { get; set; }
-        public string tP3Name { get; set; }
-        public string dooR1Name { get; set; }
-        public string dooR2Name { get; set; }
-        public string dooR3Name { get; set; }
-        public string seaL1Name { get; set; }
-        public string seaL2Name { get; set; }
-        public string seaL3Name { get; set; }
-        public string analogFuel { get; set; }
-        public bool hasCanBus { get; set; }
-        public bool hasAdBlueLevelSensor { get; set; }
-        public bool hasWeightSensor { get; set; }
-        public bool hasGrossCombinationWeightSensor { get; set; }
-        public bool hasFirstAxleWeightSensor { get; set; }
-        public bool hasSecondAxleWeightSensor { get; set; }
-        public bool hasTrailerWeightSensor { get; set; }
+        public int vehicleId { set; get; }
+        public int companyId { set; get; }
+        public string[] sensors { set; get; }
+        public string fuelLevel { set; get; }
+        public string wireless { set; get; }
+        public string inputs { set; get; }
+        public string anA1Name { set; get; }
+        public string anA2Name { set; get; }
+        public string anA3Name { set; get; }
+        public string diN1Name { set; get; }
+        public string diN2Name { set; get; }
+        public string diN3Name { set; get; }
+        public string tP1Name { set; get; }
+        public string tP2Name { set; get; }
+        public string tP3Name { set; get; }
+        public string dooR1Name { set; get; }
+        public string dooR2Name { set; get; }
+        public string dooR3Name { set; get; }
+        public string seaL1Name { set; get; }
+        public string seaL2Name { set; get; }
+        public string seaL3Name { set; get; }
+        public string analogFuel { set; get; }
+        public bool hasCanBus { set; get; }
+        public bool hasAdBlueLevelSensor { set; get; }
+        public bool hasWeightSensor { set; get; }
+        public bool hasGrossCombinationWeightSensor { set; get; }
+        public bool hasFirstAxleWeightSensor { set; get; }
+        public bool hasSecondAxleWeightSensor { set; get; }
+        public bool hasTrailerWeightSensor { set; get; }
     }
 }

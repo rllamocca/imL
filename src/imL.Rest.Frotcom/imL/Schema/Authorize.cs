@@ -2,12 +2,12 @@
 {
     public class Authorize
     {
-        public string token { get; set; }
-        public string provider { get; set; }
-        public string username { get; set; }
-        public Parent parent { get; set; }
-        public Announcement[] announcements { get; set; }
-        public bool removedSessions { get; set; }
-        public int companyId { get; set; }
+        public string token { set; get; }
+        public string provider { set; get; }
+        public string username { set; get; }
+        public Parent parent { set; get; }
+        public Announcement[] announcements { set; get; }
+        public bool removedSessions { set; get; }
+        public int companyId { set; get; }
     }
 }

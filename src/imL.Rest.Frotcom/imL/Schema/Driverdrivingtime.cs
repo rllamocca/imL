@@ -2,16 +2,16 @@
 {
     public class Driverdrivingtime
     {
-        public int driverId { get; set; }
-        public int continuous { get; set; }
-        public int continuousSec { get; set; }
-        public int daily { get; set; }
-        public int dailySec { get; set; }
-        public int extraHours { get; set; }
-        public int weekly { get; set; }
-        public int weeklySec { get; set; }
-        public int biweekly { get; set; }
-        public int biweeklySec { get; set; }
-        public bool isMultiManning { get; set; }
+        public int driverId { set; get; }
+        public int continuous { set; get; }
+        public int continuousSec { set; get; }
+        public int daily { set; get; }
+        public int dailySec { set; get; }
+        public int extraHours { set; get; }
+        public int weekly { set; get; }
+        public int weeklySec { set; get; }
+        public int biweekly { set; get; }
+        public int biweeklySec { set; get; }
+        public bool isMultiManning { set; get; }
     }
 }

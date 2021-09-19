@@ -2,7 +2,7 @@
 {
     public class Plugins
     {
-        public Legend legend { get; set; }
-        public Title title { get; set; }
+        public Legend legend { set; get; }
+        public Title title { set; get; }
     }
 }

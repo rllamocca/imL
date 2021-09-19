@@ -2,6 +2,6 @@
 {
     public class Legend
     {
-        public string position { get; set; }
+        public string position { set; get; }
     }
 }

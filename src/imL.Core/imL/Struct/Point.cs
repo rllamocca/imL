@@ -5,8 +5,8 @@ namespace imL.Struct
 {
     public struct Point
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        public int X { set; get; }
+        public int Y { set; get; }
 
         public Point(int _x, int _y)
         {

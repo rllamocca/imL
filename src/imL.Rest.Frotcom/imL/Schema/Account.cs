@@ -2,15 +2,15 @@
 {
     public class Account
     {
-        public int id { get; set; }
-        public int partnerId { get; set; }
-        public string partnerName { get; set; }
-        public string name { get; set; }
-        public string fullname { get; set; }
-        public int industry { get; set; }
-        public string website { get; set; }
-        public bool disclaimer { get; set; }
-        public string address { get; set; }
-        public string vatNumber { get; set; }
+        public int id { set; get; }
+        public int partnerId { set; get; }
+        public string partnerName { set; get; }
+        public string name { set; get; }
+        public string fullname { set; get; }
+        public int industry { set; get; }
+        public string website { set; get; }
+        public bool disclaimer { set; get; }
+        public string address { set; get; }
+        public string vatNumber { set; get; }
     }
 }

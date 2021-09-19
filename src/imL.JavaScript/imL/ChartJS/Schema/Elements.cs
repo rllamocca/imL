@@ -2,6 +2,6 @@
 {
     public class Elements
     {
-        public Bar bar { get; set; }
+        public Bar bar { set; get; }
     }
 }

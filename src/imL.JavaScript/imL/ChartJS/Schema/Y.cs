@@ -2,7 +2,7 @@
 {
     public class Y
     {
-        public bool stacked { get; set; }
-        public bool beginAtZero { get; set; }
+        public bool stacked { set; get; }
+        public bool beginAtZero { set; get; }
     }
 }

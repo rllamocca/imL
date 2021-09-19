@@ -2,14 +2,14 @@
 {
     public class Options
     {
-        public Scales scales { get; set; }
+        public Scales scales { set; get; }
 
-        public bool? responsive { get; set; }
-        public Plugins plugins { get; set; }
+        public bool? responsive { set; get; }
+        public Plugins plugins { set; get; }
 
-        public string indexAxis { get; set; }
-        public Elements elements { get; set; }
+        public string indexAxis { set; get; }
+        public Elements elements { set; get; }
 
-        public Interaction interaction { get; set; }
+        public Interaction interaction { set; get; }
     }
 }

@@ -102,33 +102,33 @@ namespace imL.Utility.NPOI
                 if (_columnnames)
                 {
                     _wbsr = _wbs.CreateRow(_row);
-                    foreach (DataColumn _dc in _item.Columns)
+                    foreach (DataColumn _item2 in _item.Columns)
                     {
                         ICell _wbsrc = _wbsr.CreateCell(_col);
                         _wbsrc.CellStyle = _sbold;
                         _wbsrc.SetCellType(CellType.String);
 
-                        if (_dc.Caption == null)
-                            _wbsrc.SetCellValue(_dc.ColumnName);
+                        if (_item2.Caption == null)
+                            _wbsrc.SetCellValue(_item2.ColumnName);
                         else
-                            _wbsrc.SetCellValue(_dc.Caption);
+                            _wbsrc.SetCellValue(_item2.Caption);
 
                         _col++;
                     }
                     _row++;
                 }
 
-                foreach (DataRow _dr in _item.Rows)
+                foreach (DataRow _item2 in _item.Rows)
                 {
                     _col = 0;
                     _wbsr = _wbs.CreateRow(_row);
-                    foreach (DataColumn _dc in _item.Columns)
+                    foreach (DataColumn _item3 in _item.Columns)
                     {
                         ICell _wbsrc = _wbsr.CreateCell(_col);
-                        object _obj = _dr[_dc.ColumnName];
+                        object _obj = _item2[_item3.ColumnName];
                         if (_obj != DBNull.Value && _obj != null)
                         {
-                            switch (Convert.ToString(_dc.DataType))
+                            switch (Convert.ToString(_item3.DataType))
                             {
                                 case "System.Int16":
                                 case "System.Int32":
@@ -254,16 +254,16 @@ namespace imL.Utility.NPOI
                 if (_columnnames)
                 {
                     _wbsr = _wbs.CreateRow(_row);
-                    foreach (DataColumn _dc in _item.Columns)
+                    foreach (DataColumn _item2 in _item.Columns)
                     {
                         ICell _wbsrc = _wbsr.CreateCell(_col);
                         _wbsrc.CellStyle = _sbold;
                         _wbsrc.SetCellType(CellType.String);
 
-                        if (_dc.Caption == null)
-                            _wbsrc.SetCellValue(_dc.ColumnName);
+                        if (_item2.Caption == null)
+                            _wbsrc.SetCellValue(_item2.ColumnName);
                         else
-                            _wbsrc.SetCellValue(_dc.Caption);
+                            _wbsrc.SetCellValue(_item2.Caption);
 
                         _col++;
                     }
@@ -272,9 +272,9 @@ namespace imL.Utility.NPOI
 
                 _col = 0;
                 ICellStyle[] _t_styles = new ICellStyle[_item.Columns.Count];
-                foreach (DataColumn _dc in _item.Columns)
+                foreach (DataColumn _item2 in _item.Columns)
                 {
-                    Tuple<string, string, string> _f = _formats.Where(_w => _w.Item1 == _item.TableName && _w.Item2 == _dc.ColumnName).FirstOrDefault();
+                    Tuple<string, string, string> _f = _formats.Where(_w => _w.Item1 == _item.TableName && _w.Item2 == _item2.ColumnName).FirstOrDefault();
 
                     if (_f.Equals(default(Tuple<string, string, string>)))
                         _t_styles[_col] = _sbasic;
@@ -290,18 +290,18 @@ namespace imL.Utility.NPOI
                     _col++;
                 }
 
-                foreach (DataRow _dr in _item.Rows)
+                foreach (DataRow _item2 in _item.Rows)
                 {
                     _col = 0;
                     _wbsr = _wbs.CreateRow(_row);
-                    foreach (DataColumn _dc in _item.Columns)
+                    foreach (DataColumn _item3 in _item.Columns)
                     {
                         ICell _wbsrc = _wbsr.CreateCell(_col);
                         _wbsrc.CellStyle = _t_styles[_col];
-                        object _obj = _dr[_dc.ColumnName];
+                        object _obj = _item2[_item3.ColumnName];
                         if (_obj != DBNull.Value && _obj != null)
                         {
-                            switch (Convert.ToString(_dc.DataType))
+                            switch (Convert.ToString(_item3.DataType))
                             {
                                 case "System.Int16":
                                 case "System.Int32":

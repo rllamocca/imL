@@ -4,17 +4,17 @@ namespace imL.Rest.Frotcom.Schema
 {
     public class Announcement
     {
-        public int id { get; set; }
-        public string title { get; set; }
-        public string text { get; set; }
-        public string imageTitle { get; set; }
-        public string imageContent { get; set; }
-        public string imageContentType { get; set; }
-        public bool isLoginBlocked { get; set; }
-        public string rule { get; set; }
-        public string approval { get; set; }
-        public bool isActive { get; set; }
-        public bool isDiscarded { get; set; }
-        public DateTime? expiration { get; set; }
+        public int id { set; get; }
+        public string title { set; get; }
+        public string text { set; get; }
+        public string imageTitle { set; get; }
+        public string imageContent { set; get; }
+        public string imageContentType { set; get; }
+        public bool isLoginBlocked { set; get; }
+        public string rule { set; get; }
+        public string approval { set; get; }
+        public bool isActive { set; get; }
+        public bool isDiscarded { set; get; }
+        public DateTime? expiration { set; get; }
     }
 }

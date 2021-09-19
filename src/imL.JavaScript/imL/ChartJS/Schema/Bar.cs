@@ -2,6 +2,6 @@
 {
     public class Bar
     {
-        public int? borderWidth { get; set; }
+        public int? borderWidth { set; get; }
     }
 }

@@ -2,8 +2,8 @@
 {
     public class Config
     {
-        public string type { get; set; }
-        public Data data { get; set; }
-        public Options options { get; set; }
+        public string type { set; get; }
+        public Data data { set; get; }
+        public Options options { set; get; }
     }
 }
