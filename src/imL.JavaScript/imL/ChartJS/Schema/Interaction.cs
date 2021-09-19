@@ -4,5 +4,6 @@
     {
         public bool? intersect { set; get; }
         public string axis { set; get; }
+        public string mode { set; get; }
     }
 }

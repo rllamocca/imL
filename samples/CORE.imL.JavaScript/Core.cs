@@ -14,9 +14,9 @@ namespace CORE.imL.JavaScript
 {
     public class Core : Controller
     {
-        private static int[] numbers(int _length, int _min = -100, int _max = 100)
+        private static int?[] numbers(int _length, int _min = -100, int _max = 100)
         {
-            int[] _return = new int[_length];
+            int?[] _return = new int?[_length];
 
             Random _r = new Random();
             for (int _i = 0; _i < _length; _i++)
@@ -166,7 +166,7 @@ namespace CORE.imL.JavaScript
 
                 string[] _axis = Core.months(8);
 
-                return Ok(ChartJSHelper.BarCharts_VerticalBarChart(new ChartFormat { Title = "BarCharts_VerticalBarChart", Series = _series, XAxis = _axis }));
+                return Ok(ChartJSHelper.BarCharts_Stacked(new ChartFormat { Title = "BarCharts_Stacked", Series = _series, XAxis = _axis }));
             }
             catch (Exception _ex)
             {
