@@ -77,12 +77,12 @@ namespace CORE.imL.JavaScript
 
             _colors = new Color[] {
                 Color.FromArgb(_por, 255, 99, 132),
-                //Color.FromArgb(_por, 255, 159, 64),
+                Color.FromArgb(_por, 255, 159, 64),
                 Color.FromArgb(_por, 255, 205, 86),
-                //Color.FromArgb(_por, 75, 192, 192),
-                Color.FromArgb(_por, 54, 162, 235)
-                //Color.FromArgb(_por, 153, 102, 255),
-                //Color.FromArgb(_por, 201, 203, 207)
+                Color.FromArgb(_por, 75, 192, 192),
+                Color.FromArgb(_por, 54, 162, 235),
+                Color.FromArgb(_por, 153, 102, 255),
+                Color.FromArgb(_por, 201, 203, 207)
             };
 
             //return _colors.Take(_length).ToArray();
@@ -155,18 +155,35 @@ namespace CORE.imL.JavaScript
         {
             try
             {
-                Color[] _colors = Core.MyColors();
-                SerieFormat[] _series = new SerieFormat[_colors.Length];
+                SerieFormat[] _series = new SerieFormat[3];
 
                 for (int _i = 0; _i < _series.Length; _i++)
                 {
-                    Color _color = _colors[_i];
-                    _series[_i] = new SerieFormat(Core.numbers(8), _color.ToString(), _color.ToStringRGBA(), _color.ToStringRGB());
+                    _series[_i] = new SerieFormat(Core.numbers(5, 0, 50), string.Format("series {0}", _i));
                 }
 
-                string[] _axis = Core.months(8);
+                Color[] _colors = Core.MyColors();
 
-                return Ok(ChartJSHelper.BarCharts_Stacked(new ChartFormat { Title = "BarCharts_Stacked", Series = _series, XAxis = _axis }));
+                string[] _axis = Core.months(5);
+                string[] _back = _colors.ToStringRGBA();
+                string[] _border = _colors.ToStringRGB();
+
+                //################################################################
+                ChartFormat _chart = new()
+                {
+                    Title = "OtherCharts_Pie",
+                    Series = _series,
+                    XAxis = new()
+                    {
+                        Name = "axis X",
+                        Axis = _axis
+                    },
+                    BackgroundColor = _back,
+                    BorderColor = _border
+                };
+
+                //################################################################
+                return Ok(ChartJSHelper.OtherCharts_Pie(_chart));
             }
             catch (Exception _ex)
             {

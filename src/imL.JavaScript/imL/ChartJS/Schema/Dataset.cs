@@ -25,5 +25,9 @@
         public string cubicInterpolationMode { set; get; }
 
         public int?[] borderDash { set; get; }
+
+        public string type { set; get; }
+
+        public int? order { set; get; }
     }
 }

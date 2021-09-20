@@ -1,6 +1,6 @@
 ﻿namespace imL.JavaScript.ChartJS.Schema
 {
-    public class Y
+    public class Z
     {
         public Title title { set; get; }
         public Grid grid { set; get; }

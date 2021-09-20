@@ -4,8 +4,10 @@
     {
         public string Title { set; get; }
         public SerieFormat[] Series { set; get; }
-        public string[] XAxis { set; get; }
-        public string[] YAxis { set; get; }
-        public string[] ZAxis { set; get; }
+        public AxisFormat XAxis { set; get; }
+        public AxisFormat YAxis { set; get; }
+        public AxisFormat ZAxis { set; get; }
+        public string[] BackgroundColor { set; get; }
+        public string[] BorderColor { set; get; }
     }
 }

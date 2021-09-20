@@ -3,6 +3,7 @@
     public class X
     {
         public Title title { set; get; }
+        public Grid grid { set; get; }
 
         public bool stacked { set; get; }
         public bool beginAtZero { set; get; }
