@@ -73,7 +73,7 @@ namespace imL.Utility.Mail
 
         public static void Send(SmtpFormat _smtp, MailMessageFormat[] _messages, Encoding _enc = null)
         {
-            EncodingUtility.SolutionDefault(ref _enc);
+            ReadOnly.DefaultEncoding(ref _enc);
 
             SmtpClient _sc = new SmtpClient();
             SmtpHelper.Init_SmtpClient(ref _sc, _smtp);

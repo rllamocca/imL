@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Text;
 
 namespace imL
 {
@@ -37,5 +39,13 @@ namespace imL
  ║  {0}  ║
  ╚═════╝
 ";
+        public static readonly Encoding _ENCODING = Encoding.UTF8;
+        public static readonly CultureInfo _CULTURE = CultureInfo.InvariantCulture;
+
+        public static void DefaultEncoding(ref Encoding _ref)
+        {
+            if (_ref == null)
+                _ref = ReadOnly._ENCODING;
+        }
     }
 }

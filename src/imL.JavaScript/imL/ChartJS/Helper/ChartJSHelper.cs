@@ -1,4 +1,6 @@
-﻿using imL.JavaScript.ChartJS.Schema;
+﻿using System.Linq;
+
+using imL.JavaScript.ChartJS.Schema;
 
 /*
 check
@@ -12,7 +14,7 @@ namespace imL.JavaScript.ChartJS
 {
     public static class ChartJSHelper
     {
-        private static Config Init(ChartFormat _chart)
+        private static Config Create(ChartFormat _chart)
         {
             Config _return = new Config();
             _return.options = new Options();
@@ -60,25 +62,36 @@ namespace imL.JavaScript.ChartJS
 
             return _return;
         }
-        private static void ToDataSets(ref Config _ref, ChartFormat _chart, bool _pileup = false)
+        private static void CleanScales(ref Config _ref)
+        {
+            if (_ref.options.scales.x != null) _ref.options.scales.x = null;
+            if (_ref.options.scales.y != null) _ref.options.scales.y = null;
+            if (_ref.options.scales.z != null) _ref.options.scales.z = null;
+        }
+        private static void ToDataSets(ref Config _ref, ChartFormat _chart, bool _pileup = false, bool _border = true)
         {
             _ref.data = new Data();
 
-            if (_chart.XAxis != null)
-                _ref.data.labels = _chart.XAxis.Axis;
-
             if (_pileup)
             {
+                _ref.data.labels = _chart.Series.Select(_s => _s.Name).ToArray();
+                //decimal?[] _values = _chart.Series.SelectMany(_s => _s.Values).Take(_ref.data.labels.Length).ToArray();
+                decimal?[] _values = _chart.Series.Select(_s => _s.Values.FirstOrDefault()).ToArray();
+
                 _ref.data.datasets = new Dataset[1];
-                SerieFormat _item = _chart.Series[0];
                 _ref.data.datasets[0] = new Dataset();
-                _ref.data.datasets[0].label = _item.Name;
-                _ref.data.datasets[0].data = _item.Values;
+                _ref.data.datasets[0].label = "pileup";
+                _ref.data.datasets[0].data = _values;
                 _ref.data.datasets[0].backgroundColor = _chart.BackgroundColor;
-                _ref.data.datasets[0].borderColor = _chart.BorderColor;
+
+                if (_border)
+                    _ref.data.datasets[0].borderColor = _chart.BorderColor;
             }
             else
             {
+                if (_chart.XAxis != null)
+                    _ref.data.labels = _chart.XAxis.Axis;
+
                 _ref.data.datasets = new Dataset[_chart.Series.Length];
 
                 for (int _i = 0; _i < _ref.data.datasets.Length; _i++)
@@ -88,14 +101,16 @@ namespace imL.JavaScript.ChartJS
                     _ref.data.datasets[_i].label = _item.Name;
                     _ref.data.datasets[_i].data = _item.Values;
                     _ref.data.datasets[_i].backgroundColor = new string[] { _chart.BackgroundColor[_i % _chart.BackgroundColor.Length] };
-                    _ref.data.datasets[_i].borderColor = new string[] { _chart.BorderColor[_i % _chart.BorderColor.Length] };
+
+                    if (_border)
+                        _ref.data.datasets[_i].borderColor = new string[] { _chart.BorderColor[_i % _chart.BorderColor.Length] };
                 }
             }
         }
 
         public static Config BarCharts_Vertical(ChartFormat _chart)
         {
-            Config _return = ChartJSHelper.Init(_chart);
+            Config _return = ChartJSHelper.Create(_chart);
             _return.type = "bar";
             ChartJSHelper.ToDataSets(ref _return, _chart);
 
@@ -125,8 +140,9 @@ namespace imL.JavaScript.ChartJS
 
             return _return;
         }
-        public static Config BarCharts_StackedWithGroups(ChartFormat _chart) //AFINAR
+        public static Config BarCharts_StackedWithGroups(ChartFormat _chart)
         {
+            //AFINAR
             Config _return = ChartJSHelper.BarCharts_Vertical(_chart);
 
             if (_return.options.scales.x == null) _return.options.scales.x = new X();
@@ -143,8 +159,9 @@ namespace imL.JavaScript.ChartJS
 
             return _return;
         }
-        public static Config BarCharts_Floating(ChartFormat _chart) //IMPLEMENTAR
+        public static Config BarCharts_Floating(ChartFormat _chart)
         {
+            //IMPLEMENTAR
             Config _return = ChartJSHelper.BarCharts_Vertical(_chart);
 
             return _return;
@@ -164,14 +181,15 @@ namespace imL.JavaScript.ChartJS
 
         public static Config LineCharts(ChartFormat _chart)
         {
-            Config _return = ChartJSHelper.Init(_chart);
+            Config _return = ChartJSHelper.Create(_chart);
             _return.type = "line";
             ChartJSHelper.ToDataSets(ref _return, _chart);
 
             return _return;
         }
-        public static Config LineCharts_MultiAxis(ChartFormat _chart) //AFINAR
+        public static Config LineCharts_MultiAxis(ChartFormat _chart)
         {
+            //AFINAR
             Config _return = ChartJSHelper.LineCharts(_chart);
 
             if (_return.options.scales.y == null) _return.options.scales.y = new Y();
@@ -210,8 +228,9 @@ namespace imL.JavaScript.ChartJS
 
             return _return;
         }
-        public static Config LineCharts_InterpolationModes(ChartFormat _chart) //AFINAR NaN
+        public static Config LineCharts_InterpolationModes(ChartFormat _chart)
         {
+            //AFINAR NaN
             Config _return = ChartJSHelper.LineCharts(_chart);
 
             if (_return.options.scales.x == null) _return.options.scales.x = new X();
@@ -253,16 +272,18 @@ namespace imL.JavaScript.ChartJS
 
             return _return;
         }
-        public static Config LineCharts_SegmentStyling(ChartFormat _chart) //IMPLEMENTAR
+        public static Config LineCharts_SegmentStyling(ChartFormat _chart)
         {
+            //IMPLEMENTAR
             Config _return = ChartJSHelper.LineCharts(_chart);
 
             return _return;
         }
 
-        public static Config OtherCharts_Bubble(ChartFormat _chart) //IMPLEMENTAR
+        public static Config OtherCharts_Bubble(ChartFormat _chart)
         {
-            Config _return = ChartJSHelper.Init(_chart);
+            //IMPLEMENTAR
+            Config _return = ChartJSHelper.Create(_chart);
             _return.type = "bubble";
             ChartJSHelper.ToDataSets(ref _return, _chart);
 
@@ -270,49 +291,37 @@ namespace imL.JavaScript.ChartJS
         }
         public static Config OtherCharts_Doughnut(ChartFormat _chart)
         {
-            Config _return = ChartJSHelper.Init(_chart);
+            Config _return = ChartJSHelper.Create(_chart);
             _return.type = "doughnut";
-            ChartJSHelper.ToDataSets(ref _return, _chart, true);
-
-            if (_return.options.scales.x != null) _return.options.scales.x = null;
-            if (_return.options.scales.y != null) _return.options.scales.y = null;
-            if (_return.options.scales.z != null) _return.options.scales.z = null;
+            ChartJSHelper.ToDataSets(ref _return, _chart, true, false);
+            ChartJSHelper.CleanScales(ref _return);
 
             return _return;
         }
         public static Config OtherCharts_Pie(ChartFormat _chart)
         {
-            Config _return = ChartJSHelper.Init(_chart);
+            Config _return = ChartJSHelper.Create(_chart);
             _return.type = "pie";
-            ChartJSHelper.ToDataSets(ref _return, _chart, true);
-
-            if (_return.options.scales.x != null) _return.options.scales.x = null;
-            if (_return.options.scales.y != null) _return.options.scales.y = null;
-            if (_return.options.scales.z != null) _return.options.scales.z = null;
+            ChartJSHelper.ToDataSets(ref _return, _chart, true, false);
+            ChartJSHelper.CleanScales(ref _return);
 
             return _return;
         }
         public static Config OtherCharts_PolarArea(ChartFormat _chart)
         {
-            Config _return = ChartJSHelper.Init(_chart);
+            Config _return = ChartJSHelper.Create(_chart);
             _return.type = "polarArea";
-            ChartJSHelper.ToDataSets(ref _return, _chart, true);
-
-            if (_return.options.scales.x != null) _return.options.scales.x = null;
-            if (_return.options.scales.y != null) _return.options.scales.y = null;
-            if (_return.options.scales.z != null) _return.options.scales.z = null;
+            ChartJSHelper.ToDataSets(ref _return, _chart, true, false);
+            ChartJSHelper.CleanScales(ref _return);
 
             return _return;
         }
         public static Config OtherCharts_Radar(ChartFormat _chart)
         {
-            Config _return = ChartJSHelper.Init(_chart);
+            Config _return = ChartJSHelper.Create(_chart);
             _return.type = "radar";
             ChartJSHelper.ToDataSets(ref _return, _chart);
-
-            if (_return.options.scales.x != null) _return.options.scales.x = null;
-            if (_return.options.scales.y != null) _return.options.scales.y = null;
-            if (_return.options.scales.z != null) _return.options.scales.z = null;
+            ChartJSHelper.CleanScales(ref _return);
 
             return _return;
         }

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace imL.Utility.Http.Handler
 {
-    public class CompressHandler : DelegatingHandler
+    public class CompressAsyncHandler : DelegatingHandler
     {
         protected async override Task<HttpResponseMessage> SendAsync(HttpRequestMessage _request, CancellationToken _token)
         {

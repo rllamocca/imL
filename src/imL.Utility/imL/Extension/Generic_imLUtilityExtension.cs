@@ -15,7 +15,7 @@ namespace imL.Utility
             if (_this == null)
                 return null;
 
-            EncodingUtility.SolutionDefault(ref _enc);
+            ReadOnly.DefaultEncoding(ref _enc);
 
             XmlWriterSettings _format = new XmlWriterSettings { Encoding = _enc };
 
@@ -57,7 +57,7 @@ namespace imL.Utility
             if (_this == null)
                 return;
 
-            EncodingUtility.SolutionDefault(ref _enc);
+            ReadOnly.DefaultEncoding(ref _enc);
 
             XmlWriterSettings _format = new XmlWriterSettings { Encoding = _enc };
 

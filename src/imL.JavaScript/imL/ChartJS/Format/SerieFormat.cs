@@ -2,13 +2,15 @@
 {
     public class SerieFormat
     {
-        public int?[] Values { set; get; }
+        public decimal?[] Values { set; get; }
         public string Name { set; get; }
+        public string Stack { set; get; }
 
-        public SerieFormat(int?[] _values, string _name = null)
+        public SerieFormat(decimal?[] _values, string _name = null, string _stack = null)
         {
             this.Values = _values;
             this.Name = _name;
+            this.Stack = _stack;
         }
     }
 }

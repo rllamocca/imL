@@ -14,19 +14,8 @@ namespace CORE.imL.JavaScript
 {
     public class Core : Controller
     {
-        private static int?[] numbers(int _length, int _min = -100, int _max = 100)
-        {
-            int?[] _return = new int?[_length];
 
-            Random _r = new Random();
-            for (int _i = 0; _i < _length; _i++)
-            {
-                _return[_i] = _r.Next(_min, _max);
-            }
-
-            return _return;
-        }
-        private static string[] months(int _length)
+        private static string[] Months(int _length)
         {
             string[] _months = new string[] {
                 "January",
@@ -45,9 +34,9 @@ namespace CORE.imL.JavaScript
 
             return _months.Take(_length).ToArray();
         }
-        private static Color[] MyColors()
+        private static Color[] MyColors(decimal _per = 0.8m)
         {
-            byte _por = Convert.ToByte(0.8 * 255);
+            byte _alpha = Convert.ToByte(255 * _per);
             Color[] _colors;
 
             //_colors = new Color[] {
@@ -76,13 +65,13 @@ namespace CORE.imL.JavaScript
             //};
 
             _colors = new Color[] {
-                Color.FromArgb(_por, 255, 99, 132),
-                Color.FromArgb(_por, 255, 159, 64),
-                Color.FromArgb(_por, 255, 205, 86),
-                Color.FromArgb(_por, 75, 192, 192),
-                Color.FromArgb(_por, 54, 162, 235),
-                Color.FromArgb(_por, 153, 102, 255),
-                Color.FromArgb(_por, 201, 203, 207)
+                Color.FromArgb(_alpha, 255, 99, 132), //red
+                Color.FromArgb(_alpha, 255, 159, 64), //orange
+                Color.FromArgb(_alpha, 255, 205, 86), //yellow
+                Color.FromArgb(_alpha, 75, 192, 192), //green
+                Color.FromArgb(_alpha, 54, 162, 235), //blue
+                Color.FromArgb(_alpha, 153, 102, 255), //purple
+                Color.FromArgb(_alpha, 201, 203, 207) //grey
             };
 
             //return _colors.Take(_length).ToArray();
@@ -155,23 +144,23 @@ namespace CORE.imL.JavaScript
         {
             try
             {
-                SerieFormat[] _series = new SerieFormat[3];
+                SerieFormat[] _series = new SerieFormat[7];
 
                 for (int _i = 0; _i < _series.Length; _i++)
                 {
-                    _series[_i] = new SerieFormat(Core.numbers(5, 0, 50), string.Format("series {0}", _i));
+                    _series[_i] = new SerieFormat(RandomHelper.Decimals(7), string.Format("series {0}", _i));
                 }
 
-                Color[] _colors = Core.MyColors();
+                Color[] _colors = Core.MyColors(0.2m);
 
-                string[] _axis = Core.months(5);
+                string[] _axis = Core.Months(7);
                 string[] _back = _colors.ToStringRGBA();
                 string[] _border = _colors.ToStringRGB();
 
                 //################################################################
                 ChartFormat _chart = new()
                 {
-                    Title = "OtherCharts_Pie",
+                    Title = "OtherCharts_PolarArea",
                     Series = _series,
                     XAxis = new()
                     {
@@ -183,7 +172,7 @@ namespace CORE.imL.JavaScript
                 };
 
                 //################################################################
-                return Ok(ChartJSHelper.OtherCharts_Pie(_chart));
+                return Ok(ChartJSHelper.OtherCharts_PolarArea(_chart));
             }
             catch (Exception _ex)
             {

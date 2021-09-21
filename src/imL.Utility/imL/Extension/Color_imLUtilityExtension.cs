@@ -12,7 +12,7 @@ namespace imL.Utility
         }
         public static string ToStringRGBA(this Color _this)
         {
-            return string.Format("rgba({0},{1},{2},{3})", _this.R, _this.G, _this.B, Math.Round(_this.A / 255.0, 4));
+            return string.Format("rgba({0},{1},{2},{3})", _this.R, _this.G, _this.B, Convert.ToString(Math.Round(_this.A / 255.0, 4), ReadOnly._CULTURE));
         }
         public static Color Blend(this Color _this, Color _add, double _por = 0.5)
         {

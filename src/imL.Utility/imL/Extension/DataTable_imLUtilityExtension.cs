@@ -31,7 +31,7 @@ namespace imL.Utility
             Encoding _enc = null,
             IProgress<int> _progress = null)
         {
-            EncodingUtility.SolutionDefault(ref _enc);
+            ReadOnly.DefaultEncoding(ref _enc);
 
             string _sep = Convert.ToString(_separator);
 

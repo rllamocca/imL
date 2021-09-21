@@ -3,7 +3,7 @@
     public class Dataset
     {
         public string label { set; get; }
-        public int?[] data { set; get; }
+        public decimal?[] data { set; get; }
         public string[] backgroundColor { set; get; }
         public string[] borderColor { set; get; }
         public int? borderWidth { set; get; }
