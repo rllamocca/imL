@@ -15,7 +15,11 @@
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
-		<TargetFramework>netstandard1.1</TargetFramework>
+		<TargetFrameworks>
+			net35
+			;net40
+			;netstandard1.1
+		</TargetFrameworks>
 	</PropertyGroup>
 
 	<ItemGroup>

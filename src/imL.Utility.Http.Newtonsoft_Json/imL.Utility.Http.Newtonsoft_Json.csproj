@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>
+			net35
+			;net40
+			;netstandard1.1
+		</TargetFrameworks>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\imL.Utility.Http\imL.Utility.Http.csproj" />
+		<ProjectReference Include="..\imL.Utility.Newtonsoft_Json\imL.Utility.Newtonsoft_Json.csproj" />
+	</ItemGroup>
+
+</Project>

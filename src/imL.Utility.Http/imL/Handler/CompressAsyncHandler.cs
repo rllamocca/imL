@@ -1,4 +1,6 @@
-﻿using System.Net.Http;
+﻿#if (NET35 || NET40) == false
+
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,3 +20,5 @@ namespace imL.Utility.Http.Handler
         }
     }
 }
+
+#endif
