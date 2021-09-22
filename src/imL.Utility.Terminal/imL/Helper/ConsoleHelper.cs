@@ -5,7 +5,6 @@ using System.Drawing;
 #endif
 
 using System;
-using System.Text;
 
 namespace imL.Utility.Terminal
 {
@@ -15,8 +14,8 @@ namespace imL.Utility.Terminal
         {
             if (_enc)
             {
-                Console.InputEncoding = Encoding.UTF8;
-                Console.OutputEncoding = Encoding.UTF8;
+                Console.InputEncoding = ReadOnly._ENCODING;
+                Console.OutputEncoding = ReadOnly._ENCODING;
             }
 
             if (_title.HasValue())
