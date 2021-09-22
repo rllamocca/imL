@@ -1,12 +1,12 @@
-﻿#if (NETSTANDARD1_3)
+﻿#if (NETSTANDARD1_3 || NETSTANDARD1_4 || NETSTANDARD1_5 || NETSTANDARD1_6)
 using System;
 
 namespace imL.Struct
 {
     public struct Point
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        public int X { set; get; }
+        public int Y { set; get; }
 
         public Point(int _x, int _y)
         {

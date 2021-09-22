@@ -6,7 +6,7 @@ namespace imL.Utility.Ftp
 {
     public static class FtpHelper
     {
-        public static void Init_FtpWebRequest(ref FtpWebRequest _ref, FormatFtp _format)
+        private static void Init_FtpWebRequest(ref FtpWebRequest _ref, FtpFormat _format)
         {
             _ref.UseBinary = _format.UseBinary ?? _ref.UseBinary;
             _ref.Timeout = _format.Timeout ?? _ref.Timeout;
@@ -15,81 +15,77 @@ namespace imL.Utility.Ftp
             _ref.EnableSsl = _format.EnableSsl ?? _ref.EnableSsl;
             _ref.UsePassive = _format.UsePassive ?? _ref.UsePassive;
 
-            _ref.Credentials = new NetworkCredential(_format.UserName, _format.Password);
+            _ref.UseDefaultCredentials = _format.UseDefaultCredentials ?? _ref.UseDefaultCredentials;
+
+            if (_ref.UseDefaultCredentials == false)
+                _ref.Credentials = new NetworkCredential(_format.UserName, _format.Password);
+        }
+        private static FtpWebRequest Create(FtpFormat _format, string _method)
+        {
+            FtpWebRequest _return = (FtpWebRequest)FtpWebRequest.Create(_format.Host + _format.Path);
+            FtpHelper.Init_FtpWebRequest(ref _return, _format);
+            _return.Method = _method;
+
+            return _return;
         }
 
-        private static FtpWebRequest Create(FormatFtp _format)
+        public static FtpStatusCode ListDirectory(out string[] _outList, FtpFormat _format)
         {
-            FtpWebRequest _fwr = (FtpWebRequest)FtpWebRequest.Create(_format.Host + _format.Path);
-            FtpHelper.Init_FtpWebRequest(ref _fwr, _format);
-
-            return _fwr;
-        }
-
-        public static FtpStatusCode ListDirectory(out string[] _list, FormatFtp _format)
-        {
-            FtpWebRequest _ftp = FtpHelper.Create(_format);
-            _ftp.Method = WebRequestMethods.Ftp.ListDirectory;
-
+            FtpWebRequest _client = FtpHelper.Create(_format, WebRequestMethods.Ftp.ListDirectory);
             List<string> _return = new List<string>();
-            using (FtpWebResponse _response = (FtpWebResponse)_ftp.GetResponse())
+
+            using (FtpWebResponse _resp = (FtpWebResponse)_client.GetResponse())
             {
-                using (StreamReader _sr = new StreamReader(_response.GetResponseStream()))
+                using (StreamReader _sr = new StreamReader(_resp.GetResponseStream()))
                     while (_sr.EndOfStream == false)
                         _return.Add(_sr.ReadLine());
 
-                _list = _return.ToArray();
-                return _response.StatusCode;
+                _outList = _return.ToArray();
+
+                return _resp.StatusCode;
             }
         }
 
-        public static FtpStatusCode DownloadFile(ref Stream _rec, FormatFtp _format)
+        public static FtpStatusCode DownloadFile(ref Stream _refDown, FtpFormat _format)
         {
-            FtpWebRequest _ftp = FtpHelper.Create(_format);
-            _ftp.Method = WebRequestMethods.Ftp.DownloadFile;
+            FtpWebRequest _client = FtpHelper.Create(_format, WebRequestMethods.Ftp.DownloadFile);
 
-            using (FtpWebResponse _response = (FtpWebResponse)_ftp.GetResponse())
+            using (FtpWebResponse _resp = (FtpWebResponse)_client.GetResponse())
             {
-                using (StreamReader _sr = new StreamReader(_response.GetResponseStream()))
+                using (StreamReader _sr = new StreamReader(_resp.GetResponseStream()))
                 {
-                    StreamWriter _sw = new StreamWriter(_rec);
+                    StreamWriter _sw = new StreamWriter(_refDown);
                     _sw.Write(_sr.ReadToEnd());
                     _sw.Flush();
                 }
-                return _response.StatusCode;
+
+                return _resp.StatusCode;
             }
         }
 
-        public static FtpStatusCode UploadFile(Stream _sub, FormatFtp _format)
+        public static FtpStatusCode UploadFile(Stream _up, FtpFormat _format)
         {
-            FtpWebRequest _ftp = FtpHelper.Create(_format);
-            _ftp.Method = WebRequestMethods.Ftp.UploadFile;
+            FtpWebRequest _client = FtpHelper.Create(_format, WebRequestMethods.Ftp.UploadFile);
 
-            using (Stream _s = _ftp.GetRequestStream())
+            using (Stream _s = _client.GetRequestStream())
             {
 #if (NET35)
-                _sub.OldCopyTo(_s);
+                _up.OldCopyTo(_s);
 #else
-                _sub.CopyTo(_s);
+                _up.CopyTo(_s);
 #endif
-
             }
 
-            using (FtpWebResponse _response = (FtpWebResponse)_ftp.GetResponse())
-            {
-                return _response.StatusCode;
-            }
+            using (FtpWebResponse _resp = (FtpWebResponse)_client.GetResponse())
+                return _resp.StatusCode;
         }
 
-        public static FtpStatusCode DeleteFile(FormatFtp _format)
+        public static FtpStatusCode DeleteFile(FtpFormat _format)
         {
-            FtpWebRequest _ftp = FtpHelper.Create(_format);
-            _ftp.Method = WebRequestMethods.Ftp.DeleteFile;
+            FtpWebRequest _client = FtpHelper.Create(_format, WebRequestMethods.Ftp.DeleteFile);
 
-            using (FtpWebResponse _response = (FtpWebResponse)_ftp.GetResponse())
-            {
-                return _response.StatusCode;
-            }
+            using (FtpWebResponse _resp = (FtpWebResponse)_client.GetResponse())
+                return _resp.StatusCode;
         }
     }
 }

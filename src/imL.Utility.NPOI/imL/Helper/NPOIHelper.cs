@@ -70,7 +70,7 @@ namespace imL.Utility.NPOI
                     .ToArray();
                 _return.Rows.Add(_new);
 
-                _progress?.Report(0);
+                _progress?.Report(_j);
             }
 
             return _return;
@@ -123,11 +123,11 @@ namespace imL.Utility.NPOI
                         .ToArray();
                     _dt.Rows.Add(_new);
 
-                    _progress?.Report(0);
+                    _progress?.Report(_j);
                 }
 
                 _return.Tables.Add(_dt);
-                _dt_progress?.Report(0);
+                _dt_progress?.Report(_i);
             }
 
             return _return;
@@ -159,7 +159,7 @@ namespace imL.Utility.NPOI
 
                 _return.Add(_set.Instance(_tmp));
 
-                _progress?.Report(0);
+                _progress?.Report(_i);
             }
 
             return _return.ToArray();

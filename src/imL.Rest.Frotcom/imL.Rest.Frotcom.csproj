@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>0.0.0.5</Version>
+		<Version>0.0.0.6</Version>
 		<Authors>r.llamocca@outlook.com</Authors>
 		<Company>imL</Company>
 		<Description>Not so free tools.</Description>
@@ -10,17 +10,20 @@
 		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>imL imL.Rest.Frotcom rest frotcom</PackageTags>
+		<PackageTags>imL imL.Rest.Frotcom rest frotcom v2</PackageTags>
 		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
-		<TargetFrameworks>netstandard2.0</TargetFrameworks>
+		<TargetFrameworks>
+			netstandard1.3
+			;netstandard1.4
+			;netstandard1.5
+			;netstandard1.6
+			;netstandard2.0
+			;netstandard2.1
+		</TargetFrameworks>
 	</PropertyGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\imL.Utility.Http\imL.Utility.Http.csproj" />

@@ -1,8 +1,9 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
+using imL.Utility.Terminal.Fulfill;
 
 namespace imL.Utility.Terminal.Process
 {
@@ -54,7 +55,7 @@ namespace imL.Utility.Terminal.Process
                 List<FileInfo> _list = new List<FileInfo>();
 
                 if (Directory.Exists(__FROM))
-#if (NETSTANDARD1_3 == false)
+#if (NETSTANDARD1_3 || NETSTANDARD1_4 || NETSTANDARD1_5 || NETSTANDARD1_6) == false
                     using (ElapsedTime _pb = new ElapsedTime())
                         GetFiles(ref _list, __FROM, _SUBDIRECTORY);
 #else
@@ -109,7 +110,7 @@ namespace imL.Utility.Terminal.Process
                         break;
                 }
 
-                using (ProgressBar32 _pb = new ProgressBar32(_paths.Length))
+                using (FProgress32 _pb = new FProgress32(_paths.Length))
                 {
                     foreach (string _item in _paths)
                     {
@@ -119,7 +120,7 @@ namespace imL.Utility.Terminal.Process
                     }
                 }
 
-                using (ProgressBar32 _pb = new ProgressBar32(_list.Count))
+                using (FProgress32 _pb = new FProgress32(_list.Count))
                 {
                     foreach (FileInfo _item in _list)
                     {

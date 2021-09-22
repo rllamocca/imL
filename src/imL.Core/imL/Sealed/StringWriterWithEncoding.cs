@@ -1,6 +1,4 @@
-﻿using imL.Utility;
-
-using System.IO;
+﻿using System.IO;
 using System.Text;
 
 namespace imL.Sealed
@@ -11,7 +9,7 @@ namespace imL.Sealed
 
         public StringWriterWithEncoding(Encoding _enc = null)
         {
-            EncodingUtility.SolutionDefault(ref _enc);
+            ReadOnly.DefaultEncoding(ref _enc);
 
             this._ENCODING = _enc;
         }

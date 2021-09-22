@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>0.8.8.10</Version>
+		<Version>0.8.8.11</Version>
 		<Authors>r.llamocca@outlook.com</Authors>
 		<Company>imL</Company>
 		<Description>Not so free tools.</Description>
@@ -10,16 +10,25 @@
 		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>imL imL.Utility.Http utilities http</PackageTags>
+		<PackageTags>imL imL.Utility.Http utilities http httpclient json</PackageTags>
 		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
-		<TargetFramework>netstandard1.1</TargetFramework>
+		<TargetFrameworks>
+			netstandard1.1
+			;netstandard1.2
+			;netstandard1.3
+			;netstandard1.4
+			;netstandard1.5
+			;netstandard1.6
+			;netstandard2.0
+			;netstandard2.1
+		</TargetFrameworks>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\imL.Core\imL.Core.csproj" />
+		<ProjectReference Include="..\imL.Utility.Newtonsoft_Json\imL.Utility.Newtonsoft_Json.csproj" />
 	</ItemGroup>
 
 </Project>
