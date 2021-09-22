@@ -69,6 +69,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL.Utility.Newtonsoft_Json
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL.Utility.OldHttp", "src\imL.Utility.OldHttp\imL.Utility.OldHttp.csproj", "{92BC604E-6EF1-4A61-8AF1-957E9468911C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nupkg", "nupkg", "{21A11574-8DB6-4FEC-BFE4-1303B513DBDC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
