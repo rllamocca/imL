@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace imL.Utility.Http.Handler
+namespace imL.Utility.Http
 {
     public class CompressAsyncHandler : DelegatingHandler
     {

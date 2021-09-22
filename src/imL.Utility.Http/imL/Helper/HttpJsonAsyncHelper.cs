@@ -1,11 +1,9 @@
-﻿#if (NET35 || NET40) == false
-
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 
 using imL.Enumeration.Http;
 
-namespace imL.Utility.Http.Newtonsoft_Json
+namespace imL.Utility.Http
 {
     public static class HttpJsonAsyncHelper
     {
@@ -13,7 +11,7 @@ namespace imL.Utility.Http.Newtonsoft_Json
         {
             using (HttpRequestMessage _req = new HttpRequestMessage(HttpMethod.Post, _url))
             {
-                HttpHelper.DefaultAccept(_req, _compress);
+                HttpJsonHelper.DefaultAccept(_req, _compress);
 
                 using (HttpContent _content = HttpJsonHelper.JsonContent(_post, _compress))
                 {
@@ -29,7 +27,7 @@ namespace imL.Utility.Http.Newtonsoft_Json
         {
             using (HttpRequestMessage _req = new HttpRequestMessage(HttpMethod.Put, _url))
             {
-                HttpHelper.DefaultAccept(_req, _compress);
+                HttpJsonHelper.DefaultAccept(_req, _compress);
 
                 using (HttpContent _content = HttpJsonHelper.JsonContent(_put, _compress))
                 {
@@ -42,5 +40,3 @@ namespace imL.Utility.Http.Newtonsoft_Json
         }
     }
 }
-
-#endif

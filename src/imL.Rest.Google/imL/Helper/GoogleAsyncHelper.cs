@@ -3,8 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 
 using imL.Rest.Google.Schema.Maps;
-
-using imL.Utility.Http.Newtonsoft_Json;
+using imL.Utility.Http;
 
 namespace imL.Rest.Google
 {

@@ -40,12 +40,19 @@ namespace imL
  ╚═════╝
 ";
         public static readonly Encoding _ENCODING = Encoding.UTF8;
+        public static readonly Encoding _ENCODING_NO_BOM = new UTF8Encoding(false);
         public static readonly CultureInfo _CULTURE = CultureInfo.InvariantCulture;
 
         public static void DefaultEncoding(ref Encoding _ref)
         {
             if (_ref == null)
                 _ref = ReadOnly._ENCODING;
+        }
+
+        public static void DefaultEncoding_NoBOM(ref Encoding _ref)
+        {
+            if (_ref == null)
+                _ref = ReadOnly._ENCODING_NO_BOM;
         }
     }
 }

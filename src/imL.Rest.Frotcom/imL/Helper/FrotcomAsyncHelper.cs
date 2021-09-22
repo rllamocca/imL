@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using imL.Rest.Frotcom.Schema;
-using imL.Utility.Http.Newtonsoft_Json;
+using imL.Utility.Http;
 
 using Newtonsoft.Json;
 
@@ -63,7 +63,7 @@ namespace imL.Rest.Frotcom
         {
             _token = "{ \"token\": \"" + _token + "\" }";
 
-            StringContent _content = new StringContent(_token, Encoding.UTF8, "application/json");
+            HttpContent _content = HttpJsonHelper.JsonContent(_token);
 
             using (HttpResponseMessage _res = await _client.Http.PutAsync(_client.URI + "/v2/authorize", _content))
                 return await _res.ReadAsJsonAsync<Authorize>();

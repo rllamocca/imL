@@ -15,11 +15,14 @@
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
-		<TargetFrameworks>netstandard2.0</TargetFrameworks>
+		<TargetFrameworks>
+			netstandard2.0
+			;netstandard2.1
+		</TargetFrameworks>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\imL.Utility.Http.Newtonsoft_Json\imL.Utility.Http.Newtonsoft_Json.csproj" />
+		<ProjectReference Include="..\imL.Utility.Http\imL.Utility.Http.csproj" />
 	</ItemGroup>
 
 </Project>
