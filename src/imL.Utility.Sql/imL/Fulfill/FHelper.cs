@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD1_3 == false
+﻿#if (NETSTANDARD1_3 || NETSTANDARD1_4 || NETSTANDARD1_5 || NETSTANDARD1_6) == false
 using System.Data;
 #endif
 #if NET35 || NET40
@@ -136,7 +136,7 @@ namespace imL.Utility.Sql.Fulfill
             }
         }
 
-#if NETSTANDARD1_3 == false
+#if (NETSTANDARD1_3 || NETSTANDARD1_4 || NETSTANDARD1_5 || NETSTANDARD1_6) == false
 
         public Return LoadData(string _query, bool _dataset = true, params IParameter[] _pmts)
         {

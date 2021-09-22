@@ -1,51 +1,57 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<Version>0.8.8.9</Version>
-		<Authors>r.llamocca@outlook.com</Authors>
-		<Company>imL</Company>
-		<Description>Not so free tools.</Description>
-		<Copyright>© 1984 - 8888</Copyright>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
-		<RepositoryType>git</RepositoryType>
-		<PackageTags>imL imL.Utility.NPOI utilities npoi excel</PackageTags>
-		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
+    <PropertyGroup>
+        <Version>0.8.8.9</Version>
+        <Authors>r.llamocca@outlook.com</Authors>
+        <Company>imL</Company>
+        <Description>Not so free tools.</Description>
+        <Copyright>© 1984 - 8888</Copyright>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>imL imL.Utility.NPOI utilities npoi excel</PackageTags>
+        <PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
 
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
-		<TargetFrameworks>
-			net35
-			;net40
-			;net45
-			;netstandard2.0
-		</TargetFrameworks>
-	</PropertyGroup>
+        <TargetFrameworks>
+            net35
+            ;net40
+            ;net45
+            ;netstandard2.0
+            ;netstandard2.1
+        </TargetFrameworks>
+    </PropertyGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\imL.Core\imL.Core.csproj" />
-		<ProjectReference Include="..\imL.Utility\imL.Utility.csproj" />
-	</ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\imL.Core\imL.Core.csproj" />
+        <ProjectReference Include="..\imL.Utility\imL.Utility.csproj" />
+    </ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net35'">
-		<PackageReference Include="NPOI">
-			<Version>2.3.0</Version>
-		</PackageReference>
-	</ItemGroup>
-	<ItemGroup Condition="'$(TargetFramework)' == 'net40'">
-		<PackageReference Include="NPOI">
-			<Version>2.5.1</Version>
-		</PackageReference>
-	</ItemGroup>
-	<ItemGroup Condition="'$(TargetFramework)' == 'net45'">
-		<PackageReference Include="NPOI">
-			<Version>2.5.*</Version>
-		</PackageReference>
-	</ItemGroup>
-	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-		<PackageReference Include="NPOI">
-			<Version>2.5.*</Version>
-		</PackageReference>
-	</ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'net35'">
+        <PackageReference Include="NPOI">
+            <Version>2.3.0</Version>
+        </PackageReference>
+    </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'net40'">
+        <PackageReference Include="NPOI">
+            <Version>2.5.1</Version>
+        </PackageReference>
+    </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+        <PackageReference Include="NPOI">
+            <Version>2.5.*</Version>
+        </PackageReference>
+    </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+        <PackageReference Include="NPOI">
+            <Version>2.5.*</Version>
+        </PackageReference>
+    </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
+        <PackageReference Include="NPOI">
+            <Version>2.5.*</Version>
+        </PackageReference>
+    </ItemGroup>
 </Project>

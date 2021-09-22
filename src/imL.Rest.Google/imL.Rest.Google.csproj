@@ -19,11 +19,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\imL.Utility.Http\imL.Utility.Http.csproj" />
+	  <ProjectReference Include="..\imL.Utility.Http.Newtonsoft_Json\imL.Utility.Http.Newtonsoft_Json.csproj" />
 	</ItemGroup>
 
 </Project>

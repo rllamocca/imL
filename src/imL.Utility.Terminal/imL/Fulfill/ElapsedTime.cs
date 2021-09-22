@@ -1,4 +1,4 @@
-﻿#if (NETSTANDARD1_3) == false
+﻿#if (NETSTANDARD1_3 || NETSTANDARD1_4 || NETSTANDARD1_5 || NETSTANDARD1_6) == false
 
 using System.Timers;
 

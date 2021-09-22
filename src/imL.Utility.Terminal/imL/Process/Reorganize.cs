@@ -55,7 +55,7 @@ namespace imL.Utility.Terminal.Process
                 List<FileInfo> _list = new List<FileInfo>();
 
                 if (Directory.Exists(__FROM))
-#if (NETSTANDARD1_3 == false)
+#if (NETSTANDARD1_3 || NETSTANDARD1_4 || NETSTANDARD1_5 || NETSTANDARD1_6) == false
                     using (ElapsedTime _pb = new ElapsedTime())
                         GetFiles(ref _list, __FROM, _SUBDIRECTORY);
 #else

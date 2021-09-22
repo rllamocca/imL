@@ -1,6 +1,4 @@
-﻿#if (NET35 || NET40) == false
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -75,5 +73,3 @@ namespace imL.Utility.Http
         }
     }
 }
-
-#endif

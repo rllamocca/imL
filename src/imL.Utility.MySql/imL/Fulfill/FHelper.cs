@@ -133,7 +133,7 @@ namespace imL.Utility.MySql.Fulfill
             }
         }
 
-#if NETSTANDARD1_3 == false
+#if (NETSTANDARD1_3 || NETSTANDARD1_4 || NETSTANDARD1_5 || NETSTANDARD1_6) == false
 
         public Return LoadData(string _query, bool _dataset = true, params IParameter[] _pmts)
         {

@@ -1,4 +1,4 @@
-﻿#if (NET45 || NETSTANDARD1_3 || NETSTANDARD2_0)
+﻿#if (NET35 || NET40) == false
 using System.Threading;
 using System.Threading.Tasks;
 #endif
@@ -55,7 +55,7 @@ namespace imL.Utility.Sql.Fulfill
         //####
         public int TimeOut { set; get; } = 100;
         public bool Constraints { set; get; } = false;
-#if (NET45 || NETSTANDARD1_3 || NETSTANDARD2_0)
+#if (NET35 || NET40) == false
         public CancellationToken Token { set; get; } = default;
 #endif
 
@@ -114,7 +114,7 @@ namespace imL.Utility.Sql.Fulfill
                     break;
             }
         }
-#if (NET45 || NETSTANDARD1_3 || NETSTANDARD2_0)
+#if (NET35 || NET40) == false
         public async Task OpenAsync()
         {
             switch (this._CN.State)

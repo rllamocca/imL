@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using imL.Rest.Frotcom.Schema;
+using imL.Utility.Http.Newtonsoft_Json;
 
 using Newtonsoft.Json;
 
@@ -49,20 +50,13 @@ namespace imL.Rest.Frotcom
             }
         }
 
+
         public async static Task<Authorize> AuthorizeUser(FrotcomClient _client, AuthorizeFormat _auth)
         {
-            StringContent _content = new StringContent(JsonConvert.SerializeObject(_auth), Encoding.UTF8, "application/json");
+            HttpContent _content = HttpJsonHelper.JsonContent(_auth);
 
             using (HttpResponseMessage _res = await _client.Http.PostAsync(_client.URI + "/v2/authorize", _content))
-            {
-                _res.EnsureSuccessStatusCode();
-                string _body = await _res.Content.ReadAsStringAsync();
-
-                if (string.IsNullOrWhiteSpace(_body))
-                    return null;
-
-                return JsonConvert.DeserializeObject<Authorize>(_body);
-            }
+                return await _res.ReadAsJsonAsync<Authorize>();
         }
 
         public async static Task<Authorize> ValidateToken(FrotcomClient _client, string _token)
@@ -72,33 +66,17 @@ namespace imL.Rest.Frotcom
             StringContent _content = new StringContent(_token, Encoding.UTF8, "application/json");
 
             using (HttpResponseMessage _res = await _client.Http.PutAsync(_client.URI + "/v2/authorize", _content))
-            {
-                _res.EnsureSuccessStatusCode();
-                string _body = await _res.Content.ReadAsStringAsync();
-
-                if (string.IsNullOrWhiteSpace(_body))
-                    return null;
-
-                return JsonConvert.DeserializeObject<Authorize>(_body);
-            }
+                return await _res.ReadAsJsonAsync<Authorize>();
         }
+
         public async static Task<Vehicle[]> GetVehicles(FrotcomClient _client)
         {
             string _uri = _client.URI + "/v2/vehicles?api_key={0}";
             _uri = string.Format(_uri, _client.Authorize.token);
 
             using (HttpResponseMessage _res = await _client.Http.GetAsync(_uri))
-            {
-                _res.EnsureSuccessStatusCode();
-                string _body = await _res.Content.ReadAsStringAsync();
-
-                if (string.IsNullOrWhiteSpace(_body))
-                    return null;
-
-                return JsonConvert.DeserializeObject<Vehicle[]>(_body);
-            }
+                return await _res.ReadAsJsonAsync<Vehicle[]>();
         }
-
         public async static Task<Location[]> GetVehicleLocations(FrotcomClient _client, long _vehicle_id)
         {
             DateTime _now = DateTime.Now;
@@ -106,15 +84,7 @@ namespace imL.Rest.Frotcom
             _uri = string.Format(_uri, _client.Authorize.token, _vehicle_id, _now.ToUniversalTime().ToString("HH"), _now.ToUniversalTime().ToString("mm"));
 
             using (HttpResponseMessage _res = await _client.Http.GetAsync(_uri))
-            {
-                _res.EnsureSuccessStatusCode();
-                string _body = await _res.Content.ReadAsStringAsync();
-
-                if (string.IsNullOrWhiteSpace(_body))
-                    return null;
-
-                return JsonConvert.DeserializeObject<Location[]>(_body);
-            }
+                return await _res.ReadAsJsonAsync<Location[]>();
         }
         public async static Task<Account> GetAccount(FrotcomClient _client)
         {
@@ -122,15 +92,7 @@ namespace imL.Rest.Frotcom
             _uri = string.Format(_uri, _client.Authorize.token);
 
             using (HttpResponseMessage _res = await _client.Http.GetAsync(_uri))
-            {
-                _res.EnsureSuccessStatusCode();
-                string _body = await _res.Content.ReadAsStringAsync();
-
-                if (string.IsNullOrWhiteSpace(_body))
-                    return null;
-
-                return JsonConvert.DeserializeObject<Account>(_body);
-            }
+                return await _res.ReadAsJsonAsync<Account>();
         }
 
         public async static Task<Dough[]> Prepare(FrotcomFormat _setting, FrotcomClient _frotcom)

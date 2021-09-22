@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 using imL.Rest.Google.Schema.Maps;
 
-using Newtonsoft.Json;
+using imL.Utility.Http.Newtonsoft_Json;
 
 namespace imL.Rest.Google
 {
@@ -20,15 +20,7 @@ namespace imL.Rest.Google
                 );
 
             using (HttpResponseMessage _res = await _client.Http.GetAsync(_uri))
-            {
-                _res.EnsureSuccessStatusCode();
-                string _body = await _res.Content.ReadAsStringAsync();
-
-                if (string.IsNullOrWhiteSpace(_body))
-                    return null;
-
-                return JsonConvert.DeserializeObject<Geocoding>(_body); ;
-            }
+                return await _res.ReadAsJsonAsync<Geocoding>();
         }
     }
 }

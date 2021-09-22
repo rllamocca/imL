@@ -13,7 +13,7 @@ namespace imL.Contract.DB
         Return Execute(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[] _pmts);
         Return[] Execute(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[][] _pmts);
 
-#if ( NETSTANDARD1_0 || NETSTANDARD1_1 || NETSTANDARD1_2 || NETSTANDARD1_3) == false
+#if (NETSTANDARD1_0 || NETSTANDARD1_1 || NETSTANDARD1_2 || NETSTANDARD1_3 || NETSTANDARD1_4 || NETSTANDARD1_5 || NETSTANDARD1_6) == false
 
         Return LoadData(string _query, bool _dataset = true, params IParameter[] _pmts);
 

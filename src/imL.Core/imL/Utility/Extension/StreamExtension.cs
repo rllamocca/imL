@@ -1,4 +1,4 @@
-﻿#if (NET45 || NETSTANDARD1_3 || NETSTANDARD2_0)
+﻿#if (NET35 || NET40) == false
 using System.Threading;
 using System.Threading.Tasks;
 #endif
@@ -17,7 +17,8 @@ namespace imL.Utility
                 _to.Write(_buffer, 0, _read);
         }
 
-#if (NET35 || NET40 || NET45 || NETSTANDARD1_3 || NETSTANDARD2_0)
+#if (NETSTANDARD1_0 || NETSTANDARD1_1 || NETSTANDARD1_2)== false
+
         public static void FileCreate(this Stream _this, string _path)
         {
             _this.Seek(0, SeekOrigin.Begin);
@@ -30,15 +31,16 @@ namespace imL.Utility
 #endif
             }
         }
-#endif
 
-#if (NET45 || NETSTANDARD1_3 || NETSTANDARD2_0)
+#if (NET35 || NET40) == false
         public async static Task FileCreateAsync(this Stream _this, string _path, CancellationToken _token = default)
         {
             _this.Seek(0, SeekOrigin.Begin);
             using (FileStream _sw = File.Create(_path, 1024, FileOptions.Asynchronous))
                 await _this.CopyToAsync(_sw, 1024, _token);
         }
+#endif
+
 #endif
     }
 }
