@@ -26,7 +26,12 @@ namespace imL.Utility.OldHttp
         }
         public static void JsonContent(HttpWebRequest _client, object _obj, ECompress _compress = ECompress.None)
         {
-            Stream _ms = NewtonsoftHelper.ToStream(_obj);
+            Stream _ms;
+
+            if (_obj is string _string)
+                _ms = NewtonsoftHelper.ToStream(_string);
+            else
+                _ms = NewtonsoftHelper.ToStream(_obj);
 
             switch (_compress)
             {

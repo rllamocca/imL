@@ -10,6 +10,7 @@ namespace imL.Utility.OldHttp
         public static T ReadAsJson<T>(this HttpWebResponse _this)
         {
             string _body;
+
             using (StreamReader _sr = new StreamReader(_this.GetResponseStream()))
                 _body = _sr.ReadToEnd();
 
