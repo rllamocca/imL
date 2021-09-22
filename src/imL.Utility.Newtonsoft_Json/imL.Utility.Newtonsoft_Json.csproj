@@ -1,28 +1,42 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFrameworks>
-            net35
-            ;net40
-            ;net45
-            ;netstandard1.0
-            ;netstandard1.1
-            ;netstandard1.2
-            ;netstandard1.3
-            ;netstandard1.4
-            ;netstandard1.5
-            ;netstandard1.6
-            ;netstandard2.0
-            ;netstandard2.1
-        </TargetFrameworks>
-    </PropertyGroup>
+	<PropertyGroup>
+		<Version>0.0.0.1</Version>
+		<Authors>r.llamocca@outlook.com</Authors>
+		<Company>imL</Company>
+		<Description>Not so free tools.</Description>
+		<Copyright>© 1984 - 8888</Copyright>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>imL imL.Utility.Newtonsoft_Json utilities newtonsoft.json json</PackageTags>
+		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
 
-    <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    </ItemGroup>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
-    <ItemGroup>
-        <ProjectReference Include="..\imL.Core\imL.Core.csproj" />
-    </ItemGroup>
+		<TargetFrameworks>
+			net35
+			;net40
+			;net45
+			;netstandard1.0
+			;netstandard1.1
+			;netstandard1.2
+			;netstandard1.3
+			;netstandard1.4
+			;netstandard1.5
+			;netstandard1.6
+			;netstandard2.0
+			;netstandard2.1
+		</TargetFrameworks>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\imL.Core\imL.Core.csproj" />
+	</ItemGroup>
 
 </Project>

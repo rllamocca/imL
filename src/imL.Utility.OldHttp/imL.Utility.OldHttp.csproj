@@ -1,6 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
+		<Version>0.0.0.1</Version>
+		<Authors>r.llamocca@outlook.com</Authors>
+		<Company>imL</Company>
+		<Description>Not so free tools.</Description>
+		<Copyright>© 1984 - 8888</Copyright>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>imL imL.Utility.OldHttp utilities http httpwebrequest json</PackageTags>
+		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
+
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
 		<TargetFrameworks>
 			net35
@@ -12,7 +25,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\imL.Utility.Newtonsoft_Json\imL.Utility.Newtonsoft_Json.csproj" />
+		<ProjectReference Include="..\imL.Utility.Newtonsoft_Json\imL.Utility.Newtonsoft_Json.csproj" />
 	</ItemGroup>
 
 </Project>

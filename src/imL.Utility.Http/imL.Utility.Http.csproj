@@ -10,7 +10,7 @@
 		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>imL imL.Utility.Http utilities http</PackageTags>
+		<PackageTags>imL imL.Utility.Http utilities http httpclient json</PackageTags>
 		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -28,7 +28,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\imL.Utility.Newtonsoft_Json\imL.Utility.Newtonsoft_Json.csproj" />
+		<ProjectReference Include="..\imL.Utility.Newtonsoft_Json\imL.Utility.Newtonsoft_Json.csproj" />
 	</ItemGroup>
 
 </Project>

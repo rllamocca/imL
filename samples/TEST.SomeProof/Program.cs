@@ -5,7 +5,9 @@ namespace TEST.SomeProof
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main(
+            //string[] args
+            )
         {
             Console.WriteLine("Hello World!");
 
@@ -31,14 +33,14 @@ namespace TEST.SomeProof
             //Console.WriteLine(_lat.ToString("r"));
             //Console.WriteLine(_lat.ToString("x"));
 
-            bool _bool = test(true);
+            //bool _bool = Test(true);
 
             Console.ReadKey();
         }
 
-        static bool test(bool _throw = false, params string[] _lala)
-        {
-            return false;
-        }
+        //static bool Test(bool _throw = false, params string[] _lala)
+        //{
+        //    return false;
+        //}
     }
 }
