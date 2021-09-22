@@ -13,8 +13,6 @@
 		<PackageTags>imL imL.Utility.Ftp utilities ftp</PackageTags>
 		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
 
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-
 		<TargetFrameworks>
 			net35
 			;net40
@@ -22,6 +20,10 @@
 			;netstandard2.0
 			;netstandard2.1
 		</TargetFrameworks>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>
