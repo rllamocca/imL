@@ -25,11 +25,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL.Utility.Terminal", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL.Utility.Sql", "src\imL.Utility.Sql\imL.Utility.Sql.csproj", "{9BB4EAC8-D9D0-4BA8-8E3A-CAF105903E0B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspecs", "nuspecs", "{BA93C0E3-1040-4346-B971-67A81D81DB8E}"
-	ProjectSection(SolutionItems) = preProject
-		nuspecs\imL.Core.nuspec = nuspecs\imL.Core.nuspec
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{65AF9E2E-0008-4209-8527-77B8848F70D2}"
 	ProjectSection(SolutionItems) = preProject
 		content\readme.txt = content\readme.txt
@@ -71,7 +66,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL.Utility.OldHttp", "src\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nupkg", "nupkg", "{21A11574-8DB6-4FEC-BFE4-1303B513DBDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEST.imL.Rest.Frotcom", "samples\TEST.imL.Rest.Frotcom\TEST.imL.Rest.Frotcom.csproj", "{6B416D04-A7A7-4408-A81F-0C2A05860989}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEST.imL.Rest.Frotcom", "samples\TEST.imL.Rest.Frotcom\TEST.imL.Rest.Frotcom.csproj", "{6B416D04-A7A7-4408-A81F-0C2A05860989}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

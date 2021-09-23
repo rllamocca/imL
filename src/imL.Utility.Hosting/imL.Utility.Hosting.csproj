@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>0.0.0.4</Version>
-		<Authors>r.llamocca@outlook.com</Authors>
+		<Authors>Ricardo Llamocca ♪♫</Authors>
 		<Company>imL</Company>
 		<Description>Not so free tools.</Description>
 		<Copyright>© 1984 - 8888</Copyright>
@@ -13,14 +12,19 @@
 		<PackageTags>imL imL.Utility.Hosting utilities hosting</PackageTags>
 		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
 
+		<Version>84.10.2.8</Version>
+		<PackageOutputPath>$(SolutionDir)\nupkg\debug\</PackageOutputPath>
+
 		<TargetFrameworks>
 			netstandard2.0
 			;netstandard2.1
 		</TargetFrameworks>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Version>0.0.0.4</Version>
 		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
+
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<ItemGroup>

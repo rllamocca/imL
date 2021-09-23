@@ -1,8 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>0.0.0.4</Version>
-		<Authors>r.llamocca@outlook.com</Authors>
+		<Authors>Ricardo Llamocca ♪♫</Authors>
 		<Company>imL</Company>
 		<Description>Not so free tools.</Description>
 		<Copyright>© 1984 - 8888</Copyright>
@@ -12,6 +11,9 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>imL imL.Rest.Google rest google maps</PackageTags>
 		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
+
+		<Version>84.10.2.8</Version>
+		<PackageOutputPath>$(SolutionDir)\nupkg\debug\</PackageOutputPath>
 
 		<TargetFrameworks>
 			netstandard1.1
@@ -25,8 +27,10 @@
 		</TargetFrameworks>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Version>0.0.0.4</Version>
 		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
+
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
