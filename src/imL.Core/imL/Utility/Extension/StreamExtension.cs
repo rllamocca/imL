@@ -9,6 +9,15 @@ namespace imL.Utility
 {
     public static class StreamExtension
     {
+        public static void CheckBeginPosition(this Stream _this)
+        {
+            if (_this == null)
+                return;
+
+            if (_this.Position > 0)
+                _this.Seek(0, SeekOrigin.Begin);
+        }
+
         public static void OldCopyTo(this Stream _this, Stream _to)
         {
             byte[] _buffer = new byte[128];
@@ -22,8 +31,6 @@ namespace imL.Utility
 
         public static void FileCreate(this Stream _this, string _path)
         {
-            _this.Seek(0, SeekOrigin.Begin);
-
             using (FileStream _sw = File.Create(_path))
             {
 
@@ -40,8 +47,6 @@ namespace imL.Utility
 
         public async static Task FileCreateAsync(this Stream _this, string _path, CancellationToken _token = default)
         {
-            _this.Seek(0, SeekOrigin.Begin);
-
             using (FileStream _sw = File.Create(_path, 128, FileOptions.Asynchronous))
                 await _this.CopyToAsync(_sw, 128, _token);
         }

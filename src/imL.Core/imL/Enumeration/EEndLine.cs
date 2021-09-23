@@ -5,12 +5,14 @@ namespace imL.Enumeration
     [Flags]
     public enum EEndLine
     {
-        HT = 0, // 9 Horizontal Tab
-        LF = 1, // 10 Line Feed
-        VT = 2, // 11 Vertical Tab
-        FF = 4, // 12 Form Feed
-        CR = 8, // 13 Carriage Return
+        All = -1,
+        None = 0,
+        HT = 1, // 9 Horizontal Tab
+        LF = 2, // 10 Line Feed
+        VT = 4, // 11 Vertical Tab
+        FF = 8, // 12 Form Feed
+        CR = 16, // 13 Carriage Return
 
-        All = HT | LF | VT | FF | CR
+        //All = HT | LF | VT | FF | CR
     }
 }
