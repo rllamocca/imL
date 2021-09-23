@@ -26,6 +26,7 @@ namespace imL.Utility.NPOI
             IProgress<int> _progress = null)
         {
             _this.GetExcel(out Stream _out, _columnnames, _xls, _dt_progress, _progress);
+            _out.CheckBeginPosition();
             _out.FileCreate(_path);
             _out.Dispose();
         }
@@ -206,6 +207,7 @@ namespace imL.Utility.NPOI
             IProgress<int> _progress = null)
         {
             _this.GetExcel(out Stream _out, _formats, _columnnames, _xls, _dt_progress, _progress);
+            _out.CheckBeginPosition();
             _out.FileCreate(_path);
             _out.Dispose();
         }

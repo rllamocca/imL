@@ -29,15 +29,19 @@ namespace imL.Utility.OldHttp
             Stream _ms;
 
             if (_obj is string _string)
-                _ms = NewtonsoftHelper.ToStream(_string);
+                NewtonsoftHelper.ToStream(out _ms, _string);
             else
-                _ms = NewtonsoftHelper.ToStream(_obj);
+                NewtonsoftHelper.ToStream(out _ms, _obj);
+
+            _ms.CheckBeginPosition();
 
             switch (_compress)
             {
                 case ECompress.Gzip:
                 case ECompress.Deflate:
                     _ms = StreamHelper.Compress(_ms, _compress);
+                    _ms.CheckBeginPosition();
+
                     break;
                 default:
                     break;

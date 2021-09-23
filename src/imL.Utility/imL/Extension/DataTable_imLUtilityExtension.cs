@@ -20,6 +20,7 @@ namespace imL.Utility
             IProgress<int> _progress = null)
         {
             _this.GetFlat(out Stream _out, _separator, _columnnames, _enc, _progress);
+            _out.CheckBeginPosition();
             _out.FileCreate(_path);
             _out.Dispose();
         }
