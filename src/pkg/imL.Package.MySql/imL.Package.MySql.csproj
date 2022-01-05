@@ -1,0 +1,72 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<NoWarn>CS1701;CS1702;CS8600;CS8601;CS8602;CS8618;CS8625;IDE0063;IDE0066;IDE0090</NoWarn>
+	</PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>
+			net35
+			;net40
+			;net45
+			;net451
+			;net452
+			;netstandard1.3
+			;netstandard1.4
+			;netstandard1.5
+			;netstandard1.6
+			;netstandard2.0
+			;netstandard2.1
+			;net5.0
+			;net6.0
+		</TargetFrameworks>
+
+		<Authors>Ricardo Llamocca ♪♫</Authors>
+		<Company>imL</Company>
+		<Description>Not so free tools.</Description>
+		<Copyright>© 1984 - 8888</Copyright>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>imL imL.Package.MySql package mysql</PackageTags>
+		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
+
+		<Version>84.10.2.8</Version>
+		<PackageOutputPath>$(SolutionDir)\nupkg\debug\</PackageOutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<Version>0.0.0.1</Version>
+		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
+
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	</PropertyGroup>
+
+	<ItemGroup Condition="('$(TargetFramework)' == 'net6.0') Or ('$(TargetFramework)' == 'net5.0') Or ('$(TargetFramework)' == 'netstandard2.1') Or ('$(TargetFramework)' == 'netstandard2.0')">
+		<PackageReference Include="MySql.Data">
+			<Version>8.0.*</Version>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.6'">
+		<PackageReference Include="MySql.Data">
+			<Version>8.0.17</Version>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup Condition="('$(TargetFramework)' == 'netstandard1.5') Or ('$(TargetFramework)' == 'netstandard1.4') Or ('$(TargetFramework)' == 'netstandard1.3')">
+		<PackageReference Include="MySql.Data">
+			<Version>6.10.9</Version>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup Condition="('$(TargetFramework)' == 'net452') Or ('$(TargetFramework)' == 'net451') Or ('$(TargetFramework)' == 'net45') Or ('$(TargetFramework)' == 'net40')">
+		<PackageReference Include="MySql.Data">
+			<Version>6.9.12</Version>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net35'">
+		<Reference Include="MySql.Data">
+			<HintPath>rsrc\dll\MySql.Data.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\core\imL.Core\imL.Core.csproj" />
+	</ItemGroup>
+</Project>
