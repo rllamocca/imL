@@ -37,7 +37,7 @@ namespace SAMPLE.imL.Utility.Terminal
 #if DEBUG
             TerminalHelper.PressAnyKeyToExit();
 #else
-            ConsoleHelper.Ends(true);
+            TerminalHelper.Ends(true);
 #endif
         }
 
