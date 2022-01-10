@@ -13,18 +13,14 @@ namespace imL.Contract.DB
         bool Constraints { set; get; }
 
 #if (NET35 || NET40) == false
-
         CancellationToken Token { set; get; }
-
 #endif
 
         void Open();
         void Close();
 
 #if (NET35 || NET40) == false
-
         Task OpenAsync();
-
 #endif
 
     }

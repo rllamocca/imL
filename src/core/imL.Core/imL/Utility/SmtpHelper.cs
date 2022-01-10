@@ -1,12 +1,12 @@
 ﻿#if (NET35_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
 
+using imL.Format;
+
 using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Text;
-
-using imL.Format;
 
 namespace imL.Utility
 {
@@ -81,7 +81,7 @@ namespace imL.Utility
             }
         }
 
-        public static void Send(SmtpFormat _smtp, MailMessageFormat[] _messages, Encoding _enc = null)
+        public static void Send(SmtpFormat _smtp, Encoding _enc = null, params MailMessageFormat[] _messages)
         {
             if (_messages.IsEmpty())
                 return;

@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using imL.Contract.DB;
+
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-
-using imL.Contract.DB;
-using imL.Utility.Sql.Fulfill;
 
 namespace imL.Utility.Sql
 {

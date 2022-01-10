@@ -1,7 +1,4 @@
-using System.Threading.Tasks;
-
 using imL.Contract;
-using imL.Fulfill;
 using imL.Utility.Hosting;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +6,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 using NLog.Extensions.Logging;
+
+using System.Threading.Tasks;
 
 namespace SAMPLE.imL.Utility.Hosting
 {

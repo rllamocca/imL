@@ -1,4 +1,4 @@
-﻿namespace imL.Contract
+﻿namespace imL.Utility.Hosting
 {
     public interface IHostPeriodSetting
     {

@@ -3,14 +3,14 @@ using System.Threading;
 using System.Threading.Tasks;
 #endif
 
+using imL.Contract.DB;
+
 using System;
 using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
 
-using imL.Contract.DB;
-
-namespace imL.Utility.Sql.Fulfill
+namespace imL.Utility.Sql
 {
     public class ConnectionDefault : IConnection
     {
@@ -55,6 +55,7 @@ namespace imL.Utility.Sql.Fulfill
         //####
         public int TimeOut { set; get; } = 100;
         public bool Constraints { set; get; } = false;
+
 #if (NET35 || NET40) == false
         public CancellationToken Token { set; get; } = default;
 #endif
@@ -64,6 +65,35 @@ namespace imL.Utility.Sql.Fulfill
             if (this._CN.State != ConnectionState.Closed)
                 this._CN.Close();
         }
+        public void Open()
+        {
+            switch (this._CN.State)
+            {
+                case ConnectionState.Closed:
+                case ConnectionState.Broken:
+                    this._CN.Open();
+                    this._CN.StatisticsEnabled = this._STATISTICS;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+#if (NET35 || NET40) == false
+        public async Task OpenAsync()
+        {
+            switch (this._CN.State)
+            {
+                case ConnectionState.Closed:
+                case ConnectionState.Broken:
+                    await this._CN.OpenAsync();
+                    this._CN.StatisticsEnabled = this._STATISTICS;
+                    break;
+                default:
+                    break;
+            }
+        }
+#endif
 
         //################################################################################
         ~ConnectionDefault()
@@ -101,34 +131,5 @@ namespace imL.Utility.Sql.Fulfill
 
             this._DISPOSED = true;
         }
-
-        public void Open()
-        {
-            switch (this._CN.State)
-            {
-                case ConnectionState.Closed:
-                case ConnectionState.Broken:
-                    this._CN.Open();
-                    this._CN.StatisticsEnabled = this._STATISTICS;
-                    break;
-                default:
-                    break;
-            }
-        }
-#if (NET35 || NET40) == false
-        public async Task OpenAsync()
-        {
-            switch (this._CN.State)
-            {
-                case ConnectionState.Closed:
-                case ConnectionState.Broken:
-                    await this._CN.OpenAsync();
-                    this._CN.StatisticsEnabled = this._STATISTICS;
-                    break;
-                default:
-                    break;
-            }
-        }
-#endif
     }
 }

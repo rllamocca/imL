@@ -10,7 +10,7 @@ namespace imL.Utility
 {
     public static class SmtpHelperAsync
     {
-        public static async Task Send(SmtpFormat _smtp, MailMessageFormat[] _messages, Encoding _enc = null)
+        public static async Task Send(SmtpFormat _smtp, Encoding _enc = null, params MailMessageFormat[] _messages)
         {
             if (_messages.IsEmpty())
                 return;
