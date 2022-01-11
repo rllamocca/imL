@@ -1,4 +1,4 @@
-﻿using imL.Contract;
+﻿using imL.Utility.Hosting;
 
 namespace SAMPLE.imL.Frotcom.Hosting.Core
 {

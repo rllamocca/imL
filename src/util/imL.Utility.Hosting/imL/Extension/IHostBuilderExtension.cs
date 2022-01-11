@@ -1,9 +1,9 @@
-﻿using System.Text.Json;
-
-using imL.Enumeration.Logging;
+﻿using imL.Enumeration.Logging;
 
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+
+using System.Text.Json;
 
 namespace imL.Utility.Hosting
 {
@@ -11,8 +11,6 @@ namespace imL.Utility.Hosting
     {
         public static IHostBuilder UseSimpleLogging(this IHostBuilder _this, EConsoleOutput _output = EConsoleOutput.Systemd)
         {
-
-            //string _A =  JsonSerializer.Serialize<string>("lalala");
             //_opt.TimestampFormat = "yyyy'-'MM'-'dd HH':'mm':'ss'.'ffff ";
             string _tsf = "HH':'mm':'ss'.'ffff ";
 

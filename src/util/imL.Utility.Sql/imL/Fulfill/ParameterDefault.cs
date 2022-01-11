@@ -1,10 +1,10 @@
-﻿using System;
+﻿using imL.Contract.DB;
+
+using System;
 using System.Data;
 using System.Data.SqlClient;
 
-using imL.Contract.DB;
-
-namespace imL.Utility.Sql.Fulfill
+namespace imL.Utility.Sql
 {
     public class ParameterDefault : IParameter
     {
@@ -20,9 +20,9 @@ namespace imL.Utility.Sql.Fulfill
             )
         {
             this.Source = _affect;
-            this.Value = DBNull.Value;
             this.Affect = _function;
 
+            this.Value = DBNull.Value;
             this.Parameter = null;
         }
         public ParameterDefault(

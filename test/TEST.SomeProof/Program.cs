@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace TEST.SomeProof
 {
@@ -88,5 +89,48 @@ namespace TEST.SomeProof
                 _b = _return;
             }
         }
+    }
+
+    public class Class1
+    {
+        public int Method1(string input)
+        {
+            //... do something
+            return 0;
+        }
+
+        public int Method2(string input)
+        {
+            //... do something different
+            return 1;
+        }
+
+        public bool RunTheMethod(Func<string, int> myMethodName)
+        {
+            //... do stuff
+            int i = myMethodName("My String");
+            //... do more stuff
+            return true;
+        }
+
+        public bool Test()
+        {
+            return RunTheMethod(Method1);
+        }
+
+        //public T DoSomething<T>(Action<T> _body)
+        //    where T : new()
+        //{
+        //    T _t = new T();
+        //    _body(_t);
+        //    return _t;
+        //}
+        //public async Task<T> DoSomethingAsync<T>(Func<T, Task> _body)
+        //    where T : new()
+        //{
+        //    T _t = new T();
+        //    await _body(_t);
+        //    return _t;
+        //}
     }
 }

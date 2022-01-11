@@ -1,7 +1,9 @@
-﻿using System;
+﻿using imL.Contract;
+
+using System;
 using System.Threading;
 
-namespace imL.Contract
+namespace imL.Utility.Hosting
 {
     public interface IPeriodExecution : IDisposable
     {

@@ -14,7 +14,7 @@ using imL.Enumeration.DB;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace imL.Utility.Sql.Fulfill
+namespace imL.Utility.Sql
 {
     public class SqlHelperAsync : IHelperAsync
     {

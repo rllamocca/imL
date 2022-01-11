@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Logging;
 
-using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
-namespace imL.Contract
+namespace imL.Utility.Hosting
 {
     public interface IHostPeriodWorker
     {

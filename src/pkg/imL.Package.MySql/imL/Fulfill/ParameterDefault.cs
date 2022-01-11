@@ -1,11 +1,11 @@
-﻿using System;
-using System.Data;
-
-using imL.Contract.DB;
+﻿using imL.Contract.DB;
 
 using MySql.Data.MySqlClient;
 
-namespace imL.Package.MySql.Fulfill
+using System;
+using System.Data;
+
+namespace imL.Package.MySql
 {
     public class ParameterDefault : IParameter
     {
@@ -21,9 +21,9 @@ namespace imL.Package.MySql.Fulfill
             )
         {
             this.Source = _affect;
-            this.Value = DBNull.Value;
             this.Affect = _function;
 
+            this.Value = DBNull.Value;
             this.Parameter = null;
         }
         public ParameterDefault(

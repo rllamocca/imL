@@ -3,11 +3,9 @@
 using System;
 using System.IO;
 
-using imL.Contract;
-
 using SYSTEM_IO = System.IO;
 
-namespace imL.Fulfill
+namespace imL.Contract
 {
     public sealed class AppInfoDefault : IAppInfo
     {

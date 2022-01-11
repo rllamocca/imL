@@ -16,7 +16,7 @@ using System.Linq;
 
 using imL.Utility;
 
-namespace imL.Package.MySql.Fulfill
+namespace imL.Package.MySql
 {
     public class MySqlHelper : IHelper
     {

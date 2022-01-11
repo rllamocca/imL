@@ -1,9 +1,9 @@
-﻿using System;
+﻿using imL.Contract;
+
+using System;
 using System.Threading;
 
-using imL.Contract;
-
-namespace imL.Fulfill
+namespace imL.Utility.Hosting
 {
     public class PeriodExecutionDefault : IPeriodExecution
     {
@@ -25,11 +25,12 @@ namespace imL.Fulfill
 
         public void PopulateWithSomething(long _count, IAppInfo _app, CancellationToken _token = default)
         {
+            this._START = DateTime.Now;
+
             this._COUNT = _count;
             this._APP = _app;
             this._TOKEN = _token;
 
-            this._START = DateTime.Now;
             this._GUID = Convert.ToString(System.Guid.NewGuid());
         }
         public void AfterPopulate()
