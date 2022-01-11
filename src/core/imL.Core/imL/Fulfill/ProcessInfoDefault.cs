@@ -1,25 +1,29 @@
-﻿using imL.Enumeration;
+﻿using System;
+using System.Collections.Generic;
 
-using System;
+using imL.Enumeration;
 
 namespace imL.Contract
 {
     public class ProcessInfoDefault : IProcessInfo
     {
-        public string Guid { set; get; }
         public DateTime? Start { set; get; }
-        public DateTime? End { set; get; }
+        public string Guid { set; get; }
+        public IAppInfo App { set; get; }
         public long? Selected { set; get; }
         public long? Inserted { set; get; }
         public long? Updated { set; get; }
         public long? Erased { set; get; }
+        public IList<string> PathAttachments { set; get; }
         public EAlert Alert { set; get; }
         public Exception Critical { set; get; }
+        public DateTime? End { set; get; }
 
-        public ProcessInfoDefault()
+        public ProcessInfoDefault(IAppInfo _info)
         {
             this.Start = DateTime.Now;
             this.Guid = Convert.ToString(System.Guid.NewGuid());
+            this.App = _info;
         }
 
         public void AddSelected(long _add)

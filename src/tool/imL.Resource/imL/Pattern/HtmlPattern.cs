@@ -14,8 +14,14 @@ namespace imL.Resource
 {
     public static class HtmlPattern
     {
-        public static string Resume(IProcessInfo _process, string _href = "mailto:r.llamocca@outlook.com?Subject=Help", string _by = "imL")
+        public static string Resume(IProcessInfo _process, string _href = null, string _by = null)
         {
+            if (_href == null && _by == null)
+            {
+                _href = "mailto:r.llamocca@outlook.com?Subject=INeedHelp";
+                _by = "imL";
+            }
+
             string _return = Resources.HTML_resume;
 
             switch (_process.Alert)

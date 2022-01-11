@@ -6,7 +6,7 @@ using imL.Utility;
 
 Console.WriteLine("Hello, World!");
 
-IProcessInfo _process = new ProcessInfoDefault();
+IProcessInfo _process = new ProcessInfoDefault(new AppInfoDefault(args));
 TerminalHelper.Starts();
 
 _process.AddInserted(1);

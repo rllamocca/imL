@@ -1,13 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<NoWarn>CS1701;CS1702;CS8600;CS8601;CS8602;CS8618;CS8625;IDE0063;IDE0066;IDE0090</NoWarn>
 	</PropertyGroup>
 	<PropertyGroup>
 		<TargetFrameworks>
-			net45
-			;netstandard1.1
-			;netstandard1.2
+			net35
+			;net40
+			;net45
+			;net451
+			;net452
 			;netstandard1.3
 			;netstandard1.4
 			;netstandard1.5
@@ -26,24 +28,29 @@
 		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>imL imL.Rest.Google rest google maps</PackageTags>
+		<PackageTags>imL imL.Package.Zip package zip</PackageTags>
 		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
 
 		<Version>84.10.2.8</Version>
 		<PackageOutputPath>$(SolutionDir)\nupkg\debug\</PackageOutputPath>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
-		<Version>0.0.0.7</Version>
+		<Version>0.0.0.1</Version>
 		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net45'">
-		<Reference Include="System.Net.Http" />
+
+	<ItemGroup Condition="('$(TargetFramework)' == 'net452') Or ('$(TargetFramework)' == 'net451') Or ('$(TargetFramework)' == 'net45')">
+		<Reference Include="System.IO.Compression" />
+		<Reference Include="System.IO.Compression.FileSystem" />
+	</ItemGroup>
+	<ItemGroup Condition="('$(TargetFramework)' == 'net40') Or ('$(TargetFramework)' == 'net35')">
+		<PackageReference Include="SharpZipLib" Version="0.86.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\util\imL.Utility.Http\imL.Utility.Http.csproj" />
+		<ProjectReference Include="..\..\core\imL.Core\imL.Core.csproj" />
 	</ItemGroup>
 </Project>

@@ -29,7 +29,6 @@ try
     SbifClient _client = new(_format.URI, _http, _format.ApiKey);
 
     //new SbifHelperAsync(EFinancialIndicator.Dolar);
-
     CurrencyInfo[] _indices = await SbifHelperAsync.GetPosterioresMonth(_client);
 
     foreach (CurrencyInfo _item in _indices)

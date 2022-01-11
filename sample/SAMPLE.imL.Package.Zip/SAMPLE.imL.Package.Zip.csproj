@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\tool\imL.Resource\imL.Resource.csproj" />
+    <ProjectReference Include="..\..\src\pkg\imL.Package.Zip\imL.Package.Zip.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,14 @@
+{
+  "Smtp": {
+    "Host": null,
+    "UserName": null,
+    "Password": null
+  },
+  "Mail": {
+    "FromAddress": null,
+    "FromDisplayName": null,
+    "Subject": null,
+    "TO": null,
+    "BCC": null
+  }
+}

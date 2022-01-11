@@ -5,13 +5,12 @@
 	</PropertyGroup>
 	<PropertyGroup>
 		<TargetFrameworks>
-			net45
-			;netstandard1.1
-			;netstandard1.2
-			;netstandard1.3
-			;netstandard1.4
-			;netstandard1.5
-			;netstandard1.6
+			net35
+			;net40
+			;net45
+			;net451
+			;net452
+			;net46
 			;netstandard2.0
 			;netstandard2.1
 			;net5.0
@@ -26,24 +25,25 @@
 		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>imL imL.Rest.Google rest google maps</PackageTags>
+		<PackageTags>imL imL.Tool.Terminal tool terminal</PackageTags>
 		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
 
 		<Version>84.10.2.8</Version>
 		<PackageOutputPath>$(SolutionDir)\nupkg\debug\</PackageOutputPath>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
-		<Version>0.0.0.7</Version>
+		<Version>0.0.0.1</Version>
 		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net45'">
-		<Reference Include="System.Net.Http" />
+	<ItemGroup>
+		<PackageReference Include="NLog" Version="4.7.13" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\util\imL.Utility.Http\imL.Utility.Http.csproj" />
+		<ProjectReference Include="..\imL.Resource\imL.Resource.csproj" />
 	</ItemGroup>
+
 </Project>
