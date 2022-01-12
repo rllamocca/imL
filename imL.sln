@@ -95,9 +95,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAMPLE.imL.Package.Zip", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RichieSays", "src\tool\RichieSays\RichieSays.csproj", "{FC451326-78BF-48E0-9F65-E6A23BFB2E8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAMPLE.imL.Rest.Sbif", "sample\SAMPLE.imL.Rest.Sbif\SAMPLE.imL.Rest.Sbif.csproj", "{0C7EB61F-3A4A-4B91-B9FE-13EE75AA59E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAMPLE.imL.Rest.Sbif", "sample\SAMPLE.imL.Rest.Sbif\SAMPLE.imL.Rest.Sbif.csproj", "{0C7EB61F-3A4A-4B91-B9FE-13EE75AA59E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAMPLE.imL.Rest.Frotcom", "sample\SAMPLE.imL.Rest.Frotcom\SAMPLE.imL.Rest.Frotcom.csproj", "{5C73A72F-9AC6-4977-A3EE-F0AF13D642E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAMPLE.imL.Rest.Frotcom", "sample\SAMPLE.imL.Rest.Frotcom\SAMPLE.imL.Rest.Frotcom.csproj", "{5C73A72F-9AC6-4977-A3EE-F0AF13D642E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "imL.Package.ServiceModel", "src\pkg\imL.Package.ServiceModel\imL.Package.ServiceModel.csproj", "{2F67D054-97B2-45FF-8C26-512BC4347898}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -229,6 +231,10 @@ Global
 		{5C73A72F-9AC6-4977-A3EE-F0AF13D642E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C73A72F-9AC6-4977-A3EE-F0AF13D642E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C73A72F-9AC6-4977-A3EE-F0AF13D642E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F67D054-97B2-45FF-8C26-512BC4347898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F67D054-97B2-45FF-8C26-512BC4347898}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F67D054-97B2-45FF-8C26-512BC4347898}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F67D054-97B2-45FF-8C26-512BC4347898}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -271,6 +277,7 @@ Global
 		{FC451326-78BF-48E0-9F65-E6A23BFB2E8B} = {DA4C8C4A-4C32-4794-B47E-1895BE9614F6}
 		{0C7EB61F-3A4A-4B91-B9FE-13EE75AA59E6} = {06C01FDE-2E33-483B-AA9B-7352424FA60E}
 		{5C73A72F-9AC6-4977-A3EE-F0AF13D642E4} = {06C01FDE-2E33-483B-AA9B-7352424FA60E}
+		{2F67D054-97B2-45FF-8C26-512BC4347898} = {DEF2C035-CBF5-4600-9D68-92924C9AB208}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F1BE17B3-0ED9-4751-BFC3-A8E338449B8C}
