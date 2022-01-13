@@ -92,19 +92,19 @@ namespace RichieSays
                 switch (__GROUPBY)
                 {
                     case "yyyy":
-                        _paths = _dates.Select(_s => PathHelper.Combine(_s.Year.ToString("0000")))
+                        _paths = _dates.Select(_s => Path.Combine(_s.Year.ToString("0000")))
                             .Distinct()
                             .ToArray();
                         break;
                     case "yyyy-MM":
-                        _paths = _dates.Select(_s => PathHelper.Combine(_s.Year.ToString("0000"),
+                        _paths = _dates.Select(_s => Path.Combine(_s.Year.ToString("0000"),
                             _s.Month.ToString("00")
                             ))
                             .Distinct()
                             .ToArray();
                         break;
                     default:
-                        _paths = _dates.Select(_s => PathHelper.Combine(_s.Year.ToString("0000"),
+                        _paths = _dates.Select(_s => Path.Combine(_s.Year.ToString("0000"),
                             _s.Month.ToString("00"),
                             _s.Day.ToString("00")
                             ))
@@ -117,7 +117,7 @@ namespace RichieSays
                 {
                     foreach (string _item in _paths)
                     {
-                        Directory.CreateDirectory(PathHelper.Combine(__TO, _item));
+                        Directory.CreateDirectory(Path.Combine(__TO, _item));
 
                         _pb.Report();
                     }
@@ -132,20 +132,20 @@ namespace RichieSays
                         switch (__GROUPBY)
                         {
                             case "yyyy":
-                                _dest = PathHelper.Combine(__TO,
+                                _dest = Path.Combine(__TO,
                                     _item.CreationTime.Year.ToString("0000"),
                                     _item.Name
                                     );
                                 break;
                             case "yyyy-MM":
-                                _dest = PathHelper.Combine(__TO,
+                                _dest = Path.Combine(__TO,
                                     _item.CreationTime.Year.ToString("0000"),
                                     _item.CreationTime.Month.ToString("00"),
                                     _item.Name
                                     );
                                 break;
                             default:
-                                _dest = PathHelper.Combine(__TO,
+                                _dest = Path.Combine(__TO,
                                     _item.CreationTime.Year.ToString("0000"),
                                     _item.CreationTime.Month.ToString("00"),
                                     _item.CreationTime.Day.ToString("00"),

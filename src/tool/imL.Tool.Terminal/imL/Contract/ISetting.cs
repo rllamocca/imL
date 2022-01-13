@@ -2,7 +2,7 @@
 
 namespace imL.Tool.Terminal
 {
-    public interface ISettings
+    public interface ISetting
     {
         SmtpFormat Smtp { set; get; }
         MailMessageFormat Mail { set; get; }

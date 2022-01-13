@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SAMPLE.imL.Utility.Hosting
 {
-    internal class Worker : IHostPeriodWorker
+    internal class MyWorker : IHostPeriodWorker
     {
         public async Task DoWork(IPeriodExecution _execution, ILogger _logger)
         {

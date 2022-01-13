@@ -1,4 +1,8 @@
-﻿using imL.Contract;
+﻿using System;
+using System.Threading.Tasks;
+
+using imL.Contract;
+using imL.Enumeration.Logging;
 using imL.Utility.Hosting;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -8,17 +12,16 @@ using Microsoft.Extensions.Logging;
 using NLog;
 using NLog.Extensions.Hosting;
 
-using System;
-using System.Threading.Tasks;
+using _NSP_LOGGING = Microsoft.Extensions.Logging;
 
 namespace imL.Frotcom.Hosting.Core
 {
-    public class AppRunAsync
+    public class HostHelperAsync
     {
         private static readonly object _LOCKED = new object();
-        private static Microsoft.Extensions.Logging.ILogger _LOGGER;
+        private static _NSP_LOGGING.ILogger _LOGGER;
 
-        public static Microsoft.Extensions.Logging.ILogger Logger { get { lock (AppRunAsync._LOCKED) { return AppRunAsync._LOGGER; } } }
+        public static _NSP_LOGGING.ILogger Logger { get { lock (HostHelperAsync._LOCKED) { return HostHelperAsync._LOGGER; } } }
 
         public static async Task ConsoleAsync<GWorker>
             (IHostPeriodSetting _setting, IAppInfo _info)
@@ -44,19 +47,20 @@ namespace imL.Frotcom.Hosting.Core
                     .UseConsoleLifetime()
                     .UseSimpleLogging(
 #if DEBUG
-                        Enumeration.Logging.EConsoleOutput.Simple
+                        EConsoleOutput.Simple
 #endif
                         );
 
-                if (BAppLocked.App.InContainer == false)
+                if (LockedHost.App.InContainer == false)
                 {
-                    LogManager.Configuration.Variables["mybasedir"] = _info.PathLog;
+                    LogManager.AutoShutdown = true;
+                    LogManager.Configuration.Variables["_BASEDIR_"] = _info.PathLog;
                     _build.UseNLog();
                 }
 
                 IHost _host = _build.Build();
-                AppRunAsync._LOGGER = _host.Services.GetRequiredService<ILogger<AppRunAsync>>();
-                AppRunAsync._LOGGER?.LogInformation("Host created.");
+                HostHelperAsync._LOGGER = _host.Services.GetRequiredService<ILogger<HostHelperAsync>>();
+                HostHelperAsync._LOGGER?.LogInformation("Host created.");
 
                 await _host.RunAsync();
             }
@@ -64,19 +68,19 @@ namespace imL.Frotcom.Hosting.Core
             {
                 string _msg = "Stopped program because of exception";
 
-                if (AppRunAsync._LOGGER == null)
+                if (HostHelperAsync._LOGGER == null)
                 {
                     Console.WriteLine(_msg);
                     Console.WriteLine(_ex);
                 }
                 else
-                    AppRunAsync._LOGGER?.LogCritical(_ex, "{p0}", _msg);
+                    HostHelperAsync._LOGGER?.LogCritical(_ex, "{p0}", _msg);
 
                 throw;
             }
             finally
             {
-                if (BAppLocked.App.InContainer == false)
+                if (LockedHost.App.InContainer == false)
                     LogManager.Shutdown();
             }
         }

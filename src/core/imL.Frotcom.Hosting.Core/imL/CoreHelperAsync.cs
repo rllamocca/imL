@@ -19,82 +19,73 @@ using Microsoft.Extensions.Logging;
 
 namespace imL.Frotcom.Hosting.Core
 {
-    public static class CommonAsync
+    public static class CoreHelperAsync
     {
-        public static async Task<Authorize> TokenFiled(FrotcomClient _client, AuthorizeFormat _auth, bool _throw = false)
+        public static async Task FillTokenFiledAsync(FrotcomClient _client, bool _throw = false)
         {
-            if (File.Exists(BAppLocked.App.Path) == false)
-                File.WriteAllText(BAppLocked.App.Path, "{}");
+            string _file = Path.Combine(LockedHost.App.Path, "_frotcom_token_.json");
+
+            if (File.Exists(_file) == false)
+                File.WriteAllText(_file, "{}");
 
 #if (NETSTANDARD2_0_OR_GREATER ||  NET5_0_OR_GREATER)
-            Authorize _token = JsonSerializer.Deserialize<Authorize>(File.ReadAllText(BAppLocked.App.Path));
+            Authorize _token = JsonSerializer.Deserialize<Authorize>(File.ReadAllText(_file));
 #else
-            Authorize _token = JsonConvert.DeserializeObject<Authorize>(File.ReadAllText(BLocked.App.Path));
+            Authorize _token = JsonConvert.DeserializeObject<Authorize>(File.ReadAllText(_path));
 #endif
 
             if (_token == null || string.IsNullOrWhiteSpace(_token.token))
             {
-                _token = await FrotcomHelperAsync.AuthorizeUser(_client, _auth);
+                _token = await FrotcomHelperAsync.AuthorizeUserAsync(_client);
 
                 if (_token == null || string.IsNullOrWhiteSpace(_token.token))
                     throw new Exception("AuthorizeUser null");
 
 #if (NETSTANDARD2_0_OR_GREATER ||  NET5_0_OR_GREATER)
-                File.WriteAllText(BAppLocked.App.Path, JsonSerializer.Serialize(_token));
+                File.WriteAllText(_file, JsonSerializer.Serialize(_token));
 #else
-                File.WriteAllText(BLocked.App.Path, JsonConvert.SerializeObject(_token));
+                File.WriteAllText(_file, JsonConvert.SerializeObject(_token));
 #endif
 
-                return _token;
+                _client.Token = _token;
             }
             else
             {
-                Authorize _validate = null;
-
-                try
-                {
-                    _validate = await FrotcomHelperAsync.ValidateToken(_client, _token.token);
-                }
-                catch (Exception)
-                {
-                    if (_throw)
-                        throw;
-                }
+                Authorize _validate = await FrotcomHelperAsync.ValidateTokenAsync(_client, _token.token, _throw);
 
                 if (_validate == null || _token.token != _validate.token)
                 {
-                    _token = await FrotcomHelperAsync.AuthorizeUser(_client, _auth);
+                    _token = await FrotcomHelperAsync.AuthorizeUserAsync(_client);
 
                     if (_token == null || string.IsNullOrWhiteSpace(_token.token))
                         throw new Exception("AuthorizeUser null");
 
 #if (NETSTANDARD2_0_OR_GREATER ||  NET5_0_OR_GREATER)
-                    File.WriteAllText(BAppLocked.App.Path, JsonSerializer.Serialize(_token));
+                    File.WriteAllText(_file, JsonSerializer.Serialize(_token));
 #else
-                    File.WriteAllText(BLocked.App.Path, JsonConvert.SerializeObject(_token));
+                    File.WriteAllText(_file, JsonConvert.SerializeObject(_token));
 #endif
-
-                    return _token;
+                    _client.Token = _token;
                 }
                 else
-                    return _validate;
+                    _client.Token = _validate;
             }
         }
-        public static async Task<Authorize> TokenCached(FrotcomClient _client, AuthorizeFormat _auth)
+        public static async Task FillTokenCachedAsync(FrotcomClient _client)
         {
             string _key = "_frotcom_token_";
 
-            if (BAppLocked.Cache.TryGetValue(_key, out Authorize _return) == false)
+            if (LockedHost.Cache.TryGetValue(_key, out Authorize _return) == false)
             {
-                _return = await FrotcomHelperAsync.AuthorizeUser(_client, _auth);
-                BAppLocked.Cache.Set(_key, _return, TimeSpan.FromHours(4));
+                _return = await FrotcomHelperAsync.AuthorizeUserAsync(_client);
+                LockedHost.Cache.Set(_key, _return, TimeSpan.FromHours(4));
             }
 
-            return _return;
+            _client.Token = _return;
         }
-        public static async Task<Dough[]> Prepared(FrotcomClient _client, FrotcomFormat _setting, ILogger _logger)
+        public static async Task<Dough[]> PreparedAsync(FrotcomClient _client, ILogger _logger)
         {
-            Dough[] _doughs = await FrotcomHelperAsync.ToPrepare(_client, _setting);
+            Dough[] _doughs = await FrotcomHelperAsync.ToPrepareAsync(_client);
 
             if (_doughs == null || _doughs.Length == 0)
             {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace TEST.SomeProof
 {
@@ -14,9 +13,7 @@ namespace TEST.SomeProof
             )
         {
             Console.WriteLine("Hello World!");
-
             Console.OutputEncoding = Encoding.UTF8;
-
 
             try
             {

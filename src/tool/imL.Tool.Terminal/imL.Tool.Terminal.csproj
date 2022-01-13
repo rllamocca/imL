@@ -43,6 +43,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\pkg\imL.Package.Zip\imL.Package.Zip.csproj" />
 		<ProjectReference Include="..\imL.Resource\imL.Resource.csproj" />
 	</ItemGroup>
 

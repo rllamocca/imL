@@ -8,11 +8,11 @@ namespace imL.Utility.Http
     {
         protected async override Task<HttpResponseMessage> SendAsync(HttpRequestMessage _request, CancellationToken _token)
         {
-            await HttpHelperAsync.DecompressContent(_request);
+            await HttpHelperAsync.DecompressContentAsync(_request);
 
             HttpResponseMessage _response = await base.SendAsync(_request, _token);
 
-            await HttpHelperAsync.CompressContent(_response, _request.Headers.AcceptEncoding);
+            await HttpHelperAsync.CompressContentAsync(_response, _request.Headers.AcceptEncoding);
 
             return _response;
         }

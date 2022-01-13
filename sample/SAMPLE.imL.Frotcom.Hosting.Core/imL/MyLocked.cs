@@ -5,7 +5,7 @@ using imL.Frotcom.Hosting.Core;
 
 namespace SAMPLE.imL.Frotcom.Hosting.Core
 {
-    internal sealed class MyLocked : BAppLocked
+    internal sealed class MyLocked : LockedHost
     {
         private static MySettings? _SETTING;
 
@@ -13,7 +13,7 @@ namespace SAMPLE.imL.Frotcom.Hosting.Core
 
         public static new void Load(IAppInfo _app)
         {
-            BAppLocked.Load(_app);
+            LockedHost.Load(_app);
 
             MyLocked._SETTING = JsonSerializer.Deserialize<MySettings>(File.ReadAllText(Path.Combine(MyLocked.App.Path, "settings.json")));
             //AppLocked._HTTP.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes(string.Format("{0}:{1}", _conf.User, _conf.Password))));

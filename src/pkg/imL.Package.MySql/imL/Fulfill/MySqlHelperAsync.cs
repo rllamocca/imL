@@ -32,11 +32,11 @@ namespace imL.Package.MySql
             this.Progress = _progress;
         }
 
-        public async Task<Return> Execute(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[] _pmts)
+        public async Task<Return> ExecuteAsync(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[] _pmts)
         {
             try
             {
-                ConnectionDefault _conn_raw = (ConnectionDefault)this.Connection;
+                MySqlConnectionDefault _conn_raw = (MySqlConnectionDefault)this.Connection;
                 IEnumerable<MySqlParameter> _pmts_raw = _pmts.GetMySqlParameters();
 
                 using (MySqlCommand _cmd = new MySqlCommand(_query, _conn_raw.Connection))
@@ -69,11 +69,11 @@ namespace imL.Package.MySql
             }
         }
 
-        public async Task<Return[]> Execute(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[][] _pmts)
+        public async Task<Return[]> ExecuteAsync(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[][] _pmts)
         {
             try
             {
-                ConnectionDefault _conn_raw = (ConnectionDefault)this.Connection;
+                MySqlConnectionDefault _conn_raw = (MySqlConnectionDefault)this.Connection;
 
                 int _r = 0;
                 Return[] _returns = new Return[_pmts.Length];
@@ -95,7 +95,7 @@ namespace imL.Package.MySql
                         {
                             if (_r > 0)
                                 for (int _i = 0; _i < _c_p; _i++)
-                                    _cmd.Parameters[_i].Value = _pmts[_r][_i].Value;
+                                    _cmd.Parameters[_i].Value = _pmts[_r][_i].GetValue();
 
                             switch (_exe)
                             {
@@ -139,42 +139,52 @@ namespace imL.Package.MySql
 
 #if (NETSTANDARD1_3 || NETSTANDARD1_4 || NETSTANDARD1_5 || NETSTANDARD1_6) == false
 
-        public async Task<Return> LoadData(string _query, bool _datatable = true, params IParameter[] _pmts)
+        public async Task<Return> LoadDataTableAsync(string _query, params IParameter[] _pmts)
         {
             try
             {
-                Return _exe = await Execute(_query, EExecute.Reader, _pmts);
+                Return _exe = await ExecuteAsync(_query, EExecute.Reader, _pmts);
                 _exe.TriggerErrorException();
 
-                if (_datatable)
+                DataTable _return = new DataTable("DataTable_0");
+
+                using (MySqlDataReader _read = (MySqlDataReader)_exe.Result)
+                    _return.Load(_read, LoadOption.OverwriteChanges);
+
+                return new Return(true, _return);
+            }
+            catch (Exception _ex)
+            {
+                if (this.Throw)
+                    throw;
+
+                return new Return(false, _ex);
+            }
+        }
+        public async Task<Return> LoadDataSetAsync(string _query, params IParameter[] _pmts)
+        {
+            try
+            {
+                Return _exe = await ExecuteAsync(_query, EExecute.Reader, _pmts);
+                _exe.TriggerErrorException();
+
+                DataSet _return = new DataSet("DataSet_0") { EnforceConstraints = this.Connection.Constraints };
+                byte _n = 0;
+
+                using (MySqlDataReader _read = (MySqlDataReader)_exe.Result)
                 {
-                    DataTable _return = new DataTable("DataTable_0");
-
-                    using (MySqlDataReader _read = (MySqlDataReader)_exe.Result)
-                        _return.Load(_read, LoadOption.OverwriteChanges);
-
-                    return new Return(true, _return);
-                }
-                else
-                {
-                    DataSet _return = new DataSet("DataSet_0") { EnforceConstraints = this.Connection.Constraints };
-                    byte _n = 0;
-
-                    using (MySqlDataReader _read = (MySqlDataReader)_exe.Result)
+                    while (_read.IsClosed == false)
                     {
-                        while (_read.IsClosed == false)
-                        {
-                            DataTable _dt = new DataTable("DataTable_" + Convert.ToString(_n));
-                            _dt.Load(_read, LoadOption.OverwriteChanges);
-                            _return.Tables.Add(_dt);
-                            _n++;
+                        DataTable _dt = new DataTable("DataTable_" + Convert.ToString(_n));
+                        _dt.Load(_read, LoadOption.OverwriteChanges);
+                        _return.Tables.Add(_dt);
+                        _n++;
 
-                            this.Progress?.Report(_n);
-                        }
+                        this.Progress?.Report(_n);
                     }
-
-                    return new Return(true, _return);
                 }
+
+                return new Return(true, _return);
             }
             catch (Exception _ex)
             {

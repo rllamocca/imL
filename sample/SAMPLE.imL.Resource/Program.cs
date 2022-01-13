@@ -2,18 +2,10 @@
 
 using imL.Contract;
 using imL.Resource;
-using imL.Utility;
-
-Console.WriteLine("Hello, World!");
 
 IProcessInfo _process = new ProcessInfoDefault(new AppInfoDefault(args));
-TerminalHelper.Starts();
-
 _process.AddInserted(1);
 _process.Danger(new ArgumentNullException("Richie"));
 string _body = HtmlPattern.Resume(_process);
 
-if (true)
-{
-
-}
+Console.WriteLine(_body);

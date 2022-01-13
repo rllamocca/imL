@@ -19,7 +19,8 @@ namespace imL.Contract.DB
 
 #if (NETSTANDARD1_0 || NETSTANDARD1_1 || NETSTANDARD1_2 || NETSTANDARD1_3 || NETSTANDARD1_4 || NETSTANDARD1_5 || NETSTANDARD1_6) == false
 
-        Return LoadData(string _query, bool _datatable = true, params IParameter[] _pmts);
+        Return LoadDataTable(string _query, params IParameter[] _pmts);
+        Return LoadDataSet(string _query, params IParameter[] _pmts);
 
 #endif
     }

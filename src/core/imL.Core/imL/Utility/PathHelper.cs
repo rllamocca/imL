@@ -1,7 +1,6 @@
 ﻿#if (NET35)
-using System;
-#endif
 
+using System;
 using System.IO;
 
 namespace imL.Utility
@@ -10,7 +9,6 @@ namespace imL.Utility
     {
         public static string Combine(params string[] _paths)
         {
-#if (NET35)
             if (_paths == null)
                 new ArgumentNullException(nameof(_paths));
 
@@ -25,9 +23,8 @@ namespace imL.Utility
             }
 
             throw new ArgumentNullException(nameof(_paths));
-#else
-            return Path.Combine(_paths);
-#endif
         }
     }
 }
+
+#endif

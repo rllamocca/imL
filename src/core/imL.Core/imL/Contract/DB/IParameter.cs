@@ -2,8 +2,10 @@
 {
     public interface IParameter
     {
-        string Source { set; get; }
-        object Value { set; get; }
-        string Affect { set; get; }
+        string Affect { get; }
+        string Expression { get; }
+        bool SkipEffect { get; }
+
+        object GetValue();
     }
 }

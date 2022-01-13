@@ -2,5 +2,4 @@
 
 using imL.Package.Zip;
 
-Console.WriteLine("Hello, World!");
-ZipHelper.Compress(@"z:\tmp\tmp.log");
+Console.WriteLine(ZipHelper.Compress(@"z:\tmp\tmp.log"));

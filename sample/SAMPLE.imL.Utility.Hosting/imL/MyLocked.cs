@@ -9,19 +9,19 @@ using NLog;
 
 namespace SAMPLE.imL.Utility.Hosting
 {
-    internal sealed class Locked : BLocked
+    internal sealed class MyLocked : LockedBase
     {
         private static readonly Logger _LOGGER = LogManager.GetCurrentClassLogger();
-        private static Settings _SETTING;
+        private static MySettings _SETTING;
 
-        public static Logger Logger { get { lock (Locked._LOCKED) { return Locked._LOGGER; } } }
-        public static Settings Setting { get { lock (Locked._LOCKED) { return Locked._SETTING; } } }
+        public static Logger Logger { get { lock (MyLocked._LOCKED) { return MyLocked._LOGGER; } } }
+        public static MySettings Setting { get { lock (MyLocked._LOCKED) { return MyLocked._SETTING; } } }
 
         public static new void Load(IAppInfo _app)
         {
-            BLocked.Load(_app);
+            LockedBase.Load(_app);
 
-            Locked._SETTING = JsonSerializer.Deserialize<Settings>(File.ReadAllText(Path.Combine(Locked.App.Path, "settings.json")));
+            MyLocked._SETTING = JsonSerializer.Deserialize<MySettings>(File.ReadAllText(Path.Combine(MyLocked.App.Path, "settings.json")));
             //AppLocked._HTTP.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes(string.Format("{0}:{1}", _conf.User, _conf.Password))));
         }
     }

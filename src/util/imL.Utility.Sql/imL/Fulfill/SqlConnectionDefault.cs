@@ -12,7 +12,7 @@ using System.Data.SqlClient;
 
 namespace imL.Utility.Sql
 {
-    public class ConnectionDefault : IConnection
+    public class SqlConnectionDefault : IConnection
     {
         private bool _DISPOSED = false;
         private bool _STATISTICS = false;
@@ -30,12 +30,12 @@ namespace imL.Utility.Sql
             get { return this._CN; }
         }
 
-        public ConnectionDefault(SqlConnection _conn)
+        public SqlConnectionDefault(SqlConnection _conn)
         {
             this._STATISTICS = this._CN.StatisticsEnabled;
             this._CN = _conn;
         }
-        public ConnectionDefault(string _conn, bool _stat = false)
+        public SqlConnectionDefault(string _conn, bool _stat = false)
         {
             this._STATISTICS = _stat;
             this._CN = new SqlConnection(_conn)
@@ -73,6 +73,7 @@ namespace imL.Utility.Sql
                 case ConnectionState.Broken:
                     this._CN.Open();
                     this._CN.StatisticsEnabled = this._STATISTICS;
+
                     break;
                 default:
                     break;
@@ -88,6 +89,7 @@ namespace imL.Utility.Sql
                 case ConnectionState.Broken:
                     await this._CN.OpenAsync();
                     this._CN.StatisticsEnabled = this._STATISTICS;
+
                     break;
                 default:
                     break;
@@ -96,7 +98,7 @@ namespace imL.Utility.Sql
 #endif
 
         //################################################################################
-        ~ConnectionDefault()
+        ~SqlConnectionDefault()
         {
             this.Dispose(false);
         }

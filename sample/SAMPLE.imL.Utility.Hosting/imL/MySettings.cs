@@ -2,7 +2,7 @@
 
 namespace SAMPLE.imL.Utility.Hosting
 {
-    internal class Settings
+    internal class MySettings
     {
         public HostedSetting Hosted { set; get; }
     }

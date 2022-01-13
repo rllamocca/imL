@@ -12,7 +12,7 @@ using System.Data;
 
 namespace imL.Package.MySql
 {
-    public class ConnectionDefault : IConnection
+    public class MySqlConnectionDefault : IConnection
     {
         private bool _DISPOSED = false;
         //private bool _STATISTICS = false;
@@ -30,11 +30,11 @@ namespace imL.Package.MySql
             get { return this._CN; }
         }
 
-        public ConnectionDefault(MySqlConnection _conn)
+        public MySqlConnectionDefault(MySqlConnection _conn)
         {
             this._CN = _conn;
         }
-        public ConnectionDefault(string _conn)
+        public MySqlConnectionDefault(string _conn)
         {
             this._CN = new MySqlConnection(_conn);
         }
@@ -59,6 +59,7 @@ namespace imL.Package.MySql
                 case ConnectionState.Closed:
                 case ConnectionState.Broken:
                     this._CN.Open();
+
                     break;
                 default:
                     break;
@@ -73,6 +74,7 @@ namespace imL.Package.MySql
                 case ConnectionState.Closed:
                 case ConnectionState.Broken:
                     await this._CN.OpenAsync();
+
                     break;
                 default:
                     break;
@@ -81,7 +83,7 @@ namespace imL.Package.MySql
 #endif
 
         //################################################################################
-        ~ConnectionDefault()
+        ~MySqlConnectionDefault()
         {
             this.Dispose(false);
         }

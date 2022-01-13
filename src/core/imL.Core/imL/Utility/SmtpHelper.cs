@@ -12,7 +12,7 @@ namespace imL.Utility
 {
     public static class SmtpHelper
     {
-        public static void Init_SmtpClient(ref SmtpClient _ref, SmtpFormat _format)
+        internal static void Init_SmtpClient(ref SmtpClient _ref, SmtpFormat _format)
         {
             _ref.Timeout = _format.Timeout ?? _ref.Timeout;
             _ref.TargetName = _format.TargetName ?? _ref.TargetName;
@@ -31,7 +31,7 @@ namespace imL.Utility
             if (_ref.UseDefaultCredentials == false)
                 _ref.Credentials = new NetworkCredential(_format.UserName, _format.Password);
         }
-        public static void Init_MailMessage(ref MailMessage _ref, MailMessageFormat _format, Encoding _enc)
+        internal static void Init_MailMessage(ref MailMessage _ref, MailMessageFormat _format, Encoding _enc)
         {
 
 #if (NET35) == false
