@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 using imL.Rest.Frotcom;
 using imL.Rest.Frotcom.Schema;
-using imL.Utility.Logging;
+using imL.Package.Logging;
 
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;

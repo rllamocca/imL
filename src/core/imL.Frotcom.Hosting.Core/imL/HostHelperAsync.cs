@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 using imL.Contract;
 using imL.Enumeration.Logging;
-using imL.Utility.Hosting;
+using imL.Package.Hosting;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,13 +24,13 @@ namespace imL.Frotcom.Hosting.Core
         public static _NSP_LOGGING.ILogger Logger { get { lock (HostHelperAsync._LOCKED) { return HostHelperAsync._LOGGER; } } }
 
         public static async Task ConsoleAsync<GWorker>
-            (IHostPeriodSetting _setting, IAppInfo _info)
+            (IHostPeriodSetting _setting, IAppInfo _info, EConsoleFormatter _formatter = EConsoleFormatter.Simple)
             where GWorker : class, IHostPeriodWorker
         {
-            await ConsoleAsync<PeriodExecutionDefault, GWorker>(_setting, _info);
+            await ConsoleAsync<PeriodExecutionDefault, GWorker>(_setting, _info, _formatter);
         }
         public static async Task ConsoleAsync<GExecution, GWorker>
-            (IHostPeriodSetting _setting, IAppInfo _info)
+            (IHostPeriodSetting _setting, IAppInfo _info, EConsoleFormatter _formatter = EConsoleFormatter.Simple)
             where GExecution : class, IPeriodExecution, new()
             where GWorker : class, IHostPeriodWorker
         {
@@ -45,11 +45,7 @@ namespace imL.Frotcom.Hosting.Core
                         _ac.AddSingleton(_s => _info);
                     })
                     .UseConsoleLifetime()
-                    .UseSimpleLogging(
-#if DEBUG
-                        EConsoleOutput.Simple
-#endif
-                        );
+                    .UseSimpleLogging(_formatter);
 
                 if (LockedHost.App.InContainer == false)
                 {

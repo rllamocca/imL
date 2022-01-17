@@ -28,11 +28,7 @@ using (Progress32 _pb = new(10, EReportProgress.StartsAtZero))
     }
 }
 
-#if DEBUG
-TerminalHelper.PressAnyKeyToExit();
-#else
 TerminalHelper.Ends(true);
-#endif
 
 /*
 //CTRL_C_EVENT

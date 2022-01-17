@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 
 using imL.Contract;
-using imL.Utility.Hosting;
+using imL.Package.Hosting;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -39,7 +39,7 @@ namespace SAMPLE.imL.Utility.Hosting
 #endif
                     _lg.AddNLog();
 
-                    NLog.LogManager.Configuration.Variables["mybasedir"] = MyLocked.App.PathLog;
+                    NLog.LogManager.Configuration.Variables["_BASEDIR_"] = MyLocked.App.PathLog;
                 });
         }
     }

@@ -8,6 +8,7 @@ using imL.Contract.DB;
 using System;
 using System.Collections;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 
 namespace imL.Utility.Sql
@@ -30,6 +31,10 @@ namespace imL.Utility.Sql
             get { return this._CN; }
         }
 
+        public SqlConnectionDefault(DbConnection _conn)
+        {
+            this._CN = (SqlConnection)_conn;
+        }
         public SqlConnectionDefault(SqlConnection _conn)
         {
             this._STATISTICS = this._CN.StatisticsEnabled;
@@ -60,11 +65,6 @@ namespace imL.Utility.Sql
         public CancellationToken Token { set; get; } = default;
 #endif
 
-        public void Close()
-        {
-            if (this._CN.State != ConnectionState.Closed)
-                this._CN.Close();
-        }
         public void Open()
         {
             switch (this._CN.State)
@@ -72,12 +72,21 @@ namespace imL.Utility.Sql
                 case ConnectionState.Closed:
                 case ConnectionState.Broken:
                     this._CN.Open();
-                    this._CN.StatisticsEnabled = this._STATISTICS;
 
                     break;
                 default:
                     break;
             }
+        }
+        public void Close()
+        {
+            if (this._CN.State != ConnectionState.Closed)
+                this._CN.Close();
+        }
+        public void Refresh()
+        {
+            this.Open();
+            this.Close();
         }
 
 #if (NET35 || NET40) == false
@@ -88,12 +97,29 @@ namespace imL.Utility.Sql
                 case ConnectionState.Closed:
                 case ConnectionState.Broken:
                     await this._CN.OpenAsync();
-                    this._CN.StatisticsEnabled = this._STATISTICS;
 
                     break;
                 default:
                     break;
             }
+        }
+#endif
+#if (NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER)
+        public async Task CloseAsync()
+        {
+            if (this._CN.State != ConnectionState.Closed)
+                await this._CN.CloseAsync();
+        }
+#endif
+#if (NET35 || NET40) == false
+        public async Task RefreshAsync()
+        {
+            await this.OpenAsync();
+#if (NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER)
+            await this.CloseAsync();
+#else
+            this.Close();
+#endif
         }
 #endif
 

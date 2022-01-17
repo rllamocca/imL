@@ -7,16 +7,17 @@ namespace imL.Utility
     {
         public static bool IsDateTime(this DateTime _this)
         {
-            return (_this.Hour > 0 || _this.Minute > 0 || _this.Second > 0 || _this.Millisecond > 0);
+            return (_this.Millisecond > 0 || _this.Second > 0 || _this.Minute > 0 || _this.Hour > 0);
         }
-        public static bool Excel18991231(this DateTime _item)
+        public static bool Excel18991231(this DateTime _this)
         {
-            return (_item.Year == 1899 && _item.Month == 12 && _item.Day == 31);
+            return (_this.Year == 1899 && _this.Month == 12 && _this.Day == 31);
         }
 
         public static DateTime ToExcelTime(this DateTime _this)
         {
-            TimeSpan _tmp = _this - new DateTime(1899, 12, 31);
+            TimeSpan _tmp = _this - ReadOnly._EXCEL_TIME;
+
             return new DateTime(_tmp.Ticks);
         }
 

@@ -10,7 +10,7 @@ using imL.Utility;
 
 namespace imL
 {
-    public class Settler<T>
+    public class Settler<G>
     {
         private PropertyInfo[] _PROPS;
         private string[] _KEYS;
@@ -19,7 +19,7 @@ namespace imL
         {
             if (this._PROPS == null)
             {
-                Type _type = typeof(T);
+                Type _type = typeof(G);
                 this._PROPS = _type.GetProperties();
             }
         }
@@ -33,10 +33,10 @@ namespace imL
                 this._KEYS = _tmp.ToArray();
             }
         }
-        private T CreateInstance()
+        private G CreateInstance()
         {
             this.Init();
-            return Activator.CreateInstance<T>();
+            return Activator.CreateInstance<G>();
         }
         //private T FactoryInstance() where T : new()
         //{
@@ -44,12 +44,12 @@ namespace imL
         //    return new T();
         //}
 
-        public T Instance(params object[] _values)
+        public G Instance(params object[] _values)
         {
             if (_values == null)
                 return default;
 
-            T _return = this.CreateInstance();
+            G _return = this.CreateInstance();
 
             for (int _i = 0; _i < _values.Length; _i++)
             {
@@ -65,12 +65,12 @@ namespace imL
 
             return _return;
         }
-        public T Instance(params KeyValuePair<string, object>[] _values)
+        public G Instance(params KeyValuePair<string, object>[] _values)
         {
             if (_values == null)
                 return default;
 
-            T _return = this.CreateInstance();
+            G _return = this.CreateInstance();
 
             foreach (KeyValuePair<string, object> _item in _values)
             {
@@ -86,12 +86,12 @@ namespace imL
 
             return _return;
         }
-        public T Instance(DataRow _values, bool _byindex = false)
+        public G Instance(DataRow _values, bool _byindex = false)
         {
             if (_values == null)
                 return default;
 
-            T _return = this.CreateInstance();
+            G _return = this.CreateInstance();
 
             if (_byindex)
                 return this.Instance(_values.ItemArray);

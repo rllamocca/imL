@@ -1,6 +1,6 @@
 ﻿using imL.Frotcom.Hosting.Core;
 using imL.Rest.Frotcom;
-using imL.Utility.Hosting;
+using imL.Package.Hosting;
 
 namespace SAMPLE.imL.Frotcom.Hosting.Core
 {

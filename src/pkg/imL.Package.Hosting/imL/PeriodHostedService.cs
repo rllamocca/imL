@@ -1,14 +1,14 @@
-﻿using imL.Contract;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+
+using imL.Contract;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace imL.Utility.Hosting
+namespace imL.Package.Hosting
 {
     public class PeriodHostedService : PeriodHostedService<PeriodExecutionDefault>
     {
@@ -22,8 +22,7 @@ namespace imL.Utility.Hosting
                   _setting,
                   _info,
                   _logger)
-        {
-        }
+        { }
     }
 
     public class PeriodHostedService<GExecution> : IHostedService, IDisposable

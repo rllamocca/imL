@@ -1,15 +1,15 @@
-﻿using imL.Enumeration.Logging;
+﻿using System.Text.Json;
+
+using imL.Enumeration.Logging;
 
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-using System.Text.Json;
-
-namespace imL.Utility.Hosting
+namespace imL.Package.Hosting
 {
     public static class IHostBuilderExtension
     {
-        public static IHostBuilder UseSimpleLogging(this IHostBuilder _this, EConsoleOutput _output = EConsoleOutput.Systemd)
+        public static IHostBuilder UseSimpleLogging(this IHostBuilder _this, EConsoleFormatter _output = EConsoleFormatter.Systemd)
         {
             //_opt.TimestampFormat = "yyyy'-'MM'-'dd HH':'mm':'ss'.'ffff ";
             string _tsf = "HH':'mm':'ss'.'ffff ";
@@ -18,9 +18,7 @@ namespace imL.Utility.Hosting
             {
                 switch (_output)
                 {
-                    case EConsoleOutput.None:
-                        break;
-                    case EConsoleOutput.Systemd:
+                    case EConsoleFormatter.Systemd:
                         _lg.AddSystemdConsole(_opt =>
                         {
                             _opt.IncludeScopes = true;
@@ -28,7 +26,7 @@ namespace imL.Utility.Hosting
                         });
 
                         break;
-                    case EConsoleOutput.Simple:
+                    case EConsoleFormatter.Simple:
                         _lg.AddSimpleConsole(_opt =>
                         {
                             _opt.SingleLine = true;
@@ -37,7 +35,7 @@ namespace imL.Utility.Hosting
                         });
 
                         break;
-                    case EConsoleOutput.Json:
+                    case EConsoleFormatter.Json:
                         _lg.AddJsonConsole(_opt =>
                         {
                             _opt.IncludeScopes = false;

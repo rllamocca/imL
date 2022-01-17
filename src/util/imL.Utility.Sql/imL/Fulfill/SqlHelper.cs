@@ -140,9 +140,9 @@ namespace imL.Utility.Sql
             }
         }
 
-#if (NETSTANDARD1_3 || NETSTANDARD1_4 || NETSTANDARD1_5 || NETSTANDARD1_6) == false
+#if (NET35_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
 
-        public Return LoadDataTable(string _query, params IParameter[] _pmts)
+        public DataTable LoadDataTable(string _query, params IParameter[] _pmts)
         {
             try
             {
@@ -154,17 +154,17 @@ namespace imL.Utility.Sql
                 using (SqlDataReader _read = (SqlDataReader)_exe.Result)
                     _return.Load(_read, LoadOption.OverwriteChanges);
 
-                return new Return(true, _return);
+                return _return;
             }
-            catch (Exception _ex)
+            catch (Exception)
             {
                 if (this.Throw)
                     throw;
-
-                return new Return(false, _ex);
             }
+
+            return null;
         }
-        public Return LoadDataSet(string _query, params IParameter[] _pmts)
+        public DataSet LoadDataSet(string _query, params IParameter[] _pmts)
         {
             try
             {
@@ -187,15 +187,38 @@ namespace imL.Utility.Sql
                     }
                 }
 
-                return new Return(true, _return);
+                return _return;
             }
-            catch (Exception _ex)
+            catch (Exception)
             {
                 if (this.Throw)
                     throw;
-
-                return new Return(false, _ex);
             }
+
+            return null;
+        }
+        public G[] LoadData<G>(string _query, params IParameter[] _pmts)
+        {
+            try
+            {
+                using (DataTable _dt = LoadDataTable(_query, _pmts))
+                {
+                    List<G> _return = new List<G>();
+                    Settler<G> _set = new Settler<G>();
+
+                    foreach (DataRow _item in _dt.Rows)
+                        _return.Add(_set.Instance(_item));
+
+                    return _return.ToArray();
+                }
+            }
+            catch (Exception)
+            {
+                if (this.Throw)
+                    throw;
+            }
+
+            return null;
         }
 
 #endif

@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using imL.Utility;
+using System.Data.SqlClient;
 
 namespace imL.Package.MySql
 {
@@ -137,9 +138,9 @@ namespace imL.Package.MySql
             }
         }
 
-#if (NETSTANDARD1_3 || NETSTANDARD1_4 || NETSTANDARD1_5 || NETSTANDARD1_6) == false
+#if (NET45_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
 
-        public async Task<Return> LoadDataTableAsync(string _query, params IParameter[] _pmts)
+        public async Task<DataTable> LoadDataTableAsync(string _query, params IParameter[] _pmts)
         {
             try
             {
@@ -151,17 +152,17 @@ namespace imL.Package.MySql
                 using (MySqlDataReader _read = (MySqlDataReader)_exe.Result)
                     _return.Load(_read, LoadOption.OverwriteChanges);
 
-                return new Return(true, _return);
+                return _return;
             }
-            catch (Exception _ex)
+            catch (Exception)
             {
                 if (this.Throw)
                     throw;
-
-                return new Return(false, _ex);
             }
+
+            return null;
         }
-        public async Task<Return> LoadDataSetAsync(string _query, params IParameter[] _pmts)
+        public async Task<DataSet> LoadDataSetAsync(string _query, params IParameter[] _pmts)
         {
             try
             {
@@ -184,15 +185,38 @@ namespace imL.Package.MySql
                     }
                 }
 
-                return new Return(true, _return);
+                return _return;
             }
-            catch (Exception _ex)
+            catch (Exception)
             {
                 if (this.Throw)
                     throw;
-
-                return new Return(false, _ex);
             }
+
+            return null;
+        }
+        public async Task<G[]> LoadDataAsync<G>(string _query, params IParameter[] _pmts)
+        {
+            try
+            {
+                using (DataTable _dt = await LoadDataTableAsync(_query, _pmts))
+                {
+                    List<G> _return = new List<G>();
+                    Settler<G> _set = new Settler<G>();
+
+                    foreach (DataRow _item in _dt.Rows)
+                        _return.Add(_set.Instance(_item));
+
+                    return _return.ToArray();
+                }
+            }
+            catch (Exception)
+            {
+                if (this.Throw)
+                    throw;
+            }
+
+            return null;
         }
 
 #endif

@@ -9,6 +9,7 @@ using MySql.Data.MySqlClient;
 
 using System;
 using System.Data;
+using System.Data.Common;
 
 namespace imL.Package.MySql
 {
@@ -30,6 +31,10 @@ namespace imL.Package.MySql
             get { return this._CN; }
         }
 
+        public MySqlConnectionDefault(DbConnection _conn)
+        {
+            this._CN = (MySqlConnection)_conn;
+        }
         public MySqlConnectionDefault(MySqlConnection _conn)
         {
             this._CN = _conn;
@@ -47,11 +52,6 @@ namespace imL.Package.MySql
         public CancellationToken Token { set; get; } = default;
 #endif
 
-        public void Close()
-        {
-            if (this._CN.State != ConnectionState.Closed)
-                this._CN.Close();
-        }
         public void Open()
         {
             switch (this._CN.State)
@@ -64,6 +64,16 @@ namespace imL.Package.MySql
                 default:
                     break;
             }
+        }
+        public void Close()
+        {
+            if (this._CN.State != ConnectionState.Closed)
+                this._CN.Close();
+        }
+        public void Refresh()
+        {
+            this.Open();
+            this.Close();
         }
 
 #if (NET35 || NET40) == false
@@ -81,6 +91,25 @@ namespace imL.Package.MySql
             }
         }
 #endif
+#if (NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER)
+        public async Task CloseAsync()
+        {
+            if (this._CN.State != ConnectionState.Closed)
+                await this._CN.CloseAsync();
+        }
+#endif
+#if (NET35 || NET40) == false
+        public async Task RefreshAsync()
+        {
+            await this.OpenAsync();
+#if (NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER)
+            await this.CloseAsync();
+#else
+            this.Close();
+#endif
+        }
+#endif
+
 
         //################################################################################
         ~MySqlConnectionDefault()

@@ -1,11 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<NoWarn>CS1701;CS1702;CS8600;CS8601;CS8602;CS8618;CS8625;IDE0063;IDE0066;IDE0090</NoWarn>
 	</PropertyGroup>
 	<PropertyGroup>
 		<TargetFrameworks>
-			net461
+			net35
+			;net40
+			;net45
+			;net451
+			;net452
+			;netstandard1.3
+			;netstandard1.4
+			;netstandard1.5
+			;netstandard1.6
 			;netstandard2.0
 			;netstandard2.1
 			;net5.0
@@ -20,26 +28,21 @@
 		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>imL imL.Utility.Hosting utilities hosting</PackageTags>
+		<PackageTags>imL imL.Package.NLog package nlog</PackageTags>
 		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
 
 		<Version>84.10.2.8</Version>
 		<PackageOutputPath>$(SolutionDir)\nupkg\debug\</PackageOutputPath>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
-		<Version>0.0.0.7</Version>
+		<Version>0.0.0.1</Version>
 		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\..\pkg\imL.Package.Json\imL.Package.Json.csproj" />
-	  <ProjectReference Include="..\imL.Utility.Logging\imL.Utility.Logging.csproj" />
+		<PackageReference Include="NLog" Version="4.7.13" />
 	</ItemGroup>
 
 </Project>

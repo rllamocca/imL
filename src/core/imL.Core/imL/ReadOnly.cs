@@ -21,6 +21,8 @@ namespace imL
             '\'', '\"' };
 
         public static readonly DateTime _TIMESTAMP = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+        //public static readonly DateTime _EXCEL_NTIME = new DateTime(1799, 12, 31, 0, 0, 0, 0, DateTimeKind.Utc);
+        public static readonly DateTime _EXCEL_TIME = new DateTime(1899, 12, 31);
         public static readonly DateTime _ANVIZ = new DateTime(2000, 1, 2, 0, 0, 0, 0, DateTimeKind.Utc);
 
         public static readonly char[] _SUITS = new char[] { '♠', '♥', '♣', '♦', '☺', '☻' };

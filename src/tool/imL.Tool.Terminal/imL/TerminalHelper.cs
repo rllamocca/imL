@@ -53,7 +53,7 @@ namespace imL.Tool.Terminal
             List<string> _attachs = new List<string>();
 
             long _mb = 1 * 1024 * 1024;
-            string[] _exts = new string[] { ".txt", ".log", ".xls", ".doc" };
+            string[] _exts = new string[] { ".txt", ".log", ".doc", ".xls" };
 
             foreach (string _item in _acum)
                 _attachs.Add(ZipHelper.CompressOnly(_item, _mb, _exts));
@@ -81,7 +81,7 @@ namespace imL.Tool.Terminal
         public static void Run<G>(Action<IProcessInfo, ISetting> _dowork, string[] _args, string _href = "#", string _by = "404")
                     where G : class, ISetting
         {
-            Logger _logger = null;
+            ILogger _logger = null;
 
             try
             {

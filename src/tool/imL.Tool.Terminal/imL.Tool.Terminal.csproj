@@ -39,10 +39,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="NLog" Version="4.7.13" />
-	</ItemGroup>
-
-	<ItemGroup>
+		<ProjectReference Include="..\..\pkg\imL.Package.NLog\imL.Package.NLog.csproj" />
 		<ProjectReference Include="..\..\pkg\imL.Package.Zip\imL.Package.Zip.csproj" />
 		<ProjectReference Include="..\imL.Resource\imL.Resource.csproj" />
 	</ItemGroup>

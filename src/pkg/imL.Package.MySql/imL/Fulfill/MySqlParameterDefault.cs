@@ -10,7 +10,7 @@ namespace imL.Package.MySql
     {
         public string Affect { get; }
         public string Expression { get; }
-        public bool SkipEffect { get; }
+        public bool IsSearchCondition { get; }
 
         public MySqlParameter Parameter { get; }
 
@@ -18,11 +18,11 @@ namespace imL.Package.MySql
             string _affect,
             object _value,
             MySqlDbType _dbtype,
-            bool _skipeffect = false
+            bool _issearch = false
             )
         {
             this.Affect = _affect;
-            this.SkipEffect = _skipeffect;
+            this.IsSearchCondition = _issearch;
 
             this.Parameter = new MySqlParameter
             {
@@ -31,16 +31,15 @@ namespace imL.Package.MySql
                 MySqlDbType = _dbtype
             };
 
-            if (this.SkipEffect == false)
-                this.Expression = this.Parameter.ParameterName;
+            this.Expression = this.Parameter.ParameterName;
         }
         public MySqlParameterDefault(
             string _affect,
             object _value,
             MySqlDbType _dbtype,
             int _size,
-            bool _skipeffect = false
-            ) : this(_affect, _value, _dbtype, _skipeffect)
+            bool _issearch = false
+            ) : this(_affect, _value, _dbtype, _issearch)
         {
             this.Parameter.Size = _size;
         }
@@ -50,8 +49,8 @@ namespace imL.Package.MySql
             MySqlDbType _dbtype,
             byte _precision,
             byte _scale,
-            bool _skipeffect = false
-            ) : this(_affect, _value, _dbtype, _skipeffect)
+            bool _issearch = false
+            ) : this(_affect, _value, _dbtype, _issearch)
         {
             this.Parameter.Precision = _precision;
             this.Parameter.Scale = _scale;

@@ -1,6 +1,6 @@
 ﻿namespace imL.Enumeration.Logging
 {
-    public enum EConsoleOutput
+    public enum EConsoleFormatter
     {
         None = 0,
         Systemd = 1,

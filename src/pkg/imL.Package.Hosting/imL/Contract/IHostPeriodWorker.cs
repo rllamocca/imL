@@ -2,7 +2,7 @@
 
 using System.Threading.Tasks;
 
-namespace imL.Utility.Hosting
+namespace imL.Package.Hosting
 {
     public interface IHostPeriodWorker
     {

@@ -18,9 +18,16 @@ namespace imL.Contract.DB
 
         void Open();
         void Close();
+        void Refresh();
 
 #if (NET35 || NET40) == false
         Task OpenAsync();
+#endif
+#if (NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER)
+        Task CloseAsync();
+#endif
+#if (NET35 || NET40) == false
+        Task RefreshAsync();
 #endif
 
     }

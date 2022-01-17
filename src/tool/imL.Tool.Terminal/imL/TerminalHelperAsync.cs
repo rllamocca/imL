@@ -21,7 +21,7 @@ namespace imL.Tool.Terminal
         public static async Task RunAsync<G>(Func<IProcessInfo, ISetting, Task> _dowork, string[] _args, string _href = "#", string _by = "404")
             where G : class, ISetting
         {
-            Logger _logger = null;
+            ILogger _logger = null;
 
             try
             {

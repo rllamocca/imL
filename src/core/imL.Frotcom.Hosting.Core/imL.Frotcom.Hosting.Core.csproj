@@ -39,7 +39,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\outer\imL.Rest.Frotcom\imL.Rest.Frotcom.csproj" />
-	  <ProjectReference Include="..\..\util\imL.Utility.Hosting\imL.Utility.Hosting.csproj" />
+	  <ProjectReference Include="..\..\pkg\imL.Package.Hosting\imL.Package.Hosting.csproj" />
 	</ItemGroup>
 
 </Project>

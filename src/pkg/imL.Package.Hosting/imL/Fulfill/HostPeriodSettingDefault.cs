@@ -1,4 +1,4 @@
-﻿namespace imL.Utility.Hosting
+﻿namespace imL.Package.Hosting
 {
     public class HostPeriodSettingDefault : IHostPeriodSetting
     {
