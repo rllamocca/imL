@@ -39,7 +39,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\src\util\imL.Utility.Hosting\imL.Utility.Hosting.csproj" />
+	  <ProjectReference Include="..\..\src\pkg\imL.Package.Hosting\imL.Package.Hosting.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

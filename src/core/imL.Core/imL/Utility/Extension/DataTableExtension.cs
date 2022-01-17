@@ -82,7 +82,7 @@ namespace imL.Utility
         }
 
 #if (NET35) == false
-        public static XmlElement[] ToXmlElements(DataTable _dt)
+        public static XmlElement[] ToXmlElements(this DataTable _dt)
         {
             if (_dt == null)
                 throw new ArgumentNullException(nameof(_dt));

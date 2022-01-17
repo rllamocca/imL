@@ -24,6 +24,7 @@ namespace imL.Contract
             this.Start = DateTime.Now;
             this.Guid = Convert.ToString(System.Guid.NewGuid());
             this.App = _info;
+            this.PathAttachments = new List<string>();
         }
 
         public void AddSelected(long _add)

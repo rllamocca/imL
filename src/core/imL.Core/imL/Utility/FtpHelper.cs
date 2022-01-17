@@ -1,6 +1,9 @@
 ﻿#if (NET35_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
 
+#if (NET6_0_OR_GREATER)
 using System;
+#endif
+
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -14,7 +17,7 @@ namespace imL.Utility
 #endif
     public static class FtpHelper
     {
-        private static void Init_FtpWebRequest(ref FtpWebRequest _ref, FtpFormat _format)
+        internal static void Init_FtpWebRequest(ref FtpWebRequest _ref, FtpFormat _format)
         {
             _ref.UseBinary = _format.UseBinary ?? _ref.UseBinary;
             _ref.Timeout = _format.Timeout ?? _ref.Timeout;
@@ -28,7 +31,7 @@ namespace imL.Utility
             if (_ref.UseDefaultCredentials == false)
                 _ref.Credentials = new NetworkCredential(_format.UserName, _format.Password);
         }
-        private static FtpWebRequest Create(FtpFormat _format, string _method)
+        internal static FtpWebRequest Create(FtpFormat _format, string _method)
         {
             FtpWebRequest _return = (FtpWebRequest)FtpWebRequest.Create(_format.Host + _format.Path);
             FtpHelper.Init_FtpWebRequest(ref _return, _format);

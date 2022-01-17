@@ -12,7 +12,7 @@ namespace imL.Package.SSH_Net
 {
     public static class SftpHelper
     {
-        private static void Init_SftpClient(ref SftpClient _ref, FtpFormat _format)
+        internal static void Init_SftpClient(ref SftpClient _ref, FtpFormat _format)
         {
             int _port = _format.Port ?? _ref.ConnectionInfo.Port;
 
@@ -21,7 +21,7 @@ namespace imL.Package.SSH_Net
 
             _ref.Connect();
         }
-        private static SftpClient Create(FtpFormat _format)
+        internal static SftpClient Create(FtpFormat _format)
         {
             SftpClient _return = new SftpClient(_format.Host, _format.UserName, _format.Password);
             SftpHelper.Init_SftpClient(ref _return, _format);

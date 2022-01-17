@@ -6,15 +6,14 @@ namespace imL.Rest.Frotcom
 {
     public class FrotcomClient
     {
-        public string URI { get; }
         public HttpClient Http { get; }
-        public Authorize Authorize { get; }
+        public FrotcomFormat Format { get; }
+        public Authorize Token { set; get; }
 
-        public FrotcomClient(string _uri, HttpClient _http, Authorize _auth)
+        public FrotcomClient(HttpClient _http, FrotcomFormat _format)
         {
-            this.URI = _uri;
             this.Http = _http;
-            this.Authorize = _auth;
+            this.Format = _format;
         }
     }
 }

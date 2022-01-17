@@ -32,17 +32,15 @@
 		<PackageOutputPath>$(SolutionDir)\nupkg\debug\</PackageOutputPath>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
-		<Version>0.0.0.1</Version>
+		<Version>0.0.0.2</Version>
 		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="NLog" Version="4.7.13" />
-	</ItemGroup>
-
-	<ItemGroup>
+		<ProjectReference Include="..\..\pkg\imL.Package.NLog\imL.Package.NLog.csproj" />
+		<ProjectReference Include="..\..\pkg\imL.Package.Zip\imL.Package.Zip.csproj" />
 		<ProjectReference Include="..\imL.Resource\imL.Resource.csproj" />
 	</ItemGroup>
 

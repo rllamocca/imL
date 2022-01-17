@@ -4,15 +4,16 @@ namespace imL.Rest.Google
 {
     public class GoogleClient
     {
-        public string URI { get; }
         public HttpClient Http { get; }
-        public string KEY { get; }
+        public GoogleFormat Format { get; }
 
-        public GoogleClient(string _uri, HttpClient _http, string _key)
+        public GoogleClient(HttpClient _http, GoogleFormat _format)
         {
-            this.URI = _uri;
             this.Http = _http;
-            this.KEY = _key;
+            this.Format = _format;
+
+            this.Format.URI_maps = this.Format.URI_maps ?? this.Format.URI;
+            this.Format.Key_maps = this.Format.Key_maps ?? this.Format.Key;
         }
     }
 }

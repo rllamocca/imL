@@ -1,13 +1,13 @@
+using System.Threading.Tasks;
+
 using imL.Contract;
-using imL.Utility.Hosting;
+using imL.Package.Hosting;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 using NLog.Extensions.Logging;
-
-using System.Threading.Tasks;
 
 namespace SAMPLE.imL.Utility.Hosting
 {
@@ -16,10 +16,7 @@ namespace SAMPLE.imL.Utility.Hosting
         async static Task Main()
         {
             string[] _args = new string[] { "Richie", "Tepes" };
-
-            //Locked _lock = new();
-            Locked.Load(new AppInfoDefault(_args));
-
+            MyLocked.Load(new AppInfoDefault(_args));
             await CreateHostBuilder(_args).RunConsoleAsync();
         }
 
@@ -29,8 +26,8 @@ namespace SAMPLE.imL.Utility.Hosting
                 .ConfigureServices((_hc, _sc) =>
                 {
                     _sc.AddHostedService<PeriodHostedService>();
-                    _sc.AddScoped<IHostPeriodWorker, Worker>();
-                    _sc.AddSingleton<IHostPeriodSetting, HostedSetting>(_s => Locked.Setting.Hosted);
+                    _sc.AddScoped<IHostPeriodWorker, MyWorker>();
+                    _sc.AddSingleton<IHostPeriodSetting, HostedSetting>(_s => MyLocked.Setting.Hosted);
                 })
                 .ConfigureLogging(_lg =>
                 {
@@ -42,7 +39,7 @@ namespace SAMPLE.imL.Utility.Hosting
 #endif
                     _lg.AddNLog();
 
-                    NLog.LogManager.Configuration.Variables["mybasedir"] = Locked.App.PathLog;
+                    NLog.LogManager.Configuration.Variables["_BASEDIR_"] = MyLocked.App.PathLog;
                 });
         }
     }

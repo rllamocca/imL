@@ -1,8 +1,8 @@
-﻿using imL.Contract.DB;
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+
+using imL.Contract.DB;
 
 namespace imL.Utility.Sql
 {
@@ -14,7 +14,8 @@ namespace imL.Utility.Sql
                 return null;
 
             return _array
-                .Select(_s => (ParameterDefault)_s)
+                .Where(_w => _w is SqlParameterDefault)
+                .Select(_s => (SqlParameterDefault)_s)
                 .Where(_w => _w.Parameter != null)
                 .Select(_s => _s.Parameter);
         }

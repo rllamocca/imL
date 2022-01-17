@@ -1,10 +1,10 @@
-﻿using imL.Contract.DB;
+﻿using System.Collections.Generic;
+using System.Linq;
+
+using imL.Contract.DB;
 using imL.Utility;
 
 using MySql.Data.MySqlClient;
-
-using System.Collections.Generic;
-using System.Linq;
 
 namespace imL.Package.MySql
 {
@@ -16,7 +16,8 @@ namespace imL.Package.MySql
                 return null;
 
             return _array
-                .Select(_s => (ParameterDefault)_s)
+                .Where(_w => _w is MySqlParameterDefault)
+                .Select(_s => (MySqlParameterDefault)_s)
                 .Where(_w => _w.Parameter != null)
                 .Select(_s => _s.Parameter);
         }

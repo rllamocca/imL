@@ -13,7 +13,7 @@ namespace imL.Utility
     {
 
 #if (NET35) == false
-        public static XmlElement[] ToXmlElements(DataSet _ds)
+        public static XmlElement[] ToXmlElements(this DataSet _ds)
         {
             if (_ds == null)
                 throw new ArgumentNullException(nameof(_ds));

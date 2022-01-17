@@ -3,6 +3,9 @@ using imL.Contract;
 #else
 using System;
 #endif
+#if (NET35_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
+using System.Data;
+#endif
 
 using imL.Enumeration.DB;
 
@@ -17,9 +20,11 @@ namespace imL.Contract.DB
         Return Execute(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[] _pmts);
         Return[] Execute(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[][] _pmts);
 
-#if (NETSTANDARD1_0 || NETSTANDARD1_1 || NETSTANDARD1_2 || NETSTANDARD1_3 || NETSTANDARD1_4 || NETSTANDARD1_5 || NETSTANDARD1_6) == false
+#if (NET35_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
 
-        Return LoadData(string _query, bool _datatable = true, params IParameter[] _pmts);
+        DataTable LoadDataTable(string _query, params IParameter[] _pmts);
+        DataSet LoadDataSet(string _query, params IParameter[] _pmts);
+        G[] LoadData<G>(string _query, params IParameter[] _pmts);
 
 #endif
     }

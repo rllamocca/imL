@@ -8,14 +8,14 @@ namespace imL.Utility
 {
     public static class TestHelperAsync
     {
-        public static async Task RandomDelay(int _max, CancellationToken _token = default)
+        public static async Task RandomDelayAsync(int _max, CancellationToken _token = default)
         {
             _max = TestHelper.MAX_INT(_max);
 
             if (_max > 0)
                 await Task.Delay(_max, _token);
         }
-        public static async Task RandomDelay(TimeSpan _time, CancellationToken _token = default)
+        public static async Task RandomDelayAsync(TimeSpan _time, CancellationToken _token = default)
         {
             long _max = TestHelper.MAX_LONG(_time.Ticks);
 

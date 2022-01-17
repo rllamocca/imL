@@ -26,7 +26,7 @@
 		<PackageOutputPath>$(SolutionDir)\nupkg\debug\</PackageOutputPath>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
-		<Version>0.0.0.2</Version>
+		<Version>0.0.0.3</Version>
 		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -39,7 +39,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\outer\imL.Rest.Frotcom\imL.Rest.Frotcom.csproj" />
-	  <ProjectReference Include="..\..\util\imL.Utility.Hosting\imL.Utility.Hosting.csproj" />
+	  <ProjectReference Include="..\..\pkg\imL.Package.Hosting\imL.Package.Hosting.csproj" />
 	</ItemGroup>
 
 </Project>
