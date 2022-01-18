@@ -10,7 +10,7 @@ HttpClient _http = new(new HttpClientHandler() { AutomaticDecompression = Decomp
 SbifClient _client = new(_http, _format);
 
 //new SbifHelperAsync(EFinancialIndicator.Dolar);
-CurrencyInfo[] _indices = await SbifHelperAsync.GetLaterMonthAsync(_client);
+CurrencyIndex[] _indices = await SbifHelperAsync.GetLaterMonthAsync(_client);
 
-foreach (CurrencyInfo _item in _indices)
+foreach (CurrencyIndex _item in _indices)
     Console.WriteLine("{0} : {1}", _item.Date.ToLocalTime().ToShortDateString(), _item.Value);

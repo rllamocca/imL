@@ -1,6 +1,6 @@
 ﻿namespace imL.Rest.Sbif
 {
-    public enum EFinancialIndicator
+    public enum EResource
     {
         None = 0,
         Dolar = 1,
