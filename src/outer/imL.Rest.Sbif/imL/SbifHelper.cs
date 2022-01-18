@@ -4,21 +4,21 @@ using System.Globalization;
 
 using imL.Rest.Sbif.Schema;
 
-namespace imL.Rest.Sbif.imL
+namespace imL.Rest.Sbif
 {
     public static class SbifHelper
     {
         internal static readonly CultureInfo _CULTURE = CultureInfo.GetCultureInfo("es-cl");
         internal static readonly string _ISO_4217 = (new RegionInfo(SbifHelper._CULTURE.LCID)).ISOCurrencySymbol;
-        internal static EFinancialIndicator _RECURSO = EFinancialIndicator.UF;
+        internal static EResource _RESOURCE = EResource.UF;
 
-        public static CurrencyInfo[] Factory(InternalIndex[] _from)
+        public static CurrencyIndex[] Factory(InternalIndex[] _from)
         {
-            List<CurrencyInfo> _return = new List<CurrencyInfo>();
+            List<CurrencyIndex> _return = new List<CurrencyIndex>();
 
             foreach (InternalIndex _item in _from)
             {
-                CurrencyInfo _new = new CurrencyInfo
+                CurrencyIndex _new = new CurrencyIndex
                 {
                     ISO4217 = SbifHelper._ISO_4217,
                     Date = Convert.ToDateTime(_item.Fecha, SbifHelper._CULTURE),

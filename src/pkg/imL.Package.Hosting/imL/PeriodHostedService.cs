@@ -80,14 +80,12 @@ namespace imL.Package.Hosting
         {
             TimeSpan _period = TimeSpan.FromSeconds(this._SETTING.Period);
             this._LOGGER?.LogInformation("PeriodHostedService RUNNING: {_period}", _period);
-            //this._LOGGER?.LogInformation("TokenStartAsync: {0}", _ct.IsCancellationRequested);
             this._TIMER = new Timer(DoWork, null, TimeSpan.Zero, _period);
 
             return this._COMPLETEDTASK;
         }
         public Task StopAsync(CancellationToken _ct)
         {
-            //this._LOGGER?.LogInformation("TokenStopAsync: {0}", _ct.IsCancellationRequested);
             this._TIMER?.Change(Timeout.Infinite, 0);
             this._LOGGER?.LogInformation("PeriodHostedService is STOPPING.");
 
