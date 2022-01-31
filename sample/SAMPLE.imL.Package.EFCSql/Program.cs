@@ -26,8 +26,8 @@ using (IContext _context = new MyContext(_conn))
 {
     string _sql = @"
 SELECT TOP 8 Pk
-	,Date
-	,Value
+    ,Date
+    ,Value
 FROM MyTable
 WHERE Deleted IS NULL
 AND CONVERT(DATE,Date) BETWEEN @_BEGIN AND @_END

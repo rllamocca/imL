@@ -65,8 +65,7 @@ namespace imL.Utility
             _ref.Subject = _format.Subject;
 
             foreach (string _item2 in _format.PathAttachments.DefaultOrEmpty())
-                if (File.Exists(_item2))
-                    _ref.Attachments.Add(new Attachment(_item2));
+                _ref.Attachments.Add(new Attachment(_item2));
 
             foreach (StreamAttachment _item2 in _format.StreamAttachments.DefaultOrEmpty())
                 _ref.Attachments.Add(new Attachment(_item2.Content, _item2.Name));
@@ -75,8 +74,8 @@ namespace imL.Utility
 
             if (_ref.IsBodyHtml)
             {
-                ContentType _mime = new ContentType("text/html");
-                AlternateView _aw = AlternateView.CreateAlternateViewFromString(_ref.Body, _mime);
+                ContentType _ct = new ContentType("text/html");
+                AlternateView _aw = AlternateView.CreateAlternateViewFromString(_ref.Body, _ct);
                 _ref.AlternateViews.Add(_aw);
             }
         }

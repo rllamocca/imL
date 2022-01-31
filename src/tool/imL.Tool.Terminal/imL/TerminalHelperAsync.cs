@@ -53,8 +53,7 @@ namespace imL.Tool.Terminal
             }
             finally
             {
-                LogManager.Shutdown();
-                Utility.TerminalHelper.Ends();
+                TerminalHelper.I__FINALLY();
             }
         }
     }

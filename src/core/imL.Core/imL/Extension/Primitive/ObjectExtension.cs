@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Text.RegularExpressions;
+
+using imL.Struct;
 
 namespace imL.Utility
 {
@@ -35,6 +38,29 @@ namespace imL.Utility
                 _return[_i] = _array[_i].DBToString(_empty);
 
             return _return;
+        }
+
+        public static bool IsNumber(this object _this, bool _throw = false)
+        {
+            if (_this == null)
+                return false;
+
+            try
+            {
+                string _a = Convert.ToString(_this);
+
+                if (_a.HasValueTrim() == false)
+                    return false;
+
+                return Regex.IsMatch(_a, @"^[-+]?[0-9]*\.?[0-9]+$");
+            }
+            catch (Exception)
+            {
+                if (_throw)
+                    throw;
+            }
+
+            return false;
         }
     }
 }

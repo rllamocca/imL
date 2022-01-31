@@ -5,20 +5,19 @@ using Newtonsoft.Json;
 #endif
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Mail;
 
 using imL.Contract;
+using imL.Enumeration;
+using imL.Package.Zip;
 using imL.Resource;
+using imL.Struct;
 using imL.Utility;
 
-using System.Linq;
-
 using NLog;
-
-using imL.Package.Zip;
-
-using System.Collections.Generic;
 
 namespace imL.Tool.Terminal
 {
@@ -26,7 +25,7 @@ namespace imL.Tool.Terminal
     {
         internal static IProcessInfo I__TRY0__(string[] _args)
         {
-            Utility.TerminalHelper.Starts();
+            ConsoleHelper.Begins();
             IProcessInfo _return = new ProcessInfoDefault(new AppInfoDefault(_args));
             LogManager.AutoShutdown = true;
             LogManager.Configuration.Variables["_BASEDIR_"] = _return.App.PathLog;
@@ -52,7 +51,7 @@ namespace imL.Tool.Terminal
             _acum = _acum.Distinct().ToList();
             List<string> _attachs = new List<string>();
 
-            long _mb = 1 * 1024 * 1024;
+            MemoryUnit _mb = new MemoryUnit(1, EMemoryUnit.MB);
             string[] _exts = new string[] { ".txt", ".log", ".doc", ".xls" };
 
             foreach (string _item in _acum)
@@ -75,7 +74,7 @@ namespace imL.Tool.Terminal
         internal static void I__FINALLY()
         {
             LogManager.Shutdown();
-            Utility.TerminalHelper.Ends();
+            ConsoleHelper.Ends(_card: true);
         }
 
         public static void Run<G>(Action<IProcessInfo, ISetting> _dowork, string[] _args, string _href = "#", string _by = "404")

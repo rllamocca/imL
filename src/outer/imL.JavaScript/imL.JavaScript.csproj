@@ -38,5 +38,8 @@
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
+	<ItemGroup>
+	  <Folder Include="imL\Select2\Schema\" />
+	</ItemGroup>
 
 </Project>

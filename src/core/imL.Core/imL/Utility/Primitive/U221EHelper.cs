@@ -25,6 +25,7 @@ namespace imL.Utility
         {
             if (_bot == 0) return _u221e;
             if (_top == 0) return 0;
+
             return (sbyte)(_top / _bot);
         }
         public static byte Division(byte _top, byte _bot, byte _u221e = 0)
@@ -37,12 +38,14 @@ namespace imL.Utility
         {
             if (_bot == 0) return _u221e;
             if (_top == 0) return 0;
+
             return (short)(_top / _bot);
         }
         public static ushort Division(ushort _top, ushort _bot, ushort _u221e = 0)
         {
             if (_bot == 0) return _u221e;
             if (_top == 0) return 0;
+
             return (ushort)(_top / _bot);
         }
         public static int Division(int _top, int _bot, int _u221e = 0)
@@ -55,20 +58,40 @@ namespace imL.Utility
         {
             if (_bot == 0) return _u221e;
             if (_top == 0) return 0;
+
             return (_top / _bot);
         }
         public static long Division(long _top, long _bot, long _u221e = 0)
         {
             if (_bot == 0) return _u221e;
             if (_top == 0) return 0;
+
             return (_top / _bot);
         }
         public static ulong Division(ulong _top, ulong _bot, ulong _u221e = 0)
         {
             if (_top == 0) return 0;
             if (_bot == 0) return _u221e;
+
             return (_top / _bot);
         }
+
+#if NET5_0_OR_GREATER
+        public static nint Division(nint _top, nint _bot, nint _u221e = 0)
+        {
+            if (_top == 0) return 0;
+            if (_bot == 0) return _u221e;
+
+            return (_top / _bot);
+        }
+        public static nuint Division(nuint _top, nuint _bot, nuint _u221e = 0)
+        {
+            if (_top == 0) return 0;
+            if (_bot == 0) return _u221e;
+
+            return (_top / _bot);
+        }
+#endif
         //#if NETSTANDARD1_0 ||NETSTANDARD1_1|| NETSTANDARD1_2 ||NETSTANDARD1_3 ||NETSTANDARD2_0
         //        public static nint Division(nint _dividend, nint _divisor, nint _u221e = 0)
         //        {
@@ -88,18 +111,21 @@ namespace imL.Utility
         {
             if (_bot == 0) return _u221e;
             if (_top == 0) return 0;
+
             return (float)(_top / _bot);
         }
         public static double Division(double _top, double _bot, double _u221e = 0)
         {
             if (_bot == 0) return _u221e;
             if (_top == 0) return 0;
+
             return (double)(_top / _bot);
         }
         public static decimal Division(decimal _top, decimal _bot, decimal _u221e = 0)
         {
             if (_bot == 0) return _u221e;
             if (_top == 0) return 0;
+
             return (_top / _bot);
         }
         #endregion

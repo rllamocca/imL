@@ -2,7 +2,7 @@
 
 using RichieSays;
 
-TerminalHelper.Starts();
+ConsoleHelper.Begins();
 //################################################################
 
 if (args != null && args.Length > 0)
@@ -14,4 +14,4 @@ if (args != null && args.Length > 0)
 }
 
 //################################################################
-TerminalHelper.Ends();
+ConsoleHelper.Ends();

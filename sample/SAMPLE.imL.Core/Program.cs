@@ -2,14 +2,37 @@
 
 using imL.Enumeration;
 using imL.Sealed;
+using imL.Struct;
 using imL.Utility;
 
 Console.WriteLine("Hello, World!");
-TerminalHelper.Starts();
+ConsoleHelper.Begins();
 /*
 Console.CancelKeyPress += new ConsoleCancelEventHandler(CancelKeyPress); //+C o +Pause
 AppDomain.CurrentDomain.ProcessExit += new EventHandler(ProcessExit);
 */
+
+MemoryUnit _mu = new(1, EMemoryUnit.MB);
+MemoryUnit _mub = _mu.To(EMemoryUnit.KB);
+MemoryUnit _muc = _mu.To(EMemoryUnit.GB);
+MemoryUnit _mud = _mu.To(EMemoryUnit.Byte);
+MemoryUnit _mue = _mu.To();
+
+MemoryUnit _mu20 = new(20, EMemoryUnit.MB);
+
+Console.WriteLine(_mu);
+Console.WriteLine(_mub);
+Console.WriteLine(_muc);
+Console.WriteLine(_mud);
+Console.WriteLine(_mue);
+Console.WriteLine(_mu == _mu20);
+Console.WriteLine(_mu != _mu20);
+Console.WriteLine(_mu < _mu20);
+Console.WriteLine(_mu <= _mu20);
+Console.WriteLine(_mu > _mu20);
+Console.WriteLine(_mu >= _mu20);
+Console.WriteLine((_mu - _mu20).To());
+Console.WriteLine((_mu + _mu20).To());
 
 using (Progress32 _pb = new(10, EReportProgress.StartsAtZero))
 {
@@ -28,7 +51,7 @@ using (Progress32 _pb = new(10, EReportProgress.StartsAtZero))
     }
 }
 
-TerminalHelper.Ends(true);
+ConsoleHelper.Ends(true);
 
 /*
 //CTRL_C_EVENT

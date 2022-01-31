@@ -19,9 +19,10 @@ namespace imL.Format
 #endif
         public bool? UseDefaultCredentials { set; get; }
 
-        public long? AttachmentSizeLimit { set; get; }
         public string UserName { set; get; }
         public string Password { set; get; }
+
+        public long? AttachmentSizeLimit { set; get; }
     }
 }
 

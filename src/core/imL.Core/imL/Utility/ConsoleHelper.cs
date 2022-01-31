@@ -10,9 +10,9 @@ using System;
 
 namespace imL.Utility
 {
-    public static class TerminalHelper
+    public static class ConsoleHelper
     {
-        public static void Starts(bool _enc = true, string _title = null)
+        public static void Begins(bool _enc = true, string _title = null)
         {
             if (_enc)
             {
@@ -23,24 +23,20 @@ namespace imL.Utility
             if (_title.HasValue())
                 Console.Title = _title;
 
-            Console.WriteLine(Environment.NewLine + @" Start the magic trick ... ♪♫ " + Environment.NewLine);
+            Console.WriteLine(Environment.NewLine + @" Start the magic trick ... ♪♫ ");
         }
         public static void PressAnyKeyToExit()
         {
             Console.WriteLine(Environment.NewLine + @" (Press any key to exit) ");
             Console.ReadKey();
         }
-        public static void Ends(bool _rk = false, bool _card = true)
+        public static void Ends(bool _rk = false, bool? _card = null)
         {
-            Console.WriteLine();
-
-            if (_card)
-                Console.WriteLine(@" ♫♪ ... {0}", StringHelper.MyFortuneCard());
-            else
-                Console.WriteLine(@" ♫♪ ... {0}", StringHelper.MyFortune());
+            if (_card.HasValue)
+                Console.WriteLine(Environment.NewLine + @" ♫♪ ... {0}", _card.Value ? StringHelper.MyFortuneCard() : StringHelper.MyFortune());
 
             if (_rk)
-                TerminalHelper.PressAnyKeyToExit();
+                ConsoleHelper.PressAnyKeyToExit();
         }
 
         public static void Write(Point _xy, char _value)
