@@ -4,6 +4,7 @@ using imL.Enumeration;
 using imL.Sealed;
 using imL.Struct;
 using imL.Utility;
+using imL;
 
 Console.WriteLine("Hello, World!");
 ConsoleHelper.Begins();
@@ -11,6 +12,22 @@ ConsoleHelper.Begins();
 Console.CancelKeyPress += new ConsoleCancelEventHandler(CancelKeyPress); //+C o +Pause
 AppDomain.CurrentDomain.ProcessExit += new EventHandler(ProcessExit);
 */
+
+string _format = "###'.'###'.'###'.'###'.'###'.'###'.'###'.'###'-'#";
+_format = "###.###.###.###.###.###.###.###-#";
+
+Formatter _f = new(_format, false, new char[] { '0' });
+
+//Console.WriteLine((246159637).ToString(_format));
+Console.WriteLine(_f.Enforce("246159637"));
+Console.WriteLine(_f.Enforce("123456789"));
+Console.WriteLine(_f.Enforce("123456780"));
+Console.WriteLine(_f.Enforce("123456781"));
+Console.WriteLine(_f.Enforce("123456782"));
+Console.WriteLine(_f.Enforce("123456783"));
+Console.WriteLine(_f.Enforce("0246159637"));
+Console.WriteLine(_f.Enforce("00246159637"));
+Console.WriteLine(_f.Enforce("000246159637"));
 
 MemoryUnit _mu = new(1, EMemoryUnit.MB);
 MemoryUnit _mub = _mu.To(EMemoryUnit.KB);

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
+//using System.Security.Policy;
 
 using imL.Utility;
 
@@ -15,27 +16,9 @@ namespace imL
         private PropertyInfo[] _PROPS;
         private string[] _KEYS;
 
-        private void Init()
+        internal G I__CREATE__()
         {
-            if (this._PROPS == null)
-            {
-                Type _type = typeof(G);
-                this._PROPS = _type.GetProperties();
-            }
-        }
-        private void Init2(DataRow _dr)
-        {
-            if (this._KEYS == null)
-            {
-                List<string> _tmp = new List<string>();
-                foreach (DataColumn _item in _dr.Table.Columns)
-                    _tmp.Add(_item.ColumnName);
-                this._KEYS = _tmp.ToArray();
-            }
-        }
-        private G CreateInstance()
-        {
-            this.Init();
+            this.I__PROP__();
             return Activator.CreateInstance<G>();
         }
         //private T FactoryInstance() where T : new()
@@ -43,25 +26,51 @@ namespace imL
         //    this.Init<T>();
         //    return new T();
         //}
+        internal void I__PROP__()
+        {
+            if (this._PROPS == null)
+                this._PROPS = typeof(G).GetProperties();
+        }
+        internal void I__KEY__(DataRow _dr)
+        {
+            if (this._KEYS == null)
+            {
+                IList<string> _tmp = new List<string>();
+
+                foreach (DataColumn _item in _dr.Table.Columns)
+                    _tmp.Add(_item.ColumnName);
+
+                this._KEYS = _tmp.ToArray();
+            }
+        }
+        internal void I__SET__(G _g, int _index, object _value)
+        {
+            PropertyInfo _prop = this._PROPS[_index];
+            this.I__VALUE__(_g, _prop, _value);
+        }
+        internal void I__SET__(G _g, string _name, object _value)
+        {
+            PropertyInfo _prop = this._PROPS.Where(_w => _w.Name == _name).FirstOrDefault();
+            this.I__VALUE__(_g, _prop, _value);
+        }
+        internal void I__VALUE__(G _g, PropertyInfo _pi, object _value)
+        {
+            if (_pi.HasValue() && _pi.CanWrite)
+            {
+                if (_value.HasValue())
+                    _pi.SetValue(_g, _value, null);
+            }
+        }
 
         public G Instance(params object[] _values)
         {
             if (_values == null)
                 return default;
 
-            G _return = this.CreateInstance();
+            G _return = this.I__CREATE__();
 
             for (int _i = 0; _i < _values.Length; _i++)
-            {
-                object _obj = _values[_i];
-                PropertyInfo _prop = this._PROPS[_i];
-
-                if (_prop.HasValue() && _prop.CanWrite)
-                {
-                    if (_obj.HasValue())
-                        _prop.SetValue(_return, _obj, null);
-                }
-            }
+                this.I__SET__(_return, _i, _values[_i]);
 
             return _return;
         }
@@ -70,45 +79,26 @@ namespace imL
             if (_values == null)
                 return default;
 
-            G _return = this.CreateInstance();
+            G _return = this.I__CREATE__();
 
             foreach (KeyValuePair<string, object> _item in _values)
-            {
-                object _obj = _item.Value;
-                PropertyInfo _prop = this._PROPS.Where(_w => _w.Name == _item.Key).FirstOrDefault();
-
-                if (_prop.HasValue() && _prop.CanWrite)
-                {
-                    if (_obj.HasValue())
-                        _prop.SetValue(_return, _obj, null);
-                }
-            }
+                this.I__SET__(_return, _item.Key, _item.Value);
 
             return _return;
         }
         public G Instance(DataRow _values, bool _byindex = false)
         {
-            if (_values == null)
-                return default;
-
-            G _return = this.CreateInstance();
-
             if (_byindex)
                 return this.Instance(_values.ItemArray);
 
-            this.Init2(_values);
+            if (_values == null)
+                return default;
+
+            this.I__KEY__(_values);
+            G _return = this.I__CREATE__();
 
             foreach (string _item in this._KEYS)
-            {
-                object _obj = _values[_item];
-                PropertyInfo _prop = this._PROPS.Where(_w => _w.Name == _item).FirstOrDefault();
-
-                if (_prop.HasValue() && _prop.CanWrite)
-                {
-                    if (_obj.HasValue())
-                        _prop.SetValue(_return, _obj, null);
-                }
-            }
+                this.I__SET__(_return, _item, _values[_item]);
 
             return _return;
         }

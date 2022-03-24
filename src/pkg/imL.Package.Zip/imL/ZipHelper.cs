@@ -62,7 +62,7 @@ namespace imL.Package.Zip
             if (_info.Exists == false)
                 throw new FileNotFoundException(nameof(_from), _from);
 
-            if (_exts.Contains(_info.Extension.ToLower()) == false)
+            if (_exts.Contains(_info.Extension, StringComparer.OrdinalIgnoreCase) == false)
                 return _from;
 
             if (_min < new MemoryUnit(_info.Length))

@@ -52,10 +52,10 @@ namespace imL.Tool.Terminal
             List<string> _attachs = new List<string>();
 
             MemoryUnit _mb = new MemoryUnit(1, EMemoryUnit.MB);
-            string[] _exts = new string[] { ".txt", ".log", ".doc", ".xls" };
+            //string[] _exts = new string[] { ".txt", ".log", ".doc", ".xls" };
 
             foreach (string _item in _acum)
-                _attachs.Add(ZipHelper.CompressOnly(_item, _mb, _exts));
+                _attachs.Add(ZipHelper.CompressOnly(_item, _mb));
 
             _settings.Mail.PathAttachments = _attachs;
             _process.Success();
