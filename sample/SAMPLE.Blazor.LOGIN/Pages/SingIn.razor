@@ -1,0 +1,82 @@
+﻿@page "/singin"
+
+@inject NavigationManager _NM
+
+<PageTitle>Sing in</PageTitle>
+
+@if (this._local is not null)
+{
+    <FormSignIn Busy="@this._busy"
+            MLocal="@this._local"
+            CancelRequest="this.Cancel"
+            ValidationResult="@(async (_vr) => await this.ValidationResultAsync(_vr))" />
+}
+@if (this._ok)
+{
+    <br />
+    <div class="alert alert-success">The contact was successfully added.</div>
+}
+@if (this._ee)
+{
+    <br />
+    <div class="alert alert-danger">Failed to add the contact; (@this._eem).</div>
+}
+
+@code
+{
+    private In_SignIn? _local { get; set; }
+    //################################################################
+
+    private bool _busy;
+    private bool _ok;
+    private bool _ee;
+    private string _eem = string.Empty;
+
+    protected override Task OnInitializedAsync()
+    {
+        this._local = new();
+
+        return base.OnInitializedAsync();
+    }
+    private void Cancel()
+    {
+        this._NM.NavigateTo("/");
+    }
+    private async Task ValidationResultAsync(bool _vr)
+    {
+        if (this._busy)
+            return;
+
+        if (_vr == false)
+        {
+            this._ok = false;
+            this._ee = false;
+
+            return;
+        }
+
+        this._busy = true;
+
+        try
+        {
+            if (this._local.Username.Equals("r.llamocca@") == false)
+            {
+                throw new Exception("ERROR 1");
+            }
+            if (this._local.PassWord.Equals("1234") == false)
+            {
+                throw new Exception("ERROR 2");
+            }
+            this._ok = true;
+            this._ee = false;
+            this._busy = false;
+            this._NM.NavigateTo("/");
+        }
+        catch (Exception _ex)
+        {
+            this._ee = true;
+            this._eem = _ex.Message;
+            this._busy = false;
+        }
+    }
+}

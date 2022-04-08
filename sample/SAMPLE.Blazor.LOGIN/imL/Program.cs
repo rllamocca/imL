@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 
+using SAMPLE.Blazor.LOGIN;
 using SAMPLE.Blazor.LOGIN.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +16,7 @@ builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
     options.Cookie.Name = ".SAMPLE.Blazor.LOGIN";
-    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.IdleTimeout = TimeSpan.FromSeconds(8);
     options.Cookie.IsEssential = true;
 });
 

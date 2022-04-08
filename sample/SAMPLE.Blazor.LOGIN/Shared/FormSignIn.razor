@@ -5,8 +5,8 @@
 @if (this.MLocal is not null)
 {
     <EditForm Model="@this.MLocal"
-          OnInvalidSubmit="(async () => await HandleSubmitAsync(false))"
-          OnValidSubmit="(async () => await HandleSubmitAsync(true))">
+          OnInvalidSubmit="(async () => await this.HandleSubmitAsync(false))"
+          OnValidSubmit="(async () => await this.HandleSubmitAsync(true))">
         <DataAnnotationsValidator />
         <ValidationSummary />
 
@@ -21,7 +21,7 @@
             </label>
             <label>
                 Password:
-                <InputText @bind-Value="this.MLocal.PassWord" />
+                <InputText @bind-Value="this.MLocal.PassWord" type="password" />
                 <ConcurrencyField Model="@this.MLocal"
                               DbModel="@this.CLocal"
                               Property="_p => _p?.Password" />
@@ -34,11 +34,19 @@
                               Property="_p => _p?.Remember" />
             </label>
         </p>
+        <br />
+        <button disabled="@Busy" class="btn btn-warning"
+            @onclick="CancelAsync">
+            Cancel
+        </button>&nbsp;
+        <button disabled="@Busy" type="submit"
+            class="btn btn-primary">
+            Submit
+        </button>
 
     </EditForm>
 }
 
-@*################################################################*@
 @code
 {
     [Parameter]

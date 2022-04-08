@@ -1,4 +1,4 @@
-﻿#region snippet
+﻿
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
@@ -32,7 +32,7 @@ namespace SAMPLE.Blazor.LOGIN
             }
         }
     }
-#endregion
+
     public interface IUserRepository
     {
         bool ValidateLastChanged(string lastChanged);

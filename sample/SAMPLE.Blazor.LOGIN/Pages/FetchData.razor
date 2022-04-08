@@ -1,5 +1,13 @@
 ﻿@page "/fetchdata"
 
+@inject NavigationManager _NM
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor _hca;
+
+@if (_hca is null || _hca.HttpContext?.User.Identity?.IsAuthenticated == false)
+{
+    this._NM.NavigateTo("/");
+}
+
 <PageTitle>Weather forecast</PageTitle>
 
 @using SAMPLE.Blazor.LOGIN.Data
