@@ -109,8 +109,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL.Package.Hosting", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL.Package.Logging", "src\pkg\imL.Package.Logging\imL.Package.Logging.csproj", "{ECB85653-3184-48A6-8C05-900800003AB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAMPLE.Blazor.LOGIN", "sample\SAMPLE.Blazor.LOGIN\SAMPLE.Blazor.LOGIN.csproj", "{03C6455F-DE7B-436E-A33E-C6746BF7484D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -261,10 +259,6 @@ Global
 		{ECB85653-3184-48A6-8C05-900800003AB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECB85653-3184-48A6-8C05-900800003AB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECB85653-3184-48A6-8C05-900800003AB0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{03C6455F-DE7B-436E-A33E-C6746BF7484D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{03C6455F-DE7B-436E-A33E-C6746BF7484D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{03C6455F-DE7B-436E-A33E-C6746BF7484D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{03C6455F-DE7B-436E-A33E-C6746BF7484D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -312,7 +306,6 @@ Global
 		{299D006D-D6AB-4F45-B9FE-8C2541D5C80E} = {DEF2C035-CBF5-4600-9D68-92924C9AB208}
 		{DD0B173D-CA36-4D05-86C8-80E90EFFDDE8} = {DEF2C035-CBF5-4600-9D68-92924C9AB208}
 		{ECB85653-3184-48A6-8C05-900800003AB0} = {DEF2C035-CBF5-4600-9D68-92924C9AB208}
-		{03C6455F-DE7B-436E-A33E-C6746BF7484D} = {06C01FDE-2E33-483B-AA9B-7352424FA60E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F1BE17B3-0ED9-4751-BFC3-A8E338449B8C}
