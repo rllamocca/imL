@@ -11,7 +11,7 @@ namespace imL.Utility.OldHttp
 
             return ((HttpWebResponse)_this.GetResponse()).ReadAsObject<T>();
         }
-        public static T Post<T>(this HttpWebRequest _this, object _post)
+        public static T Post<T>(this HttpWebRequest _this, object _post = null)
         {
             _this.Method = "POST";
             OldHttpJsonHelper.DefaultAccept(_this);
@@ -19,7 +19,7 @@ namespace imL.Utility.OldHttp
 
             return ((HttpWebResponse)_this.GetResponse()).ReadAsObject<T>();
         }
-        public static T Put<T>(this HttpWebRequest _this, object _put)
+        public static T Put<T>(this HttpWebRequest _this, object _put = null)
         {
             _this.Method = "PUT";
             OldHttpJsonHelper.DefaultAccept(_this);

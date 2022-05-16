@@ -15,7 +15,7 @@ namespace imL.Utility.Http
                     return await _res.ReadAsObjectAsync<T>();
             }
         }
-        public static async Task<T> PostAsync<T>(this HttpClient _this, string _uri, HttpContent _content)
+        public static async Task<T> PostAsync<T>(this HttpClient _this, string _uri, HttpContent _content = null)
         {
             using (HttpRequestMessage _req = new HttpRequestMessage(HttpMethod.Post, _uri))
             {
@@ -26,7 +26,7 @@ namespace imL.Utility.Http
                     return await _res.ReadAsObjectAsync<T>();
             }
         }
-        public static async Task<T> PutAsync<T>(this HttpClient _this, string _uri, HttpContent _content)
+        public static async Task<T> PutAsync<T>(this HttpClient _this, string _uri, HttpContent _content = null)
         {
             using (HttpRequestMessage _req = new HttpRequestMessage(HttpMethod.Put, _uri))
             {
