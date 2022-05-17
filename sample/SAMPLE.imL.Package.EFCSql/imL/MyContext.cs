@@ -2,12 +2,13 @@
 using imL.Package.EFCSql;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal;
 
 namespace SAMPLE.imL.Package.EFCSql
 {
     public class MyContext : DbContext, IContext
     {
-        private readonly string _CONN;
+        private readonly string? _CONN;
         private IConnection _CONNECTION;
         private IHelperAsync _HELPER_ASYNC;
 
@@ -38,9 +39,29 @@ namespace SAMPLE.imL.Package.EFCSql
         {
             this._CONN = _conn;
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder _ob)
+        public MyContext(DbContextOptions<MyContext> _co) : base(_co)
         {
-            _ob.UseSqlServer(this._CONN);
+            SqlServerOptionsExtension _ext = _co.FindExtension<SqlServerOptionsExtension>();
+
+            if (_ext != null)
+                this._CONN = _ext.ConnectionString;
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder _cob)
+        {
+            _cob.UseSqlServer(this._CONN);
+            _cob.AddInterceptors(
+                new TableHintCommandInterceptor(),
+                new NoTableCommandInterceptor()
+                );
+        }
+
+        public DateTime CURRENT_TIMESTAMP() => throw new NotSupportedException();
+        public DateTime GETDATE() => throw new NotSupportedException();
+        public decimal? ABS(decimal? numeric_expression) => throw new NotSupportedException();
+        //public bool BETWEEN(DateTime? expression, DateTime begin_expression, DateTime end_expression) => throw new NotSupportedException();
+        protected override void OnModelCreating(ModelBuilder _mb)
+        {
+            _mb.AddSqlFunctions(this.GetType());
         }
     }
 }

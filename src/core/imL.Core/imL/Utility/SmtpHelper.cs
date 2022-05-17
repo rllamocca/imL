@@ -82,8 +82,8 @@ namespace imL.Utility
 
         public static void Send(SmtpFormat _smtp, Encoding _enc = null, params MailMessageFormat[] _messages)
         {
-            if (_messages.IsEmpty())
-                return;
+            if (_smtp == null) return;
+            if (_messages.IsEmpty()) return;
 
             ReadOnly.DefaultEncoding(ref _enc);
 
