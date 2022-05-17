@@ -11,7 +11,7 @@ using imL.Utility;
 
 namespace imL
 {
-    public class Settler<G>
+    public class Setter<G>
     {
         private PropertyInfo[] _PROPS;
         private string[] _KEYS;

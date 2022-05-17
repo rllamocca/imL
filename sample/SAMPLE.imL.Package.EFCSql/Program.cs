@@ -2,6 +2,7 @@
 using System.Data;
 
 using imL.Package.EFCSql;
+using imL.Struct;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -52,7 +53,7 @@ Console.WriteLine("{0} {1} |{2}", _a, _b, _ts);
 _a = DateTime.Now;
 using (MyContext _context = new(_conn))
 {
-    IQueryable<MyTableSchema> _query = from _t in _context.MyTable.AsQueryable()
+    IQueryable<MyTableSchema> _query = from _t in _context.MyTable.AsDefault()
                                        orderby _t.Pk
                                        select _t;
 
@@ -70,6 +71,20 @@ using (MyContext _context = new(_conn))
 
     foreach (MyTableSchema _item in await _query.ToArrayAsync())
         Console.WriteLine("{0}] {1}| {2}", _item.Pk, _item.Date, _item.Value);
+
+    IQueryable<Lot<MyTableSchema, MyTableSchema>> _query2 =
+        from _l1 in _context.MyTable.AsDefault()
+        join _l2 in _context.MyTable.AsDefault() on _l1.Pk equals _l2.Pk
+        select new Lot<MyTableSchema, MyTableSchema>(_l1, _l2);
+
+    Lot<MyTableSchema, MyTableSchema>[] _result = await _query2.ToArrayAsync();
+
+    IQueryable<ValueTuple<MyTableSchema, MyTableSchema>> _query3 =
+        from _l1 in _context.MyTable.AsDefault()
+        join _l2 in _context.MyTable.AsDefault() on _l1.Pk equals _l2.Pk
+        select new ValueTuple<MyTableSchema, MyTableSchema>(_l1, _l2);
+
+    ValueTuple<MyTableSchema, MyTableSchema>[] _result2 = await _query3.ToArrayAsync();
 }
 _b = DateTime.Now;
 _ts = _b - _a;
