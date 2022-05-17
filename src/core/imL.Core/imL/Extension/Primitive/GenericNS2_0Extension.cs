@@ -12,7 +12,7 @@ namespace imL.Utility
 {
     public static class GenericNS2_0Extension
     {
-        public static string GetXml<T>(this T _this, Encoding _enc = null)
+        public static string GetXml<G>(this G _this, Encoding _enc = null)
         {
             if (_this == null)
                 return null;
@@ -54,7 +54,7 @@ namespace imL.Utility
             }
         }
 
-        public static void XmlCreate<T>(this T _this, string _path, Encoding _enc = null)
+        public static void XmlCreate<G>(this G _this, string _path, Encoding _enc = null)
         {
             if (_this == null)
                 return;

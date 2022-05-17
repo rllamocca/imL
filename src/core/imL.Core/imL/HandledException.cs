@@ -1,0 +1,26 @@
+﻿#if (NET35_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
+
+using System;
+using System.Runtime.Serialization;
+
+namespace imL
+{
+    [Serializable()]
+    public class HandledException : Exception
+    {
+        protected HandledException() : base() { }
+        protected HandledException(SerializationInfo _info, StreamingContext _context) : base(_info, _context) { }
+
+        public HandledException(string _message) : base(_message) { }
+        public HandledException(string _message, Exception _inner) : base(_message, _inner) { }
+
+        //################################################################
+        private readonly string _CODE_;
+        public string Code { get { return this._CODE_; } }
+
+        public HandledException(string _code, string _message) : base(_message) { this._CODE_ = _code; }
+        public HandledException(string _code, string _message, Exception _inner) : base(_message, _inner) { this._CODE_ = _code; }
+    }
+}
+
+#endif

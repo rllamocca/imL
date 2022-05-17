@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 
 using imL.Enumeration;
+using System.Collections.Generic;
 
 namespace imL.Utility
 {
@@ -167,6 +168,21 @@ namespace imL.Utility
             return new string(_this.Where(_w => char.IsLetterOrDigit(_w) || _let.Contains(_w)).ToArray());
 #endif
 
+        }
+
+
+        public static IEnumerable<string> GetCuts(string _string, int _length)
+        {
+            if (_length <= 0)
+                yield break;
+
+            while (_string.Length > 0)
+            {
+                yield return _string.Substring(0, _length);
+
+                _string = _string.Remove(0, _length);
+
+            }
         }
     }
 }
