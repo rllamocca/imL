@@ -1,9 +1,8 @@
-﻿using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
+﻿using System.Net.Http;
 
+using imL.Enumeration.Http;
 using imL.Rest.InsurDesign.Schema;
+using imL.Utility.Http;
 
 namespace imL.Rest.InsurDesign
 {
@@ -18,7 +17,7 @@ namespace imL.Rest.InsurDesign
             this.Http = _http;
             this.Format = _format;
 
-            this.Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes(string.Format("{0}:{1}", this.Format.Username, this.Format.Password))));
+            this.Http.DefaultRequestHeaders.Authorization = HttpHelperAsync.Authentication(EAuthentication.Basic, _format.Username, _format.Password);
         }
     }
 }

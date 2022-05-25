@@ -4,6 +4,8 @@
     {
         None = 0,
         Basic = 1,
-        Digest = 2
+        Bearer = 2,
+        Token = 3,
+        Digest = 4
     }
 }

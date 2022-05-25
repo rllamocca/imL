@@ -6,7 +6,7 @@ namespace imL.Format
     {
         public string Endpoint { set; get; }
         public EAuthentication Scheme { set; get; }
-        public string UserName { set; get; }
-        public string Password { set; get; }
+        public string Key { set; get; }
+        public string Value { set; get; }
     }
 }

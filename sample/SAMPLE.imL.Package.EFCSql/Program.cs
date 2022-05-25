@@ -79,6 +79,8 @@ using (MyContext _context = new(_conn))
 
     Lot<MyTableSchema, MyTableSchema>[] _result = await _query2.ToArrayAsync();
 
+    var _om = OneToMany<MyTableSchema, MyTableSchema>.FromLot(_result, _r => _r.Pk);
+
     IQueryable<ValueTuple<MyTableSchema, MyTableSchema>> _query3 =
         from _l1 in _context.MyTable.AsDefault()
         join _l2 in _context.MyTable.AsDefault() on _l1.Pk equals _l2.Pk

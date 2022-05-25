@@ -9,7 +9,7 @@ namespace imL.Package.Json
 {
     public static class Extension
     {
-        public static T JsonClone<T>(this T _this)
+        public static T JsonNewMe<T>(this T _this)
         {
             if (_this == null)
                 return default;
