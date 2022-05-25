@@ -6,12 +6,12 @@ namespace imL.Package.EFCSql
     {
         public static IQueryable<G> AsDefault<G>(this IQueryable<G> _this, bool _ant = true) where G : class
         {
-            IQueryable<G> _return = _this.AsQueryable();
+            _this = _this.AsQueryable();
 
             if (_ant)
-                _return = _return.AsNoTracking();
+                _this = _this.AsNoTracking();
 
-            return _return;
+            return _this;
         }
         public static IQueryable<G> AsEmpty<G>(this IQueryable<G> _this) where G : class
         {

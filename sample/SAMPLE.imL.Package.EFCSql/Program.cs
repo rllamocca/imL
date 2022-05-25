@@ -53,7 +53,7 @@ Console.WriteLine("{0} {1} |{2}", _a, _b, _ts);
 _a = DateTime.Now;
 using (MyContext _context = new(_conn))
 {
-    IQueryable<MyTableSchema> _query = from _t in _context.MyTable.AsDefault()
+    IQueryable<MyTableSchema> _query = from _t in _context.MyTable?.AsDefault()
                                        orderby _t.Pk
                                        select _t;
 
@@ -73,7 +73,7 @@ using (MyContext _context = new(_conn))
         Console.WriteLine("{0}] {1}| {2}", _item.Pk, _item.Date, _item.Value);
 
     IQueryable<Lot<MyTableSchema, MyTableSchema>> _query2 =
-        from _l1 in _context.MyTable.AsDefault()
+        from _l1 in _context.MyTable.AsQueryable()
         join _l2 in _context.MyTable.AsDefault() on _l1.Pk equals _l2.Pk
         select new Lot<MyTableSchema, MyTableSchema>(_l1, _l2);
 
