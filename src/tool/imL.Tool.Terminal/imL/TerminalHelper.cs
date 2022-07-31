@@ -50,12 +50,15 @@ namespace imL.Tool.Terminal
             _acum.Add(Path.Combine(_process.App.PathLog, _process.Guid + ".log"));
             _acum = _acum.Distinct().ToList();
             List<string> _attachs = new List<string>();
+            MemoryUnit _mb = null;
 
-            MemoryUnit _mb = new MemoryUnit(2, EMemoryUnit.MB);
-            //string[] _exts = new string[] { ".txt", ".log", ".doc", ".xls" };
+            if (_settings.Smtp.MinSizeZipAttachment > 0)
+                _mb = new MemoryUnit(_settings.Smtp.MinSizeZipAttachment.GetValueOrDefault(), EMemoryUnit.MB);
+
+            string[] _exts = new string[] { ".docx", ".xlsx", ".pdf" };
 
             foreach (string _item in _acum)
-                _attachs.Add(ZipHelper.CompressOnly(_item, _mb));
+                _attachs.Add(ZipHelper.CompressOnly(_item, _mb, _exts));
 
             _settings.Mail.PathAttachments = _attachs;
             _process.Success();

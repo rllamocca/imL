@@ -65,6 +65,9 @@ namespace imL.Package.Zip
             if (_exts.Contains(_info.Extension, StringComparer.OrdinalIgnoreCase) == false)
                 return _from;
 
+            if (_min == null)
+                return _from;
+
             if (_min < new MemoryUnit(_info.Length))
                 return ZipHelper.Compress(_from);
 
