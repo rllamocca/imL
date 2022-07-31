@@ -92,6 +92,9 @@ namespace imL.Utility
 
             for (int _i = 0; _i < _messages.Length; _i++)
             {
+                if (_messages[_i].FromAddress == null) _messages[_i].FromAddress = _smtp.UserName;
+                if (_messages[_i].FromDisplayName == null) _messages[_i].FromDisplayName = _smtp.UserName;
+
                 MailMessage _mm = new MailMessage();
                 SmtpHelper.Init_MailMessage(ref _mm, _messages[_i], _enc);
                 _client.Send(_mm);
