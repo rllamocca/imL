@@ -14,6 +14,8 @@ namespace imL.Contract
         long? Inserted { set; get; }
         long? Updated { set; get; }
         long? Erased { set; get; }
+        long? Successes { set; get; }
+        long? Errors { set; get; }
         IList<string> PathAttachments { set; get; }
         EAlert Alert { set; get; }
         Exception Critical { set; get; }
@@ -23,6 +25,7 @@ namespace imL.Contract
         void AddInserted(long _add);
         void AddUpdated(long _add);
         void AddErased(long _add);
+
         void Success();
         void Danger(Exception _ex = null);
         TimeSpan? Duration();

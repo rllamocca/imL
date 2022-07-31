@@ -14,6 +14,8 @@ namespace imL.Contract
         public long? Inserted { set; get; }
         public long? Updated { set; get; }
         public long? Erased { set; get; }
+        public long? Successes { set; get; }
+        public long? Errors { set; get; }
         public IList<string> PathAttachments { set; get; }
         public EAlert Alert { set; get; }
         public Exception Critical { set; get; }
@@ -47,6 +49,7 @@ namespace imL.Contract
             if (_add > 0)
                 this.Erased = this.Erased.GetValueOrDefault() + _add;
         }
+
         public void Success()
         {
             long? _acum = this.Inserted.GetValueOrDefault() + this.Updated.GetValueOrDefault() + this.Erased.GetValueOrDefault();

@@ -17,7 +17,7 @@ namespace imL.Package.EFCSql
         private static void ManipulateCommand(DbCommand _cmd)
         {
             string _text = _cmd.CommandText;
-            string _line = _text
+            string? _line = _text
                 .Split(new[] { '\r', '\n' })
                 .Where(_s => _s.StartsWith(_TAG, StringComparison.Ordinal))
                 .FirstOrDefault();
