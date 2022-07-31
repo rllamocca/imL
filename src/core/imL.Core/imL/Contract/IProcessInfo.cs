@@ -25,6 +25,8 @@ namespace imL.Contract
         void AddInserted(long _add);
         void AddUpdated(long _add);
         void AddErased(long _add);
+        void AddSuccesses(long _add);
+        void AddErrors(long _add);
 
         void Success();
         void Danger(Exception _ex = null);

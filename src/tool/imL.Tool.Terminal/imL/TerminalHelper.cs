@@ -51,7 +51,7 @@ namespace imL.Tool.Terminal
             _acum = _acum.Distinct().ToList();
             List<string> _attachs = new List<string>();
 
-            MemoryUnit _mb = new MemoryUnit(1, EMemoryUnit.MB);
+            MemoryUnit _mb = new MemoryUnit(2, EMemoryUnit.MB);
             //string[] _exts = new string[] { ".txt", ".log", ".doc", ".xls" };
 
             foreach (string _item in _acum)

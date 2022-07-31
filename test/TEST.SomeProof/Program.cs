@@ -17,6 +17,13 @@ namespace TEST.SomeProof
 
             try
             {
+                long? _null = null;
+
+                if (_null > 0)
+                {
+                    Console.WriteLine(_null);
+                }
+
                 int thirtiethFib = Fibonacci().Skip(7).Take(1).First();
 
                 Console.WriteLine(thirtiethFib);
