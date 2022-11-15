@@ -31,8 +31,10 @@ namespace imL.Utility
             if (_ref.UseDefaultCredentials == false)
                 _ref.Credentials = new NetworkCredential(_format.UserName, _format.Password);
         }
-        internal static void Init_MailMessage(ref MailMessage _ref, MailMessageFormat _format, Encoding _enc)
+        internal static void Init_MailMessage(ref MailMessage _ref, MailMessageFormat _format, Encoding _enc = null)
         {
+
+            ReadOnly.DefaultEncoding(ref _enc);
 
 #if (NET35) == false
             _ref.HeadersEncoding = _enc;
@@ -67,7 +69,7 @@ namespace imL.Utility
             foreach (string _item2 in _format.PathAttachments.DefaultOrEmpty())
                 _ref.Attachments.Add(new Attachment(_item2));
 
-            foreach (StreamAttachment _item2 in _format.StreamAttachments.DefaultOrEmpty())
+            foreach (StreamAttachmentFormat _item2 in _format.StreamAttachments.DefaultOrEmpty())
                 _ref.Attachments.Add(new Attachment(_item2.Content, _item2.Name));
 
             _ref.Body = _format.Body;
