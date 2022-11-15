@@ -8,11 +8,11 @@ namespace imL
 {
     public class Formatter
     {
-        private readonly string _FORMAT;
-        private readonly bool _DRAW_RL;
-        private readonly char[] _L_R;
-        private readonly char[] _R_R;
-        private readonly IList<KeyValuePair<int, string>> _FORMATS = new List<KeyValuePair<int, string>>();
+        readonly string _FORMAT;
+        readonly bool _DRAW_RL;
+        readonly char[] _L_R;
+        readonly char[] _R_R;
+        readonly IList<KeyValuePair<int, string>> _FORMATS = new List<KeyValuePair<int, string>>();
 
         public Formatter(string _format, bool _draw_rl = true, char[] _l_r = null, char[] _r_r = null)
         {
@@ -28,9 +28,9 @@ namespace imL
 Before
 During
 After
-        private void BeforeExecution();
-        private void DuringExecution();
-        private void AfterExecution();
+        void BeforeExecution();
+        void DuringExecution();
+        void AfterExecution();
          */
 
         public string Enforce(string _value)
@@ -92,7 +92,7 @@ After
 
             return _return;
         }
-        private string Analyze(int _length)
+        string Analyze(int _length)
         {
             string _return = this._FORMAT;
 

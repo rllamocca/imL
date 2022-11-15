@@ -13,7 +13,7 @@ namespace imL
 {
     public static class Analyzer
     {
-        private static readonly string[] _DATETIME_FORMATs = new string[] {
+        static readonly string[] _DATETIME_FORMATs = new string[] {
                 "yyyyMMdd",
                 "yyyy'-'MM'-'dd",
                 "yyyy'-'MM'-'dd HH':'mm':'ss",
@@ -21,8 +21,8 @@ namespace imL
                 "dd'/'MM'/'yyyy"
             };
 
-        private static readonly string _LF = new string(new char[] { (char)10 });
-        private static readonly string _CR = new string(new char[] { (char)13 });
+        static readonly string _LF = new string(new char[] { (char)10 });
+        static readonly string _CR = new string(new char[] { (char)13 });
 
         public static string GetStringNull(string _key, string _value, int _length = 0, params string[] _in)
         {

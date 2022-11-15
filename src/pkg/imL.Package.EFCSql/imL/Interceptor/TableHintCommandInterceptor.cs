@@ -7,14 +7,14 @@ namespace imL.Package.EFCSql
 {
     public class TableHintCommandInterceptor : DbCommandInterceptor
     {
-        private static readonly string _TAG = "-- TABLE_HINT:";
-        private static readonly Regex _RE = new(@"(?<table_hint>(?:from|join) +(\[.*\]\.)?(\[.*\]) as (\[.*\])(?! with))",
+        static readonly string _TAG = "-- TABLE_HINT:";
+        static readonly Regex _RE = new(@"(?<table_hint>(?:from|join) +(\[.*\]\.)?(\[.*\]) as (\[.*\])(?! with))",
             RegexOptions.IgnoreCase |
             RegexOptions.Multiline |
             RegexOptions.Compiled
             );
 
-        private static void ManipulateCommand(DbCommand _cmd)
+        static void ManipulateCommand(DbCommand _cmd)
         {
             string _text = _cmd.CommandText;
             string? _line = _text

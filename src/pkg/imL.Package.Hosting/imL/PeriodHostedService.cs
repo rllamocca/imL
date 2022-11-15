@@ -28,18 +28,18 @@ namespace imL.Package.Hosting
     public class PeriodHostedService<GExecution> : IHostedService, IDisposable
         where GExecution : IPeriodExecution, new()
     {
-        private bool _DISPOSED = false;
-        private readonly Task _COMPLETEDTASK = Task.CompletedTask;
+        bool _DISPOSED = false;
+        readonly Task _COMPLETEDTASK = Task.CompletedTask;
 
-        private readonly IHostPeriodWorker _WORKER;
-        private readonly IHostPeriodSetting _SETTING;
-        private readonly IAppInfo _INFO;
-        private readonly ILogger<PeriodHostedService<GExecution>> _LOGGER;
+        readonly IHostPeriodWorker _WORKER;
+        readonly IHostPeriodSetting _SETTING;
+        readonly IAppInfo _INFO;
+        readonly ILogger<PeriodHostedService<GExecution>> _LOGGER;
 
-        private long _EXECUTION_COUNT;
-        private Timer _TIMER;
+        long _EXECUTION_COUNT;
+        Timer _TIMER;
 
-        private async void DoWork(object _state)
+        async void DoWork(object _state)
         {
             long _count = Interlocked.Increment(ref this._EXECUTION_COUNT);
 

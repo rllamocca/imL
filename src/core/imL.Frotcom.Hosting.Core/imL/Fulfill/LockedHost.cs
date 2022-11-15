@@ -11,7 +11,7 @@ namespace imL.Frotcom.Hosting.Core
     {
         protected static readonly MemoryCache _CACHE = new MemoryCache(new MemoryCacheOptions());
         //protected static readonly MemoryCacheEntryOptions _CACHE_OPTIONS = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromHours(4));
-        private static HttpClient _HTTP;
+        static HttpClient _HTTP;
 
         public static MemoryCache Cache { get { lock (LockedHost._LOCKED) { return LockedHost._CACHE; } } }
         public static HttpClient Http { get { lock (LockedHost._LOCKED) { return LockedHost._HTTP; } } }

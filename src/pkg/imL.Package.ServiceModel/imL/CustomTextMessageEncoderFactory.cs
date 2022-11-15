@@ -8,10 +8,10 @@ namespace imL.Package.ServiceModel
 {
     public class CustomTextMessageEncoderFactory : MessageEncoderFactory
     {
-        private readonly MessageEncoder encoder;
-        private readonly MessageVersion version;
-        private readonly string mediaType;
-        private readonly string charSet;
+        readonly MessageEncoder encoder;
+        readonly MessageVersion version;
+        readonly string mediaType;
+        readonly string charSet;
 
         internal CustomTextMessageEncoderFactory(string mediaType, string charSet,
             MessageVersion version)

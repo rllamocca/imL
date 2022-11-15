@@ -15,11 +15,11 @@ namespace imL.Package.MySql
 {
     public class MySqlConnectionDefault : IConnection
     {
-        private bool _DISPOSED = false;
-        //private bool _STATISTICS = false;
+        bool _DISPOSED = false;
+        //bool _STATISTICS = false;
 
-        private MySqlTransaction _TS;
-        private MySqlConnection _CN;
+        MySqlTransaction _TS;
+        MySqlConnection _CN;
 
         public MySqlTransaction Transaction
         {

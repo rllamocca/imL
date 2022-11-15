@@ -16,20 +16,20 @@ namespace imL.Contract
 {
     public abstract class ProgressAbstract : IDisposable
     {
-        private bool _DISPOSED = false;
+        bool _DISPOSED = false;
 
         protected ProgressAbstract _PARENT;
         protected EReportProgress _REPORT;
         protected Point _DRAW_END;
         protected DateTime _START;
 
-        private const char _CHAR = '■';
-        private const string _BUCLE = @"+\|/";
-        private byte _BLOCKS = 50;
-        private Point _LINE;
-        private Point _NEW_LINE;
-        private Point _DRAW_START;
-        private List<decimal> _BAR = new List<decimal>() { 0 };
+        const char _CHAR = '■';
+        const string _BUCLE = @"+\|/";
+        byte _BLOCKS = 50;
+        Point _LINE;
+        Point _NEW_LINE;
+        Point _DRAW_START;
+        List<decimal> _BAR = new List<decimal>() { 0 };
 
         public DateTime Start { get { return this._START; } }
 

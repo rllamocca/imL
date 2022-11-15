@@ -15,7 +15,7 @@ namespace imL
         public HandledException(string _message, Exception _inner) : base(_message, _inner) { }
 
         //################################################################
-        private readonly string _CODE_;
+        readonly string _CODE_;
         public string Code { get { return this._CODE_; } }
 
         public HandledException(string _code, string _message) : base(_message) { this._CODE_ = _code; }

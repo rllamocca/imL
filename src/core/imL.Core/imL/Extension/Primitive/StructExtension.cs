@@ -7,11 +7,11 @@ namespace imL.Utility
 {
     public static class StructExtension
     {
-        private static readonly char _HT = (char)9;
-        private static readonly char _LF = (char)10;
-        private static readonly char _VT = (char)11;
-        private static readonly char _FF = (char)12;
-        private static readonly char _CR = (char)13;
+        static readonly char _HT = (char)9;
+        static readonly char _LF = (char)10;
+        static readonly char _VT = (char)11;
+        static readonly char _FF = (char)12;
+        static readonly char _CR = (char)13;
 
         public static List<char> RemoveEndLine(this List<char> _array, EEndLine _el)
         {

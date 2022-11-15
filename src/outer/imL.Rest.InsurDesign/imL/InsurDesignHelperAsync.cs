@@ -43,7 +43,7 @@ namespace imL.Rest.InsurDesign
             return await InsurDesignHelperAsync.GetBeneficiarioNextAsync(_client.Http, _uri);
         }
 
-        private static string CheckHttp(string _from, string _to)
+        static string CheckHttp(string _from, string _to)
         {
             string _https = "https://";
             string _http = "http://";
@@ -63,7 +63,7 @@ namespace imL.Rest.InsurDesign
 
             return _to;
         }
-        private static async Task<Beneficiary[]> GetBeneficiarioPreviousAsync(HttpClient _client, string _uri)
+        static async Task<Beneficiary[]> GetBeneficiarioPreviousAsync(HttpClient _client, string _uri)
         {
             Beneficiario _get = await _client.GetAsync<Beneficiario>(_uri);
             string _re = _get.previous;
@@ -78,7 +78,7 @@ namespace imL.Rest.InsurDesign
 
             return _return.ToArray();
         }
-        private static async Task<Beneficiary[]> GetBeneficiarioNextAsync(HttpClient _client, string _uri)
+        static async Task<Beneficiary[]> GetBeneficiarioNextAsync(HttpClient _client, string _uri)
         {
             Beneficiario _get = await _client.GetAsync<Beneficiario>(_uri);
             string _re = _get.next;

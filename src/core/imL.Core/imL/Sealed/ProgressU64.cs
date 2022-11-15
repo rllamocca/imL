@@ -15,10 +15,10 @@ namespace imL.Sealed
         , IProgress<ulong>
 #endif
     {
-        private bool _DISPOSED = false;
+        bool _DISPOSED = false;
 
-        private ulong _LENGTH;
-        private ulong _VALUE = 0;
+        ulong _LENGTH;
+        ulong _VALUE = 0;
 
         public ulong Length { get { return this._LENGTH; } }
         public ulong Value { get { return this._VALUE; } }

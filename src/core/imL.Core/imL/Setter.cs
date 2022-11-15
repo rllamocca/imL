@@ -13,15 +13,15 @@ namespace imL
 {
     public class Setter<G>
     {
-        private PropertyInfo[] _PROPS;
-        private string[] _KEYS;
+        PropertyInfo[] _PROPS;
+        string[] _KEYS;
 
         internal G I__CREATE__()
         {
             this.I__PROP__();
             return Activator.CreateInstance<G>();
         }
-        //private T FactoryInstance() where T : new()
+        //T FactoryInstance() where T : new()
         //{
         //    this.Init<T>();
         //    return new T();

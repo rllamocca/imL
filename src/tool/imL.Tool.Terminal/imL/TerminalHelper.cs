@@ -50,7 +50,7 @@ namespace imL.Tool.Terminal
             _acum.Add(Path.Combine(_process.App.PathLog, _process.Guid + ".log"));
             _acum = _acum.Distinct().ToList();
             List<string> _attachs = new List<string>();
-            MemoryUnit _mb = null;
+            MemoryUnit _mb = default;
 
             if (_settings.Smtp.MinSizeZipAttachment > 0)
                 _mb = new MemoryUnit(_settings.Smtp.MinSizeZipAttachment.GetValueOrDefault(), EMemoryUnit.MB);

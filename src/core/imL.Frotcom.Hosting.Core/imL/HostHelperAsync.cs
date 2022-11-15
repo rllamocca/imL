@@ -18,8 +18,8 @@ namespace imL.Frotcom.Hosting.Core
 {
     public class HostHelperAsync
     {
-        private static readonly object _LOCKED = new object();
-        private static _NSP_LOGGING.ILogger _LOGGER;
+        static readonly object _LOCKED = new object();
+        static _NSP_LOGGING.ILogger _LOGGER;
 
         public static _NSP_LOGGING.ILogger Logger { get { lock (HostHelperAsync._LOCKED) { return HostHelperAsync._LOGGER; } } }
 

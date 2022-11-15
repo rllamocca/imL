@@ -8,11 +8,11 @@ namespace imL.Sealed
 {
     public sealed class ElapsedTime : ProgressAbstract
     {
-        private bool _DISPOSED = false;
+        bool _DISPOSED = false;
 
-        private readonly Timer _TIMER;
+        readonly Timer _TIMER;
 
-        private void ElapsedEvent(object _source, ElapsedEventArgs _e)
+        void ElapsedEvent(object _source, ElapsedEventArgs _e)
         {
             this.DrawElapsed(_e.SignalTime);
         }

@@ -16,7 +16,7 @@ namespace imL.Package.NPOI
 {
     public static class NPOIHelper
     {
-        private static IWorkbook OpenRead(string _path, bool _xls = true)
+        static IWorkbook OpenRead(string _path, bool _xls = true)
         {
             using (FileStream _s = new FileStream(_path, FileMode.Open, FileAccess.Read))
             {

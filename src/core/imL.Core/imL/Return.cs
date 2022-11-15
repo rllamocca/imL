@@ -19,10 +19,10 @@ namespace imL
 {
     public class Return
     {
-        private readonly bool _SUCCESS;
-        private readonly object _RESULT;
-        private readonly bool _EXCEPTION;
-        private readonly string _MESSAGE;
+        readonly bool _SUCCESS;
+        readonly object _RESULT;
+        readonly bool _EXCEPTION;
+        readonly string _MESSAGE;
 
         public bool Success { get { return this._SUCCESS; } }
         public object Result { get { return this._RESULT; } }

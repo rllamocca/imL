@@ -9,14 +9,14 @@ namespace imL.Contract
 {
     public sealed class AppInfoDefault : IAppInfo
     {
-        private readonly string[] _ARGS;
-        private readonly string _PATH;
-        private readonly string _PATH_IN;
-        private readonly string _PATH_OUT;
-        private readonly string _PATH_LOG;
-        private readonly string _PATH_TMP;
-        private readonly bool _IN_CONTAINER = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
-        private readonly bool _IN_TEMPPATH;
+        readonly string[] _ARGS;
+        readonly string _PATH;
+        readonly string _PATH_IN;
+        readonly string _PATH_OUT;
+        readonly string _PATH_LOG;
+        readonly string _PATH_TMP;
+        readonly bool _IN_CONTAINER = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
+        readonly bool _IN_TEMPPATH;
 
         public string[] Args { get { return this._ARGS; } }
         public string Path { get { return this._PATH; } }
@@ -52,7 +52,7 @@ namespace imL.Contract
         }
 
         //#if NETSTANDARD1_0 || NETSTANDARD1_1 || NETSTANDARD1_2 || NETSTANDARD1_3 || NETSTANDARD1_4 || NETSTANDARD1_5 || NETSTANDARD1_6
-        //        private static string AssemblyDirectory()
+        //        static string AssemblyDirectory()
         //        {
         //            string _cb = Assembly.GetExecutingAssembly().CodeBase;
         //            UriBuilder _uri = new UriBuilder(_cb);

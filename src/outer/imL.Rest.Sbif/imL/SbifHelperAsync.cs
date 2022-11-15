@@ -17,7 +17,7 @@ namespace imL.Rest.Sbif
                 throw new ArgumentOutOfRangeException(nameof(_resource));
         }
 
-        private static async Task<CurrencyIndex[]> ReferAsync(SbifClient _client, string _uri)
+        static async Task<CurrencyIndex[]> ReferAsync(SbifClient _client, string _uri)
         {
             switch (SbifHelper._RESOURCE)
             {
