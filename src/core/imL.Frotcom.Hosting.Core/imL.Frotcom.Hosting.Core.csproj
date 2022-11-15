@@ -9,6 +9,7 @@
 			;netstandard2.1
 			;net5.0
 			;net6.0
+			;net7.0
 		</TargetFrameworks>
 
 		<Authors>Ricardo Llamocca ♪♫</Authors>
@@ -38,8 +39,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\outer\imL.Rest.Frotcom\imL.Rest.Frotcom.csproj" />
-	  <ProjectReference Include="..\..\pkg\imL.Package.Hosting\imL.Package.Hosting.csproj" />
+		<ProjectReference Include="..\..\outer\imL.Rest.Frotcom\imL.Rest.Frotcom.csproj" />
+		<ProjectReference Include="..\..\pkg\imL.Package.Hosting\imL.Package.Hosting.csproj" />
 	</ItemGroup>
 
 </Project>

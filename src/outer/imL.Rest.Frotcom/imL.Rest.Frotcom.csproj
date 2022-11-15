@@ -16,6 +16,7 @@
 			;netstandard2.1
 			;net5.0
 			;net6.0
+			;net7.0
 		</TargetFrameworks>
 
 		<Authors>Ricardo Llamocca ♪♫</Authors>
@@ -44,7 +45,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\util\imL.Utility.Http\imL.Utility.Http.csproj" />
+		<ProjectReference Include="..\..\util\imL.Utility.Http\imL.Utility.Http.csproj" />
 	</ItemGroup>
 
 
