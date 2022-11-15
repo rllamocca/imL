@@ -10,11 +10,11 @@ namespace imL
     public class Password : IDisposable
     {
         //؟
-        private bool _DISPOSED = false;
+        bool _DISPOSED = false;
 
-        private const ERandomSort _SORT = ERandomSort.Fisher_Yates;
-        private char[] _BASE;
-        private char[] _GENERATED;
+        const ERandomSort _SORT = ERandomSort.Fisher_Yates;
+        char[] _BASE;
+        char[] _GENERATED;
 
         public bool Numbers { set; get; } = true;
         public bool UpperCase { set; get; } = true;

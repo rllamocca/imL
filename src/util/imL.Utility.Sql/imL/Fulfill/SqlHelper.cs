@@ -204,7 +204,7 @@ namespace imL.Utility.Sql
                 using (DataTable _dt = LoadDataTable(_query, _pmts))
                 {
                     List<G> _return = new List<G>();
-                    Settler<G> _set = new Settler<G>();
+                    Setter<G> _set = new Setter<G>();
 
                     foreach (DataRow _item in _dt.Rows)
                         _return.Add(_set.Instance(_item));

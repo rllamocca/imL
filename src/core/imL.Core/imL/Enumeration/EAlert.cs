@@ -2,9 +2,10 @@
 {
     public enum EAlert
     {
+        Warning = -2,
+        Danger = -1,
         None = 0,
         Success = 1,
-        Warning = 2,
-        Danger = 3
+        Info = 2
     }
 }

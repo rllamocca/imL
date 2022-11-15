@@ -5,7 +5,7 @@ namespace imL.Sealed
 {
     public sealed class StringWriterWithEncoding : StringWriter
     {
-        private readonly Encoding _ENCODING;
+        readonly Encoding _ENCODING;
 
         public StringWriterWithEncoding(Encoding _enc = null)
         {

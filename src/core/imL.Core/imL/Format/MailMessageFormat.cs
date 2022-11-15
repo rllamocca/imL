@@ -1,7 +1,6 @@
 ﻿#if (NET35_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
 
 using System.Collections.Generic;
-using System.IO;
 using System.Net.Mail;
 using System.Net.Mime;
 
@@ -24,13 +23,7 @@ namespace imL.Format
         public IEnumerable<string> CC { set; get; }
         public IEnumerable<string> BCC { set; get; }
         public IEnumerable<string> PathAttachments { set; get; }
-        public IEnumerable<StreamAttachment> StreamAttachments { set; get; }
-    }
-
-    public class StreamAttachment
-    {
-        public Stream Content { set; get; }
-        public string Name { set; get; }
+        public IEnumerable<StreamAttachmentFormat> StreamAttachments { set; get; }
     }
 }
 

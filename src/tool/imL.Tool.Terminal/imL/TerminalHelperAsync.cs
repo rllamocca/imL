@@ -37,7 +37,7 @@ namespace imL.Tool.Terminal
                 }
                 catch (Exception _ex)
                 {
-                    _logger.Fatal(_ex);
+                    _logger?.Fatal(_ex);
                     TerminalHelper.I__CATCH(_proc, _sett, _ex);
                 }
 
@@ -49,12 +49,11 @@ namespace imL.Tool.Terminal
                 if (_logger == null)
                     Console.WriteLine(_ex);
                 else
-                    _logger.Fatal(_ex);
+                    _logger?.Fatal(_ex);
             }
             finally
             {
-                LogManager.Shutdown();
-                Utility.TerminalHelper.Ends();
+                TerminalHelper.I__FINALLY();
             }
         }
     }

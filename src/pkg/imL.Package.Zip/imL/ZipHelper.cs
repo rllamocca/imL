@@ -9,6 +9,7 @@ using System.IO.Compression;
 using System;
 using System.IO;
 using System.Linq;
+using imL.Struct;
 
 namespace imL.Package.Zip
 {
@@ -54,17 +55,20 @@ namespace imL.Package.Zip
 
             return _to;
         }
-        public static string CompressOnly(string _from, long _min, params string[] _exts)
+        public static string CompressOnly(string _from, MemoryUnit _min, params string[] _exts)
         {
             FileInfo _info = new FileInfo(_from);
 
             if (_info.Exists == false)
                 throw new FileNotFoundException(nameof(_from), _from);
 
-            if (_exts.Contains(_info.Extension.ToLower()) == false)
+            if (_exts.Contains(_info.Extension, StringComparer.OrdinalIgnoreCase) == false)
                 return _from;
 
-            if (_min < _info.Length)
+            if (_min == null || _min == default)
+                return _from;
+
+            if (_min < new MemoryUnit(_info.Length))
                 return ZipHelper.Compress(_from);
 
             return _from;

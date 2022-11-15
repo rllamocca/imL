@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 using imL.Enumeration.Http;
+using imL.Format;
 
 namespace imL.Utility.Http
 {
@@ -70,6 +73,47 @@ namespace imL.Utility.Http
                         break;
                 }
             }
+        }
+
+        public static AuthenticationHeaderValue Authentication(EndpointFormat _format)
+        {
+            string _name = Convert.ToString(_format.Scheme);
+
+            switch (_format.Scheme)
+            {
+                case EAuthentication.Basic:
+                    byte[] _unicode = Encoding.Unicode.GetBytes(string.Format("{0}:{1}", _format.Key, _format.Value));
+
+#if (NETSTANDARD1_1 || NETSTANDARD1_2)
+                    Encoding _dest = Encoding.UTF8;
+#else
+                    Encoding _dest = Encoding.ASCII;
+#endif
+
+                    byte[] _ascii = Encoding.Convert(Encoding.Unicode, _dest, _unicode);
+
+                    return new AuthenticationHeaderValue(_name, Convert.ToBase64String(_ascii));
+                case EAuthentication.Bearer:
+                case EAuthentication.Token:
+                    return new AuthenticationHeaderValue(_name, _format.Key);
+                case EAuthentication.Digest:
+                    throw new NotImplementedException();
+                default:
+                    break;
+            }
+
+            return null;
+        }
+        public static AuthenticationHeaderValue Authentication(EAuthentication _scheme, string _key, string _value = null)
+        {
+            EndpointFormat _format = new EndpointFormat
+            {
+                Scheme = _scheme,
+                Key = _key,
+                Value = _value
+            };
+
+            return Authentication(_format);
         }
     }
 }

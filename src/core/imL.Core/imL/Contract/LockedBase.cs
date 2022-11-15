@@ -4,7 +4,7 @@
     {
         protected static readonly object _LOCKED = new object();
 
-        private static IAppInfo _APP;
+        static IAppInfo _APP;
         public static IAppInfo App { get { lock (LockedBase._LOCKED) { return LockedBase._APP; } } }
 
         public static void Load(IAppInfo _app)

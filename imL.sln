@@ -3,27 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_root", "_root", "{5E5627C2-F20C-4D19-92D4-E6CAD12EA0C3}"
-	ProjectSection(SolutionItems) = preProject
-		.gitattributes = .gitattributes
-		.gitignore = .gitignore
-		LICENSE = LICENSE
-		README.md = README.md
-		remove.ps1 = remove.ps1
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nupkg", "nupkg", "{D92CFDA9-7848-4782-8ADA-D999D1B1E134}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{06C01FDE-2E33-483B-AA9B-7352424FA60E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9468AFE8-3923-405B-8C64-52240EADAB5E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E5086BD4-1DA9-4AD3-BAA2-01AA0605E5A9}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{7E2F66FF-85D2-4623-A3E7-EA5EC5E980B5}"
-	ProjectSection(SolutionItems) = preProject
-		nupkg\content\readme.txt = nupkg\content\readme.txt
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{9B5D1AA1-4DB0-425F-A8BC-8D2C5A51A461}"
 EndProject
@@ -103,11 +87,24 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL.Package.EFCSql", "src\p
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAMPLE.imL.Package.EFCSql", "sample\SAMPLE.imL.Package.EFCSql\SAMPLE.imL.Package.EFCSql.csproj", "{15367FEB-600D-42D2-87E4-F5ED7B098FCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "imL.Package.NLog", "src\pkg\imL.Package.NLog\imL.Package.NLog.csproj", "{299D006D-D6AB-4F45-B9FE-8C2541D5C80E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL.Package.NLog", "src\pkg\imL.Package.NLog\imL.Package.NLog.csproj", "{299D006D-D6AB-4F45-B9FE-8C2541D5C80E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "imL.Package.Hosting", "src\pkg\imL.Package.Hosting\imL.Package.Hosting.csproj", "{DD0B173D-CA36-4D05-86C8-80E90EFFDDE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL.Package.Hosting", "src\pkg\imL.Package.Hosting\imL.Package.Hosting.csproj", "{DD0B173D-CA36-4D05-86C8-80E90EFFDDE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "imL.Package.Logging", "src\pkg\imL.Package.Logging\imL.Package.Logging.csproj", "{ECB85653-3184-48A6-8C05-900800003AB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL.Package.Logging", "src\pkg\imL.Package.Logging\imL.Package.Logging.csproj", "{ECB85653-3184-48A6-8C05-900800003AB0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL.Rest.InsurDesign", "src\outer\imL.Rest.InsurDesign\imL.Rest.InsurDesign.csproj", "{37CD40EF-6F83-4931-8288-AE5D009FFF10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAMPLE.imL.Rest.InsurDesign", "sample\SAMPLE.imL.Rest.InsurDesign\SAMPLE.imL.Rest.InsurDesign.csproj", "{098164CD-C144-4A27-80CC-722ED027F72B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_root_", "_root_", "{9617E2B0-6DBE-4971-B53D-764C3C114F90}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+		remove.ps1 = remove.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -259,12 +256,19 @@ Global
 		{ECB85653-3184-48A6-8C05-900800003AB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECB85653-3184-48A6-8C05-900800003AB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECB85653-3184-48A6-8C05-900800003AB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37CD40EF-6F83-4931-8288-AE5D009FFF10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37CD40EF-6F83-4931-8288-AE5D009FFF10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37CD40EF-6F83-4931-8288-AE5D009FFF10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37CD40EF-6F83-4931-8288-AE5D009FFF10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{098164CD-C144-4A27-80CC-722ED027F72B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{098164CD-C144-4A27-80CC-722ED027F72B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{098164CD-C144-4A27-80CC-722ED027F72B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{098164CD-C144-4A27-80CC-722ED027F72B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{7E2F66FF-85D2-4623-A3E7-EA5EC5E980B5} = {D92CFDA9-7848-4782-8ADA-D999D1B1E134}
 		{9B5D1AA1-4DB0-425F-A8BC-8D2C5A51A461} = {9468AFE8-3923-405B-8C64-52240EADAB5E}
 		{9C77253D-8326-4D02-9963-A9905608C369} = {9468AFE8-3923-405B-8C64-52240EADAB5E}
 		{DEF2C035-CBF5-4600-9D68-92924C9AB208} = {9468AFE8-3923-405B-8C64-52240EADAB5E}
@@ -306,6 +310,8 @@ Global
 		{299D006D-D6AB-4F45-B9FE-8C2541D5C80E} = {DEF2C035-CBF5-4600-9D68-92924C9AB208}
 		{DD0B173D-CA36-4D05-86C8-80E90EFFDDE8} = {DEF2C035-CBF5-4600-9D68-92924C9AB208}
 		{ECB85653-3184-48A6-8C05-900800003AB0} = {DEF2C035-CBF5-4600-9D68-92924C9AB208}
+		{37CD40EF-6F83-4931-8288-AE5D009FFF10} = {9C77253D-8326-4D02-9963-A9905608C369}
+		{098164CD-C144-4A27-80CC-722ED027F72B} = {06C01FDE-2E33-483B-AA9B-7352424FA60E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F1BE17B3-0ED9-4751-BFC3-A8E338449B8C}

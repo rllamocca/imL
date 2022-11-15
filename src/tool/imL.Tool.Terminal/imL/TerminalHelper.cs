@@ -5,20 +5,19 @@ using Newtonsoft.Json;
 #endif
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Mail;
 
 using imL.Contract;
+using imL.Enumeration;
+using imL.Package.Zip;
 using imL.Resource;
+using imL.Struct;
 using imL.Utility;
 
-using System.Linq;
-
 using NLog;
-
-using imL.Package.Zip;
-
-using System.Collections.Generic;
 
 namespace imL.Tool.Terminal
 {
@@ -26,7 +25,7 @@ namespace imL.Tool.Terminal
     {
         internal static IProcessInfo I__TRY0__(string[] _args)
         {
-            Utility.TerminalHelper.Starts();
+            ConsoleHelper.Begins();
             IProcessInfo _return = new ProcessInfoDefault(new AppInfoDefault(_args));
             LogManager.AutoShutdown = true;
             LogManager.Configuration.Variables["_BASEDIR_"] = _return.App.PathLog;
@@ -51,9 +50,12 @@ namespace imL.Tool.Terminal
             _acum.Add(Path.Combine(_process.App.PathLog, _process.Guid + ".log"));
             _acum = _acum.Distinct().ToList();
             List<string> _attachs = new List<string>();
+            MemoryUnit _mb = default;
 
-            long _mb = 1 * 1024 * 1024;
-            string[] _exts = new string[] { ".txt", ".log", ".doc", ".xls" };
+            if (_settings.Smtp.MinSizeZipAttachment > 0)
+                _mb = new MemoryUnit(_settings.Smtp.MinSizeZipAttachment.GetValueOrDefault(), EMemoryUnit.MB);
+
+            string[] _exts = new string[] { ".docx", ".xlsx", ".pdf" };
 
             foreach (string _item in _acum)
                 _attachs.Add(ZipHelper.CompressOnly(_item, _mb, _exts));
@@ -75,7 +77,7 @@ namespace imL.Tool.Terminal
         internal static void I__FINALLY()
         {
             LogManager.Shutdown();
-            Utility.TerminalHelper.Ends();
+            ConsoleHelper.Ends(_card: true);
         }
 
         public static void Run<G>(Action<IProcessInfo, ISetting> _dowork, string[] _args, string _href = "#", string _by = "404")
@@ -97,7 +99,7 @@ namespace imL.Tool.Terminal
                 }
                 catch (Exception _ex)
                 {
-                    _logger.Fatal(_ex);
+                    _logger?.Fatal(_ex);
                     TerminalHelper.I__CATCH(_proc, _sett, _ex);
                 }
 
@@ -109,7 +111,7 @@ namespace imL.Tool.Terminal
                 if (_logger == null)
                     Console.WriteLine(_ex);
                 else
-                    _logger.Fatal(_ex);
+                    _logger?.Fatal(_ex);
 
                 throw;
             }

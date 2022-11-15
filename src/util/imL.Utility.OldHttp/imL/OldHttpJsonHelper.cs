@@ -26,8 +26,11 @@ namespace imL.Utility.OldHttp
                     break;
             }
         }
-        public static void JsonContent(HttpWebRequest _client, object _obj, ECompress _compress = ECompress.None)
+        public static void JsonContent(HttpWebRequest _client, object _obj = null, ECompress _compress = ECompress.None)
         {
+            if (_obj == null)
+                return;
+
             JsonHelper.ToJsonStream(out Stream _ms, _obj);
 
             switch (_compress)

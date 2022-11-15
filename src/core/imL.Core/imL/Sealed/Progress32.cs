@@ -15,10 +15,10 @@ namespace imL.Sealed
         , IProgress<int>
 #endif
     {
-        private bool _DISPOSED = false;
+        bool _DISPOSED = false;
 
-        private int _LENGTH;
-        private int _VALUE = 0;
+        int _LENGTH;
+        int _VALUE = 0;
 
         public int Length { get { return this._LENGTH; } }
         public int Value { get { return this._VALUE; } }

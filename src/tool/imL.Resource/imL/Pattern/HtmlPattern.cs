@@ -45,11 +45,28 @@ namespace imL.Resource
             }
 
             if (_process.Alert == EAlert.Danger)
+            {
+                if (_process.Critical != null)
+                {
+                    string _critical;
+
+                    try
+                    {
 #if (NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
-                _return = _return.Replace("__CRITICAL__", JsonSerializer.Serialize(_process.Critical, new JsonSerializerOptions() { WriteIndented = true }));
+                        _critical = JsonSerializer.Serialize(_process.Critical, new JsonSerializerOptions() { WriteIndented = true });
 #else
-                _return = _return.Replace("__CRITICAL__", JsonConvert.SerializeObject(_process.Critical, Formatting.Indented));
+                        _critical = JsonConvert.SerializeObject(_process.Critical, Formatting.Indented);
 #endif
+                    }
+                    catch (Exception _ex)
+                    {
+                        _critical = _process.Critical.Message + Environment.NewLine + _ex.Message;
+                    }
+
+                    _return = _return.Replace("__CRITICAL__", _critical);
+                }
+
+            }
             else
                 _return = _return.Replace("__CRITICAL__", "");
 

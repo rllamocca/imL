@@ -6,5 +6,9 @@ namespace imL.Package.EFCSql
     {
         IConnection Connection { get; }
         IHelperAsync Helper { get; }
+
+        DateTime CURRENT_TIMESTAMP();
+        DateTime GETDATE();
+        decimal? ABS(decimal? numeric_expression);
     }
 }

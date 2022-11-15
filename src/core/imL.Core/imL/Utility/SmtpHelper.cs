@@ -31,8 +31,10 @@ namespace imL.Utility
             if (_ref.UseDefaultCredentials == false)
                 _ref.Credentials = new NetworkCredential(_format.UserName, _format.Password);
         }
-        internal static void Init_MailMessage(ref MailMessage _ref, MailMessageFormat _format, Encoding _enc)
+        internal static void Init_MailMessage(ref MailMessage _ref, MailMessageFormat _format, Encoding _enc = null)
         {
+
+            ReadOnly.DefaultEncoding(ref _enc);
 
 #if (NET35) == false
             _ref.HeadersEncoding = _enc;
@@ -65,26 +67,25 @@ namespace imL.Utility
             _ref.Subject = _format.Subject;
 
             foreach (string _item2 in _format.PathAttachments.DefaultOrEmpty())
-                if (File.Exists(_item2))
-                    _ref.Attachments.Add(new Attachment(_item2));
+                _ref.Attachments.Add(new Attachment(_item2));
 
-            foreach (StreamAttachment _item2 in _format.StreamAttachments.DefaultOrEmpty())
+            foreach (StreamAttachmentFormat _item2 in _format.StreamAttachments.DefaultOrEmpty())
                 _ref.Attachments.Add(new Attachment(_item2.Content, _item2.Name));
 
             _ref.Body = _format.Body;
 
             if (_ref.IsBodyHtml)
             {
-                ContentType _mime = new ContentType("text/html");
-                AlternateView _aw = AlternateView.CreateAlternateViewFromString(_ref.Body, _mime);
+                ContentType _ct = new ContentType("text/html");
+                AlternateView _aw = AlternateView.CreateAlternateViewFromString(_ref.Body, _ct);
                 _ref.AlternateViews.Add(_aw);
             }
         }
 
         public static void Send(SmtpFormat _smtp, Encoding _enc = null, params MailMessageFormat[] _messages)
         {
-            if (_messages.IsEmpty())
-                return;
+            if (_smtp == null) return;
+            if (_messages.IsEmpty()) return;
 
             ReadOnly.DefaultEncoding(ref _enc);
 
@@ -93,6 +94,9 @@ namespace imL.Utility
 
             for (int _i = 0; _i < _messages.Length; _i++)
             {
+                if (_messages[_i].FromAddress == null) _messages[_i].FromAddress = _smtp.UserName;
+                if (_messages[_i].FromDisplayName == null) _messages[_i].FromDisplayName = _smtp.UserName;
+
                 MailMessage _mm = new MailMessage();
                 SmtpHelper.Init_MailMessage(ref _mm, _messages[_i], _enc);
                 _client.Send(_mm);

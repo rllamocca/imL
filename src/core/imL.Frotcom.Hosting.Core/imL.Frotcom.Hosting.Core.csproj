@@ -2,6 +2,7 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<NoWarn>CS1701;CS1702;CS8600;CS8601;CS8602;CS8618;CS8625;IDE0063;IDE0066;IDE0090</NoWarn>
+		<CheckEolTargetFramework>false</CheckEolTargetFramework>
 	</PropertyGroup>
 	<PropertyGroup>
 		<TargetFrameworks>
@@ -9,6 +10,7 @@
 			;netstandard2.1
 			;net5.0
 			;net6.0
+			;net7.0
 		</TargetFrameworks>
 
 		<Authors>Ricardo Llamocca ♪♫</Authors>
@@ -26,20 +28,20 @@
 		<PackageOutputPath>$(SolutionDir)\nupkg\debug\</PackageOutputPath>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
-		<Version>0.0.0.3</Version>
+		<Version>0.0.0.4</Version>
 		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.0" />
-		<PackageReference Include="NLog.Extensions.Hosting" Version="1.7.4" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="7.*" />
+		<PackageReference Include="NLog.Extensions.Hosting" Version="5.*" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\outer\imL.Rest.Frotcom\imL.Rest.Frotcom.csproj" />
-	  <ProjectReference Include="..\..\pkg\imL.Package.Hosting\imL.Package.Hosting.csproj" />
+		<ProjectReference Include="..\..\outer\imL.Rest.Frotcom\imL.Rest.Frotcom.csproj" />
+		<ProjectReference Include="..\..\pkg\imL.Package.Hosting\imL.Package.Hosting.csproj" />
 	</ItemGroup>
 
 </Project>

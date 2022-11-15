@@ -12,8 +12,8 @@ namespace imL.Utility
     {
         public static async Task SendAsync(SmtpFormat _smtp, Encoding _enc = null, params MailMessageFormat[] _messages)
         {
-            if (_messages.IsEmpty())
-                return;
+            if (_smtp == null) return;
+            if (_messages.IsEmpty()) return;
 
             ReadOnly.DefaultEncoding(ref _enc);
 
@@ -22,6 +22,9 @@ namespace imL.Utility
 
             for (int _i = 0; _i < _messages.Length; _i++)
             {
+                if (_messages[_i].FromAddress == null) _messages[_i].FromAddress = _smtp.UserName;
+                if (_messages[_i].FromDisplayName == null) _messages[_i].FromDisplayName = _smtp.UserName;
+
                 MailMessage _mm = new MailMessage();
                 SmtpHelper.Init_MailMessage(ref _mm, _messages[_i], _enc);
                 await _client.SendMailAsync(_mm);

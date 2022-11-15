@@ -15,11 +15,11 @@ namespace imL.Utility.Sql
 {
     public class SqlConnectionDefault : IConnection
     {
-        private bool _DISPOSED = false;
-        private bool _STATISTICS = false;
+        bool _DISPOSED = false;
+        bool _STATISTICS = false;
 
-        private SqlTransaction _TS;
-        private SqlConnection _CN;
+        SqlTransaction _TS;
+        SqlConnection _CN;
 
         public SqlTransaction Transaction
         {

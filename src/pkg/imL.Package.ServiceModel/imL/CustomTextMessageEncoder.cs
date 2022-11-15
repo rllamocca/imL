@@ -12,9 +12,9 @@ namespace imL.Package.ServiceModel
 {
     public class CustomTextMessageEncoder : MessageEncoder
     {
-        private readonly CustomTextMessageEncoderFactory factory;
-        private readonly XmlWriterSettings writerSettings;
-        private readonly string contentType;
+        readonly CustomTextMessageEncoderFactory factory;
+        readonly XmlWriterSettings writerSettings;
+        readonly string contentType;
 
         public CustomTextMessageEncoder(CustomTextMessageEncoderFactory factory)
         {

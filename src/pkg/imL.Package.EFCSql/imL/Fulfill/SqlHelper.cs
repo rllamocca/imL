@@ -193,7 +193,7 @@ namespace imL.Package.EFCSql
                 using (DataTable _dt = LoadDataTable(_query, _pmts))
                 {
                     List<G> _return = new();
-                    Settler<G> _set = new();
+                    Setter<G> _set = new();
 
                     foreach (DataRow _item in _dt.Rows)
                         _return.Add(_set.Instance(_item));

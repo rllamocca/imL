@@ -6,10 +6,10 @@ namespace imL.Package.ServiceModel
 {
     public class CustomTextMessageBindingElement : MessageEncodingBindingElement
     {
-        private MessageVersion msgVersion;
-        private string mediaType;
-        private string encoding;
-        private readonly XmlDictionaryReaderQuotas readerQuotas;
+        MessageVersion msgVersion;
+        string mediaType;
+        string encoding;
+        readonly XmlDictionaryReaderQuotas readerQuotas;
 
         CustomTextMessageBindingElement(CustomTextMessageBindingElement binding)
             : this(binding.Encoding, binding.MediaType, binding.MessageVersion)

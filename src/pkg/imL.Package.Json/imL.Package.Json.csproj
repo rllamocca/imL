@@ -2,6 +2,7 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<NoWarn>CS1701;CS1702;CS8600;CS8601;CS8602;CS8618;CS8625;IDE0063;IDE0066;IDE0090</NoWarn>
+		<CheckEolTargetFramework>false</CheckEolTargetFramework>
 	</PropertyGroup>
 	<PropertyGroup>
 		<TargetFrameworks>
@@ -18,6 +19,7 @@
 			;netstandard2.1
 			;net5.0
 			;net6.0
+			;net7.0
 		</TargetFrameworks>
 
 		<Authors>Ricardo Llamocca ♪♫</Authors>
@@ -35,20 +37,20 @@
 		<PackageOutputPath>$(SolutionDir)\nupkg\debug\</PackageOutputPath>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
-		<Version>0.0.0.3</Version>
+		<Version>0.0.0.4</Version>
 		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<ItemGroup Condition="('$(TargetFramework)' == 'netstandard2.1') Or ('$(TargetFramework)' == 'netstandard2.0')">
-		<PackageReference Include="System.Text.Json" Version="6.0.*" />
+		<PackageReference Include="System.Text.Json" Version="7.*" />
 	</ItemGroup>
 	<ItemGroup Condition="('$(TargetFramework)' == 'netstandard1.6') Or ('$(TargetFramework)' == 'netstandard1.5') Or ('$(TargetFramework)' == 'netstandard1.4') Or ('$(TargetFramework)' == 'netstandard1.3') Or ('$(TargetFramework)' == 'netstandard1.2') Or ('$(TargetFramework)' == 'netstandard1.1') Or ('$(TargetFramework)' == 'netstandard1.0') Or ('$(TargetFramework)' == 'net40') Or ('$(TargetFramework)' == 'net35')">
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.*" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.*" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\..\core\imL.Core\imL.Core.csproj" />
+		<ProjectReference Include="..\..\core\imL.Core\imL.Core.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -14,7 +14,7 @@ namespace imL.JavaScript.ChartJS
 {
     public static class ChartJSHelper
     {
-        private static Config Create(ChartFormat _chart)
+        static Config Create(ChartFormat _chart)
         {
             Config _return = new Config
             {
@@ -82,13 +82,13 @@ namespace imL.JavaScript.ChartJS
 
             return _return;
         }
-        private static void CleanScales(ref Config _ref)
+        static void CleanScales(ref Config _ref)
         {
             if (_ref.options.scales.x != null) _ref.options.scales.x = null;
             if (_ref.options.scales.y != null) _ref.options.scales.y = null;
             if (_ref.options.scales.z != null) _ref.options.scales.z = null;
         }
-        private static void ToDataSets(ref Config _ref, ChartFormat _chart, bool _pileup = false, bool _border = true)
+        static void ToDataSets(ref Config _ref, ChartFormat _chart, bool _pileup = false, bool _border = true)
         {
             _ref.data = new Data();
 

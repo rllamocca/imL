@@ -7,14 +7,14 @@ namespace imL.Package.Hosting
 {
     public class PeriodExecutionDefault : IPeriodExecution
     {
-        private bool _DISPOSED;
+        bool _DISPOSED;
 
-        private long _COUNT;
-        private IAppInfo _APP;
-        private CancellationToken _TOKEN;
+        long _COUNT;
+        IAppInfo _APP;
+        CancellationToken _TOKEN;
 
-        private DateTime _START;
-        private string _GUID;
+        DateTime _START;
+        string _GUID;
 
         public long Count { get { return this._COUNT; } }
         public IAppInfo App { get { return this._APP; } }

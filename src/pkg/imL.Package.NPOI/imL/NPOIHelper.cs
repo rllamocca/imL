@@ -16,7 +16,7 @@ namespace imL.Package.NPOI
 {
     public static class NPOIHelper
     {
-        private static IWorkbook OpenRead(string _path, bool _xls = true)
+        static IWorkbook OpenRead(string _path, bool _xls = true)
         {
             using (FileStream _s = new FileStream(_path, FileMode.Open, FileAccess.Read))
             {
@@ -141,7 +141,7 @@ namespace imL.Package.NPOI
         {
             IWorkbook _wb = OpenRead(_path, _xls);
             ISheet _sheet = _wb.GetSheetAt(_isheet);
-            Settler<T> _set = new Settler<T>();
+            Setter<T> _set = new Setter<T>();
             int _init = 0;
 
             if (_columnnames)

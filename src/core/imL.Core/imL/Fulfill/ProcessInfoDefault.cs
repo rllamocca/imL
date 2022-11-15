@@ -14,6 +14,8 @@ namespace imL.Contract
         public long? Inserted { set; get; }
         public long? Updated { set; get; }
         public long? Erased { set; get; }
+        public long? Successes { set; get; }
+        public long? Errors { set; get; }
         public IList<string> PathAttachments { set; get; }
         public EAlert Alert { set; get; }
         public Exception Critical { set; get; }
@@ -47,13 +49,28 @@ namespace imL.Contract
             if (_add > 0)
                 this.Erased = this.Erased.GetValueOrDefault() + _add;
         }
+        public void AddSuccesses(long _add)
+        {
+            if (_add > 0)
+                this.Successes = this.Successes.GetValueOrDefault() + _add;
+        }
+        public void AddErrors(long _add)
+        {
+            if (_add > 0)
+                this.Errors = this.Errors.GetValueOrDefault() + _add;
+        }
+
         public void Success()
         {
             long? _acum = this.Inserted.GetValueOrDefault() + this.Updated.GetValueOrDefault() + this.Erased.GetValueOrDefault();
 
             if (_acum == null || _acum == 0)
+                this.Alert = EAlert.Info;
+
+            if (this.Errors > 0)
                 this.Alert = EAlert.Warning;
-            else
+
+            if (this.Alert == EAlert.None)
                 this.Alert = EAlert.Success;
 
             this.End = DateTime.Now;
