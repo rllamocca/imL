@@ -43,7 +43,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="NLog" Version="5.0.*" />
+		<PackageReference Include="NLog" Version="5.*" />
 	</ItemGroup>
 
 </Project>

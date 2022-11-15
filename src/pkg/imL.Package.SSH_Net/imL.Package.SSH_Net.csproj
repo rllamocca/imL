@@ -40,7 +40,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="SSH.NET" Version="2020.0.*" />
+		<PackageReference Include="SSH.NET" Version="2020.*" />
 	</ItemGroup>
 
 	<ItemGroup>
