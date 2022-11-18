@@ -14,6 +14,9 @@ using imL.Utility;
 
 using NLog;
 
+using imL.Package.NLog;
+using imL.Enumeration;
+
 namespace imL.Tool.Terminal
 {
     public static class TerminalHelperAsync
@@ -33,11 +36,11 @@ namespace imL.Tool.Terminal
                 {
                     await _dowork(_proc, _sett);
 
-                    TerminalHelper.I__TRY2__(_proc, _sett);
+                    _proc.Success();
                 }
                 catch (Exception _ex)
                 {
-                    _logger?.Fatal(_ex);
+                    _logger?.InnerFatal(_ex);
                     TerminalHelper.I__CATCH(_proc, _sett, _ex);
                 }
 
@@ -47,9 +50,9 @@ namespace imL.Tool.Terminal
             catch (Exception _ex)
             {
                 if (_logger == null)
-                    Console.WriteLine(_ex);
+                    ConsoleHelper.InnerException(_ex);
                 else
-                    _logger?.Fatal(_ex);
+                    _logger?.InnerFatal(_ex);
             }
             finally
             {

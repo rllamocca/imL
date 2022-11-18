@@ -1,4 +1,7 @@
-﻿using NLog;
+﻿using System;
+using System.Linq;
+
+using NLog;
 
 namespace imL.Package.NLog
 {
@@ -63,6 +66,17 @@ namespace imL.Package.NLog
                 return _this;
 
             return null;
+        }
+
+        public static void InnerFatal(this ILogger _this, Exception _ex)
+        {
+            if (_this == null)
+                return;
+
+            _this.Fatal(_ex);
+
+            if (_ex.InnerException != null)
+                _this.InnerFatal(_ex.InnerException);
         }
     }
 }

@@ -79,8 +79,7 @@ namespace imL.Resource.Properties {
         ///    --bs-green: #198754;
         ///    --bs-teal: #20c997;
         ///    --bs-cyan: #0dcaf0;
-        ///    --bs-white: #fff;
-        ///   [resto de la cadena truncado]&quot;;.
+        ///    -- [resto de la cadena truncado]&quot;;.
         /// </summary>
         internal static string CSS_bootstrap {
             get {
@@ -100,22 +99,30 @@ namespace imL.Resource.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a &lt;div class=&quot;alert alert-info bg-gradient&quot; role=&quot;alert&quot;&gt;
+        ///    Proceso completado sin diferencias.
+        ///&lt;/div&gt;.
+        /// </summary>
+        internal static string HTML_info {
+            get {
+                return ResourceManager.GetString("HTML_info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a &lt;!doctype html&gt;
         ///&lt;html lang=&quot;es&quot;&gt;
         ///
         ///&lt;head&gt;
+        ///    &lt;title&gt;Summary:&lt;/title&gt;
         ///    &lt;meta charset=&quot;utf-8&quot;&gt;
         ///    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-        ///    &lt;meta name=&quot;description&quot; content=&quot;Resumen de proceso.&quot;&gt;
         ///    &lt;meta name=&quot;author&quot; content=&quot;Ricardo Llamocca&quot;&gt;
-        ///    &lt;meta name=&quot;generator&quot; content=&quot;Richie 84.10.2&quot;&gt;
-        ///    &lt;title&gt;Resume:&lt;/title&gt;
-        ///&lt;/head&gt;
-        ///
-        ///&lt;body class=&quot;bg-light&quot;&gt;
-        ///    &lt;div class=&quot;container-fluid&quot;&gt;
-        ///        &lt;div class=&quot;bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2&quot;&gt;
-        ///        [resto de la cadena truncado]&quot;;.
+        ///    &lt;meta name=&quot;copyright&quot; content=&quot;imL © 1984 - 8888&quot; /&gt;
+        ///    &lt;!--&lt;meta name=&quot;robots&quot; content=&quot;noindex,nofollow&quot; /&gt;--&gt;
+        ///    &lt;!--&lt;meta http-equiv=&quot;cache-control&quot; content=&quot;no-cache&quot; /&gt;--&gt;
+        ///    &lt;!--&lt;meta http-equiv=&quot;expires&quot; content=&quot;28800&quot; /&gt;--&gt;
+        ///    &lt;!--&lt;meta http-equiv=&quot;refresh&quot; co [resto de la cadena truncado]&quot;;.
         /// </summary>
         internal static string HTML_resume {
             get {
@@ -136,7 +143,7 @@ namespace imL.Resource.Properties {
         
         /// <summary>
         ///   Busca una cadena traducida similar a &lt;div class=&quot;alert alert-warning bg-gradient&quot; role=&quot;alert&quot;&gt;
-        ///    Proceso completado sin diferencias.
+        ///    Proceso completado con incidencias.
         ///&lt;/div&gt;.
         /// </summary>
         internal static string HTML_warning {

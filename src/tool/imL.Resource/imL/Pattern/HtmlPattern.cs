@@ -26,16 +26,40 @@ namespace imL.Resource
 
             switch (_process.Alert)
             {
-                case EAlert.Success:
-                    _return = _return.Replace("__ALERT__", Resources.HTML_success);
-
-                    break;
                 case EAlert.Warning:
                     _return = _return.Replace("__ALERT__", Resources.HTML_warning);
 
                     break;
                 case EAlert.Danger:
                     _return = _return.Replace("__ALERT__", Resources.HTML_danger);
+
+                    break;
+                case EAlert.Success:
+                    _return = _return.Replace("__ALERT__", Resources.HTML_success);
+
+                    break;
+                case EAlert.Info:
+                    _return = _return.Replace("__ALERT__", Resources.HTML_info);
+
+                    break;
+                default:
+                    _return = _return.Replace("__ALERT__", "");
+
+                    break;
+            }
+
+            switch (_process.Alert)
+            {
+                case EAlert.Success:
+                    
+
+                    break;
+                case EAlert.Warning:
+                    
+
+                    break;
+                case EAlert.Danger:
+                    
 
                     break;
                 default:
@@ -77,6 +101,8 @@ namespace imL.Resource
             _return = _return.Replace("__INSERTED__", Convert.ToString(_process.Inserted));
             _return = _return.Replace("__UPDATED__", Convert.ToString(_process.Updated));
             _return = _return.Replace("__ERASED__", Convert.ToString(_process.Erased));
+            _return = _return.Replace("__SUCCESSES__", Convert.ToString(_process.Successes));
+            _return = _return.Replace("__ERRORS__", Convert.ToString(_process.Errors));
             _return = _return.Replace("__POWERED_HREF__", _href);
             _return = _return.Replace("__POWERED_BY__", _by);
 
