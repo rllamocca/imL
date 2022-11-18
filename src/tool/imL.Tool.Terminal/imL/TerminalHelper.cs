@@ -19,6 +19,8 @@ using imL.Utility;
 
 using NLog;
 
+using imL.Package.NLog;
+
 namespace imL.Tool.Terminal
 {
     public static class TerminalHelper
@@ -42,7 +44,7 @@ namespace imL.Tool.Terminal
             return JsonConvert.DeserializeObject<G>(File.ReadAllText(Path.Combine(_process.App.Path, "settings.json")));
 #endif
         }
-        internal static void I__TRY2__(IProcessInfo _process, ISetting _settings)
+        internal static void I__TRYN__(IProcessInfo _process, ISetting _settings, string _href, string _by)
         {
             List<string> _acum = new List<string>();
             _acum.AddRange(_process.PathAttachments.DefaultOrEmpty());
@@ -61,10 +63,7 @@ namespace imL.Tool.Terminal
                 _attachs.Add(ZipHelper.CompressOnly(_item, _mb, _exts));
 
             _settings.Mail.PathAttachments = _attachs;
-            _process.Success();
-        }
-        internal static void I__TRYN__(IProcessInfo _process, ISetting _settings, string _href, string _by)
-        {
+
             _settings.Mail.IsBodyHtml = true;
             _settings.Mail.Body = HtmlPattern.Resume(_process, _href, _by);
             LogManager.Shutdown();
@@ -95,11 +94,11 @@ namespace imL.Tool.Terminal
                 {
                     _dowork(_proc, _sett);
 
-                    TerminalHelper.I__TRY2__(_proc, _sett);
+                    _proc.Success();
                 }
                 catch (Exception _ex)
                 {
-                    _logger?.Fatal(_ex);
+                    _logger?.InnerFatal(_ex);
                     TerminalHelper.I__CATCH(_proc, _sett, _ex);
                 }
 
@@ -109,9 +108,9 @@ namespace imL.Tool.Terminal
             catch (Exception _ex)
             {
                 if (_logger == null)
-                    Console.WriteLine(_ex);
+                    ConsoleHelper.InnerException(_ex);
                 else
-                    _logger?.Fatal(_ex);
+                    _logger?.InnerFatal(_ex);
 
                 throw;
             }

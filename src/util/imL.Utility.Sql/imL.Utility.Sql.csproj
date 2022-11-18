@@ -37,7 +37,7 @@
 		<PackageOutputPath>$(SolutionDir)\nupkg\debug\</PackageOutputPath>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
-		<Version>0.8.8.15</Version>
+		<Version>0.8.8.16</Version>
 		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>

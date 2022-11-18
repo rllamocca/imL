@@ -59,6 +59,14 @@ namespace imL.Utility
             Console.SetCursorPosition(_xy.X, _xy.Y);
             Console.WriteLine(_value);
         }
+
+        public static void InnerException(Exception _ex)
+        {
+            Console.WriteLine(_ex);
+
+            if (_ex.InnerException != null)
+                InnerException(_ex.InnerException);
+        }
     }
 }
 

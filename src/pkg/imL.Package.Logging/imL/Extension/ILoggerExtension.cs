@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System;
+
+using Microsoft.Extensions.Logging;
 
 namespace imL.Package.Logging
 {
@@ -63,6 +65,18 @@ namespace imL.Package.Logging
                 return _this;
 
             return null;
+        }
+
+        public static void InnerLogCritical(this ILogger _this, Exception _ex)
+        {
+            if (_this == null)
+                return;
+
+            while (_ex != null)
+            {
+                _this.LogCritical(_ex, "{p0}", _ex.Message);
+                _ex = _ex.InnerException;
+            }
         }
     }
 }

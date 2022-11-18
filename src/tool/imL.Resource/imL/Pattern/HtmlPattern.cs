@@ -1,14 +1,11 @@
-﻿#if (NETSTANDARD2_0_OR_GREATER ||  NET5_0_OR_GREATER)
-using System.Text.Json;
-#else
-using Newtonsoft.Json;
-#endif
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 using imL.Contract;
 using imL.Enumeration;
 using imL.Resource.Properties;
-
-using System;
+using imL.Utility;
 
 namespace imL.Resource
 {
@@ -26,10 +23,6 @@ namespace imL.Resource
 
             switch (_process.Alert)
             {
-                case EAlert.Success:
-                    _return = _return.Replace("__ALERT__", Resources.HTML_success);
-
-                    break;
                 case EAlert.Warning:
                     _return = _return.Replace("__ALERT__", Resources.HTML_warning);
 
@@ -38,34 +31,24 @@ namespace imL.Resource
                     _return = _return.Replace("__ALERT__", Resources.HTML_danger);
 
                     break;
+                case EAlert.Success:
+                    _return = _return.Replace("__ALERT__", Resources.HTML_success);
+
+                    break;
+                case EAlert.Info:
+                    _return = _return.Replace("__ALERT__", Resources.HTML_info);
+
+                    break;
                 default:
                     _return = _return.Replace("__ALERT__", "");
 
                     break;
             }
 
-            if (_process.Alert == EAlert.Danger)
+            if (_process.Critical != null)
             {
-                if (_process.Critical != null)
-                {
-                    string _critical;
-
-                    try
-                    {
-#if (NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
-                        _critical = JsonSerializer.Serialize(_process.Critical, new JsonSerializerOptions() { WriteIndented = true });
-#else
-                        _critical = JsonConvert.SerializeObject(_process.Critical, Formatting.Indented);
-#endif
-                    }
-                    catch (Exception _ex)
-                    {
-                        _critical = _process.Critical.Message + Environment.NewLine + _ex.Message;
-                    }
-
-                    _return = _return.Replace("__CRITICAL__", _critical);
-                }
-
+                IEnumerable<string> _critical = ExceptionHelper.InnerException(_process.Critical);
+                _return = _return.Replace("__CRITICAL__", string.Join(Environment.NewLine, _critical.ToArray()));
             }
             else
                 _return = _return.Replace("__CRITICAL__", "");
@@ -77,6 +60,8 @@ namespace imL.Resource
             _return = _return.Replace("__INSERTED__", Convert.ToString(_process.Inserted));
             _return = _return.Replace("__UPDATED__", Convert.ToString(_process.Updated));
             _return = _return.Replace("__ERASED__", Convert.ToString(_process.Erased));
+            _return = _return.Replace("__SUCCESSES__", Convert.ToString(_process.Successes));
+            _return = _return.Replace("__ERRORS__", Convert.ToString(_process.Errors));
             _return = _return.Replace("__POWERED_HREF__", _href);
             _return = _return.Replace("__POWERED_BY__", _by);
 
