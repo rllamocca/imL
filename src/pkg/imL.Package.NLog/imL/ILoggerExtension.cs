@@ -73,10 +73,11 @@ namespace imL.Package.NLog
             if (_this == null)
                 return;
 
-            _this.Fatal(_ex);
-
-            if (_ex.InnerException != null)
-                _this.InnerFatal(_ex.InnerException);
+            while (_ex != null)
+            {
+                _this.Fatal(_ex);
+                _ex = _ex.InnerException;
+            }
         }
     }
 }

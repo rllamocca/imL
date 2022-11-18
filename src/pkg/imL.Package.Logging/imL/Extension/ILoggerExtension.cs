@@ -72,10 +72,11 @@ namespace imL.Package.Logging
             if (_this == null)
                 return;
 
-            _this.LogCritical(_ex, "{p0}", _ex.Message);
-
-            if (_ex.InnerException != null)
-                _this.InnerLogCritical(_ex.InnerException);
+            while (_ex != null)
+            {
+                _this.LogCritical(_ex, "{p0}", _ex.Message);
+                _ex = _ex.InnerException;
+            }
         }
     }
 }

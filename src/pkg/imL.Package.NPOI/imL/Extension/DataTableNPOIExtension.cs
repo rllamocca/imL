@@ -182,7 +182,13 @@ namespace imL.Package.NPOI
             if (_wb is XSSFWorkbook _wb2)
                 _wb2.Write(_out, true);
             else
+            {
+#if (NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
+                _wb.Write(_out, true);
+#else
                 _wb.Write(_out);
+#endif
+            }
 #endif
         }
 
@@ -330,7 +336,13 @@ namespace imL.Package.NPOI
             if (_wb is XSSFWorkbook _wb2)
                 _wb2.Write(_out, true);
             else
+            {
+#if (NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
+                _wb.Write(_out, true);
+#else
                 _wb.Write(_out);
+#endif
+            }
 #endif
         }
     }

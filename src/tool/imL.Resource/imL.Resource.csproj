@@ -39,9 +39,8 @@
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
-
 	<ItemGroup>
-		<ProjectReference Include="..\..\pkg\imL.Package.Json\imL.Package.Json.csproj" />
+		<ProjectReference Include="..\..\core\imL.Core\imL.Core.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

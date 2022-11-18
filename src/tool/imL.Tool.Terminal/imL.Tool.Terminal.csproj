@@ -41,6 +41,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\pkg\imL.Package.Json\imL.Package.Json.csproj" />
 		<ProjectReference Include="..\..\pkg\imL.Package.NLog\imL.Package.NLog.csproj" />
 		<ProjectReference Include="..\..\pkg\imL.Package.Zip\imL.Package.Zip.csproj" />
 		<ProjectReference Include="..\imL.Resource\imL.Resource.csproj" />
