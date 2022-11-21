@@ -15,7 +15,7 @@ namespace SAMPLE.imL.Tool.Terminal
             _logger.Info("Hi process");
             _logger.LetDebug()?.Debug("Debug");
             await Task.Delay(1000);
-            _info.PathAttachments.Add(@"C:\tmp\20211129-applog.log");
+            //_info.PathAttachments.Add(@"C:\tmp\20211129-applog.log");
             _logger.Info("Bye process");
         }
     }
