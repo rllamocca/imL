@@ -20,10 +20,10 @@ namespace imL.Utility
             _ref.PickupDirectoryLocation = _format.PickupDirectoryLocation ?? _ref.PickupDirectoryLocation;
             _ref.Host = _format.Host ?? _ref.Host;
             _ref.EnableSsl = _format.EnableSsl ?? _ref.EnableSsl;
-            _ref.DeliveryMethod = _format.DeliveryMethod;
+            _ref.DeliveryMethod = _format.DeliveryMethod ?? _ref.DeliveryMethod;
 
 #if (NET35 || NET40) == false
-            _ref.DeliveryFormat = _format.DeliveryFormat;
+            _ref.DeliveryFormat = _format.DeliveryFormat ?? _ref.DeliveryFormat;
 #endif
 
             _ref.UseDefaultCredentials = _format.UseDefaultCredentials ?? _ref.UseDefaultCredentials;
@@ -44,13 +44,13 @@ namespace imL.Utility
             _ref.BodyEncoding = _enc;
 
             _ref.IsBodyHtml = _format.IsBodyHtml ?? _ref.IsBodyHtml;
-            _ref.Priority = _format.Priority;
+            _ref.Priority = _format.Priority ?? _ref.Priority;
 
 #if (NET35 || NET40) == false
-            _ref.BodyTransferEncoding = _format.BodyTransferEncoding;
+            _ref.BodyTransferEncoding = _format.BodyTransferEncoding ?? _ref.BodyTransferEncoding;
 #endif
 
-            _ref.DeliveryNotificationOptions = _format.DeliveryNotificationOptions;
+            _ref.DeliveryNotificationOptions = _format.DeliveryNotificationOptions ?? _ref.DeliveryNotificationOptions;
 
             _ref.From = new MailAddress(_format.FromAddress, _format.FromDisplayName, _enc);
             _ref.Sender = _ref.From;

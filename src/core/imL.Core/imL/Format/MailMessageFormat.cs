@@ -9,11 +9,11 @@ namespace imL.Format
     public class MailMessageFormat
     {
         public string Subject { set; get; }
-        public MailPriority Priority { set; get; }
+        public MailPriority? Priority { set; get; }
         public bool? IsBodyHtml { set; get; }
-        public TransferEncoding BodyTransferEncoding { set; get; }
+        public TransferEncoding? BodyTransferEncoding { set; get; }
         public string Body { set; get; }
-        public DeliveryNotificationOptions DeliveryNotificationOptions { set; get; }
+        public DeliveryNotificationOptions? DeliveryNotificationOptions { set; get; }
 
 
         public string FromAddress { set; get; }
