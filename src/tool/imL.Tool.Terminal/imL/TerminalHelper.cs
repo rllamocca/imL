@@ -46,17 +46,18 @@ namespace imL.Tool.Terminal
         }
         internal static void I__TRYN__(IProcessInfo _process, ISetting _settings, string _href, string _by)
         {
-            string _log = Path.Combine(_process.App.PathLog, _process.Guid + ".log");
-            //string _html = Path.Combine(_process.App.PathOut, _process.Guid + ".html");
-            //string _pdf = Path.Combine(_process.App.PathOut, _process.Guid + ".pdf");
-
             _settings.Mail.IsBodyHtml = true;
             _settings.Mail.Body = HtmlPattern.Resume(_process, _href, _by);
-            //File.WriteAllText(_html, _settings.Mail.Body);
+
+            string _log = Path.Combine(_process.App.PathLog, _process.Guid + ".log");
+            string _html = Path.Combine(_process.App.PathOut, _process.Guid + ".html");
+            //string _pdf = Path.Combine(_process.App.PathOut, _process.Guid + ".pdf");
+
+            File.WriteAllText(_html, _settings.Mail.Body);
 
             List<string> _acum = new List<string>();
             _acum.Add(_log);
-            //_acum.Add(_html);
+            _acum.Add(_html);
             //_acum.Add(_pdf);
             _acum.AddRange(_process.PathAttachments.DefaultOrEmpty());
             _acum.AddRange(_settings.Mail.PathAttachments.DefaultOrEmpty());

@@ -1,12 +1,13 @@
 ﻿#if (NET35_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
 
-using imL.Format;
-
 using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
+//using System.Runtime.Serialization.Formatters;
 using System.Text;
+
+using imL.Format;
 
 namespace imL.Utility
 {
@@ -55,6 +56,14 @@ namespace imL.Utility
             _ref.From = new MailAddress(_format.FromAddress, _format.FromDisplayName, _enc);
             _ref.Sender = _ref.From;
 
+            _ref.Body = _format.Body ?? _ref.Body;
+
+            if (_ref.IsBodyHtml)
+            {
+                AlternateView _aw = AlternateView.CreateAlternateViewFromString(_ref.Body, new ContentType("text/html"));
+                _ref.AlternateViews.Add(_aw);
+            }
+
             foreach (string _item2 in _format.TO.DefaultOrEmpty())
                 _ref.To.Add(new MailAddress(_item2));
 
@@ -67,19 +76,10 @@ namespace imL.Utility
             _ref.Subject = _format.Subject;
 
             foreach (string _item2 in _format.PathAttachments.DefaultOrEmpty())
-                _ref.Attachments.Add(new Attachment(_item2));
+                _ref.Attachments.Add(new Attachment(_item2, MimeHelper.ContentType(_item2)));
 
             foreach (StreamAttachmentFormat _item2 in _format.StreamAttachments.DefaultOrEmpty())
-                _ref.Attachments.Add(new Attachment(_item2.Content, _item2.Name));
-
-            _ref.Body = _format.Body;
-
-            if (_ref.IsBodyHtml)
-            {
-                ContentType _ct = new ContentType("text/html");
-                AlternateView _aw = AlternateView.CreateAlternateViewFromString(_ref.Body, _ct);
-                _ref.AlternateViews.Add(_aw);
-            }
+                _ref.Attachments.Add(new Attachment(_item2.Content, _item2.Name, _item2.MediaType ?? MimeHelper.MediaType(new FileInfo(_item2.Name).Extension)));
         }
 
         public static void Send(SmtpFormat _smtp, Encoding _enc = null, params MailMessageFormat[] _messages)

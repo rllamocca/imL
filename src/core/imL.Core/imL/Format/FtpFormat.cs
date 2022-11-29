@@ -10,6 +10,9 @@
         public bool? UsePassive { set; get; }
         public bool? UseDefaultCredentials { set; get; }
 
+        public string ConnectionGroupName { set; get; }
+        public int? ConnectionLimit { set; get; }
+
         public int? Port { set; get; }
 
         public string Host { set; get; }

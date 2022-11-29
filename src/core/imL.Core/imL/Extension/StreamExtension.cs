@@ -28,11 +28,19 @@ namespace imL.Utility
         public static void FileCreate(this Stream _this, string _path)
         {
             using (FileStream _sw = File.Create(_path))
-            {
                 _this.CopyTo(_sw);
-            }
         }
 #endif
+
+        public static byte[] ToBytes(this Stream _this)
+        {
+            using (MemoryStream _ms = new MemoryStream())
+            {
+                _this.CopyTo(_ms);
+
+                return _ms.ToArray();
+            }
+        }
 
     }
 }

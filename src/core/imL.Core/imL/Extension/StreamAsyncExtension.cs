@@ -17,6 +17,18 @@ namespace imL.Utility
         }
 #endif
 
+#if (NET40 == false)
+        public static byte[] ToBytesAsync(this Stream _this)
+        {
+            using (MemoryStream _ms = new MemoryStream())
+            {
+                _this.CopyToAsync(_ms);
+
+                return _ms.ToArray();
+            }
+        }
+#endif
+
     }
 }
 

@@ -72,6 +72,10 @@ namespace imL.Utility
         {
             return _array ?? Enumerable.Empty<G>();
         }
+        public static IEnumerable<G> ReturnAny<G>(this IEnumerable<G> _array, IEnumerable<G> _default = null)
+        {
+            return _array.Any() ? _array : _default;
+        }
         public static bool HasValue<G>(this IEnumerable<G> _array)
         {
             return (_array != null);
