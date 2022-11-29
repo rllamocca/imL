@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace imL.Utility
 {
-    public static class StreamAsyncExtension
+    public static class StreamExtensionAsync
     {
 
 #if (NET45_OR_GREATER || NETSTANDARD1_3_OR_GREATER || NET5_0_OR_GREATER)
         public static async Task FileCreateAsync(this Stream _this, string _path, CancellationToken _token = default)
         {
-            using (FileStream _sw = File.Create(_path, 128, FileOptions.Asynchronous))
-                await _this.CopyToAsync(_sw, 128, _token);
+            int _buffer = 128;
+
+            using (FileStream _sw = File.Create(_path, _buffer, FileOptions.Asynchronous))
+                await _this.CopyToAsync(_sw, _buffer, _token);
         }
 #endif
 

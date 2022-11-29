@@ -45,6 +45,14 @@ namespace imL
         public static readonly Encoding _ENCODING_NO_BOM = new UTF8Encoding(false);
         public static readonly CultureInfo _CULTURE_INVARIANT = CultureInfo.InvariantCulture;
 
+        public static Encoding DefaultEncoding(string _name)
+        {
+            if (_name == null)
+                return ReadOnly._ENCODING;
+
+            return Encoding.GetEncoding(_name);
+        }
+
         public static void DefaultEncoding(ref Encoding _ref)
         {
             if (_ref == null)

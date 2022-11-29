@@ -45,7 +45,7 @@ namespace imL.Tool.Terminal
                 }
 
                 TerminalHelper.I__TRYN__(_proc, _sett, _href, _by);
-                await SmtpHelperAsync.SendAsync(_sett.Smtp, null, _sett.Mail);
+                await SmtpHelperAsync.SendAsync(_sett.Smtp, _sett.Mail);
             }
             catch (Exception _ex)
             {

@@ -8,6 +8,8 @@ namespace imL.Format
 {
     public class MailMessageFormat
     {
+        public string Encoding { set; get; }
+
         public string Subject { set; get; }
         public MailPriority? Priority { set; get; }
         public bool? IsBodyHtml { set; get; }

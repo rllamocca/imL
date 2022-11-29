@@ -17,6 +17,25 @@ namespace TEST.SomeProof
 
             try
             {
+                Encoding _nulll;
+                _nulll = null;
+
+                Encoding _utf = Encoding.GetEncoding(null);
+
+                Console.WriteLine("{0}: {1}", nameof(_utf.HeaderName), _utf.HeaderName);
+                Console.WriteLine("{0}: {1}", nameof(_utf.EncodingName), _utf.EncodingName);
+                Console.WriteLine("{0}: {1}", nameof(_utf.BodyName), _utf.BodyName);
+                Console.WriteLine("{0}: {1}", nameof(_utf.WebName), _utf.WebName);
+                Console.WriteLine("{0}: {1}", nameof(_utf.CodePage), _utf.CodePage);
+
+                Encoding _enc = Encoding.GetEncoding("UTF-8");
+
+                Console.WriteLine("{0}: {1}", nameof(_enc.HeaderName), _enc.HeaderName);
+                Console.WriteLine("{0}: {1}", nameof(_enc.EncodingName), _enc.EncodingName);
+                Console.WriteLine("{0}: {1}", nameof(_enc.BodyName), _enc.BodyName);
+                Console.WriteLine("{0}: {1}", nameof(_enc.WebName), _enc.WebName);
+                Console.WriteLine("{0}: {1}", nameof(_enc.CodePage), _enc.CodePage);
+
                 long? _null = null;
 
                 if (_null > 0)

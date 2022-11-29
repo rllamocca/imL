@@ -4,7 +4,6 @@ using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
-//using System.Runtime.Serialization.Formatters;
 using System.Text;
 
 using imL.Format;
@@ -13,94 +12,92 @@ namespace imL.Utility
 {
     public static class SmtpHelper
     {
-        internal static void Init_SmtpClient(ref SmtpClient _ref, SmtpFormat _format)
+        internal static SmtpClient InitSmtpClient(SmtpClient _i, SmtpFormat _f)
         {
-            _ref.Timeout = _format.Timeout ?? _ref.Timeout;
-            _ref.TargetName = _format.TargetName ?? _ref.TargetName;
-            _ref.Port = _format.Port ?? _ref.Port;
-            _ref.PickupDirectoryLocation = _format.PickupDirectoryLocation ?? _ref.PickupDirectoryLocation;
-            _ref.Host = _format.Host ?? _ref.Host;
-            _ref.EnableSsl = _format.EnableSsl ?? _ref.EnableSsl;
-            _ref.DeliveryMethod = _format.DeliveryMethod ?? _ref.DeliveryMethod;
+            _i.Timeout = _f.Timeout ?? _i.Timeout;
+            _i.TargetName = _f.TargetName ?? _i.TargetName;
+            _i.Port = _f.Port ?? _i.Port;
+            _i.PickupDirectoryLocation = _f.PickupDirectoryLocation ?? _i.PickupDirectoryLocation;
+            _i.Host = _f.Host ?? _i.Host;
+            _i.EnableSsl = _f.EnableSsl ?? _i.EnableSsl;
+            _i.DeliveryMethod = _f.DeliveryMethod ?? _i.DeliveryMethod;
 
 #if (NET35 || NET40) == false
-            _ref.DeliveryFormat = _format.DeliveryFormat ?? _ref.DeliveryFormat;
+            _i.DeliveryFormat = _f.DeliveryFormat ?? _i.DeliveryFormat;
 #endif
 
-            _ref.UseDefaultCredentials = _format.UseDefaultCredentials ?? _ref.UseDefaultCredentials;
+            _i.UseDefaultCredentials = _f.UseDefaultCredentials ?? _i.UseDefaultCredentials;
 
-            if (_ref.UseDefaultCredentials == false)
-                _ref.Credentials = new NetworkCredential(_format.UserName, _format.Password);
+            if (_i.UseDefaultCredentials == false)
+                _i.Credentials = new NetworkCredential(_f.UserName, _f.Password);
+
+            return _i;
         }
-        internal static void Init_MailMessage(ref MailMessage _ref, MailMessageFormat _format, Encoding _enc = null)
+        internal static MailMessage InitMailMessage(MailMessage _i, MailMessageFormat _f)
         {
-
-            ReadOnly.DefaultEncoding(ref _enc);
+            Encoding _enc = _f.Encoding == null ? null : Encoding.GetEncoding(_f.Encoding);
 
 #if (NET35) == false
-            _ref.HeadersEncoding = _enc;
+            _i.HeadersEncoding = _enc ?? _i.HeadersEncoding;
 #endif
 
-            _ref.SubjectEncoding = _enc;
-            _ref.BodyEncoding = _enc;
+            _i.SubjectEncoding = _enc ?? _i.SubjectEncoding;
+            _i.BodyEncoding = _enc ?? _i.BodyEncoding;
 
-            _ref.IsBodyHtml = _format.IsBodyHtml ?? _ref.IsBodyHtml;
-            _ref.Priority = _format.Priority ?? _ref.Priority;
+            _i.IsBodyHtml = _f.IsBodyHtml ?? _i.IsBodyHtml;
+            _i.Priority = _f.Priority ?? _i.Priority;
 
 #if (NET35 || NET40) == false
-            _ref.BodyTransferEncoding = _format.BodyTransferEncoding ?? _ref.BodyTransferEncoding;
+            _i.BodyTransferEncoding = _f.BodyTransferEncoding ?? _i.BodyTransferEncoding;
 #endif
 
-            _ref.DeliveryNotificationOptions = _format.DeliveryNotificationOptions ?? _ref.DeliveryNotificationOptions;
+            _i.DeliveryNotificationOptions = _f.DeliveryNotificationOptions ?? _i.DeliveryNotificationOptions;
 
-            _ref.From = new MailAddress(_format.FromAddress, _format.FromDisplayName, _enc);
-            _ref.Sender = _ref.From;
+            _i.From = new MailAddress(_f.FromAddress, _f.FromDisplayName, _enc);
+            _i.Sender = _i.From;
 
-            _ref.Body = _format.Body ?? _ref.Body;
+            _i.Body = _f.Body ?? _i.Body;
 
-            if (_ref.IsBodyHtml)
+            if (_i.IsBodyHtml)
             {
-                AlternateView _aw = AlternateView.CreateAlternateViewFromString(_ref.Body, new ContentType("text/html"));
-                _ref.AlternateViews.Add(_aw);
+                AlternateView _aw = AlternateView.CreateAlternateViewFromString(_i.Body, new ContentType("text/html"));
+                _i.AlternateViews.Add(_aw);
             }
 
-            foreach (string _item2 in _format.TO.DefaultOrEmpty())
-                _ref.To.Add(new MailAddress(_item2));
+            foreach (string _item2 in _f.TO.DefaultOrEmpty())
+                _i.To.Add(new MailAddress(_item2));
 
-            foreach (string _item2 in _format.CC.DefaultOrEmpty())
-                _ref.CC.Add(new MailAddress(_item2));
+            foreach (string _item2 in _f.CC.DefaultOrEmpty())
+                _i.CC.Add(new MailAddress(_item2));
 
-            foreach (string _item2 in _format.BCC.DefaultOrEmpty())
-                _ref.Bcc.Add(new MailAddress(_item2));
+            foreach (string _item2 in _f.BCC.DefaultOrEmpty())
+                _i.Bcc.Add(new MailAddress(_item2));
 
-            _ref.Subject = _format.Subject;
+            _i.Subject = _f.Subject;
 
-            foreach (string _item2 in _format.PathAttachments.DefaultOrEmpty())
-                _ref.Attachments.Add(new Attachment(_item2, MimeHelper.ContentType(_item2)));
+            foreach (string _item2 in _f.PathAttachments.DefaultOrEmpty())
+                _i.Attachments.Add(new Attachment(_item2, MimeHelper.ContentType(_item2)));
 
-            foreach (StreamAttachmentFormat _item2 in _format.StreamAttachments.DefaultOrEmpty())
-                _ref.Attachments.Add(new Attachment(_item2.Content, _item2.Name, _item2.MediaType ?? MimeHelper.MediaType(new FileInfo(_item2.Name).Extension)));
+            foreach (StreamAttachmentFormat _item2 in _f.StreamAttachments.DefaultOrEmpty())
+                _i.Attachments.Add(new Attachment(_item2.Content, _item2.Name, _item2.MediaType ?? MimeHelper.MediaType(new FileInfo(_item2.Name).Extension)));
+
+            return _i;
         }
 
-        public static void Send(SmtpFormat _smtp, Encoding _enc = null, params MailMessageFormat[] _messages)
+        public static void Send(SmtpFormat _smtp, params MailMessageFormat[] _messages)
         {
             if (_smtp == null) return;
             if (_messages.IsEmpty()) return;
 
-            ReadOnly.DefaultEncoding(ref _enc);
+            SmtpClient _client = SmtpHelper.InitSmtpClient(new SmtpClient(), _smtp);
 
-            SmtpClient _client = new SmtpClient();
-            SmtpHelper.Init_SmtpClient(ref _client, _smtp);
-
-            for (int _i = 0; _i < _messages.Length; _i++)
+            foreach (MailMessageFormat _item in _messages)
             {
-                if (_messages[_i].FromAddress == null) _messages[_i].FromAddress = _smtp.UserName;
-                if (_messages[_i].FromDisplayName == null) _messages[_i].FromDisplayName = _smtp.UserName;
+                _item.FromAddress = _item.FromAddress ?? _smtp.UserName;
+                _item.FromDisplayName = _item.FromDisplayName ?? _smtp.UserName;
 
-                MailMessage _mm = new MailMessage();
-                SmtpHelper.Init_MailMessage(ref _mm, _messages[_i], _enc);
-                _client.Send(_mm);
-                _mm.Dispose();
+                using (MailMessage _mm = SmtpHelper.InitMailMessage(new MailMessage(), _item))
+                    _client.Send(_mm);
             }
 
 #if (NET35) == false
