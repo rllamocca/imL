@@ -50,14 +50,14 @@ namespace imL.Tool.Terminal
             _settings.Mail.Body = HtmlPattern.Resume(_process, _href, _by);
 
             string _log = Path.Combine(_process.App.PathLog, _process.Guid + ".log");
-            string _html = Path.Combine(_process.App.PathOut, _process.Guid + ".html");
+            //string _html = Path.Combine(_process.App.PathOut, _process.Guid + ".html");
             //string _pdf = Path.Combine(_process.App.PathOut, _process.Guid + ".pdf");
 
-            File.WriteAllText(_html, _settings.Mail.Body);
+            //File.WriteAllText(_html, _settings.Mail.Body);
 
             List<string> _acum = new List<string>();
             _acum.Add(_log);
-            _acum.Add(_html);
+            //_acum.Add(_html);
             //_acum.Add(_pdf);
             _acum.AddRange(_process.PathAttachments.DefaultOrEmpty());
             _acum.AddRange(_settings.Mail.PathAttachments.DefaultOrEmpty());
