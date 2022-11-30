@@ -47,7 +47,7 @@ namespace imL.Package.Hosting
             {
                 using (IPeriodExecution _using = new GExecution())
                 {
-                    CancellationTokenSource _cts = (this._SETTING.Delay == 0) ? new CancellationTokenSource() : new CancellationTokenSource(TimeSpan.FromSeconds(this._SETTING.Delay));
+                    CancellationTokenSource _cts = (this._SETTING.Delay == 0) ? new CancellationTokenSource() : new CancellationTokenSource(TimeSpan.FromSeconds(this._SETTING.Delay.GetValueOrDefault()));
                     _using.PopulateWithSomething(_count, this._INFO, _cts.Token);
                     _using.AfterPopulate();
                     this._LOGGER?.LogInformation("WORKING DO: {_p0} <<<<", _using.WorkingDoInfo());

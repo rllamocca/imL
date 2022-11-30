@@ -13,6 +13,7 @@ namespace SAMPLE.imL.Frotcom.Hosting.Core
             FrotcomClient _frotcom = new(MyLocked.Http, MyLocked.Setting.Frotcom);
             await CoreHelperAsync.FillTokenCachedAsync(_frotcom);
             Dough[] _doughs = await CoreHelperAsync.PreparedAsync(_frotcom, _logger);
+            _doughs = await FrotcomHelperAsync.ToPrepareAsync(_frotcom);
 
             await Task.Delay(5000);
             _execution.Token.ThrowIfCancellationRequested();

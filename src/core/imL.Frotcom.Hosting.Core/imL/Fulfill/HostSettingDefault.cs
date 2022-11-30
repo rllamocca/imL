@@ -10,6 +10,6 @@ namespace imL.Frotcom.Hosting.Core
         public FrotcomFormat Frotcom { set; get; }
 
         public double Period { set; get; }
-        public double Delay { set; get; }
+        public double? Delay { set; get; }
     }
 }

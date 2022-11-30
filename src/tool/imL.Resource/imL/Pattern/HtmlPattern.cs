@@ -21,6 +21,8 @@ namespace imL.Resource
 
             string _return = Resources.HTML_resume;
 
+            //return _return;
+
             switch (_process.Alert)
             {
                 case EAlert.Warning:

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFrameworks>
+			net35
+			;net48
+			;net5.0
+		</TargetFrameworks>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\src\core\imL.Core\imL.Core.csproj" />
+	</ItemGroup>
+
+</Project>

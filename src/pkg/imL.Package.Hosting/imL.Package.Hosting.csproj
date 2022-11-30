@@ -29,8 +29,9 @@
 		<PackageOutputPath>$(SolutionDir)\nupkg\debug\</PackageOutputPath>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
-		<Version>0.0.0.3</Version>
+		<Version>0.0.0.4</Version>
 		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
@@ -42,6 +43,13 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\core\imL.Core\imL.Core.csproj" />
 		<ProjectReference Include="..\imL.Package.Logging\imL.Package.Logging.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="readme.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
 	</ItemGroup>
 
 </Project>

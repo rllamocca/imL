@@ -7,5 +7,8 @@ namespace SAMPLE.imL.Tool.Terminal
     {
         public SmtpFormat Smtp { set; get; }
         public MailMessageFormat Mail { set; get; }
+
+        public bool? OneZipFile { set; get; }
+        public long? MinSizeZipAttachment { set; get; }
     }
 }

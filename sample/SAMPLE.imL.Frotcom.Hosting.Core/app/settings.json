@@ -1,16 +1,16 @@
 {
   "Endpoint": {
-    "Endpoint": ""
+    "Endpoint": null
   },
   "Frotcom": {
     "URI": "https://v2api.frotcom.com",
     "Authorize": {
       "provider": "thirdparty",
-      "username": "",
-      "password": ""
+      "username": null,
+      "password": null
     },
     "LicensePlates": null
   },
-  "Period": 16,
-  "Delay": 4
+  "Period": 300,
+  "Delay": null
 }
