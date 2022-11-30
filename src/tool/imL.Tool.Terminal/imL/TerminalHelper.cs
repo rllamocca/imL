@@ -11,10 +11,7 @@ using System.Linq;
 using System.Net.Mail;
 
 using imL.Contract;
-using imL.Enumeration;
-using imL.Package.Zip;
 using imL.Resource;
-using imL.Struct;
 using imL.Utility;
 
 using NLog;
@@ -51,10 +48,11 @@ namespace imL.Tool.Terminal
             _settings.Mail.Body = HtmlPattern.Resume(_process, _href, _by);
 
             string _log = Path.Combine(_process.App.PathLog, _process.Guid + ".log");
-            //string _html = Path.Combine(_process.App.PathOut, _process.Guid + ".html");
+            string _html = Path.Combine(_process.App.PathOut, _process.Guid + ".html");
             //string _pdf = Path.Combine(_process.App.PathOut, _process.Guid + ".pdf");
 
-            //File.WriteAllText(_html, _settings.Mail.Body);
+            File.WriteAllText(_html, _settings.Mail.Body);
+            //Converter.ConvertHTML(_settings.Mail.Body, ".", new PdfSaveOptions(), _pdf);
 
             List<string> _acum = new List<string>();
             _acum.Add(_log);
@@ -63,18 +61,19 @@ namespace imL.Tool.Terminal
             _acum.AddRange(_process.PathAttachments.DefaultOrEmpty());
             _acum.AddRange(_settings.Mail.PathAttachments.DefaultOrEmpty());
             _acum = _acum.Distinct().ToList();
-            List<string> _attachs = new List<string>();
-            MemoryUnit _mb = default;
 
-            if (_settings.Smtp.MinSizeZipAttachment > 0)
-                _mb = new MemoryUnit(_settings.Smtp.MinSizeZipAttachment.GetValueOrDefault(), EMemoryUnit.MB);
+            //List<string> _attachs = new List<string>();
+            //MemoryUnit _mb = default;
 
-            string[] _exts = new string[] { ".docx", ".xlsx", ".pdf" };
+            //if (_settings.Smtp.MinSizeZipAttachment > 0)
+            //    _mb = new MemoryUnit(_settings.Smtp.MinSizeZipAttachment.GetValueOrDefault(), EMemoryUnit.MB);
 
-            foreach (string _item in _acum)
-                _attachs.Add(ZipHelper.CompressOnly(_item, _mb, _exts));
+            //string[] _exts = new string[] { ".docx", ".xlsx", ".pdf" };
 
-            _settings.Mail.PathAttachments = _attachs;
+            //foreach (string _item in _acum)
+            //    _attachs.Add(ZipHelper.CompressOnly(_item, _mb, _exts));
+
+            _settings.Mail.PathAttachments = _acum;
             LogManager.Shutdown();
         }
         internal static void I__CATCH(IProcessInfo _process, ISetting _settings, Exception _ex)

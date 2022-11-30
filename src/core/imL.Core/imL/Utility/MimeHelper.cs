@@ -17,6 +17,7 @@ namespace imL.Utility
             {
                 case ".log":
                 case ".txt": return "text/plain";
+                case ".htm":
                 case ".html": return "text/html";
                 case ".css": return "text/css";
                 case ".js": return "text/javascript";
@@ -48,6 +49,8 @@ namespace imL.Utility
                 case ".xlsx": return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
                 case ".pdf": return "application/pdf";
                 case ".zip": return "application/zip";
+
+                case ".mhtml": return "multipart/related";
 
                 default:
                     break;

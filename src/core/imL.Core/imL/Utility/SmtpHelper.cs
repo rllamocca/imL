@@ -28,7 +28,7 @@ namespace imL.Utility
 
             _i.UseDefaultCredentials = _f.UseDefaultCredentials ?? _i.UseDefaultCredentials;
 
-            if (_i.UseDefaultCredentials == false)
+            if (_i.UseDefaultCredentials != true)
                 _i.Credentials = new NetworkCredential(_f.UserName, _f.Password);
 
             return _i;
@@ -64,24 +64,39 @@ namespace imL.Utility
                 _i.AlternateViews.Add(_aw);
             }
 
-            foreach (string _item2 in _f.TO.DefaultOrEmpty())
-                _i.To.Add(new MailAddress(_item2));
+            foreach (string _item in _f.TO.DefaultOrEmpty())
+                _i.To.Add(new MailAddress(_item));
 
-            foreach (string _item2 in _f.CC.DefaultOrEmpty())
-                _i.CC.Add(new MailAddress(_item2));
+            foreach (string _item in _f.CC.DefaultOrEmpty())
+                _i.CC.Add(new MailAddress(_item));
 
-            foreach (string _item2 in _f.BCC.DefaultOrEmpty())
-                _i.Bcc.Add(new MailAddress(_item2));
+            foreach (string _item in _f.BCC.DefaultOrEmpty())
+                _i.Bcc.Add(new MailAddress(_item));
 
             _i.Subject = _f.Subject;
 
-            foreach (string _item2 in _f.PathAttachments.DefaultOrEmpty())
-                _i.Attachments.Add(new Attachment(_item2, MimeHelper.ContentType(_item2)));
+            foreach (string _item in _f.PathAttachments.DefaultOrEmpty())
+                _i.Attachments.Add(InitAttachment(_item));
 
-            foreach (StreamAttachmentFormat _item2 in _f.StreamAttachments.DefaultOrEmpty())
-                _i.Attachments.Add(new Attachment(_item2.Content, _item2.Name, _item2.MediaType ?? MimeHelper.MediaType(new FileInfo(_item2.Name).Extension)));
+            foreach (StreamAttachmentFormat _item in _f.StreamAttachments.DefaultOrEmpty())
+                _i.Attachments.Add(new Attachment(_item.Content, _item.Name, _item.MediaType ?? MimeHelper.MediaType(new FileInfo(_item.Name).Extension)));
 
             return _i;
+        }
+        internal static Attachment InitAttachment(string _path)
+        {
+            Attachment _return = new Attachment(_path, MimeHelper.ContentType(_path));
+            FileInfo _fi = new FileInfo(_path);
+
+            ContentDisposition _d = _return.ContentDisposition;
+            _d.CreationDate = _fi.CreationTime;
+            _d.ModificationDate = _fi.LastWriteTime;
+            _d.ReadDate = _fi.LastAccessTime;
+            _d.FileName = _fi.Name;
+            _d.Size = _fi.Length;
+            _d.DispositionType = DispositionTypeNames.Attachment;
+
+            return _return;
         }
 
         public static void Send(SmtpFormat _smtp, params MailMessageFormat[] _messages)
@@ -89,14 +104,14 @@ namespace imL.Utility
             if (_smtp == null) return;
             if (_messages.IsEmpty()) return;
 
-            SmtpClient _client = SmtpHelper.InitSmtpClient(new SmtpClient(), _smtp);
+            SmtpClient _client = InitSmtpClient(new SmtpClient(), _smtp);
 
             foreach (MailMessageFormat _item in _messages)
             {
                 _item.FromAddress = _item.FromAddress ?? _smtp.UserName;
                 _item.FromDisplayName = _item.FromDisplayName ?? _smtp.UserName;
 
-                using (MailMessage _mm = SmtpHelper.InitMailMessage(new MailMessage(), _item))
+                using (MailMessage _mm = InitMailMessage(new MailMessage(), _item))
                     _client.Send(_mm);
             }
 

@@ -22,8 +22,8 @@ namespace imL.Format
         public string UserName { set; get; }
         public string Password { set; get; }
 
+
         public long? MaxSizeAttachments { set; get; } //MB
-        public long? MinSizeZipAttachment { set; get; } //MB
     }
 }
 
