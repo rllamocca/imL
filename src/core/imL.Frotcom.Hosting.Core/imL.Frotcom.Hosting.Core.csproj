@@ -30,6 +30,7 @@
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
 		<Version>0.0.0.6</Version>
 		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
@@ -42,6 +43,13 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\outer\imL.Rest.Frotcom\imL.Rest.Frotcom.csproj" />
 		<ProjectReference Include="..\..\pkg\imL.Package.Hosting\imL.Package.Hosting.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="readme.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
 	</ItemGroup>
 
 </Project>

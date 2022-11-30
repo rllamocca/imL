@@ -34,6 +34,7 @@
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
 		<Version>0.0.0.7</Version>
 		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
@@ -44,6 +45,13 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\util\imL.Utility.Http\imL.Utility.Http.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="readme.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
 	</ItemGroup>
 
 </Project>
