@@ -9,8 +9,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\src\core\imL.Core\imL.Core.csproj" />
-	  <ProjectReference Include="..\..\src\outer\imL.JavaScript\imL.JavaScript.csproj" />
+		<ProjectReference Include="..\..\..\src\core\imL.Core\imL.Core.csproj" />
+		<ProjectReference Include="..\..\..\src\outer\imL.JavaScript\imL.JavaScript.csproj" />
 	</ItemGroup>
-	
 </Project>
