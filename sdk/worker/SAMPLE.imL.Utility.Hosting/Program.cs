@@ -27,7 +27,7 @@ namespace SAMPLE.imL.Utility.Hosting
                 {
                     _sc.AddHostedService<PeriodHostedService>();
                     _sc.AddScoped<IHostPeriodWorker, MyWorker>();
-                    _sc.AddSingleton<IHostPeriodSetting, HostedSetting>(_s => MyLocked.Setting.Hosted);
+                    _sc.AddSingleton<IHostPeriodSetting, MyHostedSetting>(_s => MyLocked.Setting.Hosted);
                 })
                 .ConfigureLogging(_lg =>
                 {

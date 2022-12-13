@@ -4,12 +4,12 @@ namespace SAMPLE.imL.Utility.Hosting
 {
     internal class MySettings
     {
-        public HostedSetting Hosted { set; get; }
+        public MyHostedSetting Hosted { set; get; }
     }
 
-    internal class HostedSetting : IHostPeriodSetting
+    internal class MyHostedSetting : IHostPeriodSetting
     {
         public double Period { set; get; }
-        public double Delay { set; get; }
+        public double? Delay { set; get; }
     }
 }
