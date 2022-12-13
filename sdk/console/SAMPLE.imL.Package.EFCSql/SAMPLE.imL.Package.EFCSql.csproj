@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
@@ -8,7 +8,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\pkg\imL.Package.EFCSql\imL.Package.EFCSql.csproj" />
+		<ProjectReference Include="..\..\..\src\pkg\imL.Package.EFCSql\imL.Package.EFCSql.csproj" />
 	</ItemGroup>
-
 </Project>
