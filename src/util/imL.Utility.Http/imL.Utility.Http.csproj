@@ -22,25 +22,38 @@
 
 		<Authors>Ricardo Llamocca ♪♫</Authors>
 		<Company>imL</Company>
-		<Description>Not so free tools.</Description>
-		<Copyright>© 1984 - 8888</Copyright>
+		<Description>Not so free tools</Description>
+		<Copyright>© $(TargetFramework)</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>imL imL.Utility.Http utilities http httpclient json</PackageTags>
-		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
+		<PackageReleaseNotes>Notas de la versión</PackageReleaseNotes>
 
 		<Version>84.10.2.8</Version>
 		<PackageOutputPath>$(SolutionDir)\nupkg\debug\</PackageOutputPath>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<Copyright>© 1984 - 8888</Copyright>
 		<Version>0.8.8.19</Version>
 		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
+
+	<ItemGroup Condition="('$(TargetFramework)' == 'net7.0') Or ('$(TargetFramework)' == 'net6.0') Or ('$(TargetFramework)' == 'net5.0')">
+		<PackageReference Include="System.Net.Http.Json">
+			<Version>7.*</Version>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="('$(TargetFramework)' == 'netstandard2.1') Or ('$(TargetFramework)' == 'netstandard2.0')">
+		<PackageReference Include="System.Net.Http.Json">
+			<Version>7.*</Version>
+		</PackageReference>
+	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net45'">
 		<Reference Include="System.Net.Http" />

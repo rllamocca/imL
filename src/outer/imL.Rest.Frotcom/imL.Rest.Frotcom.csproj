@@ -23,7 +23,7 @@
 		<Authors>Ricardo Llamocca ♪♫</Authors>
 		<Company>imL</Company>
 		<Description>Not so free tools.</Description>
-		<Copyright>© 1984 - 8888</Copyright>
+		<Copyright>© $(TargetFramework)</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
@@ -35,6 +35,7 @@
 		<PackageOutputPath>$(SolutionDir)\nupkg\debug\</PackageOutputPath>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<Copyright>© 1984 - 8888</Copyright>
 		<Version>0.0.0.13</Version>
 		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>

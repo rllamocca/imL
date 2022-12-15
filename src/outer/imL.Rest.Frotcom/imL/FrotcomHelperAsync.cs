@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using System.Threading;
 using System.Threading.Tasks;
 
 using imL.Rest.Frotcom.Schema;
@@ -11,9 +13,10 @@ namespace imL.Rest.Frotcom
 {
     public static class FrotcomHelperAsync
     {
-        public static async Task<Authorize> AuthorizeUserAsync(FrotcomClient _client)
+        public static async Task<Authorize> AuthorizeUserAsync(FrotcomClient _client, CancellationToken _ct = default)
         {
-            return await _client.Http.PostAsync<Authorize>(_client.Format.URI + "/v2/authorize", HttpJsonHelper.JsonContent(_client.Format.Authorize));
+            return await _client.Http.PostJsonAsync<Authorize, AuthorizeFormat>(_client.Format.URI + "/v2/authorize", _client.Format.Authorize, true, _ct);
+            //return await _client.Http.PostJsonAsync<Authorize>(_client.Format.URI + "/v2/authorize", HttpJsonHelper.JsonContent(_client.Format.Authorize), true, _ct);
         }
 
         public static async Task<Authorize> ValidateTokenAsync(FrotcomClient _client, string _token, bool _throw = false)
@@ -22,7 +25,7 @@ namespace imL.Rest.Frotcom
             {
                 _token = "{ \"token\": \"" + _token + "\" }";
 
-                return await _client.Http.PutAsync<Authorize>(_client.Format.URI + "/v2/authorize", HttpJsonHelper.JsonContent(_token));
+                return await _client.Http.PutJsonAsync<Authorize, string>(_client.Format.URI + "/v2/authorize", _token);
             }
             catch (Exception)
             {
@@ -38,7 +41,7 @@ namespace imL.Rest.Frotcom
             string _uri = _client.Format.URI + "/v2/vehicles?api_key={0}";
             _uri = string.Format(_uri, _client.Token.token);
 
-            return await _client.Http.GetAsync<Vehicle[]>(_uri);
+            return await _client.Http.GetJsonAsync<Vehicle[]>(_uri);
         }
         public static async Task<Location[]> GetVehicleLocationsAsync(FrotcomClient _client, long _vehicle_id)
         {
@@ -46,7 +49,7 @@ namespace imL.Rest.Frotcom
             string _uri = _client.Format.URI + "/v2/vehicles/{1}/locations?api_key={0}&df={2}%3a{3}&allPositions=true&loadLastPosition=true";
             _uri = string.Format(_uri, _client.Token.token, _vehicle_id, _now.ToString("HH"), _now.ToString("mm"));
 
-            return await _client.Http.GetAsync<Location[]>(_uri);
+            return await _client.Http.GetJsonAsync<Location[]>(_uri);
         }
         public static async Task<Location> GetVehicleLocationAsync(FrotcomClient _client, long _vehicle_id)
         {
@@ -62,7 +65,7 @@ namespace imL.Rest.Frotcom
             string _uri = _client.Format.URI + "/v2/accounts?api_key={0}";
             _uri = string.Format(_uri, _client.Token.token);
 
-            return await _client.Http.GetAsync<Account>(_uri);
+            return await _client.Http.GetJsonAsync<Account>(_uri);
         }
 
         public static async Task<Dough[]> ToPrepareAsync(FrotcomClient _client)
