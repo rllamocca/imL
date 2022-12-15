@@ -1,13 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<NoWarn>CS8602</NoWarn>
 		<CheckEolTargetFramework>false</CheckEolTargetFramework>
 	</PropertyGroup>
+
 	<PropertyGroup>
 		<TargetFrameworks>
-			net6.0
-			;net7.0
+			net6.0;net7.0
 		</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
