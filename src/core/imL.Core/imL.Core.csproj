@@ -31,7 +31,7 @@
 		<Authors>Ricardo Llamocca ♪♫</Authors>
 		<Company>imL</Company>
 		<Description>Not so free tools.</Description>
-		<Copyright>© 1984 - 8888</Copyright>
+		<Copyright>© $(TargetFramework)</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
