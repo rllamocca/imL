@@ -17,6 +17,8 @@ using imL.Package.Logging;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 
+using imL.Utility;
+
 namespace imL.Frotcom.Hosting.Core
 {
     public static class CoreHelperAsync
@@ -83,11 +85,11 @@ namespace imL.Frotcom.Hosting.Core
 
             _client.Token = _return;
         }
-        public static async Task<Dough[]> PreparedAsync(FrotcomClient _client, ILogger _logger)
+        public static async Task<IEnumerable<Dough>> PreparedAsync(FrotcomClient _client, ILogger _logger)
         {
-            Dough[] _doughs = await FrotcomHelperAsync.ToPrepareAsync(_client);
+            IEnumerable<Dough> _doughs = await FrotcomHelperAsync.ToPrepareAsync(_client);
 
-            if (_doughs == null || _doughs.Length == 0)
+            if (_doughs.IsEmpty())
             {
                 _logger?.LogInformation("_doughs.Length == 0");
 
@@ -96,7 +98,7 @@ namespace imL.Frotcom.Hosting.Core
 
             _logger?.LetDebug()?.LogDebug("{p0}", string.Join("|", _doughs.Select(_s => _s.Vehicle.licensePlate).Distinct().OrderBy(_o => _o).ToArray()));
             bool _sstop = (DateTime.Now.Minute % 20 == 0);
-            List<Dough> _return = new List<Dough>();
+            IList<Dough> _return = new List<Dough>();
 
             foreach (Dough _item in _doughs)
             {
@@ -138,7 +140,7 @@ namespace imL.Frotcom.Hosting.Core
             if (_sstop)
                 _logger?.LogInformation("refer isStopped");
 
-            return _return.ToArray();
+            return _return;
         }
     }
 }

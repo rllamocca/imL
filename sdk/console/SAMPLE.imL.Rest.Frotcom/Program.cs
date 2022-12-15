@@ -4,8 +4,7 @@ using System.Net.Http.Headers;
 
 using imL.Rest.Frotcom;
 using imL.Rest.Frotcom.Schema;
-
-using SAMPLE.imL.Rest.Frotcom;
+using imL.Utility.Http;
 
 FrotcomFormat _format = new()
 {
@@ -18,17 +17,15 @@ FrotcomFormat _format = new()
     }
 };
 
-//HttpClient _http = new();
-//HttpClient _http = new(new HttpClientHandler() { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate });
-HttpClient _http = new(new MyDelegatingHandler(new HttpClientHandler() { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate }));
+HttpClient _http = new(new HttpJsonHandler(new HttpClientHandler() { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate }));
 _http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
 FrotcomClient _client = new(_http, _format);
 
-Authorize _token = await FrotcomHelperAsync.AuthorizeUserAsync(_client);
+var _token = await FrotcomHelperAsync.AuthorizeUserAsync(_client);
 _client.Token = _token;
 Console.WriteLine(_token.token);
 
-//Vehicle[] _vehicles = await FrotcomHelperAsync.GetVehiclesAsync(_client);
-//foreach (var _item in _vehicles)
-//    Console.WriteLine("{0} {1}", _item.licensePlate, _item.lastCommunication);
+var _vehicles = await FrotcomHelperAsync.GetVehiclesAsync(_client);
+foreach (var _item in _vehicles)
+    Console.WriteLine("{0} {1}", _item.licensePlate, _item.lastCommunication);

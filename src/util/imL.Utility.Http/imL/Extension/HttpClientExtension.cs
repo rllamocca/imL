@@ -52,8 +52,6 @@ namespace imL.Utility.Http
         public static async Task<GRs> PostJsonAsync<GRs, GRq>(this HttpClient _this, string _uri, GRq _value, bool _essc = true, CancellationToken _ct = default)
         {
 #if NETSTANDARD2_0_OR_GREATER || NETCOREAPP
-            //JsonSerializerOptions _null = null;
-
             using (HttpResponseMessage _res = await _this.PostAsJsonAsync(_uri, _value, _ct))
                 return await _res.ReadJsonAsync<GRs>(_essc, _ct);
 #else
