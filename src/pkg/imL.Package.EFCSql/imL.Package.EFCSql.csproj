@@ -27,6 +27,7 @@
 		<PackageOutputPath>$(SolutionDir)\nupkg\debug\</PackageOutputPath>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<Copyright>© 1984 - 8888</Copyright>
 		<Version>0.0.0.4</Version>
 		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>

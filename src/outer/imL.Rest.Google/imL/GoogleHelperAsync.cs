@@ -17,7 +17,7 @@ namespace imL.Rest.Google
                 Convert.ToString(_lng, ReadOnly._CULTURE_INVARIANT)
                 );
 
-            return await _client.Http.GetAsync<Geocoding>(_uri);
+            return await _client.Http.GetJsonAsync<Geocoding>(_uri);
         }
     }
 }

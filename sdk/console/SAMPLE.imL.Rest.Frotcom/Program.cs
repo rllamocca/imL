@@ -3,7 +3,6 @@ using System.Net;
 using System.Net.Http.Headers;
 
 using imL.Rest.Frotcom;
-using imL.Rest.Frotcom.Schema;
 using imL.Utility.Http;
 
 FrotcomFormat _format = new()
