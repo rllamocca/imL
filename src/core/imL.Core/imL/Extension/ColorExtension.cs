@@ -28,7 +28,11 @@ namespace imL.Utility
             return Color.FromArgb(Convert.ToByte(_a), Convert.ToByte(_r), Convert.ToByte(_g), Convert.ToByte(_b));
         }
 
-        public static string[] ToStringRGB(this Color[] _array)
+        public static string[]
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP
+        ?
+#endif
+            ToStringRGB(this Color[] _array)
         {
             if (_array == null)
                 return null;
