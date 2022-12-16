@@ -11,27 +11,49 @@
 			;net5.0;net6.0;net7.0
 		</TargetFrameworks>
 
-		<Authors>Ricardo Llamocca ♪♫</Authors>
-		<Company>imL</Company>
-		<Description>Not so free tools.</Description>
 		<Copyright>© $(TargetFramework)</Copyright>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
-		<RepositoryType>git</RepositoryType>
-		<PackageTags>imL</PackageTags>
-		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
-
 		<Version>84.10.2.8</Version>
 		<PackageOutputPath>$(SolutionDir)\nupkg\debug\</PackageOutputPath>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<Company>imL</Company>
+		<!--<Configuration></Configuration>-->
 		<Copyright>© 1984 - 8888</Copyright>
+		<Description>Not so free tools.</Description>
+		<!--<FileVersion></FileVersion>-->
+		<!--<InformationalVersion></InformationalVersion>-->
+		<!--<Product></Product>-->
+		<AssemblyTitle>® $(TargetFramework)</AssemblyTitle>
+		<!--<AssemblyVersion></AssemblyVersion>-->
+		<!--<NeutralLanguage></NeutralLanguage>-->
+
+		<!--<PackageId></PackageId>-->
 		<Version>0.8.8.18</Version>
-		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
+		<!--<PackageVersion></PackageVersion>-->
+		<!--<VersionPrefix></VersionPrefix>-->
+		<!--<VersionSuffix></VersionSuffix>-->
+		<Authors>Ricardo Llamocca ♪♫</Authors>
+		<!--<Title></Title>-->
+		<!--<Description></Description>-->
+		<!--<Copyright></Copyright>-->
+		<!--<PackageRequireLicenseAcceptance></PackageRequireLicenseAcceptance>-->
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<!--<PackageLicenseFile></PackageLicenseFile>-->
+		<!--<PackageLicenseUrl></PackageLicenseUrl>-->
+		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
+		<!--<PackageIcon></PackageIcon>-->
+		<!--<PackageIconUrl></PackageIconUrl>-->
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
+		<PackageTags>imL</PackageTags>
+		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
+		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<!--<RepositoryBranch></RepositoryBranch>-->
+		<!--<RepositoryCommit></RepositoryCommit>-->
+		<!--<PackageType></PackageType>-->
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>
