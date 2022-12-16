@@ -4,7 +4,7 @@ using imL.Enumeration;
 
 namespace imL.Struct
 {
-    public struct DataInfo
+    public readonly struct DataInfo
     {
         public EDataBasicType Basic { get; }
         public EDataType Generic { get; }

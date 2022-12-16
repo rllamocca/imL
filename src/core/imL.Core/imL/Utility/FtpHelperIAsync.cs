@@ -1,9 +1,5 @@
 ﻿#if (NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER)
 
-#if (NET6_0_OR_GREATER)
-using System;
-#endif
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -31,7 +27,12 @@ namespace imL.Utility
                 //string _d = _item.Substring(19, 10);
                 string _e = _item.Substring(29, 12);
                 //string _f = _item.Substring(41, 13);
+
+#if NETSTANDARD2_1_OR_GREATER
+                string _g = _item[54..];
+#else
                 string _g = _item.Substring(54, _item.Length - 54);
+#endif
 
                 _e = _e.Trim();
                 _g = _g.Trim();

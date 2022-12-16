@@ -2,7 +2,7 @@
 
 namespace imL.Struct
 {
-    public struct Tuple<T1>
+    public readonly struct Tuple<T1>
     {
         public T1 Item1 { get; }
 
@@ -32,7 +32,7 @@ namespace imL.Struct
         }
     }
 
-    public struct Tuple<T1, T2>
+    public readonly struct Tuple<T1, T2>
     {
         public T1 Item1 { get; }
         public T2 Item2 { get; }
@@ -64,7 +64,7 @@ namespace imL.Struct
         }
     }
 
-    public struct Tuple<T1, T2, T3>
+    public readonly struct Tuple<T1, T2, T3>
     {
         public T1 Item1 { get; }
         public T2 Item2 { get; }

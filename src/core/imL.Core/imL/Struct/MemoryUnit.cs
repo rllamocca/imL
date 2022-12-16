@@ -4,7 +4,7 @@ using imL.Enumeration;
 
 namespace imL.Struct
 {
-    public struct MemoryUnit
+    public readonly struct MemoryUnit
     {
         public decimal Size { get; }
         public EMemoryUnit Unit { get; }

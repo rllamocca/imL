@@ -23,9 +23,15 @@ namespace imL.Utility
                     for (int _k = _return.Length - 1; _k > 0; _k--)
                     {
                         int _az = _r.Next(_k);
+
+#if NETSTANDARD2_0_OR_GREATER || NETCOREAPP
+                        (_return[_k], _return[_az]) = (_return[_az], _return[_k]);
+#else
                         G _tmp = _return[_az];
                         _return[_az] = _return[_k];
                         _return[_k] = _tmp;
+#endif
+
                     }
                     break;
                 default:
@@ -48,9 +54,15 @@ namespace imL.Utility
                     for (int _k = _return.Count - 1; _k > 0; _k--)
                     {
                         int _az = _r.Next(_k);
+
+#if NETSTANDARD2_0_OR_GREATER || NETCOREAPP
+                        (_return[_k], _return[_az]) = (_return[_az], _return[_k]);
+#else
                         G _tmp = _return[_az];
                         _return[_az] = _return[_k];
                         _return[_k] = _tmp;
+#endif
+
                     }
                     break;
                 default:

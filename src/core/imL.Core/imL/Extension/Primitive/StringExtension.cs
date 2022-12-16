@@ -2,9 +2,9 @@
 using System.Net.Mail;
 #endif
 
-#if NETSTANDARD1_0 || NETSTANDARD1_1
-using System.Collections.Generic;
-#endif
+//#if NETSTANDARD1_0 || NETSTANDARD1_1
+//using System.Collections.Generic;
+//#endif
 
 using System;
 using System.IO;
@@ -178,7 +178,11 @@ namespace imL.Utility
 
             while (_string.Length > 0)
             {
+#if NETSTANDARD2_1_OR_GREATER
+                yield return _string[.._length];
+#else
                 yield return _string.Substring(0, _length);
+#endif
 
                 _string = _string.Remove(0, _length);
 

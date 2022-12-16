@@ -161,7 +161,12 @@ namespace imL
         public static void CheckRUN(string _key, string _run, int _max = 0)
         {
             int _a = _run.Length - 1;
+
+#if NETSTANDARD2_1_OR_GREATER
+            long _rut = Convert.ToInt64(_run[.._a]);
+#else
             long _rut = Convert.ToInt64(_run.Substring(0, _a));
+#endif
 
             if (_max > 0)
             {
@@ -228,7 +233,7 @@ namespace imL
             return _dv.Equals(RUTGetDV(_rut), StringComparison.OrdinalIgnoreCase);
         }
 
-        public static string CleanEndLine(string _value, EEndLine _el)
+        public static string CleanEndLine(string _value)
         {
             //char _null = (char)0;
             //char _lf = (char)10;
