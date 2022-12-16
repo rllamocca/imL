@@ -41,15 +41,11 @@
 	</PropertyGroup>
 
 	<ItemGroup Condition="('$(TargetFramework)' == 'net7.0') Or ('$(TargetFramework)' == 'net6.0') Or ('$(TargetFramework)' == 'net5.0')">
-		<PackageReference Include="System.Net.Http.Json">
-			<Version>7.*</Version>
-		</PackageReference>
+		<PackageReference Include="System.Net.Http.Json" Version="7.*" />
 	</ItemGroup>
 
 	<ItemGroup Condition="('$(TargetFramework)' == 'netstandard2.1') Or ('$(TargetFramework)' == 'netstandard2.0')">
-		<PackageReference Include="System.Net.Http.Json">
-			<Version>7.*</Version>
-		</PackageReference>
+		<PackageReference Include="System.Net.Http.Json" Version="7.*" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net45'">
