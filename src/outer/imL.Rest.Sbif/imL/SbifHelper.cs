@@ -8,27 +8,22 @@ namespace imL.Rest.Sbif
 {
     public static class SbifHelper
     {
-        internal static readonly CultureInfo _CULTURE = CultureInfo.GetCultureInfo("es-cl");
-        internal static readonly string _ISO_4217 = (new RegionInfo(SbifHelper._CULTURE.LCID)).ISOCurrencySymbol;
+        static readonly CultureInfo _CULTURE = CultureInfo.GetCultureInfo("es-cl");
+        static readonly string _ISO_4217 = (new RegionInfo(_CULTURE.LCID)).ISOCurrencySymbol;
+        
         internal static EResource _RESOURCE = EResource.UF;
 
-        public static CurrencyIndex[] Factory(InternalIndex[] _from)
+        public static IEnumerable<CurrencyIndex> Factory(IEnumerable<InternalIndex> _from)
         {
-            List<CurrencyIndex> _return = new List<CurrencyIndex>();
-
             foreach (InternalIndex _item in _from)
             {
-                CurrencyIndex _new = new CurrencyIndex
+                yield return new CurrencyIndex
                 {
-                    ISO4217 = SbifHelper._ISO_4217,
-                    Date = Convert.ToDateTime(_item.Fecha, SbifHelper._CULTURE),
-                    Value = Convert.ToDecimal(_item.Valor, SbifHelper._CULTURE)
+                    ISO4217 = _ISO_4217,
+                    Date = Convert.ToDateTime(_item.Fecha, _CULTURE),
+                    Value = Convert.ToDecimal(_item.Valor, _CULTURE)
                 };
-
-                _return.Add(_new);
             }
-
-            return _return.ToArray();
         }
     }
 }
