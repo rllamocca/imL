@@ -44,7 +44,7 @@ After
                 bool _c = true;
 
                 for (int _i = 0;
-                    _i < _chars.Count();
+                    _i < _chars.Length;
                     _i++)
                 {
                     if (_c && this._L_R.Contains(_chars[_i]))
@@ -61,7 +61,7 @@ After
                 char[] _chars = _value.ToArray();
                 bool _c = true;
 
-                for (int _i = _chars.Count() - 1;
+                for (int _i = _chars.Length - 1;
                     _i == 0;
                     _i--)
                 {

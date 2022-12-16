@@ -192,7 +192,7 @@ namespace imL.Package.EFCSql
             {
                 using (DataTable _dt = LoadDataTable(_query, _pmts))
                 {
-                    List<G> _return = new();
+                    IList<G> _return = new List<G>();
                     Setter<G> _set = new();
 
                     foreach (DataRow _item in _dt.Rows)

@@ -20,8 +20,10 @@ namespace imL.Package.ServiceModel
         {
             this.factory = factory;
 
-            this.writerSettings = new XmlWriterSettings();
-            this.writerSettings.Encoding = Encoding.GetEncoding(factory.CharSet);
+            this.writerSettings = new XmlWriterSettings
+            {
+                Encoding = Encoding.GetEncoding(factory.CharSet)
+            };
             this.contentType = string.Format("{0}; charset={1}",
                 this.factory.MediaType, this.writerSettings.Encoding.HeaderName);
         }

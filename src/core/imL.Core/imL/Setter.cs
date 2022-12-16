@@ -46,14 +46,14 @@ namespace imL
         internal void I__SET__(G _g, int _index, object _value)
         {
             PropertyInfo _prop = this._PROPS[_index];
-            this.I__VALUE__(_g, _prop, _value);
+            I__VALUE__(_g, _prop, _value);
         }
         internal void I__SET__(G _g, string _name, object _value)
         {
             PropertyInfo _prop = this._PROPS.Where(_w => _w.Name == _name).FirstOrDefault();
-            this.I__VALUE__(_g, _prop, _value);
+            I__VALUE__(_g, _prop, _value);
         }
-        internal void I__VALUE__(G _g, PropertyInfo _pi, object _value)
+        internal static void I__VALUE__(G _g, PropertyInfo _pi, object _value)
         {
             if (_pi.HasValue() && _pi.CanWrite)
             {

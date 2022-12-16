@@ -1,15 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<NoWarn>CS8602</NoWarn>
-		<CheckEolTargetFramework>false</CheckEolTargetFramework>
-	</PropertyGroup>
-	<PropertyGroup Condition="('$(TargetFramework)' == 'net7.0') Or ('$(TargetFramework)' == 'net6.0') Or ('$(TargetFramework)' == 'net5.0')">
-		<Nullable>enable</Nullable>
-	</PropertyGroup>
-	<PropertyGroup Condition="('$(TargetFramework)' == 'netstandard2.1')">
-		<Nullable>enable</Nullable>
-	</PropertyGroup>
-
 	<PropertyGroup>
 		<TargetFrameworks>
 			net6.0;net7.0
@@ -39,6 +28,16 @@
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
+		<NoWarn>CS8602</NoWarn>
+		<CheckEolTargetFramework>false</CheckEolTargetFramework>
+	</PropertyGroup>
+	<PropertyGroup Condition="('$(TargetFramework)' == 'net7.0') Or ('$(TargetFramework)' == 'net6.0') Or ('$(TargetFramework)' == 'net5.0')">
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	<PropertyGroup Condition="('$(TargetFramework)' == 'netstandard2.1')">
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
