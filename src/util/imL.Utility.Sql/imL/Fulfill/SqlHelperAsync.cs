@@ -68,7 +68,7 @@ namespace imL.Utility.Sql
             }
         }
 
-        public async Task<Return[]> ExecuteAsync(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[][] _pmts)
+        public async Task<Return[]> ExecutionsAsync(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[][] _pmts)
         {
             try
             {

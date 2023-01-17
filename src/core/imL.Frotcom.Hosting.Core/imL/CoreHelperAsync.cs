@@ -85,7 +85,7 @@ namespace imL.Frotcom.Hosting.Core
 
             _client.Token = _return;
         }
-        public static async Task<IEnumerable<Dough>> PreparedAsync(FrotcomClient _client, ILogger _logger)
+        public static async Task<IEnumerable<Dough>> PreparedNoStopAsync(FrotcomClient _client, ILogger _logger)
         {
             IEnumerable<Dough> _doughs = await FrotcomHelperAsync.ToPrepareAsync(_client);
 
@@ -139,6 +139,56 @@ namespace imL.Frotcom.Hosting.Core
 
             if (_sstop)
                 _logger?.LogInformation("refer isStopped");
+
+            return _return;
+        }
+        public static async Task<IEnumerable<Dough>> PreparedAsync(FrotcomClient _client, ILogger _logger)
+        {
+            IEnumerable<Dough> _doughs = await FrotcomHelperAsync.ToPrepareAsync(_client);
+
+            if (_doughs.IsEmpty())
+            {
+                _logger?.LogInformation("_doughs.Length == 0");
+
+                return null;
+            }
+
+            _logger?.LetDebug()?.LogDebug("{p0}", string.Join("|", _doughs.Select(_s => _s.Vehicle.licensePlate).Distinct().OrderBy(_o => _o).ToArray()));
+            IList<Dough> _return = new List<Dough>();
+
+            foreach (Dough _item in _doughs)
+            {
+                if (string.IsNullOrWhiteSpace(_item.Vehicle.licensePlate))
+                {
+                    _logger?.LogInformation("licensePlate IsNullOrWhiteSpace: {p0}", _item.Vehicle.id);
+
+                    continue;
+                }
+
+                if (_item.Vehicle.lastCommunication.HasValue == false)
+                {
+                    _logger?.LogInformation("lastCommunication FALSE: {p0}| {p1}| {p2}",
+                        _item.Vehicle.licensePlate,
+                        _item.Vehicle.latitude,
+                        _item.Vehicle.longitude);
+
+                    continue;
+                }
+
+                if (_item.Vehicle.isStopped)
+                {
+                    _logger?.LogInformation("isStopped: {p0}| {p1}| {p2}| {p3}| {p4}",
+                        _item.Vehicle.licensePlate,
+                        _item.Vehicle.latitude,
+                        _item.Vehicle.longitude,
+                        _item.Vehicle.lastCommunication.Value.ToLocalTime(),
+                        TimeSpan.FromSeconds(_item.Vehicle.stopDuration));
+                }
+
+                _item.Vehicle.licensePlate = _item.Vehicle.licensePlate.Trim().Replace(" ", "").ToUpper();
+
+                _return.Add(_item);
+            }
 
             return _return;
         }

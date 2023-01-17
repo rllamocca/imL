@@ -17,7 +17,7 @@ using System.Linq;
 
 namespace imL.Utility.Sql
 {
-    public class SqlHelper : IHelper
+    public partial class SqlHelper : IHelper
     {
         public IConnection Connection { get; }
         public bool Throw { get; }
@@ -69,7 +69,7 @@ namespace imL.Utility.Sql
             }
         }
 
-        public Return[] Execute(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[][] _pmts)
+        public Return[] Executions(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[][] _pmts)
         {
             try
             {

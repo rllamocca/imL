@@ -43,6 +43,10 @@ namespace imL.Tool.Terminal
         }
         internal static void I__TRYN__(IProcessInfo _process, ISetting _settings, string _href, string _by)
         {
+            if (_settings == null) return;
+            if (_settings.Smtp == null) return;
+            if (_settings.Mail == null) return;
+
             _settings.Mail.Encoding = "utf-8";
             _settings.Mail.IsBodyHtml = true;
             _settings.Mail.Body = HtmlPattern.Resume(_process, _href, _by);

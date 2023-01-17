@@ -18,7 +18,7 @@ namespace imL.Contract.DB
         IProgress<int> Progress { get; }
 
         Return Execute(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[] _pmts);
-        Return[] Execute(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[][] _pmts);
+        Return[] Executions(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[][] _pmts);
 
 #if (NET35_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
 

@@ -69,7 +69,7 @@ namespace imL.Package.MySql
             }
         }
 
-        public Return[] Execute(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[][] _pmts)
+        public Return[] Executions(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[][] _pmts)
         {
             try
             {
