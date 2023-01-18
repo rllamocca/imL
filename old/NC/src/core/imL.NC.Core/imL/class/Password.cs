@@ -58,7 +58,7 @@ namespace imL
             if (_specials) _tmp.AddRange(ReadOnly._SPECIALS.RandomSort(Password._SORT).Take(_length));
             if (_aggregate != null) _tmp.AddRange(_aggregate.RandomSort(Password._SORT));
 
-            List<char> _tmp2 = _tmp.Distinct().ToList();
+            IList<char> _tmp2 = _tmp.Distinct().ToList();
             _tmp2 = _tmp2.RemoveEndLine(EEndLine.All);
 
             _tmp2 = _tmp2.RandomSort(Password._SORT);

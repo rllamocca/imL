@@ -20,7 +20,7 @@ FROM [{0}]
             string _1 = null;
             string _2 = null;
             string[] _affects = _array.Where(_w => _w.Affect != null && _w.IsSearchCondition == false).Select(_s => _s.Affect).Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
-            List<string> _tmp = _affects.Select(_s => string.Format("[{0}]", _s)).ToList();
+            IList<string> _tmp = _affects.Select(_s => string.Format("[{0}]", _s)).ToList();
 
             if (_tmp.Count == 0)
                 _1 = "*";
@@ -62,7 +62,7 @@ VALUES
             string _2 = null;
             string _3 = null;
             string[] _affects = _array.Where(_w => _w.Affect != null).Select(_s => _s.Affect).Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
-            List<string> _tmp = _affects.Select(_s => string.Format("[{0}]", _s)).ToList();
+            IList<string> _tmp = _affects.Select(_s => string.Format("[{0}]", _s)).ToList();
             _1 = string.Join(",", _tmp.ToArray());
             _tmp.Clear();
 
@@ -95,7 +95,7 @@ UPDATE [{0}] SET
             string _1 = null;
             string _2 = null;
             string[] _affects = _array.Where(_w => _w.Affect != null && _w.IsSearchCondition == false).Select(_s => _s.Affect).Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
-            List<string> _tmp = new List<string>();
+            IList<string> _tmp = new List<string>();
 
             foreach (string _item in _affects)
             {
@@ -141,7 +141,7 @@ DELETE FROM [{0}]
             string _0 = _table;
             string _1 = null;
             string[] _affects = _array.Where(_w => _w.Affect != null && _w.IsSearchCondition == true).Select(_s => _s.Affect).Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
-            List<string> _tmp = new List<string>();
+            IList<string> _tmp = new List<string>();
 
             foreach (string _item in _affects)
             {

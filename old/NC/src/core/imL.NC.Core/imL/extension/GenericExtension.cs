@@ -38,12 +38,12 @@ namespace imL
 
             return _return;
         }
-        public static List<G> RandomSort<G>(this List<G> _array, ERandomSort _sort = ERandomSort.None)
+        public static IList<G> RandomSort<G>(this IList<G> _array, ERandomSort _sort = ERandomSort.None)
         {
             if (_array == null)
                 return null;
 
-            List<G> _return = _array;
+            IList<G> _return = _array;
             Random _r = new Random();
 
             switch (_sort)

@@ -13,12 +13,12 @@ namespace imL
     {
 
 #if (NET35) == false
-        public static XmlElement[] ToXmlElements(this DataSet _ds)
+        public static IEnumerable<XmlElement> ToXmlElements(this DataSet _ds)
         {
             if (_ds == null)
                 throw new ArgumentNullException(nameof(_ds));
 
-            List<XmlElement> _return = new List<XmlElement>();
+            IList<XmlElement> _return = new List<XmlElement>();
             XmlElement _tmp;
 
             using (MemoryStream _ms = new MemoryStream())
@@ -45,7 +45,7 @@ namespace imL
                     _return.Add(_tmp);
             }
 
-            return _return.ToArray();
+            return _return;
         }
 #endif
 

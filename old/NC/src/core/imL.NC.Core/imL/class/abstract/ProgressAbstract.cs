@@ -26,7 +26,7 @@ namespace imL
         Point _LINE;
         Point _NEW_LINE;
         Point _DRAW_START;
-        List<decimal> _BAR = new List<decimal>() { 0 };
+        IList<decimal> _BAR = new List<decimal>() { 0 };
 
         public DateTime Start { get { return _START; } }
 

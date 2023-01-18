@@ -156,7 +156,8 @@ namespace imL
                 return null;
 
 #if NETSTANDARD1_0 || NETSTANDARD1_1
-            List<char> _return = new List<char>();
+            Iist<char> _return = new List<char>();
+            
             foreach (char _item in _this)
                 if (char.IsLetterOrDigit(_item) || _let.Contains(_item))
                     _return.Add(_item);

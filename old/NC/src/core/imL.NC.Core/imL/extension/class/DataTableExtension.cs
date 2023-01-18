@@ -49,7 +49,7 @@ namespace imL
 
             if (_columnnames)
             {
-                List<string> _line = new List<string>();
+                IList<string> _line = new List<string>();
 
                 foreach (DataColumn _item in _this.Columns)
                     _line.Add(_item.Caption ?? _item.ColumnName);
@@ -82,12 +82,12 @@ namespace imL
         }
 
 #if (NET35) == false
-        public static XmlElement[] ToXmlElements(this DataTable _dt)
+        public static IEnumerable<XmlElement> ToXmlElements(this DataTable _dt)
         {
             if (_dt == null)
                 throw new ArgumentNullException(nameof(_dt));
 
-            List<XmlElement> _return = new List<XmlElement>();
+            IList<XmlElement> _return = new List<XmlElement>();
             XmlElement _tmp;
 
             using (MemoryStream _ms = new MemoryStream())
@@ -114,7 +114,7 @@ namespace imL
                     _return.Add(_tmp);
             }
 
-            return _return.ToArray();
+            return _return;
         }
 #endif
 

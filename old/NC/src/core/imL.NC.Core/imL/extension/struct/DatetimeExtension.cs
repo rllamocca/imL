@@ -21,10 +21,10 @@ namespace imL
             return new DateTime(_tmp.Ticks);
         }
 
-        public static DateTime[] DaysBetween(this DateTime _this, DateTime _z, DayOfWeek _day = DayOfWeek.Sunday)
+        public static IEnumerable<DateTime> DaysBetween(this DateTime _this, DateTime _z, DayOfWeek _day = DayOfWeek.Sunday)
         {
             DateTime _a = _this;
-            List<DateTime> _return = new List<DateTime>();
+            IList<DateTime> _return = new List<DateTime>();
 
             while (_a <= _z)
             {
@@ -37,7 +37,7 @@ namespace imL
                     _a = _a.AddDays(1);
             }
 
-            return _return.ToArray();
+            return _return;
         }
         public static double ToTimeStamp(this DateTime _this)
         {

@@ -11,7 +11,7 @@ namespace imL
         static readonly char _FF = (char)12;
         static readonly char _CR = (char)13;
 
-        public static List<char> RemoveEndLine(this List<char> _array, EEndLine _el)
+        public static IList<char> RemoveEndLine(this IList<char> _array, EEndLine _el)
         {
             if (_array == null)
                 return null;
