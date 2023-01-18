@@ -36,11 +36,6 @@
 		<NoWarn>CS1701;CS1702;CS8600;CS8601;CS8602;CS8618;CS8625;IDE0063;IDE0066;IDE0090</NoWarn>
 		<CheckEolTargetFramework>false</CheckEolTargetFramework>
 	</PropertyGroup>
-	<ItemGroup>
-	  <Compile Remove="imL\eeeextension\**" />
-	  <EmbeddedResource Remove="imL\eeeextension\**" />
-	  <None Remove="imL\eeeextension\**" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="readme.md" />
