@@ -31,51 +31,51 @@ namespace imL.Contract
         Point _DRAW_START;
         List<decimal> _BAR = new List<decimal>() { 0 };
 
-        public DateTime Start { get { return this._START; } }
+        public DateTime Start { get { return _START; } }
 
         protected void Init(EReportProgress _report = EReportProgress.None, ProgressAbstract _parent = null)
         {
-            this._START = DateTime.Now;
-            this._PARENT = _parent;
-            this._REPORT = _report;
+            _START = DateTime.Now;
+            _PARENT = _parent;
+            _REPORT = _report;
         }
         protected void Init2(byte _blocks = 50)
         {
-            if (this._PARENT == null)
+            if (_PARENT == null)
             {
-                this._LINE = new Point(Console.CursorLeft, Console.CursorTop);
+                _LINE = new Point(Console.CursorLeft, Console.CursorTop);
                 Console.CursorVisible = false;
             }
             else
-                this._LINE = new Point(this._PARENT._LINE.X + 2, this._PARENT._LINE.Y + 1);
+                _LINE = new Point(_PARENT._LINE.X + 2, _PARENT._LINE.Y + 1);
 
-            this._DRAW_START = new Point(this._LINE.X, this._LINE.Y);
+            _DRAW_START = new Point(_LINE.X, _LINE.Y);
 
-            if (_blocks < this._BLOCKS)
-                this._BLOCKS = _blocks;
+            if (_blocks < _BLOCKS)
+                _BLOCKS = _blocks;
 
-            if (this._BLOCKS > 0)
+            if (_BLOCKS > 0)
             {
-                this._DRAW_END = new Point(this._DRAW_START.X + this._BLOCKS + 4, this._DRAW_START.Y);
+                _DRAW_END = new Point(_DRAW_START.X + _BLOCKS + 4, _DRAW_START.Y);
 
-                ConsoleHelper.Write(this._DRAW_START, string.Format("[{0}]{1}", new string(' ', this._BLOCKS), new string(' ', 75)));
-                this._DRAW_START.X += 1;
+                ConsoleHelper.Write(_DRAW_START, string.Format("[{0}]{1}", new string(' ', _BLOCKS), new string(' ', 75)));
+                _DRAW_START.X += 1;
             }
 
-            this._NEW_LINE = new Point(this._LINE.X, this._LINE.Y + 1);
+            _NEW_LINE = new Point(_LINE.X, _LINE.Y + 1);
         }
         protected void DrawBar(decimal _per)
         {
             if (_per.Between(0, 1, EInterval.Until))
             {
-                decimal _round = Math.Round(_per * this._BLOCKS);
+                decimal _round = Math.Round(_per * _BLOCKS);
 
-                if (this._BAR.Contains(_round) == false)
+                if (_BAR.Contains(_round) == false)
                 {
-                    this._BAR.Add(_round);
+                    _BAR.Add(_round);
 
-                    ConsoleHelper.Write(this._DRAW_START, ProgressAbstract._CHAR);
-                    this._DRAW_START.X += 1;
+                    ConsoleHelper.Write(_DRAW_START, ProgressAbstract._CHAR);
+                    _DRAW_START.X += 1;
                 }
             }
         }
@@ -86,15 +86,15 @@ namespace imL.Contract
                 _value,
                 _length);
 
-            ConsoleHelper.Write(this._DRAW_END, _text);
+            ConsoleHelper.Write(_DRAW_END, _text);
         }
         protected void DrawElapsed(DateTime _value)
         {
-            TimeSpan _diff = _value - this._START;
+            TimeSpan _diff = _value - _START;
 
             string _text = string.Format(
                 "[{0}]  {1}",
-                ProgressAbstract._BUCLE[this._BLOCKS++ % 4],
+                ProgressAbstract._BUCLE[_BLOCKS++ % 4],
 #if (NET35)
                 _diff.ToString()
 #else
@@ -102,7 +102,7 @@ namespace imL.Contract
 #endif
                 );
 
-            ConsoleHelper.Write(this._DRAW_START, _text);
+            ConsoleHelper.Write(_DRAW_START, _text);
         }
 
         //################################################################################
@@ -114,30 +114,30 @@ namespace imL.Contract
         }
         protected virtual void Dispose(bool _managed)
         {
-            if (this._DISPOSED)
+            if (_DISPOSED)
                 return;
 
             if (_managed)
             {
-                if (this._PARENT == null)
+                if (_PARENT == null)
                 {
                     Console.CursorVisible = true;
-                    ConsoleHelper.WriteLine(this._NEW_LINE, ' ');
+                    ConsoleHelper.WriteLine(_NEW_LINE, ' ');
                 }
                 else
-                    this._PARENT._NEW_LINE = new Point(this._NEW_LINE.X, this._NEW_LINE.Y);
+                    _PARENT._NEW_LINE = new Point(_NEW_LINE.X, _NEW_LINE.Y);
 
-                this._DRAW_END = new Point(0, 0);
-                this._START = DateTime.MinValue;
+                _DRAW_END = new Point(0, 0);
+                _START = DateTime.MinValue;
 
-                this._BLOCKS = 0;
-                this._LINE = new Point(0, 0);
-                this._NEW_LINE = new Point(0, 0);
-                this._DRAW_START = new Point(0, 0);
-                this._BAR.Clear();
-                this._BAR = null;
+                _BLOCKS = 0;
+                _LINE = new Point(0, 0);
+                _NEW_LINE = new Point(0, 0);
+                _DRAW_START = new Point(0, 0);
+                _BAR.Clear();
+                _BAR = null;
             }
-            this._DISPOSED = true;
+            _DISPOSED = true;
         }
     }
 }

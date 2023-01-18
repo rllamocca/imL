@@ -12,8 +12,8 @@ namespace imL.Rest.Frotcom
 
         public FrotcomClient(HttpClient _http, FrotcomFormat _format)
         {
-            this.Http = _http;
-            this.Format = _format;
+            Http = _http;
+            Format = _format;
         }
     }
 }

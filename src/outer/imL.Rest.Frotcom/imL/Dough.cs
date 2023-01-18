@@ -12,8 +12,8 @@ namespace imL.Rest.Frotcom
             Location _location
             )
         {
-            this.Vehicle = _vehicle;
-            this.Location = _location;
+            Vehicle = _vehicle;
+            Location = _location;
         }
     }
 }

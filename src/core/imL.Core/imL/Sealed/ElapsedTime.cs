@@ -14,37 +14,37 @@ namespace imL.Sealed
 
         void ElapsedEvent(object _source, ElapsedEventArgs _e)
         {
-            this.DrawElapsed(_e.SignalTime);
+            DrawElapsed(_e.SignalTime);
         }
 
         public ElapsedTime(ProgressAbstract _parent = null)
         {
-            this.Init(_parent: _parent);
-            this.Init2(0);
+            Init(_parent: _parent);
+            Init2(0);
 
-            this.DrawElapsed(this._START);
+            DrawElapsed(_START);
 
-            this._TIMER = new Timer(1000);
-            this._TIMER.Elapsed += this.ElapsedEvent;
-            this._TIMER.Start();
+            _TIMER = new Timer(1000);
+            _TIMER.Elapsed += ElapsedEvent;
+            _TIMER.Start();
         }
 
         //################################################################################
         protected override void Dispose(bool _managed)
         {
-            if (this._DISPOSED)
+            if (_DISPOSED)
                 return;
 
             if (_managed)
             {
-                if (this._TIMER != null)
+                if (_TIMER != null)
                 {
-                    this._TIMER.Stop();
-                    this._TIMER.Dispose();
+                    _TIMER.Stop();
+                    _TIMER.Dispose();
                 }
             }
 
-            this._DISPOSED = true;
+            _DISPOSED = true;
 
             base.Dispose(_managed);
         }

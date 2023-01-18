@@ -11,33 +11,33 @@ namespace imL.Struct
 
         public MemoryUnit(decimal _size, EMemoryUnit _unit = EMemoryUnit.Byte)
         {
-            this.Size = _size;
-            this.Unit = _unit;
+            Size = _size;
+            Unit = _unit;
         }
 
         public MemoryUnit To(EMemoryUnit _new = EMemoryUnit.MB)
         {
-            return new MemoryUnit(this.ToSize(_new), _new);
+            return new MemoryUnit(ToSize(_new), _new);
         }
         public decimal ToSize(EMemoryUnit _new = EMemoryUnit.MB)
         {
-            if (this.Unit == _new || this.Size == 0)
-                return this.Size;
+            if (Unit == _new || Size == 0)
+                return Size;
 
-            bool _cen = this.Unit < _new;
+            bool _cen = Unit < _new;
             double _diff;
 
             if (_cen)
-                _diff = _new - this.Unit;
+                _diff = _new - Unit;
             else
-                _diff = this.Unit - _new;
+                _diff = Unit - _new;
 
             _diff = Math.Pow(2, _diff);
 
             if (_cen)
-                return this.Size / Convert.ToDecimal(_diff);
+                return Size / Convert.ToDecimal(_diff);
             else
-                return this.Size * Convert.ToDecimal(_diff);
+                return Size * Convert.ToDecimal(_diff);
         }
 
         public static bool operator <(MemoryUnit _l, MemoryUnit _r)
@@ -133,12 +133,12 @@ namespace imL.Struct
         }
         public override string ToString()
         {
-            return string.Format("{0} {1}s", this.Size, this.Unit);
+            return string.Format("{0} {1}s", Size, Unit);
         }
         public override int GetHashCode()
         {
-            int _a = Convert.ToInt32(this.Size);
-            int _b = Convert.ToInt32(this.Unit);
+            int _a = Convert.ToInt32(Size);
+            int _b = Convert.ToInt32(Unit);
 
             return _a ^ _b;
         }

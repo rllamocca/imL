@@ -22,8 +22,8 @@ namespace imL
         public bool Specials { set; get; } = false;
         public char[] Aggregate { set; get; }
 
-        public string Base { get { return new string(this._BASE); } }
-        public string Generated { get { return new string(this._GENERATED); } }
+        public string Base { get { return new string(_BASE); } }
+        public string Generated { get { return new string(_GENERATED); } }
 
         public Password(
             bool _numbers = true,
@@ -33,16 +33,16 @@ namespace imL
             char[] _aggregate = null
             )
         {
-            this.Numbers = _numbers;
-            this.UpperCase = _uppercase;
-            this.LowerCase = _lowercase;
-            this.Specials = _specials;
-            this.Aggregate = _aggregate;
+            Numbers = _numbers;
+            UpperCase = _uppercase;
+            LowerCase = _lowercase;
+            Specials = _specials;
+            Aggregate = _aggregate;
         }
         public void Generate(byte _length = 8)
         {
-            this._BASE = Password.Prepare(this.Numbers, this.UpperCase, this.LowerCase, this.Specials, this.Aggregate, _length);
-            this._GENERATED = Password.Generate(this._BASE, _length);
+            _BASE = Password.Prepare(Numbers, UpperCase, LowerCase, Specials, Aggregate, _length);
+            _GENERATED = Password.Generate(_BASE, _length);
         }
 
         public static char[] Prepare(
@@ -82,31 +82,31 @@ namespace imL
         //################################################################################
         ~Password()
         {
-            this.Dispose(false);
+            Dispose(false);
         }
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
         protected virtual void Dispose(bool _managed)
         {
-            if (this._DISPOSED)
+            if (_DISPOSED)
                 return;
 
             if (_managed)
             {
-                this._BASE = null;
-                this._GENERATED = null;
+                _BASE = null;
+                _GENERATED = null;
 
-                this.LowerCase = false;
-                this.UpperCase = false;
-                this.Numbers = false;
-                this.Specials = false;
-                this.Aggregate = null;
+                LowerCase = false;
+                UpperCase = false;
+                Numbers = false;
+                Specials = false;
+                Aggregate = null;
             }
 
-            this._DISPOSED = true;
+            _DISPOSED = true;
         }
     }
 }

@@ -27,22 +27,22 @@ namespace imL.Package.MySql
 
         public MySqlHelper(IConnection _conn, bool _throw = false, IProgress<int> _progress = null)
         {
-            this.Connection = _conn;
-            this.Throw = _throw;
-            this.Progress = _progress;
+            Connection = _conn;
+            Throw = _throw;
+            Progress = _progress;
         }
 
         public Return Execute(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[] _pmts)
         {
             try
             {
-                MySqlConnectionDefault _conn_raw = (MySqlConnectionDefault)this.Connection;
+                MySqlConnectionDefault _conn_raw = (MySqlConnectionDefault)Connection;
                 IEnumerable<MySqlParameter> _pmts_raw = _pmts.GetMySqlParameters();
 
                 using (MySqlCommand _cmd = new MySqlCommand(_query, _conn_raw.Connection))
                 {
                     _cmd.Transaction = _conn_raw.Transaction;
-                    _cmd.CommandTimeout = this.Connection.TimeOut;
+                    _cmd.CommandTimeout = Connection.TimeOut;
 
                     if (_pmts_raw.HasValue())
                         _cmd.Parameters.AddRange(_pmts_raw.ToArray());
@@ -62,7 +62,7 @@ namespace imL.Package.MySql
             }
             catch (Exception _ex)
             {
-                if (this.Throw)
+                if (Throw)
                     throw;
 
                 return new Return(false, _ex);
@@ -73,7 +73,7 @@ namespace imL.Package.MySql
         {
             try
             {
-                MySqlConnectionDefault _conn_raw = (MySqlConnectionDefault)this.Connection;
+                MySqlConnectionDefault _conn_raw = (MySqlConnectionDefault)Connection;
 
                 int _r = 0;
                 Return[] _returns = new Return[_pmts.Length];
@@ -82,7 +82,7 @@ namespace imL.Package.MySql
                 using (MySqlCommand _cmd = new MySqlCommand(_query, _conn_raw.Connection))
                 {
                     _cmd.Transaction = _conn_raw.Transaction;
-                    _cmd.CommandTimeout = this.Connection.TimeOut;
+                    _cmd.CommandTimeout = Connection.TimeOut;
                     _cmd.Parameters.AddRange(_pmts_raw.ToArray());
 
                     int _c_p = _cmd.Parameters.Count;
@@ -116,14 +116,14 @@ namespace imL.Package.MySql
                         }
                         catch (Exception _ex)
                         {
-                            if (this.Throw)
+                            if (Throw)
                                 throw;
 
                             _returns[_r] = new Return(false, _ex);
                         }
 
                         _r++;
-                        this.Progress?.Report(_r);
+                        Progress?.Report(_r);
 
                     } while (_r < _c_r);
                 }
@@ -131,7 +131,7 @@ namespace imL.Package.MySql
             }
             catch (Exception _ex)
             {
-                if (this.Throw)
+                if (Throw)
                     throw;
 
                 return new Return[] { new Return(false, _ex) };
@@ -156,7 +156,7 @@ namespace imL.Package.MySql
             }
             catch (Exception)
             {
-                if (this.Throw)
+                if (Throw)
                     throw;
             }
 
@@ -169,7 +169,7 @@ namespace imL.Package.MySql
                 Return _exe = Execute(_query, EExecute.Reader, _pmts);
                 _exe.TriggerErrorException();
 
-                DataSet _return = new DataSet("DataSet_0") { EnforceConstraints = this.Connection.Constraints };
+                DataSet _return = new DataSet("DataSet_0") { EnforceConstraints = Connection.Constraints };
                 byte _n = 0;
 
                 using (MySqlDataReader _read = (MySqlDataReader)_exe.Result)
@@ -181,7 +181,7 @@ namespace imL.Package.MySql
                         _return.Tables.Add(_dt);
                         _n++;
 
-                        this.Progress?.Report(_n);
+                        Progress?.Report(_n);
                     }
                 }
 
@@ -189,7 +189,7 @@ namespace imL.Package.MySql
             }
             catch (Exception)
             {
-                if (this.Throw)
+                if (Throw)
                     throw;
             }
 
@@ -212,7 +212,7 @@ namespace imL.Package.MySql
             }
             catch (Exception)
             {
-                if (this.Throw)
+                if (Throw)
                     throw;
             }
 

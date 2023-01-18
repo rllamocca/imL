@@ -41,24 +41,24 @@ namespace imL.Package.Hosting
 
         async void DoWork(object _state)
         {
-            long _count = Interlocked.Increment(ref this._EXECUTION_COUNT);
+            long _count = Interlocked.Increment(ref _EXECUTION_COUNT);
 
             try
             {
                 using (IPeriodExecution _using = new GExecution())
                 {
-                    CancellationTokenSource _cts = (this._SETTING.Delay == 0) ? new CancellationTokenSource() : new CancellationTokenSource(TimeSpan.FromSeconds(this._SETTING.Delay.GetValueOrDefault()));
-                    _using.PopulateWithSomething(_count, this._INFO, _cts.Token);
+                    CancellationTokenSource _cts = (_SETTING.Delay == 0) ? new CancellationTokenSource() : new CancellationTokenSource(TimeSpan.FromSeconds(_SETTING.Delay.GetValueOrDefault()));
+                    _using.PopulateWithSomething(_count, _INFO, _cts.Token);
                     _using.AfterPopulate();
-                    this._LOGGER?.LogInformation("WORKING DO: {_p0} <<<<", _using.WorkingDoInfo());
-                    await this._WORKER?.DoWork(_using, this._LOGGER);
-                    this._LOGGER?.LogInformation(">>>> STANDING WORK: {_p0}", _using.Guid);
+                    _LOGGER?.LogInformation("WORKING DO: {_p0} <<<<", _using.WorkingDoInfo());
+                    await _WORKER?.DoWork(_using, _LOGGER);
+                    _LOGGER?.LogInformation(">>>> STANDING WORK: {_p0}", _using.Guid);
                 }
             }
             catch (Exception _ex)
             {
-                this._LOGGER?.LogCritical("EXCEPTION IN: {_count}", _count);
-                this._LOGGER?.LogCritical(_ex, "{p0}", _ex.Message);
+                _LOGGER?.LogCritical("EXCEPTION IN: {_count}", _count);
+                _LOGGER?.LogCritical(_ex, "{p0}", _ex.Message);
             }
         }
 
@@ -70,50 +70,50 @@ namespace imL.Package.Hosting
             )
         {
             using (IServiceScope _scope = _services.CreateScope())
-                this._WORKER = _scope.ServiceProvider.GetRequiredService<IHostPeriodWorker>();
+                _WORKER = _scope.ServiceProvider.GetRequiredService<IHostPeriodWorker>();
 
-            this._SETTING = _setting;
-            this._INFO = _info;
-            this._LOGGER = _logger;
+            _SETTING = _setting;
+            _INFO = _info;
+            _LOGGER = _logger;
         }
         public Task StartAsync(CancellationToken _ct)
         {
-            TimeSpan _period = TimeSpan.FromSeconds(this._SETTING.Period);
-            this._LOGGER?.LogInformation("PeriodHostedService RUNNING: {_period}", _period);
-            this._TIMER = new Timer(DoWork, null, TimeSpan.Zero, _period);
+            TimeSpan _period = TimeSpan.FromSeconds(_SETTING.Period);
+            _LOGGER?.LogInformation("PeriodHostedService RUNNING: {_period}", _period);
+            _TIMER = new Timer(DoWork, null, TimeSpan.Zero, _period);
 
-            return this._COMPLETEDTASK;
+            return _COMPLETEDTASK;
         }
         public Task StopAsync(CancellationToken _ct)
         {
-            this._TIMER?.Change(Timeout.Infinite, 0);
-            this._LOGGER?.LogInformation("PeriodHostedService is STOPPING.");
+            _TIMER?.Change(Timeout.Infinite, 0);
+            _LOGGER?.LogInformation("PeriodHostedService is STOPPING.");
 
-            return this._COMPLETEDTASK;
+            return _COMPLETEDTASK;
         }
 
         //################################################################################
         ~PeriodHostedService()
         {
-            this.Dispose(false);
+            Dispose(false);
         }
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
         protected virtual void Dispose(bool _managed)
         {
-            if (this._DISPOSED)
+            if (_DISPOSED)
                 return;
 
             if (_managed)
             {
-                this._TIMER?.Dispose();
-                this._TIMER = null;
+                _TIMER?.Dispose();
+                _TIMER = null;
             }
 
-            this._DISPOSED = true;
+            _DISPOSED = true;
         }
     }
 }

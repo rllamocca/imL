@@ -24,22 +24,22 @@ namespace imL.Utility.Sql
 
         public SqlHelperAsync(IConnection _conn, bool _throw = false, IProgress<int> _progress = null)
         {
-            this.Connection = _conn;
-            this.Throw = _throw;
-            this.Progress = _progress;
+            Connection = _conn;
+            Throw = _throw;
+            Progress = _progress;
         }
 
         public async Task<Return> ExecuteAsync(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[] _pmts)
         {
             try
             {
-                SqlConnectionDefault _conn_raw = (SqlConnectionDefault)this.Connection;
+                SqlConnectionDefault _conn_raw = (SqlConnectionDefault)Connection;
                 IEnumerable<SqlParameter> _pmts_raw = _pmts.GetSqlParameters();
 
                 using (SqlCommand _cmd = new SqlCommand(_query, _conn_raw.Connection))
                 {
                     _cmd.Transaction = _conn_raw.Transaction;
-                    _cmd.CommandTimeout = this.Connection.TimeOut;
+                    _cmd.CommandTimeout = Connection.TimeOut;
 
                     if (_pmts_raw.HasValue())
                         _cmd.Parameters.AddRange(_pmts_raw.ToArray());
@@ -47,13 +47,13 @@ namespace imL.Utility.Sql
                     switch (_exe)
                     {
                         case EExecute.NonQuery:
-                            return new Return(true, await _cmd.ExecuteNonQueryAsync(this.Connection.Token));
+                            return new Return(true, await _cmd.ExecuteNonQueryAsync(Connection.Token));
                         case EExecute.Scalar:
-                            return new Return(true, await _cmd.ExecuteScalarAsync(this.Connection.Token));
+                            return new Return(true, await _cmd.ExecuteScalarAsync(Connection.Token));
                         case EExecute.Reader:
-                            return new Return(true, await _cmd.ExecuteReaderAsync(this.Connection.Token));
+                            return new Return(true, await _cmd.ExecuteReaderAsync(Connection.Token));
                         case EExecute.XmlReader:
-                            return new Return(true, await _cmd.ExecuteXmlReaderAsync(this.Connection.Token));
+                            return new Return(true, await _cmd.ExecuteXmlReaderAsync(Connection.Token));
                         default:
                             return new Return(false);
                     }
@@ -61,7 +61,7 @@ namespace imL.Utility.Sql
             }
             catch (Exception _ex)
             {
-                if (this.Throw)
+                if (Throw)
                     throw;
 
                 return new Return(false, _ex);
@@ -72,7 +72,7 @@ namespace imL.Utility.Sql
         {
             try
             {
-                SqlConnectionDefault _conn_raw = (SqlConnectionDefault)this.Connection;
+                SqlConnectionDefault _conn_raw = (SqlConnectionDefault)Connection;
 
                 int _r = 0;
                 Return[] _returns = new Return[_pmts.Length];
@@ -81,7 +81,7 @@ namespace imL.Utility.Sql
                 using (SqlCommand _cmd = new SqlCommand(_query, _conn_raw.Connection))
                 {
                     _cmd.Transaction = _conn_raw.Transaction;
-                    _cmd.CommandTimeout = this.Connection.TimeOut;
+                    _cmd.CommandTimeout = Connection.TimeOut;
                     _cmd.Parameters.AddRange(_pmts_raw.ToArray());
 
                     int _c_p = _cmd.Parameters.Count;
@@ -99,16 +99,16 @@ namespace imL.Utility.Sql
                             switch (_exe)
                             {
                                 case EExecute.NonQuery:
-                                    _returns[_r] = new Return(true, await _cmd.ExecuteNonQueryAsync(this.Connection.Token));
+                                    _returns[_r] = new Return(true, await _cmd.ExecuteNonQueryAsync(Connection.Token));
                                     break;
                                 case EExecute.Scalar:
-                                    _returns[_r] = new Return(true, await _cmd.ExecuteScalarAsync(this.Connection.Token));
+                                    _returns[_r] = new Return(true, await _cmd.ExecuteScalarAsync(Connection.Token));
                                     break;
                                 case EExecute.Reader:
-                                    _returns[_r] = new Return(true, await _cmd.ExecuteReaderAsync(this.Connection.Token));
+                                    _returns[_r] = new Return(true, await _cmd.ExecuteReaderAsync(Connection.Token));
                                     break;
                                 case EExecute.XmlReader:
-                                    _returns[_r] = new Return(true, await _cmd.ExecuteXmlReaderAsync(this.Connection.Token));
+                                    _returns[_r] = new Return(true, await _cmd.ExecuteXmlReaderAsync(Connection.Token));
                                     break;
                                 default:
                                     _returns[_r] = new Return(false);
@@ -117,14 +117,14 @@ namespace imL.Utility.Sql
                         }
                         catch (Exception _ex)
                         {
-                            if (this.Throw)
+                            if (Throw)
                                 throw;
 
                             _returns[_r] = new Return(false, _ex);
                         }
 
                         _r++;
-                        this.Progress?.Report(_r);
+                        Progress?.Report(_r);
 
                     } while (_r < _c_r);
                 }
@@ -132,7 +132,7 @@ namespace imL.Utility.Sql
             }
             catch (Exception _ex)
             {
-                if (this.Throw)
+                if (Throw)
                     throw;
 
                 return new Return[] { new Return(false, _ex) };
@@ -157,7 +157,7 @@ namespace imL.Utility.Sql
             }
             catch (Exception)
             {
-                if (this.Throw)
+                if (Throw)
                     throw;
             }
 
@@ -170,7 +170,7 @@ namespace imL.Utility.Sql
                 Return _exe = await ExecuteAsync(_query, EExecute.Reader, _pmts);
                 _exe.TriggerErrorException();
 
-                DataSet _return = new DataSet("DataSet_0") { EnforceConstraints = this.Connection.Constraints };
+                DataSet _return = new DataSet("DataSet_0") { EnforceConstraints = Connection.Constraints };
                 byte _n = 0;
 
                 using (SqlDataReader _read = (SqlDataReader)_exe.Result)
@@ -182,7 +182,7 @@ namespace imL.Utility.Sql
                         _return.Tables.Add(_dt);
                         _n++;
 
-                        this.Progress?.Report(_n);
+                        Progress?.Report(_n);
                     }
                 }
 
@@ -190,7 +190,7 @@ namespace imL.Utility.Sql
             }
             catch (Exception)
             {
-                if (this.Throw)
+                if (Throw)
                     throw;
             }
 
@@ -213,7 +213,7 @@ namespace imL.Utility.Sql
             }
             catch (Exception)
             {
-                if (this.Throw)
+                if (Throw)
                     throw;
             }
 

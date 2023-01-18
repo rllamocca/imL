@@ -19,10 +19,10 @@ namespace imL
             if (_draw_rl == false)
                 _format = new string(_format.Reverse().ToArray());
 
-            this._FORMAT = _format;
-            this._DRAW_RL = _draw_rl;
-            this._L_R = _l_r;
-            this._R_R = _r_r;
+            _FORMAT = _format;
+            _DRAW_RL = _draw_rl;
+            _L_R = _l_r;
+            _R_R = _r_r;
         }
         /*
 Before
@@ -38,7 +38,7 @@ After
             if (string.IsNullOrEmpty(_value))
                 return _value;
 
-            if (this._L_R != null)
+            if (_L_R != null)
             {
                 char[] _chars = _value.ToArray();
                 bool _c = true;
@@ -47,7 +47,7 @@ After
                     _i < _chars.Length;
                     _i++)
                 {
-                    if (_c && this._L_R.Contains(_chars[_i]))
+                    if (_c && _L_R.Contains(_chars[_i]))
                         _chars[_i] = ' ';
                     else
                         _c = false;
@@ -56,7 +56,7 @@ After
                 _value = new string(_chars).Trim();
             }
 
-            if (this._R_R != null)
+            if (_R_R != null)
             {
                 char[] _chars = _value.ToArray();
                 bool _c = true;
@@ -65,7 +65,7 @@ After
                     _i == 0;
                     _i--)
                 {
-                    if (_c && this._R_R.Contains(_chars[_i]))
+                    if (_c && _R_R.Contains(_chars[_i]))
                         _chars[_i] = ' ';
                     else
                         _c = false;
@@ -74,27 +74,27 @@ After
                 _value = new string(_chars).Trim();
             }
 
-            KeyValuePair<int, string> _pair = this._FORMATS.Where(_w => _w.Key == _value.Length).FirstOrDefault();
+            KeyValuePair<int, string> _pair = _FORMATS.Where(_w => _w.Key == _value.Length).FirstOrDefault();
             string _format;
 
             if (_pair.Key == 0)
-                _format = this.Analyze(_value.Length);
+                _format = Analyze(_value.Length);
             else
                 _format = _pair.Value;
 
-            if (this._DRAW_RL == false)
+            if (_DRAW_RL == false)
                 _value = new string(_value.Reverse().ToArray());
 
             string _return = string.Format(_format, _value.Select(_s => Convert.ToString(_s)).ToArray());
 
-            if (this._DRAW_RL == false)
+            if (_DRAW_RL == false)
                 _return = new string(_return.Reverse().ToArray());
 
             return _return;
         }
         string Analyze(int _length)
         {
-            string _return = this._FORMAT;
+            string _return = _FORMAT;
 
             IList<int> _indexs = new List<int>();
 
@@ -116,7 +116,7 @@ After
                     _return = _return.Remove(_i, 1).Insert(_i, "{" + Convert.ToString(_indexs.IndexOf(_i)) + "}");
             }
 
-            this._FORMATS.Add(new KeyValuePair<int, string>(_length, _return));
+            _FORMATS.Add(new KeyValuePair<int, string>(_length, _return));
 
             return _return;
         }

@@ -16,22 +16,22 @@ namespace imL.Package.Hosting
         DateTime _START;
         string _GUID;
 
-        public long Count { get { return this._COUNT; } }
-        public IAppInfo App { get { return this._APP; } }
-        public CancellationToken Token { get { return this._TOKEN; } }
+        public long Count { get { return _COUNT; } }
+        public IAppInfo App { get { return _APP; } }
+        public CancellationToken Token { get { return _TOKEN; } }
 
-        public DateTime Start { get { return this._START; } }
-        public string Guid { get { return this._GUID; } }
+        public DateTime Start { get { return _START; } }
+        public string Guid { get { return _GUID; } }
 
         public void PopulateWithSomething(long _count, IAppInfo _app, CancellationToken _token = default)
         {
-            this._START = DateTime.Now;
+            _START = DateTime.Now;
 
-            this._COUNT = _count;
-            this._APP = _app;
-            this._TOKEN = _token;
+            _COUNT = _count;
+            _APP = _app;
+            _TOKEN = _token;
 
-            this._GUID = Convert.ToString(System.Guid.NewGuid());
+            _GUID = Convert.ToString(System.Guid.NewGuid());
         }
         public void AfterPopulate()
         {
@@ -40,27 +40,27 @@ namespace imL.Package.Hosting
 
         public string WorkingDoInfo()
         {
-            return string.Format("{0} | {1}| {2}|", this._START.ToLocalTime(), this._GUID, this._COUNT);
+            return string.Format("{0} | {1}| {2}|", _START.ToLocalTime(), _GUID, _COUNT);
         }
 
         public override string ToString()
         {
-            return string.Format("[{0}]{1}|", this._COUNT, this._GUID);
+            return string.Format("[{0}]{1}|", _COUNT, _GUID);
         }
 
         //################################################################################
         ~PeriodExecutionDefault()
         {
-            this.Dispose(false);
+            Dispose(false);
         }
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
         protected virtual void Dispose(bool _managed)
         {
-            if (this._DISPOSED)
+            if (_DISPOSED)
                 return;
 
             if (_managed)
@@ -68,7 +68,7 @@ namespace imL.Package.Hosting
                 //
             }
 
-            this._DISPOSED = true;
+            _DISPOSED = true;
         }
     }
 }

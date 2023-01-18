@@ -20,61 +20,61 @@ namespace imL.Sealed
         ulong _LENGTH;
         ulong _VALUE = 0;
 
-        public ulong Length { get { return this._LENGTH; } }
-        public ulong Value { get { return this._VALUE; } }
+        public ulong Length { get { return _LENGTH; } }
+        public ulong Value { get { return _VALUE; } }
 
         public ProgressU64(ulong _length = 50, EReportProgress _report = EReportProgress.Increment, ProgressAbstract _parent = null)
         {
             if (_length == 0)
                 throw new ArgumentOutOfRangeException(nameof(_length), "_length == 0");
 
-            this.Init(_report, _parent);
-            this._LENGTH = _length;
+            Init(_report, _parent);
+            _LENGTH = _length;
 
-            if (this._LENGTH < 50)
-                this.Init2(Convert.ToByte(this._LENGTH));
+            if (_LENGTH < 50)
+                Init2(Convert.ToByte(_LENGTH));
             else
-                this.Init2();
+                Init2();
         }
 
         public void Report(ulong _value = 0)
         {
-            switch (this._REPORT)
+            switch (_REPORT)
             {
                 case EReportProgress.StartsAtZero:
-                    this._VALUE = _value + 1;
+                    _VALUE = _value + 1;
                     break;
                 case EReportProgress.Increment:
-                    this._VALUE++;
+                    _VALUE++;
                     break;
                 default:
-                    this._VALUE = _value;
+                    _VALUE = _value;
                     break;
             }
 
             decimal _per = 1.0m;
 
-            if (this._VALUE.Between(0, this._LENGTH))
+            if (_VALUE.Between(0, _LENGTH))
             {
-                _per = (1.0m * this._VALUE / this._LENGTH);
-                this.DrawBar(_per);
+                _per = (1.0m * _VALUE / _LENGTH);
+                DrawBar(_per);
             }
 
-            this.DrawProgress(_per, this._VALUE, this._LENGTH);
+            DrawProgress(_per, _VALUE, _LENGTH);
         }
 
         //################################################################################
         protected override void Dispose(bool _managed)
         {
-            if (this._DISPOSED)
+            if (_DISPOSED)
                 return;
 
             if (_managed)
             {
-                this._LENGTH = 0;
-                this._VALUE = 0;
+                _LENGTH = 0;
+                _VALUE = 0;
             }
-            this._DISPOSED = true;
+            _DISPOSED = true;
 
             base.Dispose(_managed);
         }

@@ -8,9 +8,9 @@
 
         public BufferCoordinate(string _licenseplate, decimal _latitude, decimal _longitude)
         {
-            this.LicensePlate = _licenseplate;
-            this.Latitude = _latitude;
-            this.Longitude = _longitude;
+            LicensePlate = _licenseplate;
+            Latitude = _latitude;
+            Longitude = _longitude;
         }
     }
 }

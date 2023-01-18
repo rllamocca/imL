@@ -23,25 +23,25 @@ namespace imL.Package.MySql
 
         public MySqlTransaction Transaction
         {
-            set { this._TS = value; }
-            get { return this._TS; }
+            set { _TS = value; }
+            get { return _TS; }
         }
         public MySqlConnection Connection
         {
-            get { return this._CN; }
+            get { return _CN; }
         }
 
         public MySqlConnectionDefault(DbConnection _conn)
         {
-            this._CN = (MySqlConnection)_conn;
+            _CN = (MySqlConnection)_conn;
         }
         public MySqlConnectionDefault(MySqlConnection _conn)
         {
-            this._CN = _conn;
+            _CN = _conn;
         }
         public MySqlConnectionDefault(string _conn)
         {
-            this._CN = new MySqlConnection(_conn);
+            _CN = new MySqlConnection(_conn);
         }
 
         //####
@@ -54,11 +54,11 @@ namespace imL.Package.MySql
 
         public void Open()
         {
-            switch (this._CN.State)
+            switch (_CN.State)
             {
                 case ConnectionState.Closed:
                 case ConnectionState.Broken:
-                    this._CN.Open();
+                    _CN.Open();
 
                     break;
                 default:
@@ -67,23 +67,23 @@ namespace imL.Package.MySql
         }
         public void Close()
         {
-            if (this._CN.State != ConnectionState.Closed)
-                this._CN.Close();
+            if (_CN.State != ConnectionState.Closed)
+                _CN.Close();
         }
         public void Refresh()
         {
-            this.Open();
-            this.Close();
+            Open();
+            Close();
         }
 
 #if (NET35 || NET40) == false
         public async Task OpenAsync()
         {
-            switch (this._CN.State)
+            switch (_CN.State)
             {
                 case ConnectionState.Closed:
                 case ConnectionState.Broken:
-                    await this._CN.OpenAsync();
+                    await _CN.OpenAsync();
 
                     break;
                 default:
@@ -94,18 +94,18 @@ namespace imL.Package.MySql
 #if (NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER)
         public async Task CloseAsync()
         {
-            if (this._CN.State != ConnectionState.Closed)
-                await this._CN.CloseAsync();
+            if (_CN.State != ConnectionState.Closed)
+                await _CN.CloseAsync();
         }
 #endif
 #if (NET35 || NET40) == false
         public async Task RefreshAsync()
         {
-            await this.OpenAsync();
+            await OpenAsync();
 #if (NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER)
-            await this.CloseAsync();
+            await CloseAsync();
 #else
-            this.Close();
+            Close();
 #endif
         }
 #endif
@@ -114,36 +114,36 @@ namespace imL.Package.MySql
         //################################################################################
         ~MySqlConnectionDefault()
         {
-            this.Dispose(false);
+            Dispose(false);
         }
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
         protected virtual void Dispose(bool _managed)
         {
-            if (this._DISPOSED)
+            if (_DISPOSED)
                 return;
 
             if (_managed)
             {
-                if (this._TS != null)
+                if (_TS != null)
                 {
-                    this._TS.Dispose();
-                    this._TS = null;
+                    _TS.Dispose();
+                    _TS = null;
                 }
-                if (this._CN != null)
+                if (_CN != null)
                 {
-                    this._CN.Dispose();
-                    this._CN = null;
+                    _CN.Dispose();
+                    _CN = null;
                 }
 
-                this.TimeOut = 0;
-                this.Constraints = false;
+                TimeOut = 0;
+                Constraints = false;
             }
 
-            this._DISPOSED = true;
+            _DISPOSED = true;
         }
     }
 }

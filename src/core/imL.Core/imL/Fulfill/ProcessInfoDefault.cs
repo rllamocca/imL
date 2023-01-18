@@ -23,67 +23,67 @@ namespace imL.Contract
 
         public ProcessInfoDefault(IAppInfo _info)
         {
-            this.Start = DateTime.Now;
-            this.Guid = Convert.ToString(System.Guid.NewGuid());
-            this.App = _info;
-            this.PathAttachments = new List<string>();
+            Start = DateTime.Now;
+            Guid = Convert.ToString(System.Guid.NewGuid());
+            App = _info;
+            PathAttachments = new List<string>();
         }
 
         public void AddSelected(long _add)
         {
             if (_add > 0)
-                this.Selected = this.Selected.GetValueOrDefault() + _add;
+                Selected = Selected.GetValueOrDefault() + _add;
         }
         public void AddInserted(long _add)
         {
             if (_add > 0)
-                this.Inserted = this.Inserted.GetValueOrDefault() + _add;
+                Inserted = Inserted.GetValueOrDefault() + _add;
         }
         public void AddUpdated(long _add)
         {
             if (_add > 0)
-                this.Updated = this.Updated.GetValueOrDefault() + _add;
+                Updated = Updated.GetValueOrDefault() + _add;
         }
         public void AddErased(long _add)
         {
             if (_add > 0)
-                this.Erased = this.Erased.GetValueOrDefault() + _add;
+                Erased = Erased.GetValueOrDefault() + _add;
         }
         public void AddSuccesses(long _add)
         {
             if (_add > 0)
-                this.Successes = this.Successes.GetValueOrDefault() + _add;
+                Successes = Successes.GetValueOrDefault() + _add;
         }
         public void AddErrors(long _add)
         {
             if (_add > 0)
-                this.Errors = this.Errors.GetValueOrDefault() + _add;
+                Errors = Errors.GetValueOrDefault() + _add;
         }
 
         public void Success()
         {
-            long? _acum = this.Inserted.GetValueOrDefault() + this.Updated.GetValueOrDefault() + this.Erased.GetValueOrDefault();
+            long? _acum = Inserted.GetValueOrDefault() + Updated.GetValueOrDefault() + Erased.GetValueOrDefault();
 
             if (_acum == null || _acum == 0)
-                this.Alert = EAlert.Info;
+                Alert = EAlert.Info;
 
-            if (this.Errors > 0)
-                this.Alert = EAlert.Warning;
+            if (Errors > 0)
+                Alert = EAlert.Warning;
 
-            if (this.Alert == EAlert.None)
-                this.Alert = EAlert.Success;
+            if (Alert == EAlert.None)
+                Alert = EAlert.Success;
 
-            this.End = DateTime.Now;
+            End = DateTime.Now;
         }
         public void Danger(Exception _ex = null)
         {
-            this.Critical = _ex;
-            this.Alert = EAlert.Danger;
-            this.End = DateTime.Now;
+            Critical = _ex;
+            Alert = EAlert.Danger;
+            End = DateTime.Now;
         }
         public TimeSpan? Duration()
         {
-            return this.End - this.Start;
+            return End - Start;
         }
     }
 }

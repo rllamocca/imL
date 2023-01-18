@@ -13,7 +13,7 @@
 
 //            internal Booleanizer(TypeSystemProvider typeProvider, MetaModel model)
 //            {
-//                this.sql = new SqlFactory(typeProvider, model);
+//                sql = new SqlFactory(typeProvider, model);
 //            }
 //internal override SqlSelect VisitSelect(SqlSelect select)
 //{
@@ -41,7 +41,7 @@
 ////    OriginalExpr = 1
 //// Yukon and later could also handle:
 ////    OriginalExpr = 'true'
-//// but Sql2000 does not support this.
+//// but Sql2000 does not support 
 //                return new SqlBinary(SqlNodeType.EQ,
 //                    valueExpression.ClrType, sql.TypeProvider.From(typeof(bool)),
 //                    valueExpression,

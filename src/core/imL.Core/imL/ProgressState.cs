@@ -10,11 +10,11 @@ namespace imL
 
         public decimal Percentage()
         {
-            return U221EHelper.Division(1.0m * this.Value, this.Length);
+            return U221EHelper.Division(1.0m * Value, Length);
         }
         public string Proportion()
         {
-            return string.Format("{0}/{1}", this.Value, this.Length);
+            return string.Format("{0}/{1}", Value, Length);
         }
     }
 }

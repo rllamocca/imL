@@ -18,21 +18,21 @@ namespace imL.Package.ServiceModel
 
         public CustomTextMessageEncoder(CustomTextMessageEncoderFactory factory)
         {
-            this.factory = factory;
+            factory = factory;
 
-            this.writerSettings = new XmlWriterSettings
+            writerSettings = new XmlWriterSettings
             {
                 Encoding = Encoding.GetEncoding(factory.CharSet)
             };
-            this.contentType = string.Format("{0}; charset={1}",
-                this.factory.MediaType, this.writerSettings.Encoding.HeaderName);
+            contentType = string.Format("{0}; charset={1}",
+                factory.MediaType, writerSettings.Encoding.HeaderName);
         }
 
         public override string ContentType
         {
             get
             {
-                return this.contentType;
+                return contentType;
             }
         }
 
@@ -48,7 +48,7 @@ namespace imL.Package.ServiceModel
         {
             get
             {
-                return this.factory.MessageVersion;
+                return factory.MessageVersion;
             }
         }
 
@@ -65,13 +65,13 @@ namespace imL.Package.ServiceModel
         public override Message ReadMessage(Stream stream, int maxSizeOfHeaders, string contentType)
         {
             XmlReader reader = XmlReader.Create(stream);
-            return Message.CreateMessage(reader, maxSizeOfHeaders, this.MessageVersion);
+            return Message.CreateMessage(reader, maxSizeOfHeaders, MessageVersion);
         }
 
         public override ArraySegment<byte> WriteMessage(Message message, int maxMessageSize, BufferManager bufferManager, int messageOffset)
         {
             MemoryStream stream = new MemoryStream();
-            XmlWriter writer = XmlWriter.Create(stream, this.writerSettings);
+            XmlWriter writer = XmlWriter.Create(stream, writerSettings);
             message.WriteMessage(writer);
             writer.Close();
 
@@ -89,7 +89,7 @@ namespace imL.Package.ServiceModel
 
         public override void WriteMessage(Message message, Stream stream)
         {
-            XmlWriter writer = XmlWriter.Create(stream, this.writerSettings);
+            XmlWriter writer = XmlWriter.Create(stream, writerSettings);
             message.WriteMessage(writer);
             writer.Close();
         }

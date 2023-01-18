@@ -12,9 +12,9 @@
             bool _issearch = false
             )
         {
-            this.Affect = _affect;
-            this.Expression = _expression;
-            this.IsSearchCondition = _issearch;
+            Affect = _affect;
+            Expression = _expression;
+            IsSearchCondition = _issearch;
         }
 
         public object GetValue()

@@ -14,10 +14,10 @@ namespace imL.Rest.InsurDesign
 
         public InsurDesignClient(HttpClient _http, InsurDesignFormat _format)
         {
-            this.Http = _http;
-            this.Format = _format;
+            Http = _http;
+            Format = _format;
 
-            this.Http.DefaultRequestHeaders.Authorization = HttpHelperAsync.Authentication(EAuthentication.Basic, _format.Username, _format.Password);
+            Http.DefaultRequestHeaders.Authorization = HttpHelperAsync.Authentication(EAuthentication.Basic, _format.Username, _format.Password);
         }
     }
 }

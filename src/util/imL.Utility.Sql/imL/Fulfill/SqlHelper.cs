@@ -25,22 +25,22 @@ namespace imL.Utility.Sql
 
         public SqlHelper(IConnection _conn, bool _throw = false, IProgress<int> _progress = null)
         {
-            this.Connection = _conn;
-            this.Throw = _throw;
-            this.Progress = _progress;
+            Connection = _conn;
+            Throw = _throw;
+            Progress = _progress;
         }
 
         public Return Execute(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[] _pmts)
         {
             try
             {
-                SqlConnectionDefault _conn_raw = (SqlConnectionDefault)this.Connection;
+                SqlConnectionDefault _conn_raw = (SqlConnectionDefault)Connection;
                 IEnumerable<SqlParameter> _pmts_raw = _pmts.GetSqlParameters();
 
                 using (SqlCommand _cmd = new SqlCommand(_query, _conn_raw.Connection))
                 {
                     _cmd.Transaction = _conn_raw.Transaction;
-                    _cmd.CommandTimeout = this.Connection.TimeOut;
+                    _cmd.CommandTimeout = Connection.TimeOut;
 
                     if (_pmts_raw != null)
                         _cmd.Parameters.AddRange(_pmts_raw.ToArray());
@@ -62,7 +62,7 @@ namespace imL.Utility.Sql
             }
             catch (Exception _ex)
             {
-                if (this.Throw)
+                if (Throw)
                     throw;
 
                 return new Return(false, _ex);
@@ -73,7 +73,7 @@ namespace imL.Utility.Sql
         {
             try
             {
-                SqlConnectionDefault _conn_raw = (SqlConnectionDefault)this.Connection;
+                SqlConnectionDefault _conn_raw = (SqlConnectionDefault)Connection;
 
                 int _r = 0;
                 Return[] _returns = new Return[_pmts.Length];
@@ -82,7 +82,7 @@ namespace imL.Utility.Sql
                 using (SqlCommand _cmd = new SqlCommand(_query, _conn_raw.Connection))
                 {
                     _cmd.Transaction = _conn_raw.Transaction;
-                    _cmd.CommandTimeout = this.Connection.TimeOut;
+                    _cmd.CommandTimeout = Connection.TimeOut;
                     _cmd.Parameters.AddRange(_pmts_raw.ToArray());
 
                     int _c_p = _cmd.Parameters.Count;
@@ -118,14 +118,14 @@ namespace imL.Utility.Sql
                         }
                         catch (Exception _ex)
                         {
-                            if (this.Throw)
+                            if (Throw)
                                 throw;
 
                             _returns[_r] = new Return(false, _ex);
                         }
 
                         _r++;
-                        this.Progress?.Report(_r);
+                        Progress?.Report(_r);
 
                     } while (_r < _c_r);
                 }
@@ -133,7 +133,7 @@ namespace imL.Utility.Sql
             }
             catch (Exception _ex)
             {
-                if (this.Throw)
+                if (Throw)
                     throw;
 
                 return new Return[] { new Return(false, _ex) };
@@ -158,7 +158,7 @@ namespace imL.Utility.Sql
             }
             catch (Exception)
             {
-                if (this.Throw)
+                if (Throw)
                     throw;
             }
 
@@ -171,7 +171,7 @@ namespace imL.Utility.Sql
                 Return _exe = Execute(_query, EExecute.Reader, _pmts);
                 _exe.TriggerErrorException();
 
-                DataSet _return = new DataSet("DataSet_0") { EnforceConstraints = this.Connection.Constraints };
+                DataSet _return = new DataSet("DataSet_0") { EnforceConstraints = Connection.Constraints };
                 byte _n = 0;
 
                 using (SqlDataReader _read = (SqlDataReader)_exe.Result)
@@ -183,7 +183,7 @@ namespace imL.Utility.Sql
                         _return.Tables.Add(_dt);
                         _n++;
 
-                        this.Progress?.Report(_n);
+                        Progress?.Report(_n);
                     }
                 }
 
@@ -191,7 +191,7 @@ namespace imL.Utility.Sql
             }
             catch (Exception)
             {
-                if (this.Throw)
+                if (Throw)
                     throw;
             }
 
@@ -214,7 +214,7 @@ namespace imL.Utility.Sql
             }
             catch (Exception)
             {
-                if (this.Throw)
+                if (Throw)
                     throw;
             }
 

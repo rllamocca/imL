@@ -16,17 +16,17 @@ namespace imL.Package.ServiceModel
         internal CustomTextMessageEncoderFactory(string mediaType, string charSet,
             MessageVersion version)
         {
-            this.version = version;
-            this.mediaType = mediaType;
-            this.charSet = charSet;
-            this.encoder = new CustomTextMessageEncoder(this);
+            version = version;
+            mediaType = mediaType;
+            charSet = charSet;
+            encoder = new CustomTextMessageEncoder(this);
         }
 
         public override MessageEncoder Encoder
         {
             get
             {
-                return this.encoder;
+                return encoder;
             }
         }
 
@@ -34,7 +34,7 @@ namespace imL.Package.ServiceModel
         {
             get
             {
-                return this.version;
+                return version;
             }
         }
 
@@ -42,7 +42,7 @@ namespace imL.Package.ServiceModel
         {
             get
             {
-                return this.mediaType;
+                return mediaType;
             }
         }
 
@@ -50,7 +50,7 @@ namespace imL.Package.ServiceModel
         {
             get
             {
-                return this.charSet;
+                return charSet;
             }
         }
     }

@@ -9,8 +9,8 @@ namespace imL.Rest.Sbif
 
         public SbifClient(HttpClient _http, SbifFormat _format)
         {
-            this.Http = _http;
-            this.Format = _format;
+            Http = _http;
+            Format = _format;
         }
     }
 }

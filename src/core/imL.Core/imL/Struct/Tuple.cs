@@ -8,7 +8,7 @@ namespace imL.Struct
 
         public Tuple(T1 item1)
         {
-            this.Item1 = item1;
+            Item1 = item1;
         }
 
         public override bool Equals(object obj)
@@ -39,8 +39,8 @@ namespace imL.Struct
 
         public Tuple(T1 item1, T2 item2)
         {
-            this.Item1 = item1;
-            this.Item2 = item2;
+            Item1 = item1;
+            Item2 = item2;
         }
 
         public override bool Equals(object obj)
@@ -72,9 +72,9 @@ namespace imL.Struct
 
         public Tuple(T1 item1, T2 item2, T3 item3)
         {
-            this.Item1 = item1;
-            this.Item2 = item2;
-            this.Item3 = item3;
+            Item1 = item1;
+            Item2 = item2;
+            Item3 = item3;
         }
 
         public override bool Equals(object obj)

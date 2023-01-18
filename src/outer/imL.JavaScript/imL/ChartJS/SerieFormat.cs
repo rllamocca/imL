@@ -10,9 +10,9 @@ namespace imL.JavaScript.ChartJS
 
         public SerieFormat(IEnumerable<decimal?> _values, string _name = null, string _stack = null)
         {
-            this.Values = _values;
-            this.Name = _name;
-            this.Stack = _stack;
+            Values = _values;
+            Name = _name;
+            Stack = _stack;
         }
     }
 }

@@ -18,29 +18,29 @@ namespace imL.Package.EFCSql
 
         public SqlTransaction Transaction
         {
-            set { this._TS = value; }
-            get { return this._TS; }
+            set { _TS = value; }
+            get { return _TS; }
         }
         public SqlConnection Connection
         {
-            get { return this._CN; }
+            get { return _CN; }
         }
 
         public SqlConnectionDefault(DbConnection _conn)
         {
-            this._CN = (SqlConnection)_conn;
+            _CN = (SqlConnection)_conn;
         }
         public SqlConnectionDefault(SqlConnection _conn)
         {
-            this._STATISTICS = this._CN.StatisticsEnabled;
-            this._CN = _conn;
+            _STATISTICS = _CN.StatisticsEnabled;
+            _CN = _conn;
         }
         public SqlConnectionDefault(string _conn, bool _stat = false)
         {
-            this._STATISTICS = _stat;
-            this._CN = new SqlConnection(_conn)
+            _STATISTICS = _stat;
+            _CN = new SqlConnection(_conn)
             {
-                StatisticsEnabled = this._STATISTICS
+                StatisticsEnabled = _STATISTICS
             };
         }
         public IDictionary RetrieveStatistics()
@@ -49,7 +49,7 @@ namespace imL.Package.EFCSql
         }
         public void ResetStatistics()
         {
-            this._CN.ResetStatistics();
+            _CN.ResetStatistics();
         }
 
         //####
@@ -59,12 +59,12 @@ namespace imL.Package.EFCSql
 
         public void Open()
         {
-            switch (this._CN.State)
+            switch (_CN.State)
             {
                 case ConnectionState.Closed:
                 case ConnectionState.Broken:
-                    this._CN.Open();
-                    this._CN.StatisticsEnabled = this._STATISTICS;
+                    _CN.Open();
+                    _CN.StatisticsEnabled = _STATISTICS;
 
                     break;
                 default:
@@ -73,23 +73,23 @@ namespace imL.Package.EFCSql
         }
         public void Close()
         {
-            if (this._CN.State != ConnectionState.Closed)
-                this._CN.Close();
+            if (_CN.State != ConnectionState.Closed)
+                _CN.Close();
         }
         public void Refresh()
         {
-            this.Open();
-            this.Close();
+            Open();
+            Close();
         }
 
         public async Task OpenAsync()
         {
-            switch (this._CN.State)
+            switch (_CN.State)
             {
                 case ConnectionState.Closed:
                 case ConnectionState.Broken:
-                    await this._CN.OpenAsync();
-                    this._CN.StatisticsEnabled = this._STATISTICS;
+                    await _CN.OpenAsync();
+                    _CN.StatisticsEnabled = _STATISTICS;
 
                     break;
                 default:
@@ -98,50 +98,50 @@ namespace imL.Package.EFCSql
         }
         public async Task CloseAsync()
         {
-            if (this._CN.State != ConnectionState.Closed)
-                await this._CN.CloseAsync();
+            if (_CN.State != ConnectionState.Closed)
+                await _CN.CloseAsync();
         }
         public async Task RefreshAsync()
         {
-            await this.OpenAsync();
-            await this.CloseAsync();
+            await OpenAsync();
+            await CloseAsync();
         }
 
         //################################################################################
         ~SqlConnectionDefault()
         {
-            this.Dispose(false);
+            Dispose(false);
         }
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
         protected virtual void Dispose(bool _managed)
         {
-            if (this._DISPOSED)
+            if (_DISPOSED)
                 return;
 
             if (_managed)
             {
-                if (this._TS != null)
+                if (_TS != null)
                 {
-                    this._TS.Dispose();
-                    this._TS = null;
+                    _TS.Dispose();
+                    _TS = null;
                 }
-                if (this._CN != null)
+                if (_CN != null)
                 {
-                    this._CN.Dispose();
-                    this._CN = null;
+                    _CN.Dispose();
+                    _CN = null;
                 }
 
-                this._STATISTICS = false;
+                _STATISTICS = false;
 
-                this.TimeOut = 0;
-                this.Constraints = false;
+                TimeOut = 0;
+                Constraints = false;
             }
 
-            this._DISPOSED = true;
+            _DISPOSED = true;
         }
     }
 }

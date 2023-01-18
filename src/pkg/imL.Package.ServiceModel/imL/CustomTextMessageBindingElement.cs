@@ -14,17 +14,17 @@ namespace imL.Package.ServiceModel
         CustomTextMessageBindingElement(CustomTextMessageBindingElement binding)
             : this(binding.Encoding, binding.MediaType, binding.MessageVersion)
         {
-            this.readerQuotas = new XmlDictionaryReaderQuotas();
-            binding.ReaderQuotas.CopyTo(this.readerQuotas);
+            readerQuotas = new XmlDictionaryReaderQuotas();
+            binding.ReaderQuotas.CopyTo(readerQuotas);
         }
 
         public CustomTextMessageBindingElement(string encoding, string mediaType,
             MessageVersion msgVersion)
         {
-            this.msgVersion = msgVersion ?? throw new ArgumentNullException(nameof(msgVersion));
-            this.mediaType = mediaType ?? throw new ArgumentNullException(nameof(mediaType));
-            this.encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
-            this.readerQuotas = new XmlDictionaryReaderQuotas();
+            msgVersion = msgVersion ?? throw new ArgumentNullException(nameof(msgVersion));
+            mediaType = mediaType ?? throw new ArgumentNullException(nameof(mediaType));
+            encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
+            readerQuotas = new XmlDictionaryReaderQuotas();
         }
 
         public CustomTextMessageBindingElement(string encoding, string mediaType)
@@ -48,12 +48,12 @@ namespace imL.Package.ServiceModel
         {
             get
             {
-                return this.msgVersion;
+                return msgVersion;
             }
 
             set
             {
-                this.msgVersion = value ?? throw new ArgumentNullException(nameof(value));
+                msgVersion = value ?? throw new ArgumentNullException(nameof(value));
             }
         }
 
@@ -62,12 +62,12 @@ namespace imL.Package.ServiceModel
         {
             get
             {
-                return this.mediaType;
+                return mediaType;
             }
 
             set
             {
-                this.mediaType = value ?? throw new ArgumentNullException(nameof(value));
+                mediaType = value ?? throw new ArgumentNullException(nameof(value));
             }
         }
 
@@ -75,12 +75,12 @@ namespace imL.Package.ServiceModel
         {
             get
             {
-                return this.encoding;
+                return encoding;
             }
 
             set
             {
-                this.encoding = value ?? throw new ArgumentNullException(nameof(value));
+                encoding = value ?? throw new ArgumentNullException(nameof(value));
             }
         }
 
@@ -91,7 +91,7 @@ namespace imL.Package.ServiceModel
         {
             get
             {
-                return this.readerQuotas;
+                return readerQuotas;
             }
         }
 
@@ -99,8 +99,8 @@ namespace imL.Package.ServiceModel
 
         public override MessageEncoderFactory CreateMessageEncoderFactory()
         {
-            return new CustomTextMessageEncoderFactory(this.MediaType,
-                this.Encoding, this.MessageVersion);
+            return new CustomTextMessageEncoderFactory(MediaType,
+                Encoding, MessageVersion);
         }
 
         #endregion
@@ -150,7 +150,7 @@ namespace imL.Package.ServiceModel
         {
             if (typeof(T) == typeof(XmlDictionaryReaderQuotas))
             {
-                return (T)(object)this.readerQuotas;
+                return (T)(object)readerQuotas;
             }
             else
             {

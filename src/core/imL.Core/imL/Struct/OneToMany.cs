@@ -11,8 +11,8 @@ namespace imL.Struct
 
         public OneToMany(G1 _one, IEnumerable<G2> _many)
         {
-            this.One = _one;
-            this.Many = _many;
+            One = _one;
+            Many = _many;
         }
 
         public static IEnumerable<OneToMany<G1, G2>> FromLot(IEnumerable<Lot<G1, G2>> _from, Func<G1, IComparable> _key)

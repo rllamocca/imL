@@ -9,11 +9,11 @@ namespace imL.Rest.Google
 
         public GoogleClient(HttpClient _http, GoogleFormat _format)
         {
-            this.Http = _http;
-            this.Format = _format;
+            Http = _http;
+            Format = _format;
 
-            this.Format.URI_maps = this.Format.URI_maps ?? this.Format.URI;
-            this.Format.Key_maps = this.Format.Key_maps ?? this.Format.Key;
+            Format.URI_maps = Format.URI_maps ?? Format.URI;
+            Format.Key_maps = Format.Key_maps ?? Format.Key;
         }
     }
 }

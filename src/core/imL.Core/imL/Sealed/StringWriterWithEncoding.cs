@@ -11,12 +11,12 @@ namespace imL.Sealed
         {
             ReadOnly.DefaultEncoding(ref _enc);
 
-            this._ENCODING = _enc;
+            _ENCODING = _enc;
         }
 
         public override Encoding Encoding
         {
-            get { return this._ENCODING; }
+            get { return _ENCODING; }
         }
     }
 }
