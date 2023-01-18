@@ -50,7 +50,7 @@ namespace imL
             return ReadOnly._TIMESTAMP.AddSeconds(_this);
         }
 
-        public static IEnumerable<sbyte> GetUnits(this long _long, sbyte _base = 10)
+        public static IEnumerable<sbyte> GetUnitsISync(this long _long, sbyte _base = 10)
         {
             if (_long == 0)
                 yield return 0;

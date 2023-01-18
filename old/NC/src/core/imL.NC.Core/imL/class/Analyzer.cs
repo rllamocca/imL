@@ -193,7 +193,7 @@ namespace imL
             int _dv = 0;
             sbyte _factor = 2;
 
-            foreach (sbyte _item in _rut.GetUnits())
+            foreach (sbyte _item in _rut.GetUnitsISync())
             {
                 _dv += _item * _factor;
                 _factor++;

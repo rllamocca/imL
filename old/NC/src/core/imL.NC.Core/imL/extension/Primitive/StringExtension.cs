@@ -174,7 +174,7 @@ namespace imL
         }
 
 
-        public static IEnumerable<string> GetCuts(string _string, int _length)
+        public static IEnumerable<string> GetCutsISync(string _string, int _length)
         {
             if (_length <= 0)
                 yield break;

@@ -4,15 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Runtime.CompilerServices;
+using System.Threading;
 
 namespace imL
 {
-#if (NET6_0_OR_GREATER)
-    [Obsolete("https://docs.microsoft.com/en-us/dotnet/fundamentals/syslib-diagnostics/syslib0014")]
-#endif
-    public static class FtpHelperIAsync
+    public static partial class FtpHelper
     {
-        internal static async IAsyncEnumerable<FtpContentFormat> AnalizeListDirectoryDetailsIAsync(string _root, IAsyncEnumerable<string> _list)
+        internal static async IAsyncEnumerable<FtpContentFormat> AnalizeListDirectoryDetailsIAsync(string _root, IAsyncEnumerable<string> _list, [EnumeratorCancellation] CancellationToken _ct = default)
         {
             await foreach (string _item in _list)
             {
@@ -53,37 +52,46 @@ namespace imL
 
         }
 
-        public static async IAsyncEnumerable<string> ListDirectoryIAsync(string _root, FtpFormat _format)
+        public static async IAsyncEnumerable<string> ListDirectoryIAsync(string _root, FtpFormat _format, [EnumeratorCancellation] CancellationToken _ct = default)
         {
-            FtpWebRequest _client = FtpHelper.CreateClient(WebRequestMethods.Ftp.ListDirectory, _root, _format);
+            FtpWebRequest _client = CreateClient(WebRequestMethods.Ftp.ListDirectory, _root, _format);
 
             using (FtpWebResponse _r = (FtpWebResponse)(await _client.GetResponseAsync()))
             using (StreamReader _sr = new StreamReader(_r.GetResponseStream()))
                 while (_sr.EndOfStream == false)
+#if NET7_0_OR_GREATER
+                    yield return await _sr.ReadLineAsync(_ct);
+#else
                     yield return await _sr.ReadLineAsync();
+#endif
+
         }
-        public static async IAsyncEnumerable<string> ListDirectoryDetailsIAsync(string _root, FtpFormat _format)
+        public static async IAsyncEnumerable<string> ListDirectoryDetailsIAsync(string _root, FtpFormat _format, [EnumeratorCancellation] CancellationToken _ct = default)
         {
-            FtpWebRequest _client = FtpHelper.CreateClient(WebRequestMethods.Ftp.ListDirectoryDetails, _root, _format);
+            FtpWebRequest _client = CreateClient(WebRequestMethods.Ftp.ListDirectoryDetails, _root, _format);
 
             using (FtpWebResponse _r = (FtpWebResponse)(await _client.GetResponseAsync()))
             using (StreamReader _sr = new StreamReader(_r.GetResponseStream()))
                 while (_sr.EndOfStream == false)
+#if NET7_0_OR_GREATER
+                    yield return await _sr.ReadLineAsync(_ct);
+#else
                     yield return await _sr.ReadLineAsync();
+#endif
         }
-        public static async IAsyncEnumerable<FtpContentFormat> ListDirectoryDetailsContentIAsync(string _root, FtpFormat _format)
+        public static async IAsyncEnumerable<FtpContentFormat> ListDirectoryDetailsContentIAsync(string _root, FtpFormat _format, [EnumeratorCancellation] CancellationToken _ct = default)
         {
-            await foreach (FtpContentFormat _item in AnalizeListDirectoryDetailsIAsync(_root, ListDirectoryDetailsIAsync(_root, _format)))
+            await foreach (FtpContentFormat _item in AnalizeListDirectoryDetailsIAsync(_root, ListDirectoryDetailsIAsync(_root, _format, _ct), _ct))
                 yield return _item;
         }
-        public static async IAsyncEnumerable<FtpContentFormat> ListSubdirectoriesIAsync(string _root, FtpFormat _format)
+        public static async IAsyncEnumerable<FtpContentFormat> ListSubdirectoriesIAsync(string _root, FtpFormat _format, [EnumeratorCancellation] CancellationToken _ct = default)
         {
-            await foreach (FtpContentFormat _item in ListDirectoryDetailsContentIAsync(_root, _format))
+            await foreach (FtpContentFormat _item in ListDirectoryDetailsContentIAsync(_root, _format, _ct))
             {
                 yield return _item;
 
                 if (_item.IsDirectory == true)
-                    await foreach (FtpContentFormat _item2 in ListSubdirectoriesIAsync(_root + "/" + _item.Name, _format))
+                    await foreach (FtpContentFormat _item2 in ListSubdirectoriesIAsync(_root + "/" + _item.Name, _format, _ct))
                         yield return _item2;
             }
         }
