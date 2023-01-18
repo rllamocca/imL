@@ -1,6 +1,6 @@
 ﻿#if (NET35 || NET40)
 
-namespace imL.Contract
+namespace imL
 {
     public interface IProgress<in T>
     {

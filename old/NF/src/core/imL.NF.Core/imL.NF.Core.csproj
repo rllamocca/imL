@@ -41,8 +41,4 @@
 		<None Include="readme.md" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="imL\extension\interface\" />
-	</ItemGroup>
-
 </Project>

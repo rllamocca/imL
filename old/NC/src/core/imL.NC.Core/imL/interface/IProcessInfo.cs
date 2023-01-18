@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using imL.Enumeration;
-
-namespace imL.Contract
+﻿namespace imL
 {
     public interface IProcessInfo
     {

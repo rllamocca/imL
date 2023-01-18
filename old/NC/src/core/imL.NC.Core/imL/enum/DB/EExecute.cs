@@ -1,4 +1,4 @@
-﻿namespace imL.Enumeration.DB
+﻿namespace imL.DB
 {
     public enum EExecute
     {

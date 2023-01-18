@@ -2,7 +2,7 @@
 
 using System.IO;
 
-namespace imL.Format
+namespace imL
 {
     public class StreamAttachmentFormat
     {

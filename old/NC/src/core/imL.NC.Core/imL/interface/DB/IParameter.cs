@@ -1,4 +1,4 @@
-﻿namespace imL.Contract.DB
+﻿namespace imL.DB
 {
     public interface IParameter
     {

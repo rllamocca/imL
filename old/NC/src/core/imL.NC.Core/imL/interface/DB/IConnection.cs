@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 using System;
 
-namespace imL.Contract.DB
+namespace imL.DB
 {
     public interface IConnection : IDisposable
     {

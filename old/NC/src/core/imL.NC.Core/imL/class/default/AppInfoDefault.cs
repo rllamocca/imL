@@ -5,7 +5,7 @@ using System.IO;
 
 using SYSTEM_IO = System.IO;
 
-namespace imL.Contract
+namespace imL
 {
     public sealed class AppInfoDefault : IAppInfo
     {

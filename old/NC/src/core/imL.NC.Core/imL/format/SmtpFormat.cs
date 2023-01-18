@@ -2,7 +2,7 @@
 
 using System.Net.Mail;
 
-namespace imL.Format
+namespace imL
 {
     public class SmtpFormat
     {

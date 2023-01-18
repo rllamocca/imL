@@ -1,15 +1,13 @@
 ﻿#if (NET35 || NET40)
 using imL.Contract;
 #else
-using System;
 #endif
 #if (NET35_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
 using System.Data;
 #endif
 
-using imL.Enumeration.DB;
 
-namespace imL.Contract.DB
+namespace imL.DB
 {
     public interface IHelper
     {

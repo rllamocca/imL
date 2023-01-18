@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace imL.Contract
+namespace imL
 {
     public interface IAppTrack : IAppReturn
     {

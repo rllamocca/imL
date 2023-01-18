@@ -1,13 +1,9 @@
 ﻿#if (NET35_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
 
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Reflection;
 //using System.Security.Policy;
 
-using imL.Utility;
 
 namespace imL
 {

@@ -1,4 +1,4 @@
-﻿namespace imL.Enumeration
+﻿namespace imL
 {
     public enum EDataBasicType
     {

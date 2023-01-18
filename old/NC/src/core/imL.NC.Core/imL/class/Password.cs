@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using imL.Enumeration;
-using imL.Utility;
-
-namespace imL
+﻿namespace imL
 {
     public class Password : IDisposable
     {

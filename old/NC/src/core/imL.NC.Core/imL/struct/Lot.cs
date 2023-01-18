@@ -1,4 +1,4 @@
-﻿namespace imL.Struct
+﻿namespace imL
 {
     public struct Lot<G1, G2>
     {

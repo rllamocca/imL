@@ -1,6 +1,4 @@
-﻿using imL.Utility;
-
-namespace imL
+﻿namespace imL
 {
     public class ProgressState
     {

@@ -1,12 +1,7 @@
 ﻿#if (NET35_OR_GREATER || NETSTANDARD1_3_OR_GREATER || NET5_0_OR_GREATER)
 
-using System;
 
-using imL.Contract;
-using imL.Enumeration;
-using imL.Utility;
-
-namespace imL.Sealed
+namespace imL
 {
     public sealed class ProgressU64 : ProgressAbstract
 #if (NET35 || NET40)

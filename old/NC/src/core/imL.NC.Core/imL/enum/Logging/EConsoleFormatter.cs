@@ -1,4 +1,4 @@
-﻿namespace imL.Enumeration.Logging
+﻿namespace imL.Logging
 {
     public enum EConsoleFormatter
     {

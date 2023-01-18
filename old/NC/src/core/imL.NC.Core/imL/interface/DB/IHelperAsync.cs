@@ -4,12 +4,8 @@
 using System.Data;
 #endif
 
-using System;
-using System.Threading.Tasks;
 
-using imL.Enumeration.DB;
-
-namespace imL.Contract.DB
+namespace imL.DB
 {
     public interface IHelperAsync
     {

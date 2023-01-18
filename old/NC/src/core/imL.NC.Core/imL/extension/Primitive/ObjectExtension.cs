@@ -1,9 +1,6 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
-using imL.Struct;
-
-namespace imL.Utility
+namespace imL
 {
     public static class ObjectExtension
     {

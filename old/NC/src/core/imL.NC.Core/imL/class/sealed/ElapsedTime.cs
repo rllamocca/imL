@@ -2,9 +2,7 @@
 
 using System.Timers;
 
-using imL.Contract;
-
-namespace imL.Sealed
+namespace imL
 {
     public sealed class ElapsedTime : ProgressAbstract
     {

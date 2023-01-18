@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace imL.Struct
+namespace imL
 {
     public struct OneToMany<G1, G2>
     {

@@ -1,4 +1,4 @@
-﻿namespace imL.Enumeration.Http
+﻿namespace imL.Http
 {
     public enum EAuthentication
     {

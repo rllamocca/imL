@@ -6,15 +6,9 @@ using System.Net.Mail;
 //using System.Collections.Generic;
 //#endif
 
-using System;
-using System.IO;
-using System.Linq;
 using System.Text;
 
-using imL.Enumeration;
-using System.Collections.Generic;
-
-namespace imL.Utility
+namespace imL
 {
     public static class StringExtension
     {

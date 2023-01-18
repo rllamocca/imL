@@ -1,6 +1,4 @@
-﻿using imL.Enumeration;
-
-namespace imL.Contract
+﻿namespace imL
 {
     public interface IAppReturn
     {
