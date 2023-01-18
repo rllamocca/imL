@@ -10,6 +10,10 @@ using System.Net.Mail;
 //using System.Collections.Generic;
 //#endif
 
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace imL
@@ -156,7 +160,7 @@ namespace imL
                 return null;
 
 #if NETSTANDARD1_0 || NETSTANDARD1_1
-            Iist<char> _return = new List<char>();
+            IList<char> _return = new List<char>();
             
             foreach (char _item in _this)
                 if (char.IsLetterOrDigit(_item) || _let.Contains(_item))

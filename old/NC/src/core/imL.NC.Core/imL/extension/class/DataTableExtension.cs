@@ -5,14 +5,11 @@ using System.Xml;
 using System.Xml.Linq;
 #endif
 
-#if (NET35 || NET40)
-using imL.Contract;
-#endif
-
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace imL

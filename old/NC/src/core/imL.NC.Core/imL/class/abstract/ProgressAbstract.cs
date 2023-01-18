@@ -1,13 +1,16 @@
 ﻿#if (NET35_OR_GREATER || NETSTANDARD1_3_OR_GREATER || NET5_0_OR_GREATER)
 
 #if (NETSTANDARD1_3 || NETSTANDARD1_4 || NETSTANDARD1_5 || NETSTANDARD1_6)
-using imL.Struct;
+//using imL.Struct;
 #else
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 #endif
 
+
+using System;
+using System.Collections.Generic;
 
 namespace imL
 {
