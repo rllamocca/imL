@@ -1,7 +1,9 @@
 ﻿#if (NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NET5_0_OR_GREATER)
 
 #if (NET45_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
+using System;
 using System.Data;
+using System.Threading.Tasks;
 #endif
 
 

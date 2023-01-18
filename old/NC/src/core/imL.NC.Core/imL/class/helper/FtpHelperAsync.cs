@@ -3,7 +3,11 @@
 #if (NET6_0_OR_GREATER)
 #endif
 
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace imL
 {

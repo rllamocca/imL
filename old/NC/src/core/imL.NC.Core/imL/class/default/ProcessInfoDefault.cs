@@ -1,4 +1,7 @@
-﻿namespace imL
+﻿using System;
+using System.Collections.Generic;
+
+namespace imL
 {
     public class ProcessInfoDefault : IProcessInfo
     {

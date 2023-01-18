@@ -1,4 +1,6 @@
-﻿namespace imL
+﻿using System;
+
+namespace imL
 {
     public readonly struct MemoryUnit
     {

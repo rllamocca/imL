@@ -1,6 +1,8 @@
 ﻿#if (NET35_OR_GREATER || NETSTANDARD1_3_OR_GREATER || NET5_0_OR_GREATER)
 
 
+using System;
+
 namespace imL
 {
     public sealed class Progress64 : ProgressAbstract

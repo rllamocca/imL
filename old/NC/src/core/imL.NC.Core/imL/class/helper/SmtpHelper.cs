@@ -1,5 +1,6 @@
 ﻿#if (NET35_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
 
+using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;

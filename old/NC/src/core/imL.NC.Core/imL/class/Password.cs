@@ -1,4 +1,8 @@
-﻿namespace imL
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace imL
 {
     public class Password : IDisposable
     {

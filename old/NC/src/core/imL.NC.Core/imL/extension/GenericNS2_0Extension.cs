@@ -1,6 +1,7 @@
 ﻿#if (NET35_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
 
 using System.Data;
+using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
