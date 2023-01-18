@@ -102,7 +102,7 @@ After
                 _i < _return.Length;
                 _i++)
             {
-                if (_return[_i] == '#' && _indexs.Count() < _length)
+                if (_return[_i] == '#' && _indexs.Count < _length)
                     _indexs.Add(_i);
             }
 

@@ -36,7 +36,7 @@ namespace imL
                 Console.WriteLine(Environment.NewLine + @" ♫♪ ... {0}", _card.Value ? StringHelper.MyFortuneCard() : StringHelper.MyFortune());
 
             if (_rk)
-                ConsoleHelper.PressAnyKeyToExit();
+                PressAnyKeyToExit();
         }
 
         public static void Write(Point _xy, char _value)

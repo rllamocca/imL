@@ -74,7 +74,7 @@ namespace imL
                 {
                     _BAR.Add(_round);
 
-                    ConsoleHelper.Write(_DRAW_START, ProgressAbstract._CHAR);
+                    ConsoleHelper.Write(_DRAW_START, _CHAR);
                     _DRAW_START.X += 1;
                 }
             }
@@ -94,7 +94,7 @@ namespace imL
 
             string _text = string.Format(
                 "[{0}]  {1}",
-                ProgressAbstract._BUCLE[_BLOCKS++ % 4],
+                _BUCLE[_BLOCKS++ % 4],
 #if (NET35)
                 _diff.ToString()
 #else
