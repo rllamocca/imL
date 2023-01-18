@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<Nullable>enable</Nullable>
 		<TargetFrameworks>
 			net5.0;net6.0;net7.0
 		</TargetFrameworks>
+		<Nullable>enable</Nullable>
 
 		<Copyright>© $(TargetFramework)</Copyright>
 		<Version>84.10.2.8</Version>
