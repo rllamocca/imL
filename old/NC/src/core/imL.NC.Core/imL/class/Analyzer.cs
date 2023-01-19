@@ -21,36 +21,36 @@ namespace imL
         static readonly string _LF = new string(new char[] { (char)10 });
         static readonly string _CR = new string(new char[] { (char)13 });
 
-        public static string GetStringNull(string _key, string _value, int _length = 0, params string[] _in)
+        public static string GetStringNull(string _key, string _value, int _length = 0, params string[] _params)
         {
             if (_length > 0 && _value.Length > _length) throw new HandledException(string.Format("{0} con largo máximo superado; ({1})", _key, _length));
 
-            if (_in.Length > 0)
+            if (_params.Length > 0)
             {
-                if (_in.Contains(_value, StringComparer.OrdinalIgnoreCase) == false)
+                if (_params.Contains(_value, StringComparer.OrdinalIgnoreCase) == false)
                     throw new HandledException(string.Format("{0} no válido", _key));
             }
 
             return _value.Trim(); //¿?
         }
-        public static string GetString(string _key, string _value, int _length = 0, params string[] _in)
+        public static string GetString(string _key, string _value, int _length = 0, params string[] _params)
         {
             if (string.IsNullOrEmpty(_value)) throw new HandledException(string.Format("{0} no informado", _key));
 
-            return GetStringNull(_key, _value, _length, _in);
+            return GetStringNull(_key, _value, _length, _params);
         }
-        public static bool GetBool(string _key, string _value, int _length = 0, params string[] _in)
+        public static bool GetBool(string _key, string _value, int _length = 0, params string[] _params)
         {
-            _value = GetString(_key, _value, _length, _in);
+            _value = GetString(_key, _value, _length, _params);
 
             if (bool.TryParse(_value, out bool _return))
                 return _return;
 
             throw new HandledException(string.Format("{0} no representa un número", _key));
         }
-        public static sbyte GetSByte(string _key, string _value, int _length = 0, ENumberLine _nl = ENumberLine.None, params string[] _in)
+        public static sbyte GetSByte(string _key, string _value, int _length = 0, ENumberLine _nl = ENumberLine.None, params string[] _params)
         {
-            _value = GetString(_key, _value, _length, _in);
+            _value = GetString(_key, _value, _length, _params);
 
             if (sbyte.TryParse(_value, out sbyte _return))
             {
@@ -67,9 +67,9 @@ namespace imL
 
             throw new HandledException(string.Format("{0} no representa un número", _key));
         }
-        public static short GetShort(string _key, string _value, int _length = 0, ENumberLine _nl = ENumberLine.None, params string[] _in)
+        public static short GetShort(string _key, string _value, int _length = 0, ENumberLine _nl = ENumberLine.None, params string[] _params)
         {
-            _value = GetString(_key, _value, _length, _in);
+            _value = GetString(_key, _value, _length, _params);
 
             if (short.TryParse(_value, out short _return))
             {
@@ -86,9 +86,9 @@ namespace imL
 
             throw new HandledException(string.Format("{0} no representa un número", _key));
         }
-        public static int GetInt(string _key, string _value, int _length = 0, ENumberLine _nl = ENumberLine.None, params string[] _in)
+        public static int GetInt(string _key, string _value, int _length = 0, ENumberLine _nl = ENumberLine.None, params string[] _params)
         {
-            _value = GetString(_key, _value, _length, _in);
+            _value = GetString(_key, _value, _length, _params);
 
             if (int.TryParse(_value, out int _return))
             {
@@ -105,9 +105,9 @@ namespace imL
 
             throw new HandledException(string.Format("{0} no representa un número", _key));
         }
-        public static long GetLong(string _key, string _value, int _length = 0, ENumberLine _nl = ENumberLine.None, params string[] _in)
+        public static long GetLong(string _key, string _value, int _length = 0, ENumberLine _nl = ENumberLine.None, params string[] _params)
         {
-            _value = GetString(_key, _value, _length, _in);
+            _value = GetString(_key, _value, _length, _params);
 
             if (long.TryParse(_value, out long _return))
             {
@@ -124,9 +124,9 @@ namespace imL
 
             throw new HandledException(string.Format("{0} no representa un número", _key));
         }
-        public static DateTime GetDateTime(string _key, string _value, int _length = 0, params string[] _in)
+        public static DateTime GetDateTime(string _key, string _value, int _length = 0, params string[] _params)
         {
-            _value = GetString(_key, _value, _length, _in);
+            _value = GetString(_key, _value, _length, _params);
 
             if (DateTime.TryParseExact(_value, _DATETIME_FORMATs, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal, out DateTime _return))
                 return _return;
@@ -134,14 +134,14 @@ namespace imL
             throw new HandledException(string.Format("{0} no representa una fecha", _key));
         }
 
-        public static void CheckCount(string _key, int _count, int _min = 0, int _max = 0, params int[] _in)
+        public static void CheckCount(string _key, int _count, int _min = 0, int _max = 0, params int[] _params)
         {
             if (_min > 0 && _count < _min) throw new HandledException(string.Format("{0} con menos detalles que los esperados; ({1})", _key, _count));
             if (_max > 0 && _max < _count) throw new HandledException(string.Format("{0} con más detalles que los esperados; ({1})", _key, _count));
 
-            if (_in.Length > 0)
+            if (_params.Length > 0)
             {
-                if (_in.Contains(_count) == false)
+                if (_params.Contains(_count) == false)
                     throw new HandledException(string.Format("{0} no válido, cantidad de detalles distinta a la informada; ({1})", _key, _count));
             }
         }

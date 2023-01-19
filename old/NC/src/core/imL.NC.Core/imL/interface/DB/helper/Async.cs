@@ -16,18 +16,18 @@ namespace imL.DB
 {
     public partial interface IHelper
     {
-        Task<Return> ExecuteAsync(string _query, EExecute _exe = EExecute.NonQuery, CancellationToken _ct = default, params IParameter[] _pmts);
+        Task<Return> ExecuteAsync(string _query, EExecute _exe = EExecute.NonQuery, CancellationToken _ct = default, params IParameter[] _params);
         Task<Return> ExecuteAsync(string _query, EExecute _exe = EExecute.NonQuery, CancellationToken _ct = default);
-        Task<IEnumerable<Return>> ExecutionsAsync(string _query, EExecute _exe = EExecute.NonQuery, CancellationToken _ct = default, params IParameter[][] _pmts);
+        Task<IEnumerable<Return>> ExecutionsAsync(string _query, EExecute _exe = EExecute.NonQuery, CancellationToken _ct = default, params IParameter[][] _params);
         Task<IEnumerable<Return>> ExecutionsAsync(string _query, EExecute _exe = EExecute.NonQuery, CancellationToken _ct = default);
 
 #if (NET45_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
 
-        Task<DataTable> LoadDataTableAsync(string _query, CancellationToken _ct = default, params IParameter[] _pmts);
+        Task<DataTable> LoadDataTableAsync(string _query, CancellationToken _ct = default, params IParameter[] _params);
         Task<DataTable> LoadDataTableAsync(string _query, CancellationToken _ct = default);
-        Task<DataSet> LoadDataSetAsync(string _query, CancellationToken _ct = default, params IParameter[] _pmts);
+        Task<DataSet> LoadDataSetAsync(string _query, CancellationToken _ct = default, params IParameter[] _params);
         Task<DataSet> LoadDataSetAsync(string _query, CancellationToken _ct = default);
-        Task<IEnumerable<G>> LoadDataAsync<G>(string _query, CancellationToken _ct = default, params IParameter[] _pmts);
+        Task<IEnumerable<G>> LoadDataAsync<G>(string _query, CancellationToken _ct = default, params IParameter[] _params);
         Task<IEnumerable<G>> LoadDataAsync<G>(string _query, CancellationToken _ct = default);
 
 #endif
