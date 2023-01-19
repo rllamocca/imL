@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Net.Mail;
 using System.Net.Mime;
 
-namespace imL.Format
+namespace imL
 {
     public class MailMessageFormat
     {

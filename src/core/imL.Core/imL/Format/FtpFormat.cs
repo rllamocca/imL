@@ -1,4 +1,4 @@
-﻿namespace imL.Format
+﻿namespace imL
 {
     public class FtpFormat
     {

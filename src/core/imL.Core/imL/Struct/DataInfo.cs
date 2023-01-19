@@ -1,8 +1,6 @@
 ﻿using System;
 
-using imL.Enumeration;
-
-namespace imL.Struct
+namespace imL
 {
     public readonly struct DataInfo
     {

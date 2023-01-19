@@ -1,4 +1,8 @@
 ﻿#if (NET35_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Net.Mail;
 #endif
 
@@ -7,14 +11,12 @@ using System.Net.Mail;
 //#endif
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-using imL.Enumeration;
-using System.Collections.Generic;
-
-namespace imL.Utility
+namespace imL
 {
     public static class StringExtension
     {
@@ -54,18 +56,18 @@ namespace imL.Utility
 
             return _this;
         }
-        public static bool ArgAppear(this string[] _array, params string[] _synonym)
+        public static bool ArgAppear(this string[] _array, params string[] _params)
         {
             if (_array == null)
                 return false;
 
             bool _return = false;
 
-            for (int _i = 0; _i < _synonym.Length; _i++)
+            for (int _i = 0; _i < _params.Length; _i++)
             {
                 //_return = _return || (_array.Count(_c => _c.CompareTo(_item) == 1) > 0);
                 //_return = _return || (_array.Count(_c => _c.ToUpper() == _synonym[_i].ToUpper()) > 0);
-                _return = _return || (_array.Any(_a => _a.Equals(_synonym[_i], StringComparison.OrdinalIgnoreCase)));
+                _return = _return || (_array.Any(_a => _a.Equals(_params[_i], StringComparison.OrdinalIgnoreCase)));
 
                 if (_return)
                     return _return;
@@ -73,14 +75,14 @@ namespace imL.Utility
 
             return _return;
         }
-        public static string ArgValue(this string[] _array, params string[] _key)
+        public static string ArgValue(this string[] _array, params string[] _params)
         {
             if (_array == null)
                 return null;
 
-            for (int _i = 0; _i < _key.Length; _i++)
+            for (int _i = 0; _i < _params.Length; _i++)
             {
-                string _return = _array.SkipWhile(_sw => _sw.ToUpper() != _key[_i].ToUpper()).Skip(1).FirstOrDefault();
+                string _return = _array.SkipWhile(_sw => _sw.ToUpper() != _params[_i].ToUpper()).Skip(1).FirstOrDefault();
 
                 if (_return != null)
                     return _return;
@@ -88,35 +90,35 @@ namespace imL.Utility
 
             return null;
         }
-        public static string Replace(this string _this, char _new, params char[] _old)
+        public static string Replace(this string _this, char _new, params char[] _params)
         {
             if (_this == null)
                 return null;
 
-            if (_old.IsEmpty())
+            if (_params.IsEmpty())
                 return _this;
 
             string _return = _this;
-            _old = _old.Distinct().ToArray();
+            _params = _params.Distinct().ToArray();
 
-            for (int _i = 0; _i < _old.Length; _i++)
-                _return = _return.Replace(_old[_i], _new);
+            for (int _i = 0; _i < _params.Length; _i++)
+                _return = _return.Replace(_params[_i], _new);
 
             return _return;
         }
-        public static string Replace(this string _this, string _new, params string[] _old)
+        public static string Replace(this string _this, string _new, params string[] _params)
         {
             if (_this == null)
                 return null;
 
-            if (_old.IsEmpty())
+            if (_params.IsEmpty())
                 return _this;
 
             string _return = _this;
-            _old = _old.Distinct().ToArray();
+            _params = _params.Distinct().ToArray();
 
-            for (int _i = 0; _i < _old.Length; _i++)
-                _return = _return.Replace(_old[_i], _new);
+            for (int _i = 0; _i < _params.Length; _i++)
+                _return = _return.Replace(_params[_i], _new);
 
             return _return;
         }
@@ -152,26 +154,27 @@ namespace imL.Utility
         }
 #endif
 
-        public static string ToLetterOrDigit(this string _this, params char[] _let)
+        public static string ToLetterOrDigit(this string _this, params char[] _params)
         {
             if (_this == null)
                 return null;
 
 #if NETSTANDARD1_0 || NETSTANDARD1_1
-            List<char> _return = new List<char>();
+            IList<char> _return = new List<char>();
+            
             foreach (char _item in _this)
-                if (char.IsLetterOrDigit(_item) || _let.Contains(_item))
+                if (char.IsLetterOrDigit(_item) || _params.Contains(_item))
                     _return.Add(_item);
 
             return new string(_return.ToArray());
 #else
-            return new string(_this.Where(_w => char.IsLetterOrDigit(_w) || _let.Contains(_w)).ToArray());
+            return new string(_this.Where(_w => char.IsLetterOrDigit(_w) || _params.Contains(_w)).ToArray());
 #endif
 
         }
 
 
-        public static IEnumerable<string> GetCuts(string _string, int _length)
+        public static IEnumerable<string> GetCutsISync(string _string, int _length)
         {
             if (_length <= 0)
                 yield break;

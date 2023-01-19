@@ -1,6 +1,6 @@
-﻿using imL.Enumeration.Http;
+﻿using imL.Http;
 
-namespace imL.Format
+namespace imL
 {
     public class EndpointFormat
     {
