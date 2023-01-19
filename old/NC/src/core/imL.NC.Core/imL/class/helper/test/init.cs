@@ -6,7 +6,7 @@ using System;
 
 namespace imL
 {
-    public static class TestHelper
+    public static partial class TestHelper
     {
         public static int MAX_INT(int _max)
         {
@@ -28,23 +28,5 @@ namespace imL
 
             return _max;
         }
-
-#if (NET35_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
-        public static void RandomSleep(int _max)
-        {
-            _max = MAX_INT(_max);
-
-            if (_max > 0)
-                Thread.Sleep(_max);
-        }
-        public static void RandomSleep(TimeSpan _time)
-        {
-            long _max = MAX_LONG(_time.Ticks);
-
-            if (_max > 0)
-                Thread.Sleep(new TimeSpan(_max));
-        }
-#endif
-
     }
 }
