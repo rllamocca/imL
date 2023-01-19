@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
 
-using imL.Enumeration.Http;
-using imL.Format;
+using imL.Http;
 
 namespace imL.Utility.Http
 {

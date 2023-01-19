@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace imL.Package.Json
 {
-    public static class Extension
+    public static class GenericExtension
     {
         public static T JsonNewMe<T>(this T _this)
         {
