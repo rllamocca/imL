@@ -18,7 +18,11 @@ namespace imL
                 _item.FromDisplayName = _item.FromDisplayName ?? _smtp.UserName;
 
                 using (MailMessage _mm = InitMailMessage(new MailMessage(), _item))
+#if (NETFRAMEWORK || NETSTANDARD)
+                    await _client.SendMailAsync(_mm);
+#else
                     await _client.SendMailAsync(_mm, _ct);
+#endif
             }
 
             _client.Dispose();

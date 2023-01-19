@@ -83,7 +83,7 @@ namespace imL
 
             using (Stream _s = _client.GetRequestStream())
             {
-                await _up.CopyToAsync(_s, _ct);
+                await _up.CopyToAsync(_s, 128, _ct);
 
                 using (FtpWebResponse _resp = (FtpWebResponse)(await _client.GetResponseAsync()))
                     return _resp.StatusCode;
@@ -102,7 +102,7 @@ namespace imL
             using (FtpWebResponse _r = (FtpWebResponse)(await _client.GetResponseAsync()))
             {
                 using (Stream _s = _r.GetResponseStream())
-                    await _s.CopyToAsync(_return, _ct);
+                    await _s.CopyToAsync(_return, 128, _ct);
 
                 _return.CheckBeginPosition();
 
