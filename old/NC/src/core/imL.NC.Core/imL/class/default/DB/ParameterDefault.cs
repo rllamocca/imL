@@ -4,7 +4,7 @@
     {
         public string Affect { get; }
         public string Expression { get; }
-        public bool IsSearchCondition { get; }
+        public bool? IsSearchCondition { get; }
 
         public ParameterDefault(
             string _affect,

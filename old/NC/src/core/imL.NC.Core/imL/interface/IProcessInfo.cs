@@ -15,7 +15,7 @@ namespace imL
         long? Successes { set; get; }
         long? Errors { set; get; }
         IList<string> PathAttachments { set; get; }
-        EAlert Alert { set; get; }
+        EAlert? Alert { set; get; }
         Exception Critical { set; get; }
         DateTime? End { set; get; }
 

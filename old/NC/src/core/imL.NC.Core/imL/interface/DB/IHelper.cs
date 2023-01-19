@@ -11,7 +11,7 @@ namespace imL.DB
     public interface IHelper
     {
         IConnection Connection { get; }
-        bool Throw { get; }
+        bool? Throw { get; }
         IProgress<int> Progress { get; }
 
         Return Execute(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[] _pmts);

@@ -9,8 +9,8 @@ namespace imL.DB
 {
     public interface IConnection : IDisposable
     {
-        int TimeOut { set; get; }
-        bool Constraints { set; get; }
+        int? TimeOut { set; get; }
+        bool? Constraints { set; get; }
 
 #if (NET35 || NET40) == false
         CancellationToken Token { set; get; }

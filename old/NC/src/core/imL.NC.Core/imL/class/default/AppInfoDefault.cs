@@ -15,8 +15,8 @@ namespace imL
         readonly string _PATH_OUT;
         readonly string _PATH_LOG;
         readonly string _PATH_TMP;
-        readonly bool _IN_CONTAINER = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
-        readonly bool _IN_TEMPPATH;
+        readonly bool? _IN_CONTAINER = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
+        readonly bool? _IN_TEMPPATH;
 
         public string[] Args { get { return _ARGS; } }
         public string Path { get { return _PATH; } }
@@ -24,8 +24,8 @@ namespace imL
         public string PathOut { get { return _PATH_OUT; } }
         public string PathLog { get { return _PATH_LOG; } }
         public string PathTmp { get { return _PATH_TMP; } }
-        public bool InContainer { get { return _IN_CONTAINER; } }
-        public bool InTempPath { get { return _IN_TEMPPATH; } }
+        public bool? InContainer { get { return _IN_CONTAINER; } }
+        public bool? InTempPath { get { return _IN_TEMPPATH; } }
 
         public AppInfoDefault(string[] _args, string _basedirectory = null, bool _temppathdefault = false)
         {
@@ -43,7 +43,7 @@ namespace imL
             _PATH_IN = SYSTEM_IO.Path.Combine(_PATH, "in");
             _PATH_OUT = SYSTEM_IO.Path.Combine(_PATH, "out");
             _PATH_LOG = SYSTEM_IO.Path.Combine(_PATH, "log");
-            _PATH_TMP = _IN_TEMPPATH ? SYSTEM_IO.Path.GetTempPath() : SYSTEM_IO.Path.Combine(_PATH, "tmp");
+            _PATH_TMP = (_IN_TEMPPATH == true) ? SYSTEM_IO.Path.GetTempPath() : SYSTEM_IO.Path.Combine(_PATH, "tmp");
 
             if (Directory.Exists(_PATH_IN) == false) Directory.CreateDirectory(_PATH_IN);
             if (Directory.Exists(_PATH_OUT) == false) Directory.CreateDirectory(_PATH_OUT);

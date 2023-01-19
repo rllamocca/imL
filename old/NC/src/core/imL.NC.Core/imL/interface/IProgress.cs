@@ -6,7 +6,6 @@ namespace System
     {
         void Report(T _value);
     }
-
 }
 
 #endif

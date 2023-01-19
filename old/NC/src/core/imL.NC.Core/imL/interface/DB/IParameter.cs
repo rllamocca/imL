@@ -4,7 +4,7 @@
     {
         string Affect { get; }
         string Expression { get; }
-        bool IsSearchCondition { get; }
+        bool? IsSearchCondition { get; }
 
         object GetValue();
     }

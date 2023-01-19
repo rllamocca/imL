@@ -15,7 +15,7 @@ namespace imL.DB
     public interface IHelperAsync
     {
         IConnection Connection { get; }
-        bool Throw { get; }
+        bool? Throw { get; }
         IProgress<int> Progress { get; }
 
         Task<Return> ExecuteAsync(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[] _pmts);
