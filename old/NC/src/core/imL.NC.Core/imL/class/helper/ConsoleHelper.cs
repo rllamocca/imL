@@ -7,6 +7,7 @@ using System.Drawing;
 #endif
 
 using System;
+using System.Diagnostics.Contracts;
 
 namespace imL
 {
@@ -59,13 +60,10 @@ namespace imL
             Console.SetCursorPosition(_xy.X, _xy.Y);
             Console.WriteLine(_value);
         }
-
-        public static void InnerException(Exception _ex)
+        public static void WriteInnerException(Exception _ex)
         {
-            Console.WriteLine(_ex);
-
-            if (_ex.InnerException != null)
-                InnerException(_ex.InnerException);
+            foreach (Exception _item in _ex.InnerExceptionISync())
+                Console.WriteLine(_item);
         }
     }
 }

@@ -40,4 +40,8 @@
 		</None>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="imL\class\helper\console\" />
+	</ItemGroup>
+
 </Project>
