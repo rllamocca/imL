@@ -8,7 +8,7 @@ using System.Text;
 
 namespace imL
 {
-    public static class SmtpHelper
+    public static partial class SmtpHelper
     {
         internal static SmtpClient InitSmtpClient(SmtpClient _i, SmtpFormat _f)
         {
@@ -95,28 +95,6 @@ namespace imL
             _d.DispositionType = DispositionTypeNames.Attachment;
 
             return _return;
-        }
-
-        public static void Send(SmtpFormat _smtp, params MailMessageFormat[] _messages)
-        {
-            if (_smtp == null) return;
-            if (_messages.IsEmpty()) return;
-
-            SmtpClient _client = InitSmtpClient(new SmtpClient(), _smtp);
-
-            foreach (MailMessageFormat _item in _messages)
-            {
-                _item.FromAddress = _item.FromAddress ?? _smtp.UserName;
-                _item.FromDisplayName = _item.FromDisplayName ?? _smtp.UserName;
-
-                using (MailMessage _mm = InitMailMessage(new MailMessage(), _item))
-                    _client.Send(_mm);
-            }
-
-#if (NET35) == false
-            _client.Dispose();
-#endif
-
         }
     }
 }

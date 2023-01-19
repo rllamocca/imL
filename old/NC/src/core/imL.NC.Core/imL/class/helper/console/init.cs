@@ -11,7 +11,7 @@ using System.Diagnostics.Contracts;
 
 namespace imL
 {
-    public static class ConsoleHelper
+    public static partial class ConsoleHelper
     {
         public static void Begins(bool _enc = true, string _title = null)
         {
@@ -38,32 +38,6 @@ namespace imL
 
             if (_rk)
                 PressAnyKeyToExit();
-        }
-
-        public static void Write(Point _xy, char _value)
-        {
-            Console.SetCursorPosition(_xy.X, _xy.Y);
-            Console.Write(_value);
-        }
-        public static void Write(Point _xy, string _value)
-        {
-            Console.SetCursorPosition(_xy.X, _xy.Y);
-            Console.Write(_value);
-        }
-        public static void WriteLine(Point _xy, char _value)
-        {
-            Console.SetCursorPosition(_xy.X, _xy.Y);
-            Console.WriteLine(_value);
-        }
-        public static void WriteLine(Point _xy, string _value)
-        {
-            Console.SetCursorPosition(_xy.X, _xy.Y);
-            Console.WriteLine(_value);
-        }
-        public static void WriteInnerException(Exception _ex)
-        {
-            foreach (Exception _item in _ex.InnerExceptionISync())
-                Console.WriteLine(_item);
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace imL
 {
-    public static class GenericUtility
+    public static class GenericHelper
     {
         public static G ToAssign<G>(G _value, G _affect)
         {
