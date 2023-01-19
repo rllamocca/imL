@@ -16,19 +16,64 @@ namespace imL
         public static async Task<IEnumerable<string>> ListDirectoryAsync(string _root, FtpFormat _format, CancellationToken _ct = default)
         {
             //return (await ListDirectoryIAsync(_root, _format).ToIEnumerable()).ToArray();
+
+#if (NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER)
             return await ListDirectoryIAsync(_root, _format, _ct).ToIEnumerable();
+#else
+            IList<string> _return = new List<string>();
+            FtpWebRequest _client = FtpHelper.CreateClient(WebRequestMethods.Ftp.ListDirectory, _root, _format);
+
+            using (FtpWebResponse _r = (FtpWebResponse)(await _client.GetResponseAsync()))
+            using (StreamReader _sr = new StreamReader(_r.GetResponseStream()))
+                while (_sr.EndOfStream == false)
+                    _return.Add(await _sr.ReadLineAsync());
+
+            return _return;
+#endif
+
         }
         public static async Task<IEnumerable<string>> ListDirectoryDetailsAsync(string _root, FtpFormat _format, CancellationToken _ct = default)
         {
+#if (NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER)
             return await ListDirectoryDetailsIAsync(_root, _format, _ct).ToIEnumerable();
+#else
+            IList<string> _return = new List<string>();
+            FtpWebRequest _client = FtpHelper.CreateClient(WebRequestMethods.Ftp.ListDirectoryDetails, _root, _format);
+
+            using (FtpWebResponse _r = (FtpWebResponse)(await _client.GetResponseAsync()))
+            using (StreamReader _sr = new StreamReader(_r.GetResponseStream()))
+                while (_sr.EndOfStream == false)
+                    _return.Add(await _sr.ReadLineAsync());
+
+            return _return;
+#endif
+
         }
         public static async Task<IEnumerable<FtpContentFormat>> ListDirectoryDetailsContentAsync(string _root, FtpFormat _format, CancellationToken _ct = default)
         {
+#if (NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER)
             return await AnalizeListDirectoryDetailsIAsync(_root, ListDirectoryDetailsIAsync(_root, _format, _ct), _ct).ToIEnumerable();
+#else
+return FtpHelper.AnalizeListDirectoryDetails(_root, await ListDirectoryDetailsAsync(_root, _format));
+#endif
+
         }
         public static async Task<IEnumerable<FtpContentFormat>> ListSubdirectoriesAsync(string _root, FtpFormat _format, CancellationToken _ct = default)
         {
+#if (NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER)
             return await ListSubdirectoriesIAsync(_root, _format, _ct).ToIEnumerable();
+#else
+List<FtpContentFormat> _return = new List<FtpContentFormat>();
+            IEnumerable<FtpContentFormat> _tmp = await ListDirectoryDetailsContentAsync(_root, _format);
+            _return.AddRange(_tmp);
+
+            foreach (FtpContentFormat _item in _tmp)
+                if (_item.IsDirectory == true)
+                    _return.AddRange(await ListSubdirectoriesAsync(_root + "/" + _item.Name, _format));
+
+            return _return;
+#endif
+
         }
 
         public static async Task<FtpStatusCode> UploadFileAsync(string _root, Stream _up, FtpFormat _format, CancellationToken _ct = default)

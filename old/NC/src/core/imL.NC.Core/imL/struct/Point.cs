@@ -2,7 +2,7 @@
 
 using System;
 
-namespace imL
+namespace System.Drawing
 {
     public struct Point
     {

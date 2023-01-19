@@ -7,7 +7,7 @@ using System.Drawing;
 #endif
 
 using System;
-using System.Diagnostics.Contracts;
+//using System.Diagnostics.Contracts;
 
 namespace imL
 {

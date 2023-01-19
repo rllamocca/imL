@@ -1,6 +1,6 @@
 ﻿#if (NET35)
 
-namespace imL
+namespace System
 {
     public readonly struct Tuple<T1>
     {
