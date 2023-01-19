@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using imL.Rest.Frotcom.Schema;
-using imL.Utility;
 using imL.Utility.Http;
 
 namespace imL.Rest.Frotcom
