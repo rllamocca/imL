@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#if (NETFRAMEWORK || NETSTANDARD2_0_OR_GREATER || NETCORE)
 using System.Data;
+#endif
+
+using System;
+using System.Collections.Generic;
+
 using System.Linq;
 
 namespace imL
 {
     public static class ReorderExtension
     {
+
+#if (NETFRAMEWORK || NETSTANDARD2_0_OR_GREATER || NETCORE)
         public static object TryGet(this DataRow _this, string _columname)
         {
             if (_this == null)
@@ -21,6 +27,8 @@ namespace imL
                 return default;
             }
         }
+#endif
+
         public static string ToText(this object _this, bool _trim = true)
         {
             if (_this == null) return default;
