@@ -163,7 +163,7 @@ namespace imL
             IList<char> _return = new List<char>();
             
             foreach (char _item in _this)
-                if (char.IsLetterOrDigit(_item) || _let.Contains(_item))
+                if (char.IsLetterOrDigit(_item) || _params.Contains(_item))
                     _return.Add(_item);
 
             return new string(_return.ToArray());
