@@ -5,6 +5,7 @@
 
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace imL
             return await ListDirectoryIAsync(_root, _format, _ct).ToIEnumerable();
 #else
             IList<string> _return = new List<string>();
-            FtpWebRequest _client = FtpHelper.CreateClient(WebRequestMethods.Ftp.ListDirectory, _root, _format);
+            FtpWebRequest _client = CreateClient(WebRequestMethods.Ftp.ListDirectory, _root, _format);
 
             using (FtpWebResponse _r = (FtpWebResponse)(await _client.GetResponseAsync()))
             using (StreamReader _sr = new StreamReader(_r.GetResponseStream()))
@@ -38,7 +39,7 @@ namespace imL
             return await ListDirectoryDetailsIAsync(_root, _format, _ct).ToIEnumerable();
 #else
             IList<string> _return = new List<string>();
-            FtpWebRequest _client = FtpHelper.CreateClient(WebRequestMethods.Ftp.ListDirectoryDetails, _root, _format);
+            FtpWebRequest _client = CreateClient(WebRequestMethods.Ftp.ListDirectoryDetails, _root, _format);
 
             using (FtpWebResponse _r = (FtpWebResponse)(await _client.GetResponseAsync()))
             using (StreamReader _sr = new StreamReader(_r.GetResponseStream()))
@@ -54,7 +55,7 @@ namespace imL
 #if (NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER)
             return await AnalizeListDirectoryDetailsIAsync(_root, ListDirectoryDetailsIAsync(_root, _format, _ct), _ct).ToIEnumerable();
 #else
-return FtpHelper.AnalizeListDirectoryDetails(_root, await ListDirectoryDetailsAsync(_root, _format));
+            return AnalizeListDirectoryDetailsISync(_root, await ListDirectoryDetailsAsync(_root, _format)).ToArray();
 #endif
 
         }
@@ -63,13 +64,13 @@ return FtpHelper.AnalizeListDirectoryDetails(_root, await ListDirectoryDetailsAs
 #if (NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER)
             return await ListSubdirectoriesIAsync(_root, _format, _ct).ToIEnumerable();
 #else
-List<FtpContentFormat> _return = new List<FtpContentFormat>();
-            IEnumerable<FtpContentFormat> _tmp = await ListDirectoryDetailsContentAsync(_root, _format);
+            List<FtpContentFormat> _return = new List<FtpContentFormat>();
+            IEnumerable<FtpContentFormat> _tmp = await ListDirectoryDetailsContentAsync(_root, _format, _ct);
             _return.AddRange(_tmp);
 
             foreach (FtpContentFormat _item in _tmp)
                 if (_item.IsDirectory == true)
-                    _return.AddRange(await ListSubdirectoriesAsync(_root + "/" + _item.Name, _format));
+                    _return.AddRange(await ListSubdirectoriesAsync(_root + "/" + _item.Name, _format, _ct));
 
             return _return;
 #endif
