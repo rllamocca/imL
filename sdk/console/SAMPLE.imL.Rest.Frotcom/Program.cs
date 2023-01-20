@@ -3,8 +3,8 @@ using imL.Rest.Frotcom;
 
 FrotcomFormat _format = new()
 {
-    URI = "https://v2api.frotcom.com",
-    Authorize = new()
+    //URI = "http://v2api.frotcom.com",
+    User = new()
     {
         provider = "thirdparty",
         username = "LrEPRefXyIv7Xzf",
@@ -14,9 +14,8 @@ FrotcomFormat _format = new()
 
 FrotcomClient _client = new(_format);
 
-var _token = await _client.AuthorizeUserAsync();
-_client.Token = _token;
-Console.WriteLine(_token.token);
+_client.Authorize = await _client.AuthorizeUserAsync();
+Console.WriteLine(_client.Authorize.token);
 
 var _vehicles = await _client.GetVehiclesAsync();
 foreach (var _item in _vehicles)

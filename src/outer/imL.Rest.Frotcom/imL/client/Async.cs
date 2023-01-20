@@ -11,18 +11,18 @@ namespace imL.Rest.Frotcom
 {
     public partial class FrotcomClient
     {
-        public async Task<Authorize> AuthorizeUserAsync(CancellationToken _ct = default)
+        public async Task<Authorize200> AuthorizeUserAsync(CancellationToken _ct = default)
         {
-            return await _CLIENT.PostJsonAsync<Authorize, AuthorizeFormat>("/authorize", Format.Authorize, true, _ct);
+            return await _CLIENT.PostJsonAsync<Authorize200, Authorize>("v2/authorize", Format.User, true, _ct);
         }
 
-        public async Task<Authorize> ValidateTokenAsync(string _token, bool _throw = false)
+        public async Task<Authorize200> ValidateTokenAsync(string _token, bool _throw = false)
         {
             try
             {
                 _token = "{ \"token\": \"" + _token + "\" }";
 
-                return await _CLIENT.PutJsonAsync<Authorize, string>("/v2/authorize", _token);
+                return await _CLIENT.PutJsonAsync<Authorize200, string>("v2/authorize", _token);
             }
             catch (Exception)
             {
@@ -33,24 +33,24 @@ namespace imL.Rest.Frotcom
             return null;
         }
 
-        public async Task<IEnumerable<Vehicle>> GetVehiclesAsync()
+        public async Task<IEnumerable<Vehicle200>> GetVehiclesAsync()
         {
-            string _uri = "/vehicles?api_key={0}";
-            _uri = string.Format(_uri, Token.token);
+            string _uri = "v2/vehicles?api_key={0}";
+            _uri = string.Format(_uri, Authorize.token);
 
-            return await _CLIENT.GetJsonAsync<IEnumerable<Vehicle>>(_uri);
+            return await _CLIENT.GetJsonAsync<IEnumerable<Vehicle200>>(_uri);
         }
-        public async Task<IEnumerable<Location>> GetVehicleLocationsAsync(long _vehicle_id)
+        public async Task<IEnumerable<Location200>> GetVehicleLocationsAsync(long _vehicle_id)
         {
             DateTime _now = DateTime.Now.ToUniversalTime();
-            string _uri = "/v2/vehicles/{1}/locations?api_key={0}&df={2}%3a{3}&allPositions=true&loadLastPosition=true";
-            _uri = string.Format(_uri, Token.token, _vehicle_id, _now.ToString("HH"), _now.ToString("mm"));
+            string _uri = "v2/vehicles/{1}/locations?api_key={0}&df={2}%3a{3}&allPositions=true&loadLastPosition=true";
+            _uri = string.Format(_uri, Authorize.token, _vehicle_id, _now.ToString("HH"), _now.ToString("mm"));
 
-            return await _CLIENT.GetJsonAsync<Location[]>(_uri);
+            return await _CLIENT.GetJsonAsync<Location200[]>(_uri);
         }
-        public async Task<Location> GetVehicleLocationAsync(long _vehicle_id)
+        public async Task<Location200> GetVehicleLocationAsync(long _vehicle_id)
         {
-            IEnumerable<Location> _locations = await GetVehicleLocationsAsync(_vehicle_id);
+            IEnumerable<Location200> _locations = await GetVehicleLocationsAsync(_vehicle_id);
 
             if (_locations.HasValue())
                 return _locations.FirstOrDefault();
@@ -59,23 +59,23 @@ namespace imL.Rest.Frotcom
         }
         public async Task<Account> GetAccountAsync()
         {
-            string _uri = "/v2/accounts?api_key={0}";
-            _uri = string.Format(_uri, Token.token);
+            string _uri = "v2/accounts?api_key={0}";
+            _uri = string.Format(_uri, Authorize.token);
 
             return await _CLIENT.GetJsonAsync<Account>(_uri);
         }
 
         public async Task<IEnumerable<Driver>> GetDrivers()
         {
-            string _format = "/v2/drivers?api_key={0}";
-            _format = string.Format(_format, Token.token);
+            string _format = "v2/drivers?api_key={0}";
+            _format = string.Format(_format, Authorize.token);
 
             return await _CLIENT.GetJsonAsync<IEnumerable<Driver>>(_format);
         }
         public async Task<Driver> GetDriver(long _driver_id)
         {
-            string _format = "/v2/drivers/{0}?api_key={1}";
-            _format = string.Format(_format, _driver_id, Token.token);
+            string _format = "v2/drivers/{0}?api_key={1}";
+            _format = string.Format(_format, _driver_id, Authorize.token);
 
             return await _CLIENT.GetJsonAsync<Driver>(_format);
         }
@@ -83,7 +83,7 @@ namespace imL.Rest.Frotcom
 
         public async Task<IEnumerable<Dough>> ToPrepareAsync()
         {
-            IEnumerable<Vehicle> _vehicles = await GetVehiclesAsync();
+            IEnumerable<Vehicle200> _vehicles = await GetVehiclesAsync();
 
             if (_vehicles.IsEmpty())
                 return null;
@@ -95,13 +95,13 @@ namespace imL.Rest.Frotcom
 
             IList<Dough> _return = new List<Dough>();
 
-            foreach (Vehicle _item in _vehicles)
+            foreach (Vehicle200 _item in _vehicles)
             {
                 if (Format.LicensePlates.HasValue())
                     if (Format.LicensePlates.Any(_w => string.Equals(_w.Replace(" ", ""), _item.licensePlate.Replace(" ", ""), StringComparison.OrdinalIgnoreCase)) == false)
                         continue;
 
-                Location _location = await GetVehicleLocationAsync(_item.id);
+                Location200 _location = await GetVehicleLocationAsync(_item.id);
 
                 _return.Add(new Dough(_item, _location));
             }

@@ -3,7 +3,7 @@
 namespace imL.Rest.Frotcom.Schema
 {
 #pragma warning disable IDE1006 // Estilos de nombres
-    public class Location
+    public class Location200
     {
         public long id { set; get; }
         public DateTime? timeStamp { set; get; }

@@ -4,12 +4,12 @@ namespace imL.Rest.Frotcom
 {
     public class Dough
     {
-        public Vehicle Vehicle { get; }
-        public Location Location { get; }
+        public Vehicle200 Vehicle { get; }
+        public Location200 Location { get; }
 
         public Dough(
-            Vehicle _vehicle,
-            Location _location
+            Vehicle200 _vehicle,
+            Location200 _location
             )
         {
             Vehicle = _vehicle;
