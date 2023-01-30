@@ -1,7 +1,7 @@
 ﻿namespace imL.Rest.Frotcom.Schema
 {
 #pragma warning disable IDE1006 // Estilos de nombres
-    public class Driver
+    public class Driver200
     {
         public string passportNumber { get; set; }
         public string driverInteractAuthoriation { get; set; }

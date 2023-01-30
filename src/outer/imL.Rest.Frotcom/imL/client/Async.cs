@@ -57,27 +57,27 @@ namespace imL.Rest.Frotcom
 
             return null;
         }
-        public async Task<Account> GetAccountAsync()
+        public async Task<Account200> GetAccountAsync()
         {
             string _uri = "v2/accounts?api_key={0}";
             _uri = string.Format(_uri, Authorize.token);
 
-            return await _CLIENT.GetJsonAsync<Account>(_uri);
+            return await _CLIENT.GetJsonAsync<Account200>(_uri);
         }
 
-        public async Task<IEnumerable<Driver>> GetDrivers()
+        public async Task<IEnumerable<Driver200>> GetDrivers()
         {
             string _format = "v2/drivers?api_key={0}";
             _format = string.Format(_format, Authorize.token);
 
-            return await _CLIENT.GetJsonAsync<IEnumerable<Driver>>(_format);
+            return await _CLIENT.GetJsonAsync<IEnumerable<Driver200>>(_format);
         }
-        public async Task<Driver> GetDriver(long _driver_id)
+        public async Task<Driver200> GetDriver(long _driver_id)
         {
             string _format = "v2/drivers/{0}?api_key={1}";
             _format = string.Format(_format, _driver_id, Authorize.token);
 
-            return await _CLIENT.GetJsonAsync<Driver>(_format);
+            return await _CLIENT.GetJsonAsync<Driver200>(_format);
         }
 
 

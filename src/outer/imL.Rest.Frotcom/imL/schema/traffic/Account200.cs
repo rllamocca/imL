@@ -1,7 +1,7 @@
 ﻿namespace imL.Rest.Frotcom.Schema
 {
 #pragma warning disable IDE1006 // Estilos de nombres
-    public class Account
+    public class Account200
     {
         public int id { set; get; }
         public int partnerId { set; get; }
