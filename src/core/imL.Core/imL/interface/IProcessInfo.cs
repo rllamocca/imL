@@ -5,7 +5,7 @@ namespace imL
 {
     public interface IProcessInfo
     {
-        DateTime? Start { set; get; }
+        DateTime Start { set; get; }
         string Guid { set; get; }
         IAppInfo App { set; get; }
         long? Selected { set; get; }
@@ -29,5 +29,9 @@ namespace imL
         void Success();
         void Danger(Exception _ex = null);
         TimeSpan? Duration();
+
+        string Base { get; }
+        string FileLog { get; }
+        string BaseOut { get; }
     }
 }

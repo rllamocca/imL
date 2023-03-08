@@ -1,11 +1,18 @@
-﻿using System;
+﻿#if (NET35_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
+
+using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace imL
 {
     public class ProcessInfoDefault : IProcessInfo
     {
-        public DateTime? Start { set; get; }
+        readonly string _PATH;
+        readonly string _FILE_LOG;
+        readonly string _PATH_OUT;
+
+        public DateTime Start { set; get; }
         public string Guid { set; get; }
         public IAppInfo App { set; get; }
         public long? Selected { set; get; }
@@ -19,10 +26,31 @@ namespace imL
         public Exception Critical { set; get; }
         public DateTime? End { set; get; }
 
-        public ProcessInfoDefault(IAppInfo _info, bool _ala = false)
+        public string Base { get { return _PATH; } }
+        public string FileLog { get { return _FILE_LOG; } }
+        public string BaseOut { get { return _PATH_OUT; } }
+
+        public ProcessInfoDefault(IAppInfo _info, bool _guidTime = false)
         {
             Start = DateTime.Now;
-            Guid = Convert.ToString(System.Guid.NewGuid());
+
+            if (_guidTime)
+            {
+                Guid = Start.ToUniversalTime().ToString("yyyy'-'MM'-'dd' T'HH':'mm':'ss' 'zzz").Replace(":", "");
+                _FILE_LOG = Start.ToString("u").Replace(":", "") + ".log";
+            }
+            else
+            {
+                Guid = Convert.ToString(System.Guid.NewGuid());
+                _FILE_LOG = Guid + ".log";
+            }
+
+            _PATH = Path.Combine(_info.BaseExe, Guid);
+            _PATH_OUT = Path.Combine(_PATH, "out");
+            
+            if (Directory.Exists(_PATH) == false) Directory.CreateDirectory(_PATH);
+            if (Directory.Exists(_PATH_OUT) == false) Directory.CreateDirectory(_PATH_OUT);
+
             App = _info;
         }
 
@@ -84,3 +112,5 @@ namespace imL
         }
     }
 }
+
+#endif

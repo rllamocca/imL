@@ -3,11 +3,11 @@
     public interface IAppInfo
     {
         string[] Args { get; }
-        string Path { get; }
-        string PathIn { get; }
-        string PathOut { get; }
-        string PathLog { get; }
-        string PathTmp { get; }
+        string Base { get; }
+        string BaseIn { get; }
+        string BaseExe { get; }
+        string BaseTmp { get; }
+
         bool? InContainer { get; }
         bool? InTempPath { get; }
     }

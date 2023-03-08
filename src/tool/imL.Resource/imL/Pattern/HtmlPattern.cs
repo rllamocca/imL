@@ -52,7 +52,7 @@ namespace imL.Resource
             else
                 _return = _return.Replace("__CRITICAL__", "");
 
-            _return = _return.Replace("__START__", Convert.ToString(_process.Start?.ToLocalTime()));
+            _return = _return.Replace("__START__", Convert.ToString(_process.Start.ToLocalTime()));
             _return = _return.Replace("__END__", Convert.ToString(_process.End?.ToLocalTime()));
             _return = _return.Replace("__DURATION__", Convert.ToString(_process.Duration()));
             _return = _return.Replace("__SELECTED__", Convert.ToString(_process.Selected));

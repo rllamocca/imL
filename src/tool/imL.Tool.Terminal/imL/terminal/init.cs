@@ -24,10 +24,10 @@ namespace imL.Tool.Terminal
         internal static IProcessInfo I__TRY0_(string[] _args)
         {
             ConsoleHelper.Begins();
-            IProcessInfo _return = new ProcessInfoDefault(new AppInfoDefault(_args));
+            IProcessInfo _return = new ProcessInfoDefault(new AppInfoDefault(_args), true);
 
-            LogManager.Configuration.Variables["_BASEDIR_"] = _return.App.PathLog;
-            LogManager.Configuration.Variables["_FILENAME_"] = _return.Guid;
+            LogManager.Configuration.Variables["_BASEDIR_"] = _return.Base;
+            LogManager.Configuration.Variables["_FILENAME_"] = _return.FileLog;
             LogManager.AutoShutdown = true;
             _LOGGER = LogManager.GetCurrentClassLogger();
             _LOGGER?.Info("TERMINAL BEGIN");
@@ -38,9 +38,9 @@ namespace imL.Tool.Terminal
             where G : class, ISetting
         {
 #if (NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
-            G _return = JsonSerializer.Deserialize<G>(File.ReadAllText(Path.Combine(_info.App.Path, "settings.json")));
+            G _return = JsonSerializer.Deserialize<G>(File.ReadAllText(Path.Combine(_info.App.Base, "settings.json")));
 #else
-            G _return = JsonConvert.DeserializeObject<G>(File.ReadAllText(Path.Combine(_info.App.Path, "settings.json")));
+            G _return = JsonConvert.DeserializeObject<G>(File.ReadAllText(Path.Combine(_info.App.Base, "settings.json")));
 #endif
 
             if (_return == null)
@@ -58,7 +58,7 @@ namespace imL.Tool.Terminal
             _setting.Mail.IsBodyHtml = true;
             _setting.Mail.Body = HtmlPattern.Resume(_info, _href, _by);
 
-            string _log = Path.Combine(_info.App.PathLog, _info.Guid + ".log");
+            string _log = Path.Combine(_info.App.BaseExe, _info.FileLog);
 
             List<string> _acum = new List<string>();
             _acum.Add(_log);
