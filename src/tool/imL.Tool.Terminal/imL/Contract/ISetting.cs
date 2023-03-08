@@ -1,6 +1,4 @@
-﻿using imL.Format;
-
-namespace imL.Tool.Terminal
+﻿namespace imL.Tool.Terminal
 {
     public interface ISetting
     {

@@ -14,45 +14,44 @@ namespace imL
         public long? Erased { set; get; }
         public long? Successes { set; get; }
         public long? Errors { set; get; }
-        public IList<string> PathAttachments { set; get; }
+        public IList<string> PathAttachments { set; get; } = new List<string>();
         public EAlert? Alert { set; get; }
         public Exception Critical { set; get; }
         public DateTime? End { set; get; }
 
-        public ProcessInfoDefault(IAppInfo _info)
+        public ProcessInfoDefault(IAppInfo _info, bool _ala = false)
         {
             Start = DateTime.Now;
             Guid = Convert.ToString(System.Guid.NewGuid());
             App = _info;
-            PathAttachments = new List<string>();
         }
 
-        public void AddSelected(long _add)
+        public void AddSelected(long _add = 1)
         {
             if (_add > 0)
                 Selected = Selected.GetValueOrDefault() + _add;
         }
-        public void AddInserted(long _add)
+        public void AddInserted(long _add = 1)
         {
             if (_add > 0)
                 Inserted = Inserted.GetValueOrDefault() + _add;
         }
-        public void AddUpdated(long _add)
+        public void AddUpdated(long _add = 1)
         {
             if (_add > 0)
                 Updated = Updated.GetValueOrDefault() + _add;
         }
-        public void AddErased(long _add)
+        public void AddErased(long _add = 1)
         {
             if (_add > 0)
                 Erased = Erased.GetValueOrDefault() + _add;
         }
-        public void AddSuccesses(long _add)
+        public void AddSuccesses(long _add = 1)
         {
             if (_add > 0)
                 Successes = Successes.GetValueOrDefault() + _add;
         }
-        public void AddErrors(long _add)
+        public void AddErrors(long _add = 1)
         {
             if (_add > 0)
                 Errors = Errors.GetValueOrDefault() + _add;

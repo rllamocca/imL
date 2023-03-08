@@ -19,12 +19,12 @@ namespace imL
         Exception Critical { set; get; }
         DateTime? End { set; get; }
 
-        void AddSelected(long _add);
-        void AddInserted(long _add);
-        void AddUpdated(long _add);
-        void AddErased(long _add);
-        void AddSuccesses(long _add);
-        void AddErrors(long _add);
+        void AddSelected(long _add = 1);
+        void AddInserted(long _add = 1);
+        void AddUpdated(long _add = 1);
+        void AddErased(long _add = 1);
+        void AddSuccesses(long _add = 1);
+        void AddErrors(long _add = 1);
 
         void Success();
         void Danger(Exception _ex = null);

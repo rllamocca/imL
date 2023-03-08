@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 
 using imL.Rest.Frotcom.Schema;
 using imL.Utility.Http;
@@ -17,9 +15,7 @@ namespace imL.Rest.Frotcom
 
         static FrotcomClient()
         {
-            _CLIENT = new HttpClient(new HttpJsonHandler(new HttpClientHandler() { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate }));
-            _CLIENT.BaseAddress = new Uri("https://v2api.frotcom.com");
-            _CLIENT.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            _CLIENT = Factory.HttpJsonClient("https://v2api.frotcom.com");
         }
 
         public FrotcomClient(FrotcomFormat _format)

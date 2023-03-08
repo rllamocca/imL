@@ -1,9 +1,9 @@
-﻿using imL.Format;
-using imL.Tool.Terminal;
+﻿using imL.Tool.Terminal;
+using imL;
 
 namespace SAMPLE.imL.Tool.Terminal
 {
-    internal class MySettings : ISetting
+    internal class MySetting : ISetting
     {
         public SmtpFormat Smtp { set; get; }
         public MailMessageFormat Mail { set; get; }

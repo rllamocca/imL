@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using imL.Contract;
-using imL.Enumeration;
 using imL.Resource.Properties;
-using imL.Utility;
 
 namespace imL.Resource
 {
@@ -49,7 +46,7 @@ namespace imL.Resource
 
             if (_process.Critical != null)
             {
-                IEnumerable<string> _critical = ExceptionHelper.InnerException(_process.Critical);
+                IEnumerable<string> _critical = _process.Critical.InnerMessageException();
                 _return = _return.Replace("__CRITICAL__", string.Join(Environment.NewLine, _critical.ToArray()));
             }
             else

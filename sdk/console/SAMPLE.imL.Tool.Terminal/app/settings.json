@@ -1,14 +1,13 @@
 {
   "Smtp": {
-    "Host": null,
-    "UserName": null,
-    "Password": null
+    "Host": "smtp-prd.services.microexpertos.local",
+    "UserName": "sender.microexpertos",
+    "Password": "Sender1002!!!!"
   },
   "Mail": {
-    "FromAddress": null,
-    "FromDisplayName": null,
-    "Subject": null,
-    "TO": null,
-    "BCC": null
+    "FromAddress": "noreply@microexpertos.com",
+    "TO": [
+      "rllamocca@microexpertos.com"
+    ]
   }
 }
