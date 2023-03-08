@@ -1,13 +1,1 @@
-{
-  "Smtp": {
-    "Host": "smtp-prd.services.microexpertos.local",
-    "UserName": "sender.microexpertos",
-    "Password": "Sender1002!!!!"
-  },
-  "Mail": {
-    "FromAddress": "noreply@microexpertos.com",
-    "TO": [
-      "rllamocca@microexpertos.com"
-    ]
-  }
-}
+{}

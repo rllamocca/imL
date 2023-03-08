@@ -27,7 +27,7 @@ namespace imL
         public bool? InContainer { get { return _IN_CONTAINER; } }
         public bool? InTempPath { get { return _IN_TEMPPATH; } }
 
-        public AppInfoDefault(string[] _args, string _basedirectory = null, bool _temppathdefault = false)
+        public AppInfoDefault(string[] _args, string _basedirectory = null, string _guid = null, bool _temppathdefault = false)
         {
             _ARGS = _args;
 
