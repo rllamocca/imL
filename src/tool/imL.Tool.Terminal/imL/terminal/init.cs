@@ -1,4 +1,4 @@
-﻿#if (NETSTANDARD2_0_OR_GREATER ||  NET5_0_OR_GREATER)
+﻿#if (NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
 using System.Text.Json;
 #else
 using Newtonsoft.Json;
@@ -38,14 +38,17 @@ namespace imL.Tool.Terminal
         internal static ISetting I__TRY1_<G>(IProcessInfo _info)
             where G : class, ISetting
         {
+            string _file = "settings.json";
+            string _read = File.ReadAllText(Path.Combine(_info.App.Base, _file));
+
 #if (NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
-            G _return = JsonSerializer.Deserialize<G>(File.ReadAllText(Path.Combine(_info.App.Base, "settings.json")));
+            G _return = JsonSerializer.Deserialize<G>(_read);
 #else
-            G _return = JsonConvert.DeserializeObject<G>(File.ReadAllText(Path.Combine(_info.App.Base, "settings.json")));
+            G _return = JsonConvert.DeserializeObject<G>(_read);
 #endif
 
             if (_return == null)
-                throw new ArgumentNullException("settings.json");
+                throw new ArgumentNullException(_file);
 
             if (_MAIL && _return.Smtp == null) _MAIL = false;
             if (_MAIL && _return.Mail == null) _MAIL = false;

@@ -2,9 +2,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Security.Principal;
 
 namespace imL
 {
@@ -104,16 +102,16 @@ namespace imL
         }
 
 
-        public static string GetPID()
-        {
+//        public static string GetPID()
+//        {
 
-#if NET50_OR_GREATER
-            return Convert.ToString( Environment.ProcessId);
-#else
-            return Convert.ToString(Process.GetCurrentProcess().Id);
-#endif
+//#if NET50_OR_GREATER
+//            return Convert.ToString( Environment.ProcessId);
+//#else
+//            return Convert.ToString(Process.GetCurrentProcess().Id);
+//#endif
 
-        }
+//        }
     }
 }
 

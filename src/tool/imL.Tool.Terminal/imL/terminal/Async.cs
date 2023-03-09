@@ -3,8 +3,6 @@
 using System;
 using System.Threading.Tasks;
 
-using NLog;
-
 using imL.Package.NLog;
 
 namespace imL.Tool.Terminal
