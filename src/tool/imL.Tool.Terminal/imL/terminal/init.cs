@@ -24,7 +24,7 @@ namespace imL.Tool.Terminal
         internal static IProcessInfo I__TRY0_(string[] _args)
         {
             ConsoleHelper.Begins();
-            IProcessInfo _return = new ProcessInfoDefault(new AppInfoDefault(_args), true);
+            IProcessInfo _return = new ProcessInfoDefault(new AppInfoDefault(_args));
 
             LogManager.Configuration.Variables["_BASEDIR_"] = _return.Base;
             LogManager.Configuration.Variables["_FILENAME_"] = _return.FileLog;

@@ -2,7 +2,7 @@
 {
     public interface IAppInfo
     {
-        string[] Args { get; }
+        string[] args { get; }
         string Base { get; }
         string BaseIn { get; }
         string BaseExe { get; }

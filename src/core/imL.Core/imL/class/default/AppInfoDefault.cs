@@ -16,7 +16,7 @@ namespace imL
         readonly bool? _IN_CONTAINER = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
         readonly bool? _IN_TEMPPATH;
 
-        public string[] Args { get { return _ARGS; } }
+        public string[] args { get { return _ARGS; } }
         public string Base { get { return _BASE; } }
         public string BaseIn { get { return _BASE_IN; } }
         public string BaseExe { get { return _BASE_EXE; } }

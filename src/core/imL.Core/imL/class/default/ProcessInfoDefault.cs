@@ -2,7 +2,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Security.Principal;
 
 namespace imL
 {
@@ -30,24 +32,14 @@ namespace imL
         public string FileLog { get { return _FILE_LOG; } }
         public string BaseOut { get { return _PATH_OUT; } }
 
-        public ProcessInfoDefault(IAppInfo _info, bool _guidTime = false)
+        public ProcessInfoDefault(IAppInfo _info)
         {
             Start = DateTime.Now;
-
-            if (_guidTime)
-            {
-                Guid = Start.ToUniversalTime().ToString("yyyy'-'MM'-'dd' T'HH':'mm':'ss' 'zzz").Replace(":", "");
-                _FILE_LOG = Start.ToString("u").Replace(":", "") + ".log";
-            }
-            else
-            {
-                Guid = Convert.ToString(System.Guid.NewGuid());
-                _FILE_LOG = Guid + ".log";
-            }
-
+            Guid = Start.ToUniversalTime().ToString("yyyy'-'MM'-'dd' T'HH':'mm").Replace(":", "");
+            _FILE_LOG = Start.ToString("yyyy'-'MM'-'dd' T'HH':'mm' 'zzz").Replace(":", "") + ".log";
             _PATH = Path.Combine(_info.BaseExe, Guid);
             _PATH_OUT = Path.Combine(_PATH, "out");
-            
+
             if (Directory.Exists(_PATH) == false) Directory.CreateDirectory(_PATH);
             if (Directory.Exists(_PATH_OUT) == false) Directory.CreateDirectory(_PATH_OUT);
 
@@ -109,6 +101,18 @@ namespace imL
         public TimeSpan? Duration()
         {
             return End - Start;
+        }
+
+
+        public static string GetPID()
+        {
+
+#if NET50_OR_GREATER
+            return Convert.ToString( Environment.ProcessId);
+#else
+            return Convert.ToString(Process.GetCurrentProcess().Id);
+#endif
+
         }
     }
 }
