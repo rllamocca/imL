@@ -32,22 +32,21 @@ namespace imL.Tool.Terminal
                     I__CATCH_(_info, _sett, _ex);
                 }
 
-                _LOGGER?.Info("RunAsync END");
+                _LOGGER?.Info("END RunAsync");
 
                 if (_MAIL)
                 {
                     I__PRE_SEND_(_info, _sett, _href, _by);
-                    LogManager.Flush();
                     await SmtpHelper.SendAsync(_sett.Smtp, default, _sett.Mail);
                     _LOGGER?.Info("SendAsync MAIL");
                 }
             }
             catch (Exception _ex)
             {
-                if (_LOGGER == null)
-                    ConsoleHelper.WriteInnerException(_ex);
-                else
-                    _LOGGER?.InnerFatal(_ex);
+                if (_LOGGER == null) ConsoleHelper.WriteInnerException(_ex);
+                else _LOGGER?.InnerFatal(_ex);
+
+                throw;
             }
             finally
             {

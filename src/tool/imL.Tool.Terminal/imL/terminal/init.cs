@@ -29,6 +29,7 @@ namespace imL.Tool.Terminal
             LogManager.Configuration.Variables["_BASEDIR_"] = _return.Base;
             LogManager.Configuration.Variables["_FILENAME_"] = _return.FileLog;
             LogManager.AutoShutdown = true;
+
             _LOGGER = LogManager.GetCurrentClassLogger();
             _LOGGER?.Info("TERMINAL BEGIN");
 
@@ -58,7 +59,7 @@ namespace imL.Tool.Terminal
             _setting.Mail.IsBodyHtml = true;
             _setting.Mail.Body = HtmlPattern.Resume(_info, _href, _by);
 
-            string _log = Path.Combine(_info.App.BaseExe, _info.FileLog);
+            string _log = Path.Combine(_info.Base, _info.FileLog);
 
             List<string> _acum = new List<string>();
             _acum.Add(_log);
@@ -78,6 +79,7 @@ namespace imL.Tool.Terminal
             //    _attachs.Add(ZipHelper.CompressOnly(_item, _mb, _exts));
 
             _setting.Mail.PathAttachments = _acum;
+            LogManager.Flush();
         }
         internal static void I__CATCH_(IProcessInfo _info, ISetting _setting, Exception _ex)
         {
@@ -88,7 +90,7 @@ namespace imL.Tool.Terminal
         }
         internal static void I__FINALLY_()
         {
-            _LOGGER?.Info("TERMINAL END");
+            _LOGGER?.Info("END TERMINAL");
 
             LogManager.Shutdown();
             ConsoleHelper.Ends(_card: true);
