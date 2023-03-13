@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-using imL.Enumeration.Logging;
+using imL.Logging;
 
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;

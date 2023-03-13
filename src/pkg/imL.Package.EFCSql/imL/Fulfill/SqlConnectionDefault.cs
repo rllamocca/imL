@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.Common;
 
-using imL.Contract.DB;
+using imL.DB;
 
 using Microsoft.Data.SqlClient;
 
@@ -53,8 +53,8 @@ namespace imL.Package.EFCSql
         }
 
         //####
-        public int TimeOut { set; get; } = 100;
-        public bool Constraints { set; get; } = false;
+        public int? TimeOut { set; get; } = 100;
+        public bool? Constraints { set; get; } = false;
         public CancellationToken Token { set; get; } = default;
 
         public void Open()

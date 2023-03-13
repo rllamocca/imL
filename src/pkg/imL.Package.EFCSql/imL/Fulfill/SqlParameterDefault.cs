@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-using imL.Contract.DB;
+using imL.DB;
 
 using Microsoft.Data.SqlClient;
 
@@ -10,7 +10,7 @@ namespace imL.Package.EFCSql
     {
         public string Affect { get; }
         public string Expression { get; }
-        public bool IsSearchCondition { get; }
+        public bool? IsSearchCondition { get; }
 
         public SqlParameter Parameter { get; }
 

@@ -1,8 +1,4 @@
-﻿#if (NET35 || NET40)
-using imL.Contract;
-#endif
-
-using NPOI.HSSF.UserModel;
+﻿using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 

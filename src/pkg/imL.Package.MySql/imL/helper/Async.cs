@@ -1,38 +1,25 @@
-﻿#if NETSTANDARD1_3 == false
+﻿#if (NET35 || NET40) == false
+
+#if (NETSTANDARD1_3) == false
 using System.Data;
 #endif
-#if NET35 || NET40
-using imL.Contract;
-#endif
-
-using imL.Enumeration.DB;
-using imL.Contract.DB;
-
-using MySql.Data.MySqlClient;
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-
-using imL.Utility;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Threading.Tasks;
+
+using imL.DB;
+
+using MySql.Data.MySqlClient;
+using System.Threading;
 
 namespace imL.Package.MySql
 {
-    public class MySqlHelper : IHelper
+    public partial class MySqlHelper : IHelper
     {
-        public IConnection Connection { get; }
-        public bool Throw { get; }
-        public IProgress<int> Progress { get; }
-
-        public MySqlHelper(IConnection _conn, bool _throw = false, IProgress<int> _progress = null)
-        {
-            Connection = _conn;
-            Throw = _throw;
-            Progress = _progress;
-        }
-
-        public Return Execute(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[] _pmts)
+        public async Task<Return> ExecuteAsync(string _query, EExecute _exe = EExecute.NonQuery, CancellationToken _ct = default, params IParameter[] _pmts)
         {
             try
             {
@@ -42,7 +29,7 @@ namespace imL.Package.MySql
                 using (MySqlCommand _cmd = new MySqlCommand(_query, _conn_raw.Connection))
                 {
                     _cmd.Transaction = _conn_raw.Transaction;
-                    _cmd.CommandTimeout = Connection.TimeOut;
+                    _cmd.CommandTimeout = Connection.TimeOut ?? _cmd.CommandTimeout;
 
                     if (_pmts_raw.HasValue())
                         _cmd.Parameters.AddRange(_pmts_raw.ToArray());
@@ -50,11 +37,11 @@ namespace imL.Package.MySql
                     switch (_exe)
                     {
                         case EExecute.NonQuery:
-                            return new Return(true, _cmd.ExecuteNonQuery());
+                            return new Return(true, await _cmd.ExecuteNonQueryAsync(_ct));
                         case EExecute.Scalar:
-                            return new Return(true, _cmd.ExecuteScalar());
+                            return new Return(true, await _cmd.ExecuteScalarAsync(_ct));
                         case EExecute.Reader:
-                            return new Return(true, _cmd.ExecuteReader());
+                            return new Return(true, await _cmd.ExecuteReaderAsync(_ct));
                         default:
                             return new Return(false);
                     }
@@ -62,14 +49,18 @@ namespace imL.Package.MySql
             }
             catch (Exception _ex)
             {
-                if (Throw)
+                if (Throw == true)
                     throw;
 
                 return new Return(false, _ex);
             }
         }
+        public async Task<Return> ExecuteAsync(string _query, EExecute _exe = EExecute.NonQuery, CancellationToken _ct = default)
+        {
+            return await ExecuteAsync(_query, _exe, _ct, null);
+        }
 
-        public Return[] Executions(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[][] _pmts)
+        public async Task<IEnumerable<Return>> ExecutionsAsync(string _query, EExecute _exe = EExecute.NonQuery, CancellationToken _ct = default, params IParameter[][] _pmts)
         {
             try
             {
@@ -82,14 +73,13 @@ namespace imL.Package.MySql
                 using (MySqlCommand _cmd = new MySqlCommand(_query, _conn_raw.Connection))
                 {
                     _cmd.Transaction = _conn_raw.Transaction;
-                    _cmd.CommandTimeout = Connection.TimeOut;
+                    _cmd.CommandTimeout = Connection.TimeOut ?? _cmd.CommandTimeout;
                     _cmd.Parameters.AddRange(_pmts_raw.ToArray());
 
                     int _c_p = _cmd.Parameters.Count;
                     int _c_r = _returns.Length;
 
                     _cmd.Prepare();
-
                     do
                     {
                         try
@@ -101,13 +91,13 @@ namespace imL.Package.MySql
                             switch (_exe)
                             {
                                 case EExecute.NonQuery:
-                                    _returns[_r] = new Return(true, _cmd.ExecuteNonQuery());
+                                    _returns[_r] = new Return(true, await _cmd.ExecuteNonQueryAsync(_ct));
                                     break;
                                 case EExecute.Scalar:
-                                    _returns[_r] = new Return(true, _cmd.ExecuteScalar());
+                                    _returns[_r] = new Return(true, await _cmd.ExecuteScalarAsync(_ct));
                                     break;
                                 case EExecute.Reader:
-                                    _returns[_r] = new Return(true, _cmd.ExecuteReader());
+                                    _returns[_r] = new Return(true, await _cmd.ExecuteReaderAsync(_ct));
                                     break;
                                 default:
                                     _returns[_r] = new Return(false);
@@ -116,7 +106,7 @@ namespace imL.Package.MySql
                         }
                         catch (Exception _ex)
                         {
-                            if (Throw)
+                            if (Throw == true)
                                 throw;
 
                             _returns[_r] = new Return(false, _ex);
@@ -131,20 +121,24 @@ namespace imL.Package.MySql
             }
             catch (Exception _ex)
             {
-                if (Throw)
+                if (Throw == true)
                     throw;
 
                 return new Return[] { new Return(false, _ex) };
             }
         }
+        public async Task<IEnumerable<Return>> ExecutionsAsync(string _query, EExecute _exe = EExecute.NonQuery, CancellationToken _ct = default)
+        {
+            return await ExecutionsAsync(_query, _exe, _ct, null);
+        }
 
-#if (NET35_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
+#if (NET45_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
 
-        public DataTable LoadDataTable(string _query, params IParameter[] _pmts)
+        public async Task<DataTable> LoadDataTableAsync(string _query, CancellationToken _ct = default, params IParameter[] _pmts)
         {
             try
             {
-                Return _exe = Execute(_query, EExecute.Reader, _pmts);
+                Return _exe = await ExecuteAsync(_query, EExecute.Reader, _ct, _pmts);
                 _exe.TriggerErrorException();
 
                 DataTable _return = new DataTable("DataTable_0");
@@ -156,20 +150,24 @@ namespace imL.Package.MySql
             }
             catch (Exception)
             {
-                if (Throw)
+                if (Throw == true)
                     throw;
             }
 
             return null;
         }
-        public DataSet LoadDataSet(string _query, params IParameter[] _pmts)
+        public async Task<DataTable> LoadDataTableAsync(string _query, CancellationToken _ct = default)
+        {
+            return await LoadDataTableAsync(_query, _ct, null);
+        }
+        public async Task<DataSet> LoadDataSetAsync(string _query, CancellationToken _ct = default, params IParameter[] _pmts)
         {
             try
             {
-                Return _exe = Execute(_query, EExecute.Reader, _pmts);
+                Return _exe = await ExecuteAsync(_query, EExecute.Reader, _ct, _pmts);
                 _exe.TriggerErrorException();
 
-                DataSet _return = new DataSet("DataSet_0") { EnforceConstraints = Connection.Constraints };
+                DataSet _return = new DataSet("DataSet_0") { EnforceConstraints = Connection.Constraints.GetValueOrDefault() };
                 byte _n = 0;
 
                 using (MySqlDataReader _read = (MySqlDataReader)_exe.Result)
@@ -189,37 +187,47 @@ namespace imL.Package.MySql
             }
             catch (Exception)
             {
-                if (Throw)
+                if (Throw == true)
                     throw;
             }
 
             return null;
         }
-        public G[] LoadData<G>(string _query, params IParameter[] _pmts)
+        public async Task<DataSet> LoadDataSetAsync(string _query, CancellationToken _ct = default)
+        {
+            return await LoadDataSetAsync(_query, _ct, null);
+        }
+        public async Task<IEnumerable<G>> LoadDataAsync<G>(string _query, CancellationToken _ct = default, params IParameter[] _pmts)
         {
             try
             {
-                using (DataTable _dt = LoadDataTable(_query, _pmts))
+                using (DataTable _dt = await LoadDataTableAsync(_query, _ct, _pmts))
                 {
-                    List<G> _return = new List<G>();
+                    IList<G> _return = new List<G>();
                     Setter<G> _set = new Setter<G>();
 
                     foreach (DataRow _item in _dt.Rows)
                         _return.Add(_set.Instance(_item));
 
-                    return _return.ToArray();
+                    return _return;
                 }
             }
             catch (Exception)
             {
-                if (Throw)
+                if (Throw == true)
                     throw;
             }
 
             return null;
+        }
+        public async Task<IEnumerable<G>> LoadDataAsync<G>(string _query, CancellationToken _ct = default)
+        {
+            return await LoadDataAsync<G>(_query, _ct, null);
         }
 
 #endif
 
     }
 }
+
+#endif

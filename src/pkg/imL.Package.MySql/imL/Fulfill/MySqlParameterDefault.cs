@@ -1,6 +1,6 @@
 ﻿using System;
 
-using imL.Contract.DB;
+using imL.DB;
 
 using MySql.Data.MySqlClient;
 
@@ -10,7 +10,7 @@ namespace imL.Package.MySql
     {
         public string Affect { get; }
         public string Expression { get; }
-        public bool IsSearchCondition { get; }
+        public bool? IsSearchCondition { get; }
 
         public MySqlParameter Parameter { get; }
 

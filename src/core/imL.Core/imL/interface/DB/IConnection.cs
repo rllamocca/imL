@@ -12,9 +12,9 @@ namespace imL.DB
         int? TimeOut { set; get; }
         bool? Constraints { set; get; }
 
-#if (NET35 || NET40) == false
-        CancellationToken Token { set; get; }
-#endif
+//#if (NET35 || NET40) == false
+//        CancellationToken Token { set; get; }
+//#endif
 
         void Open();
         void Close();

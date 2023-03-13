@@ -1,11 +1,4 @@
-﻿#if (NET35)
-using imL.Struct;
-#endif
-#if (NET35 || NET40)
-using imL.Contract;
-#endif
-
-using NPOI.HSSF.UserModel;
+﻿using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 
@@ -13,8 +6,6 @@ using System;
 using System.Data;
 using System.IO;
 using System.Linq;
-
-using imL.Utility;
 
 namespace imL.Package.NPOI
 {

@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-using imL.Contract;
+using imL;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

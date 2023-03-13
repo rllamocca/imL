@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 #endif
 
-using imL.Contract.DB;
+using imL.DB;
 
 using MySql.Data.MySqlClient;
 
@@ -45,8 +45,8 @@ namespace imL.Package.MySql
         }
 
         //####
-        public int TimeOut { set; get; } = 100;
-        public bool Constraints { set; get; } = false;
+        public int? TimeOut { set; get; } = 100;
+        public bool? Constraints { set; get; } = false;
 
 #if (NET35 || NET40) == false
         public CancellationToken Token { set; get; } = default;

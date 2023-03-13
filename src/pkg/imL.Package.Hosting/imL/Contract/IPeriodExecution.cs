@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading;
 
-using imL.Contract;
-
 namespace imL.Package.Hosting
 {
     public interface IPeriodExecution : IDisposable

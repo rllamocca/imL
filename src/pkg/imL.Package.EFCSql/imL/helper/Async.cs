@@ -1,27 +1,14 @@
 ﻿using System.Data;
 
-using imL.Contract.DB;
-using imL.Enumeration.DB;
-using imL.Utility;
+using imL.DB;
 
 using Microsoft.Data.SqlClient;
 
 namespace imL.Package.EFCSql
 {
-    public class SqlHelperAsync : IHelperAsync
+    public partial class SqlHelper
     {
-        public IConnection Connection { get; }
-        public bool Throw { get; }
-        public IProgress<int> Progress { get; }
-
-        public SqlHelperAsync(IConnection _conn, bool _throw = false, IProgress<int> _progress = null)
-        {
-            Connection = _conn;
-            Throw = _throw;
-            Progress = _progress;
-        }
-
-        public async Task<Return> ExecuteAsync(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[] _pmts)
+        public async Task<Return> ExecuteAsync(string _query, EExecute _exe = EExecute.NonQuery, CancellationToken _ct = default, params IParameter[] _pmts)
         {
             try
             {
@@ -31,7 +18,7 @@ namespace imL.Package.EFCSql
                 using (SqlCommand _cmd = new(_query, _conn_raw.Connection))
                 {
                     _cmd.Transaction = _conn_raw.Transaction;
-                    _cmd.CommandTimeout = Connection.TimeOut;
+                    _cmd.CommandTimeout = Connection.TimeOut ?? _cmd.CommandTimeout;
 
                     if (_pmts_raw.HasValue())
                         _cmd.Parameters.AddRange(_pmts_raw.ToArray());
@@ -39,13 +26,13 @@ namespace imL.Package.EFCSql
                     switch (_exe)
                     {
                         case EExecute.NonQuery:
-                            return new Return(true, await _cmd.ExecuteNonQueryAsync(Connection.Token));
+                            return new Return(true, await _cmd.ExecuteNonQueryAsync(_ct));
                         case EExecute.Scalar:
-                            return new Return(true, await _cmd.ExecuteScalarAsync(Connection.Token));
+                            return new Return(true, await _cmd.ExecuteScalarAsync(_ct));
                         case EExecute.Reader:
-                            return new Return(true, await _cmd.ExecuteReaderAsync(Connection.Token));
+                            return new Return(true, await _cmd.ExecuteReaderAsync(_ct));
                         case EExecute.XmlReader:
-                            return new Return(true, await _cmd.ExecuteXmlReaderAsync(Connection.Token));
+                            return new Return(true, await _cmd.ExecuteXmlReaderAsync(_ct));
                         default:
                             return new Return(false);
                     }
@@ -53,14 +40,18 @@ namespace imL.Package.EFCSql
             }
             catch (Exception _ex)
             {
-                if (Throw)
+                if (Throw == true)
                     throw;
 
                 return new Return(false, _ex);
             }
         }
+        public async Task<Return> ExecuteAsync(string _query, EExecute _exe = EExecute.NonQuery, CancellationToken _ct = default)
+        {
+            return await ExecuteAsync(_query, _exe, _ct, null);
+        }
 
-        public async Task<Return[]> ExecutionsAsync(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[][] _pmts)
+        public async Task<IEnumerable<Return>> ExecutionsAsync(string _query, EExecute _exe = EExecute.NonQuery, CancellationToken _ct = default, params IParameter[][] _pmts)
         {
             try
             {
@@ -73,7 +64,7 @@ namespace imL.Package.EFCSql
                 using (SqlCommand _cmd = new(_query, _conn_raw.Connection))
                 {
                     _cmd.Transaction = _conn_raw.Transaction;
-                    _cmd.CommandTimeout = Connection.TimeOut;
+                    _cmd.CommandTimeout = Connection.TimeOut ?? _cmd.CommandTimeout;
                     _cmd.Parameters.AddRange(_pmts_raw.ToArray());
 
                     int _c_p = _cmd.Parameters.Count;
@@ -91,16 +82,16 @@ namespace imL.Package.EFCSql
                             switch (_exe)
                             {
                                 case EExecute.NonQuery:
-                                    _returns[_r] = new Return(true, await _cmd.ExecuteNonQueryAsync(Connection.Token));
+                                    _returns[_r] = new Return(true, await _cmd.ExecuteNonQueryAsync(_ct));
                                     break;
                                 case EExecute.Scalar:
-                                    _returns[_r] = new Return(true, await _cmd.ExecuteScalarAsync(Connection.Token));
+                                    _returns[_r] = new Return(true, await _cmd.ExecuteScalarAsync(_ct));
                                     break;
                                 case EExecute.Reader:
-                                    _returns[_r] = new Return(true, await _cmd.ExecuteReaderAsync(Connection.Token));
+                                    _returns[_r] = new Return(true, await _cmd.ExecuteReaderAsync(_ct));
                                     break;
                                 case EExecute.XmlReader:
-                                    _returns[_r] = new Return(true, await _cmd.ExecuteXmlReaderAsync(Connection.Token));
+                                    _returns[_r] = new Return(true, await _cmd.ExecuteXmlReaderAsync(_ct));
                                     break;
                                 default:
                                     _returns[_r] = new Return(false);
@@ -109,7 +100,7 @@ namespace imL.Package.EFCSql
                         }
                         catch (Exception _ex)
                         {
-                            if (Throw)
+                            if (Throw == true)
                                 throw;
 
                             _returns[_r] = new Return(false, _ex);
@@ -124,18 +115,22 @@ namespace imL.Package.EFCSql
             }
             catch (Exception _ex)
             {
-                if (Throw)
+                if (Throw == true)
                     throw;
 
                 return new Return[] { new Return(false, _ex) };
             }
         }
+        public async Task<IEnumerable<Return>> ExecutionsAsync(string _query, EExecute _exe = EExecute.NonQuery, CancellationToken _ct = default)
+        {
+            return await ExecutionsAsync(_query, _exe, _ct, null);
+        }
 
-        public async Task<DataTable> LoadDataTableAsync(string _query, params IParameter[] _pmts)
+        public async Task<DataTable> LoadDataTableAsync(string _query, CancellationToken _ct = default, params IParameter[] _pmts)
         {
             try
             {
-                Return _exe = await ExecuteAsync(_query, EExecute.Reader, _pmts);
+                Return _exe = await ExecuteAsync(_query, EExecute.Reader, _ct, _pmts);
                 _exe.TriggerErrorException();
 
                 DataTable _return = new("DataTable_0");
@@ -147,20 +142,24 @@ namespace imL.Package.EFCSql
             }
             catch (Exception)
             {
-                if (Throw)
+                if (Throw == true)
                     throw;
             }
 
             return null;
         }
-        public async Task<DataSet> LoadDataSetAsync(string _query, params IParameter[] _pmts)
+        public async Task<DataTable> LoadDataTableAsync(string _query, CancellationToken _ct = default)
+        {
+            return await LoadDataTableAsync(_query, _ct, null);
+        }
+        public async Task<DataSet> LoadDataSetAsync(string _query, CancellationToken _ct = default, params IParameter[] _pmts)
         {
             try
             {
-                Return _exe = await ExecuteAsync(_query, EExecute.Reader, _pmts);
+                Return _exe = await ExecuteAsync(_query, EExecute.Reader, _ct, _pmts);
                 _exe.TriggerErrorException();
 
-                DataSet _return = new("DataSet_0") { EnforceConstraints = Connection.Constraints };
+                DataSet _return = new("DataSet_0") { EnforceConstraints = Connection.Constraints.GetValueOrDefault() };
                 byte _n = 0;
 
                 using (SqlDataReader _read = (SqlDataReader)_exe.Result)
@@ -180,34 +179,42 @@ namespace imL.Package.EFCSql
             }
             catch (Exception)
             {
-                if (Throw)
+                if (Throw == true)
                     throw;
             }
 
             return null;
         }
-        public async Task<G[]> LoadDataAsync<G>(string _query, params IParameter[] _pmts)
+        public async Task<DataSet> LoadDataSetAsync(string _query, CancellationToken _ct = default)
+        {
+            return await LoadDataSetAsync(_query, _ct, null);
+        }
+        public async Task<IEnumerable<G>> LoadDataAsync<G>(string _query, CancellationToken _ct = default, params IParameter[] _pmts)
         {
             try
             {
-                using (DataTable _dt = await LoadDataTableAsync(_query, _pmts))
+                using (DataTable _dt = await LoadDataTableAsync(_query, _ct, _pmts))
                 {
-                    List<G> _return = new();
+                    IList<G> _return = new List<G>();
                     Setter<G> _set = new();
 
                     foreach (DataRow _item in _dt.Rows)
                         _return.Add(_set.Instance(_item));
 
-                    return _return.ToArray();
+                    return _return;
                 }
             }
             catch (Exception)
             {
-                if (Throw)
+                if (Throw == true)
                     throw;
             }
 
             return null;
+        }
+        public async Task<IEnumerable<G>> LoadDataAsync<G>(string _query, CancellationToken _ct = default)
+        {
+            return await LoadDataAsync<G>(_query, _ct, null);
         }
     }
 }
