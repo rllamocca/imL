@@ -41,10 +41,10 @@
 	</PropertyGroup>
 
 	<ItemGroup Condition="('$(TargetFramework)' == 'net7.0') Or ('$(TargetFramework)' == 'net6.0') Or ('$(TargetFramework)' == 'net5.0') Or ('$(TargetFramework)' == 'netstandard2.1') Or ('$(TargetFramework)' == 'netstandard2.0')">
-		<PackageReference Include="NPOI" Version="2.*" />
+		<PackageReference Include="NPOI" Version="2.5.0" />
 	</ItemGroup>
 	<ItemGroup Condition="('$(TargetFramework)' == 'net46') Or ('$(TargetFramework)' == 'net452') Or ('$(TargetFramework)' == 'net451') Or ('$(TargetFramework)' == 'net45')">
-		<PackageReference Include="NPOI" Version="2.5.*" />
+		<PackageReference Include="NPOI" Version="2.5.0" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net40'">
 		<PackageReference Include="NPOI" Version="2.5.1" />
