@@ -2,7 +2,7 @@
 using System.Data.SqlClient;
 using System.Linq;
 
-using imL.Contract.DB;
+using imL.DB;
 
 namespace imL.Utility.Sql
 {

@@ -53,9 +53,8 @@ namespace imL.Package.EFCSql
         }
 
         //####
-        public int? TimeOut { set; get; } = 100;
-        public bool? Constraints { set; get; } = false;
-        public CancellationToken Token { set; get; } = default;
+        public int? TimeOut { set; get; }
+        public bool? Constraints { set; get; }
 
         public void Open()
         {

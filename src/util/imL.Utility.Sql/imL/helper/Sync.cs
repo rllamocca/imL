@@ -1,35 +1,19 @@
-﻿#if NET35 || NET40
-using imL.Contract;
-#endif
-
-#if (NETSTANDARD1_3 || NETSTANDARD1_4 || NETSTANDARD1_5 || NETSTANDARD1_6) == false
+﻿#if (NETSTANDARD1_3 || NETSTANDARD1_4 || NETSTANDARD1_5 || NETSTANDARD1_6) == false
 using System.Data;
 #endif
 
 using System;
 using System.Data.SqlClient;
 
-using imL.Contract.DB;
-using imL.Enumeration.DB;
+using imL.DB;
 
 using System.Collections.Generic;
 using System.Linq;
 
 namespace imL.Utility.Sql
 {
-    public partial class SqlHelper : IHelper
+    public partial class SqlHelper
     {
-        public IConnection Connection { get; }
-        public bool Throw { get; }
-        public IProgress<int> Progress { get; }
-
-        public SqlHelper(IConnection _conn, bool _throw = false, IProgress<int> _progress = null)
-        {
-            Connection = _conn;
-            Throw = _throw;
-            Progress = _progress;
-        }
-
         public Return Execute(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[] _pmts)
         {
             try
@@ -40,7 +24,7 @@ namespace imL.Utility.Sql
                 using (SqlCommand _cmd = new SqlCommand(_query, _conn_raw.Connection))
                 {
                     _cmd.Transaction = _conn_raw.Transaction;
-                    _cmd.CommandTimeout = Connection.TimeOut;
+                    _cmd.CommandTimeout = Connection.TimeOut ?? _cmd.CommandTimeout;
 
                     if (_pmts_raw != null)
                         _cmd.Parameters.AddRange(_pmts_raw.ToArray());
@@ -62,14 +46,18 @@ namespace imL.Utility.Sql
             }
             catch (Exception _ex)
             {
-                if (Throw)
+                if (Throw == true)
                     throw;
 
                 return new Return(false, _ex);
             }
         }
+        public Return Execute(string _query, EExecute _exe = EExecute.NonQuery)
+        {
+            return Execute(_query, _exe, null);
+        }
 
-        public Return[] Executions(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[][] _pmts)
+        public  IEnumerable<Return> Executions(string _query, EExecute _exe = EExecute.NonQuery, params IParameter[][] _pmts)
         {
             try
             {
@@ -82,7 +70,7 @@ namespace imL.Utility.Sql
                 using (SqlCommand _cmd = new SqlCommand(_query, _conn_raw.Connection))
                 {
                     _cmd.Transaction = _conn_raw.Transaction;
-                    _cmd.CommandTimeout = Connection.TimeOut;
+                    _cmd.CommandTimeout = Connection.TimeOut ?? _cmd.CommandTimeout;
                     _cmd.Parameters.AddRange(_pmts_raw.ToArray());
 
                     int _c_p = _cmd.Parameters.Count;
@@ -118,7 +106,7 @@ namespace imL.Utility.Sql
                         }
                         catch (Exception _ex)
                         {
-                            if (Throw)
+                            if (Throw == true)
                                 throw;
 
                             _returns[_r] = new Return(false, _ex);
@@ -133,11 +121,15 @@ namespace imL.Utility.Sql
             }
             catch (Exception _ex)
             {
-                if (Throw)
+                if (Throw == true)
                     throw;
 
                 return new Return[] { new Return(false, _ex) };
             }
+        }
+        public IEnumerable<Return> Executions(string _query, EExecute _exe = EExecute.NonQuery)
+        {
+            return Executions(_query, _exe, null);
         }
 
 #if (NET35_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
@@ -158,11 +150,15 @@ namespace imL.Utility.Sql
             }
             catch (Exception)
             {
-                if (Throw)
+                if (Throw == true)
                     throw;
             }
 
             return null;
+        }
+        public DataTable LoadDataTable(string _query)
+        {
+            return LoadDataTable(_query, null);
         }
         public DataSet LoadDataSet(string _query, params IParameter[] _pmts)
         {
@@ -171,7 +167,7 @@ namespace imL.Utility.Sql
                 Return _exe = Execute(_query, EExecute.Reader, _pmts);
                 _exe.TriggerErrorException();
 
-                DataSet _return = new DataSet("DataSet_0") { EnforceConstraints = Connection.Constraints };
+                DataSet _return = new DataSet("DataSet_0") { EnforceConstraints = Connection.Constraints.GetValueOrDefault() };
                 byte _n = 0;
 
                 using (SqlDataReader _read = (SqlDataReader)_exe.Result)
@@ -191,34 +187,42 @@ namespace imL.Utility.Sql
             }
             catch (Exception)
             {
-                if (Throw)
+                if (Throw == true)
                     throw;
             }
 
             return null;
         }
-        public G[] LoadData<G>(string _query, params IParameter[] _pmts)
+        public DataSet LoadDataSet(string _query)
+        {
+            return LoadDataSet(_query, null);
+        }
+        public IEnumerable<G> LoadData<G>(string _query, params IParameter[] _pmts)
         {
             try
             {
                 using (DataTable _dt = LoadDataTable(_query, _pmts))
                 {
-                    List<G> _return = new List<G>();
+                    IList<G> _return = new List<G>();
                     Setter<G> _set = new Setter<G>();
 
                     foreach (DataRow _item in _dt.Rows)
                         _return.Add(_set.Instance(_item));
 
-                    return _return.ToArray();
+                    return _return;
                 }
             }
             catch (Exception)
             {
-                if (Throw)
+                if (Throw == true)
                     throw;
             }
 
             return null;
+        }
+        public IEnumerable<G> LoadData<G>(string _query)
+        {
+            return LoadData<G>(_query, null);
         }
 
 #endif

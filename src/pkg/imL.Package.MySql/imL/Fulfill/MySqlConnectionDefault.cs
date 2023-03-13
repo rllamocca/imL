@@ -45,12 +45,8 @@ namespace imL.Package.MySql
         }
 
         //####
-        public int? TimeOut { set; get; } = 100;
-        public bool? Constraints { set; get; } = false;
-
-#if (NET35 || NET40) == false
-        public CancellationToken Token { set; get; } = default;
-#endif
+        public int? TimeOut { set; get; }
+        public bool? Constraints { set; get; }
 
         public void Open()
         {

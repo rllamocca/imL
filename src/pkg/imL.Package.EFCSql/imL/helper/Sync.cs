@@ -201,7 +201,7 @@ namespace imL.Package.EFCSql
                     foreach (DataRow _item in _dt.Rows)
                         _return.Add(_set.Instance(_item));
 
-                    return _return.ToArray();
+                    return _return;
                 }
             }
             catch (Exception)

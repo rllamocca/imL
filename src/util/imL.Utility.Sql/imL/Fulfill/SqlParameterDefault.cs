@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 
-using imL.Contract.DB;
+using imL.DB;
 
 namespace imL.Utility.Sql
 {
@@ -10,7 +10,7 @@ namespace imL.Utility.Sql
     {
         public string Affect { get; }
         public string Expression { get; }
-        public bool IsSearchCondition { get; }
+        public bool? IsSearchCondition { get; }
 
         public SqlParameter Parameter { get; }
 
