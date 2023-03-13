@@ -41,7 +41,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="System.ServiceModel.Primitives" Version="4.0.0" />
+		<PackageReference Include="System.ServiceModel.Primitives" Version="4.10.0" />
 	</ItemGroup>
 
 	<ItemGroup>
