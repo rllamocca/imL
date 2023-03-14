@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-using imL.Contract;
+using imL;
 using imL.Frotcom.Hosting.Core;
 
 namespace SAMPLE.imL.Frotcom.Hosting.Core
@@ -9,13 +9,13 @@ namespace SAMPLE.imL.Frotcom.Hosting.Core
     {
         private static MySettings? _SETTING;
 
-        public static MySettings Setting { get { lock (_LOCKED) { return _SETTING; } } }
+        public static MySettings Setting { get { lock (_LOCK) { return _SETTING; } } }
 
         public static new void Load(IAppInfo _app)
         {
             LockedHost.Load(_app);
 
-            _SETTING = JsonSerializer.Deserialize<MySettings>(File.ReadAllText(Path.Combine(MyLocked.App.Path, "settings.json")));
+            _SETTING = JsonSerializer.Deserialize<MySettings>(File.ReadAllText(Path.Combine(MyLocked.App.Base, "settings.json")));
 
             if (_SETTING == null)
                 throw new ArgumentNullException(nameof(_SETTING));

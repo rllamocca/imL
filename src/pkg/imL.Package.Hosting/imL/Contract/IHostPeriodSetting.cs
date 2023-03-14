@@ -2,7 +2,7 @@
 {
     public interface IHostPeriodSetting
     {
-        double Period { set; get; }
+        double? Period { set; get; }
         double? Delay { set; get; }
     }
 }

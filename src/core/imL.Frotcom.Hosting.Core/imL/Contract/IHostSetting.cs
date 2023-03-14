@@ -7,8 +7,5 @@ namespace imL.Frotcom.Hosting.Core
     {
         EndpointFormat Endpoint { set; get; }
         FrotcomFormat Frotcom { set; get; }
-
-        //double Period { set; get; }
-        //double Delay { set; get; }
     }
 }

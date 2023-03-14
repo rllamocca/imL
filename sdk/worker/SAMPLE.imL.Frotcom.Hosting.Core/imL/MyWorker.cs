@@ -10,10 +10,10 @@ namespace SAMPLE.imL.Frotcom.Hosting.Core
         {
             _logger?.LogInformation("Token: {p0} {p1}", _execution, _execution.Token.IsCancellationRequested);
 
-            FrotcomClient _frotcom = new(MyLocked.Http, MyLocked.Setting.Frotcom);
+            FrotcomClient _frotcom = new(MyLocked.Setting.Frotcom);
             await CoreHelperAsync.FillTokenCachedAsync(_frotcom);
-            Dough[] _doughs = await CoreHelperAsync.PreparedAsync(_frotcom, _logger);
-            _doughs = await FrotcomHelperAsync.ToPrepareAsync(_frotcom);
+            IEnumerable<Dough> _doughs = await CoreHelperAsync.PreparedAsync(_frotcom, _logger);
+            _doughs = await _frotcom.ToPrepareAsync();
 
             await Task.Delay(5000);
             _execution.Token.ThrowIfCancellationRequested();

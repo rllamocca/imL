@@ -78,7 +78,10 @@ namespace imL.Package.Hosting
         }
         public Task StartAsync(CancellationToken _ct)
         {
-            TimeSpan _period = TimeSpan.FromSeconds(_SETTING.Period);
+            if (_SETTING.Period == null || _SETTING.Period < 1)
+                throw new ArgumentOutOfRangeException(nameof(_SETTING.Period));
+
+            TimeSpan _period = TimeSpan.FromSeconds(_SETTING.Period.GetValueOrDefault());
             _LOGGER?.LogInformation("PeriodHostedService RUNNING: {_period}", _period);
             _TIMER = new Timer(DoWork, null, TimeSpan.Zero, _period);
 

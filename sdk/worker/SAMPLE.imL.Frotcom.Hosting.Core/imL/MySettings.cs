@@ -1,7 +1,7 @@
-﻿using imL.Format;
+﻿using imL;
 using imL.Frotcom.Hosting.Core;
-using imL.Rest.Frotcom;
 using imL.Package.Hosting;
+using imL.Rest.Frotcom;
 
 namespace SAMPLE.imL.Frotcom.Hosting.Core
 {
@@ -10,7 +10,7 @@ namespace SAMPLE.imL.Frotcom.Hosting.Core
         public EndpointFormat Endpoint { set; get; }
         public FrotcomFormat Frotcom { set; get; }
 
-        public double Period { set; get; }
+        public double? Period { set; get; }
         public double? Delay { set; get; }
     }
 }
