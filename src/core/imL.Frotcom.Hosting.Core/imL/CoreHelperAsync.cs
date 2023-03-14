@@ -17,28 +17,26 @@ using imL.Package.Logging;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 
-using imL.Utility;
-
 namespace imL.Frotcom.Hosting.Core
 {
     public static class CoreHelperAsync
     {
         public static async Task FillTokenFiledAsync(FrotcomClient _client, bool _throw = false)
         {
-            string _file = Path.Combine(LockedHost.App.Path, "_frotcom_token_.json");
+            string _file = Path.Combine(LockedHost.App.Base, "_frotcom_token_.json");
 
             if (File.Exists(_file) == false)
                 File.WriteAllText(_file, "{}");
 
 #if (NETSTANDARD2_0_OR_GREATER ||  NET5_0_OR_GREATER)
-            Authorize _token = JsonSerializer.Deserialize<Authorize>(File.ReadAllText(_file));
+            Authorize200 _token = JsonSerializer.Deserialize<Authorize200>(File.ReadAllText(_file));
 #else
-            Authorize _token = JsonConvert.DeserializeObject<Authorize>(File.ReadAllText(_path));
+            Authorize200 _token = JsonConvert.DeserializeObject<Authorize200>(File.ReadAllText(_file));
 #endif
 
             if (_token == null || string.IsNullOrWhiteSpace(_token.token))
             {
-                _token = await FrotcomHelperAsync.AuthorizeUserAsync(_client);
+                _token = await _client.AuthorizeUserAsync();
 
                 if (_token == null || string.IsNullOrWhiteSpace(_token.token))
                     throw new Exception("AuthorizeUser null");
@@ -49,15 +47,15 @@ namespace imL.Frotcom.Hosting.Core
                 File.WriteAllText(_file, JsonConvert.SerializeObject(_token));
 #endif
 
-                _client.Token = _token;
+                _client.Authorize = _token;
             }
             else
             {
-                Authorize _validate = await FrotcomHelperAsync.ValidateTokenAsync(_client, _token.token, _throw);
+                Authorize200 _validate = await _client.ValidateTokenAsync( _token.token, _throw);
 
                 if (_validate == null || _token.token != _validate.token)
                 {
-                    _token = await FrotcomHelperAsync.AuthorizeUserAsync(_client);
+                    _token = await _client.AuthorizeUserAsync();
 
                     if (_token == null || string.IsNullOrWhiteSpace(_token.token))
                         throw new Exception("AuthorizeUser null");
@@ -67,27 +65,27 @@ namespace imL.Frotcom.Hosting.Core
 #else
                     File.WriteAllText(_file, JsonConvert.SerializeObject(_token));
 #endif
-                    _client.Token = _token;
+                    _client.Authorize = _token;
                 }
                 else
-                    _client.Token = _validate;
+                    _client.Authorize = _validate;
             }
         }
         public static async Task FillTokenCachedAsync(FrotcomClient _client)
         {
             string _key = "_frotcom_token_";
 
-            if (LockedHost.Cache.TryGetValue(_key, out Authorize _return) == false)
+            if (LockedHost.Cache.TryGetValue(_key, out Authorize200 _return) == false)
             {
-                _return = await FrotcomHelperAsync.AuthorizeUserAsync(_client);
+                _return = await _client.AuthorizeUserAsync();
                 LockedHost.Cache.Set(_key, _return, TimeSpan.FromHours(4));
             }
 
-            _client.Token = _return;
+            _client.Authorize = _return;
         }
         public static async Task<IEnumerable<Dough>> PreparedNoStopAsync(FrotcomClient _client, ILogger _logger)
         {
-            IEnumerable<Dough> _doughs = await FrotcomHelperAsync.ToPrepareAsync(_client);
+            IEnumerable<Dough> _doughs = await _client.ToPrepareAsync();
 
             if (_doughs.IsEmpty())
             {
@@ -144,7 +142,7 @@ namespace imL.Frotcom.Hosting.Core
         }
         public static async Task<IEnumerable<Dough>> PreparedAsync(FrotcomClient _client, ILogger _logger)
         {
-            IEnumerable<Dough> _doughs = await FrotcomHelperAsync.ToPrepareAsync(_client);
+            IEnumerable<Dough> _doughs = await _client.ToPrepareAsync();
 
             if (_doughs.IsEmpty())
             {

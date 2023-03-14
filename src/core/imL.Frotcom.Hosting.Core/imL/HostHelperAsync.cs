@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-using imL.Contract;
-using imL.Enumeration.Logging;
+using imL.Logging;
 using imL.Package.Hosting;
 using imL.Package.Logging;
-using imL.Utility;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-using NLog;
 using NLog.Extensions.Hosting;
 
 namespace imL.Frotcom.Hosting.Core
@@ -29,11 +26,11 @@ namespace imL.Frotcom.Hosting.Core
             where GExecution : class, IPeriodExecution, new()
             where GWorker : class, IHostPeriodWorker
         {
-            Microsoft.Extensions.Logging.ILogger _logger = null;
+            ILogger _logger = null;
 
             try
             {
-                IHostBuilder _build = Host.CreateDefaultBuilder(_info.Args)
+                IHostBuilder _build = Host.CreateDefaultBuilder(_info.args)
                     .ConfigureServices(_ac =>
                     {
                         _ac.AddHostedService<PeriodHostedService<GExecution>>();
@@ -46,8 +43,7 @@ namespace imL.Frotcom.Hosting.Core
 
                 if (_info.InContainer == false)
                 {
-                    LogManager.AutoShutdown = true;
-                    LogManager.Configuration.Variables["_BASEDIR_"] = _info.PathLog;
+                    NLog.LogManager.AutoShutdown = true;
                     _build.UseNLog();
                 }
 
@@ -64,7 +60,7 @@ namespace imL.Frotcom.Hosting.Core
                 if (_logger == null)
                 {
                     Console.WriteLine(_msg);
-                    ConsoleHelper.InnerException(_ex);
+                    ConsoleHelper.WriteInnerException(_ex);
                 }
                 else
                 {
@@ -77,7 +73,7 @@ namespace imL.Frotcom.Hosting.Core
             finally
             {
                 if (_info.InContainer == false)
-                    LogManager.Shutdown();
+                    NLog.LogManager.Shutdown();
             }
         }
     }
