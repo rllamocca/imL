@@ -5,7 +5,7 @@ using imL.Rest.Frotcom;
 
 namespace SAMPLE.imL.Frotcom.Hosting.Core
 {
-    internal class MySettings : IHostSetting, IHostPeriodSetting
+    internal class MySetting : IHostSetting, IHostPeriodSetting
     {
         public EndpointFormat Endpoint { set; get; }
         public FrotcomFormat Frotcom { set; get; }
