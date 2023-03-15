@@ -62,7 +62,6 @@ namespace SAMPLE.imL.Frotcom.Hosting.Core
 
             if (_managed)
             {
-
             }
 
             _DISPOSED = true;

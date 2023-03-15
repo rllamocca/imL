@@ -1,18 +1,16 @@
 ﻿#if (NETSTANDARD2_0_OR_GREATER ||  NET5_0_OR_GREATER)
-using System.Text.Json;
 #else
 using Newtonsoft.Json;
 #endif
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
+using imL.Package.Logging;
 using imL.Rest.Frotcom;
 using imL.Rest.Frotcom.Schema;
-using imL.Package.Logging;
 
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
@@ -81,7 +79,11 @@ namespace imL.Frotcom.Hosting.Core
             if (_CACHE.TryGetValue(_key, out Authorize200 _return) == false)
             {
                 _return = await _client.AuthorizeUserAsync();
-                _CACHE.Set(_key, _return, TimeSpan.FromHours(4));
+
+                if (_client.Format.LifeTime == null)
+                    _client.Format.LifeTime = 4;
+
+                _CACHE.Set(_key, _return, TimeSpan.FromHours(_client.Format.LifeTime.GetValueOrDefault()));
             }
 
             return _return;
