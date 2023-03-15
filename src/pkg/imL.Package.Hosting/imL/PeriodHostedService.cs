@@ -47,11 +47,11 @@ namespace imL.Package.Hosting
             {
                 using (IPeriodExecution _using = new GExecution())
                 {
-                    CancellationTokenSource _cts = (_SETTING.Delay == 0) ? new CancellationTokenSource() : new CancellationTokenSource(TimeSpan.FromSeconds(_SETTING.Delay.GetValueOrDefault()));
+                    CancellationTokenSource _cts = (_SETTING.TimeOut == null) ? new CancellationTokenSource() : new CancellationTokenSource(TimeSpan.FromSeconds(_SETTING.TimeOut.GetValueOrDefault()));
                     _using.PopulateWithSomething(_count, _INFO, _cts.Token);
                     _using.AfterPopulate();
                     _LOGGER?.LogInformation("WORKING DO: {_p0} <<<<", _using.WorkingDoInfo());
-                    await _WORKER?.DoWork(_using, _LOGGER);
+                    await _WORKER?.DoWork(_using, _SETTING, _LOGGER);
                     _LOGGER?.LogInformation(">>>> STANDING WORK: {_p0}", _using.Guid);
                 }
             }

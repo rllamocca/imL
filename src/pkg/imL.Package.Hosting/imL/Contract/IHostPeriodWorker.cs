@@ -6,6 +6,6 @@ namespace imL.Package.Hosting
 {
     public interface IHostPeriodWorker
     {
-        Task DoWork(IPeriodExecution _execution, ILogger _logger);
+        Task DoWork(IPeriodExecution _execution, IHostPeriodSetting _settings, ILogger _logger);
     }
 }

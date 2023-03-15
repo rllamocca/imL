@@ -4,5 +4,6 @@
     {
         double? Period { set; get; }
         double? Delay { set; get; }
+        double? TimeOut { set; get; }
     }
 }

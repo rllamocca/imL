@@ -6,7 +6,8 @@ namespace SAMPLE.imL.Frotcom.Hosting.Core
 {
     internal class MyWorker : IHostPeriodWorker
     {
-        public async Task DoWork(IPeriodExecution _execution, IHostSetting _settings, ILogger _logger)
+        public async Task DoWork(IPeriodExecution _execution, IHostPeriodSetting _settings, ILogger _logger)
+        //, IHostSetting _settings
         {
             _logger?.LogInformation("Token: {p0} {p1}", _execution, _execution.Token.IsCancellationRequested);
 
@@ -19,7 +20,7 @@ namespace SAMPLE.imL.Frotcom.Hosting.Core
             await Task.Delay(5000);
             _execution.Token.ThrowIfCancellationRequested();
 
-            _logger?.LogInformation("Token Delay: {p0} {p1}", _execution, _execution.Token.IsCancellationRequested);
+            _logger?.LogInformation("Token: {p0} {p1}", _execution, _execution.Token.IsCancellationRequested);
         }
     }
 }
