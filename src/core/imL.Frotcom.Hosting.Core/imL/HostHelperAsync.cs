@@ -37,10 +37,10 @@ namespace imL.Frotcom.Hosting.Core
                         _ac.AddScoped<IHostPeriodWorker, GWorker>();
                         _ac.AddSingleton(_s => _setting);
                         _ac.AddSingleton(_s => _info);
-                    });
+                    })
+                    .UseConsoleLifetime();
 
-                _build.UseConsoleLifetime()
-                    .UseSimpleLogging(_formatter);
+                _build.UseSimpleLogging(_formatter);
 
                 if (_info.InContainer != true)
                 {
