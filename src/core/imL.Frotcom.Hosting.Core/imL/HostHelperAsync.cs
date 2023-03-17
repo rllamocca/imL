@@ -37,14 +37,16 @@ namespace imL.Frotcom.Hosting.Core
                         _ac.AddScoped<IHostPeriodWorker, GWorker>();
                         _ac.AddSingleton(_s => _setting);
                         _ac.AddSingleton(_s => _info);
-                    })
-                    .UseConsoleLifetime()
+                    });
+
+                _build.UseConsoleLifetime()
                     .UseSimpleLogging(_formatter);
 
-                if (_info.InContainer == false)
+                if (_info.InContainer != true)
                 {
-                    NLog.LogManager.AutoShutdown = true;
                     _build.UseNLog();
+
+                    NLog.LogManager.AutoShutdown = true;
                 }
 
                 IHost _host = _build.Build();
@@ -72,7 +74,7 @@ namespace imL.Frotcom.Hosting.Core
             }
             finally
             {
-                if (_info.InContainer == false)
+                if (_info.InContainer != true)
                     NLog.LogManager.Shutdown();
             }
         }

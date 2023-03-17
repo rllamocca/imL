@@ -24,11 +24,4 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\src\core\imL.Frotcom.Hosting.Core\imL.Frotcom.Hosting.Core.csproj" />
 	</ItemGroup>
-
-	<ItemGroup>
-		<None Update="NLog.xsd">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<SubType>Designer</SubType>
-		</None>
-	</ItemGroup>
 </Project>
