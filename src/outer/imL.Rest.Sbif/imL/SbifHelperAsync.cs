@@ -18,7 +18,7 @@ namespace imL.Rest.Sbif
                 throw new ArgumentOutOfRangeException(nameof(_resource));
         }
 
-        static async Task<IEnumerable<CurrencyIndex>> ReferAsync(SbifClient _client, string _uri)
+        static async Task<IEnumerable<CurrencyIndex>> ReferAsync(SBIFClient _client, string _uri)
         {
             switch (SbifHelper._RESOURCE)
             {
@@ -52,7 +52,7 @@ namespace imL.Rest.Sbif
             return null;
         }
 
-        public static async Task<IEnumerable<CurrencyIndex>> GetPreviousYearAsync(SbifClient _client, DateTime? _date = null)
+        public static async Task<IEnumerable<CurrencyIndex>> GetPreviousYearAsync(SBIFClient _client, DateTime? _date = null)
         {
             if (_date == null)
                 _date = DateTime.Now.AddYears(1);
@@ -66,7 +66,7 @@ namespace imL.Rest.Sbif
 
             return await SbifHelperAsync.ReferAsync(_client, _uri);
         }
-        public static async Task<IEnumerable<CurrencyIndex>> GetPreviousMonthAsync(SbifClient _client, DateTime? _date = null)
+        public static async Task<IEnumerable<CurrencyIndex>> GetPreviousMonthAsync(SBIFClient _client, DateTime? _date = null)
         {
             if (_date == null)
                 _date = DateTime.Now.AddMonths(1);
@@ -81,7 +81,7 @@ namespace imL.Rest.Sbif
 
             return await SbifHelperAsync.ReferAsync(_client, _uri);
         }
-        public static async Task<IEnumerable<CurrencyIndex>> GetPreviousAsync(SbifClient _client, DateTime? _date = null)
+        public static async Task<IEnumerable<CurrencyIndex>> GetPreviousAsync(SBIFClient _client, DateTime? _date = null)
         {
             if (_date == null)
                 _date = DateTime.Now.AddDays(1);
@@ -98,7 +98,7 @@ namespace imL.Rest.Sbif
             return await SbifHelperAsync.ReferAsync(_client, _uri);
         }
 
-        public static async Task<IEnumerable<CurrencyIndex>> GetYearAsync(SbifClient _client, DateTime? _date = null)
+        public static async Task<IEnumerable<CurrencyIndex>> GetYearAsync(SBIFClient _client, DateTime? _date = null)
         {
             if (_date == null)
                 _date = DateTime.Now;
@@ -112,7 +112,7 @@ namespace imL.Rest.Sbif
 
             return await SbifHelperAsync.ReferAsync(_client, _uri);
         }
-        public static async Task<IEnumerable<CurrencyIndex>> GetMonthAsync(SbifClient _client, DateTime? _date = null)
+        public static async Task<IEnumerable<CurrencyIndex>> GetMonthAsync(SBIFClient _client, DateTime? _date = null)
         {
             if (_date == null)
                 _date = DateTime.Now;
@@ -127,7 +127,7 @@ namespace imL.Rest.Sbif
 
             return await SbifHelperAsync.ReferAsync(_client, _uri);
         }
-        public static async Task<IEnumerable<CurrencyIndex>> GetAsync(SbifClient _client, DateTime? _date = null)
+        public static async Task<IEnumerable<CurrencyIndex>> GetAsync(SBIFClient _client, DateTime? _date = null)
         {
             if (_date == null)
                 _date = DateTime.Now;
@@ -144,7 +144,7 @@ namespace imL.Rest.Sbif
             return await SbifHelperAsync.ReferAsync(_client, _uri);
         }
 
-        public static async Task<IEnumerable<CurrencyIndex>> GetLaterYearAsync(SbifClient _client, DateTime? _date = null)
+        public static async Task<IEnumerable<CurrencyIndex>> GetLaterYearAsync(SBIFClient _client, DateTime? _date = null)
         {
             if (_date == null)
                 _date = DateTime.Now.AddYears(-1);
@@ -158,7 +158,7 @@ namespace imL.Rest.Sbif
 
             return await SbifHelperAsync.ReferAsync(_client, _uri);
         }
-        public static async Task<IEnumerable<CurrencyIndex>> GetLaterMonthAsync(SbifClient _client, DateTime? _date = null)
+        public static async Task<IEnumerable<CurrencyIndex>> GetLaterMonthAsync(SBIFClient _client, DateTime? _date = null)
         {
             if (_date == null)
                 _date = DateTime.Now.AddMonths(-1);
@@ -173,7 +173,7 @@ namespace imL.Rest.Sbif
 
             return await SbifHelperAsync.ReferAsync(_client, _uri);
         }
-        public static async Task<IEnumerable<CurrencyIndex>> GetLaterAsync(SbifClient _client, DateTime? _date = null)
+        public static async Task<IEnumerable<CurrencyIndex>> GetLaterAsync(SBIFClient _client, DateTime? _date = null)
         {
             if (_date == null)
                 _date = DateTime.Now.AddDays(-1);
@@ -190,7 +190,7 @@ namespace imL.Rest.Sbif
             return await SbifHelperAsync.ReferAsync(_client, _uri);
         }
 
-        public static async Task<IEnumerable<CurrencyIndex>> GetPeriodYearAsync(SbifClient _client, DateTime? _begin = null, DateTime? _end = null)
+        public static async Task<IEnumerable<CurrencyIndex>> GetPeriodYearAsync(SBIFClient _client, DateTime? _begin = null, DateTime? _end = null)
         {
             DateTime _now = DateTime.Now;
 
@@ -210,7 +210,7 @@ namespace imL.Rest.Sbif
 
             return await SbifHelperAsync.ReferAsync(_client, _uri);
         }
-        public static async Task<IEnumerable<CurrencyIndex>> GetPeriodMonthAsync(SbifClient _client, DateTime? _begin = null, DateTime? _end = null)
+        public static async Task<IEnumerable<CurrencyIndex>> GetPeriodMonthAsync(SBIFClient _client, DateTime? _begin = null, DateTime? _end = null)
         {
             DateTime _now = DateTime.Now;
 
@@ -232,7 +232,7 @@ namespace imL.Rest.Sbif
 
             return await SbifHelperAsync.ReferAsync(_client, _uri);
         }
-        public static async Task<IEnumerable<CurrencyIndex>> GetPeriodAsync(SbifClient _client, DateTime? _begin = null, DateTime? _end = null)
+        public static async Task<IEnumerable<CurrencyIndex>> GetPeriodAsync(SBIFClient _client, DateTime? _begin = null, DateTime? _end = null)
         {
             DateTime _now = DateTime.Now;
 
