@@ -7,7 +7,7 @@ using imL.Utility.Http;
 
 namespace imL.Rest.Google
 {
-    public partial class GoogleClient
+    public partial class GoogleMapsClient
     {
         public async Task<Geocoding200> GetGeocodeAsync(decimal _lat, decimal _lng, CancellationToken _ct = default)
         {
@@ -18,7 +18,7 @@ namespace imL.Rest.Google
                 Convert.ToString(_lng, ReadOnly._CULTURE_INVARIANT)
                 );
 
-            return await _MAPS_CLIENT.GetJsonAsync<Geocoding200>(_uri, true, _ct);
+            return await _CLIENT.GetJsonAsync<Geocoding200>(_uri, true, _ct);
         }
     }
 }

@@ -5,19 +5,19 @@ using imL.Utility.Http;
 
 namespace imL.Rest.Google
 {
-    public partial class GoogleClient
+    public partial class GoogleMapsClient
     {
-        static readonly HttpClient _MAPS_CLIENT;
-        static GoogleClient _SINGLETON;
+        static readonly HttpClient _CLIENT;
+        static GoogleMapsClient _SINGLETON;
 
         public GoogleFormat Format { get; }
 
-        static GoogleClient()
+        static GoogleMapsClient()
         {
-            _MAPS_CLIENT = Factory.HttpJsonClient("https://maps.googleapis.com/maps");
+            _CLIENT = Factory.HttpJsonClient("https://maps.googleapis.com/maps");
         }
 
-        private GoogleClient(GoogleFormat _format)
+        private GoogleMapsClient(GoogleFormat _format)
         {
             Format = _format;
 
@@ -25,14 +25,14 @@ namespace imL.Rest.Google
             Format.Key_maps = Format.Key_maps ?? Format.Key;
 
             if (Format.URI_maps != null)
-                _MAPS_CLIENT.BaseAddress = new Uri(Format.URI_maps);
+                _CLIENT.BaseAddress = new Uri(Format.URI_maps);
         }
 
-        public static GoogleClient GetSingleton(GoogleFormat _format)
+        public static GoogleMapsClient GetSingleton(GoogleFormat _format)
         {
             if (_SINGLETON == null)
             {
-                _SINGLETON = new GoogleClient(_format);
+                _SINGLETON = new GoogleMapsClient(_format);
 
                 return _SINGLETON;
             }
@@ -41,7 +41,7 @@ namespace imL.Rest.Google
         }
         public static void Dispose()
         {
-            _MAPS_CLIENT?.Dispose();
+            _CLIENT?.Dispose();
         }
     }
 }
