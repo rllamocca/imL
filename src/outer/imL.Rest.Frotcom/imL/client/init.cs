@@ -9,6 +9,7 @@ namespace imL.Rest.Frotcom
     public partial class FrotcomClient
     {
         static readonly HttpClient _CLIENT;
+        static readonly string _PATH = "v2/";
         static FrotcomClient _SINGLETON;
 
         public FrotcomFormat Format { get; }
