@@ -38,5 +38,9 @@ namespace imL.Rest.Frotcom
 
             return _SINGLETON;
         }
+        public static void Dispose()
+        {
+            _CLIENT?.Dispose();
+        }
     }
 }

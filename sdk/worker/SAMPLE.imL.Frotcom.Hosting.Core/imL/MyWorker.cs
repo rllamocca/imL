@@ -11,8 +11,8 @@ namespace SAMPLE.imL.Frotcom.Hosting.Core
         {
             _logger?.LogInformation("Token: {p0} {p1}", _execution, _execution.Token.IsCancellationRequested);
 
-            //MySetting _setting = (MySetting)_settings;
-            //FrotcomClient _frotcom = FrotcomClient.GetSingleton(_setting.Frotcom);
+            MySetting _setting = (MySetting)_settings;
+            FrotcomClient _frotcom = FrotcomClient.GetSingleton(_setting.Frotcom);
             //_frotcom.Authorize = await CoreHelperAsync.FillTokenCachedAsync(_frotcom);
 
             //IEnumerable<Vehicle200> _vehicles = await _frotcom.GetVehiclesAsync();
