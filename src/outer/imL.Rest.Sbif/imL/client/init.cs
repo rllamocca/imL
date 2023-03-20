@@ -8,7 +8,7 @@ namespace imL.Rest.Sbif
 {
     public partial class SBIFClient
     {
-        
+
         static readonly HttpClient _CLIENT;
         static readonly CultureInfo _CULTURE = CultureInfo.GetCultureInfo("es-cl");
         static readonly string _ISO_4217 = (new RegionInfo(_CULTURE.LCID)).ISOCurrencySymbol;
@@ -19,10 +19,10 @@ namespace imL.Rest.Sbif
 
         static SBIFClient()
         {
-            _CLIENT = Factory.HttpJsonClient("https://v2api.frotcom.com");
+            _CLIENT = Factory.HttpJsonClient("https://api.sbif.cl");
         }
 
-        private SBIFClient(SBIFFormat _format, EResource _resource = EResource.UF)
+        private SBIFClient(SBIFFormat _format)
         {
             Format = _format;
 
@@ -30,11 +30,11 @@ namespace imL.Rest.Sbif
                 _CLIENT.BaseAddress = new Uri(Format.URI);
         }
 
-        public static SBIFClient GetSingleton(SBIFFormat _format, EResource _resource = EResource.UF)
+        public static SBIFClient GetSingleton(SBIFFormat _format)
         {
             if (_SINGLETON == null)
             {
-                _SINGLETON = new SBIFClient(_format, _resource);
+                _SINGLETON = new SBIFClient(_format);
 
                 return _SINGLETON;
             }
