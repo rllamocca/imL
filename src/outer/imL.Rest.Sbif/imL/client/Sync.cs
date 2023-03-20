@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 
 using imL.Rest.Sbif.Schema;
 
 namespace imL.Rest.Sbif
 {
-    public static class SbifHelper
+    public partial class SBIFClient
     {
-        static readonly CultureInfo _CULTURE = CultureInfo.GetCultureInfo("es-cl");
-        static readonly string _ISO_4217 = (new RegionInfo(_CULTURE.LCID)).ISOCurrencySymbol;
-        
-        internal static EResource _RESOURCE = EResource.UF;
-
-        public static IEnumerable<CurrencyIndex> Factory(IEnumerable<InternalIndex> _from)
+        public static IEnumerable<CurrencyIndex> FactoryISync(IEnumerable<InternalIndex> _from)
         {
             foreach (InternalIndex _item in _from)
             {

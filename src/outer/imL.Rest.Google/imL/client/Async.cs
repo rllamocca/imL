@@ -9,7 +9,7 @@ namespace imL.Rest.Google
 {
     public partial class GoogleClient
     {
-        public async Task<Geocoding200> GetGeocodingAsync(decimal _lat, decimal _lng, CancellationToken _ct = default)
+        public async Task<Geocoding200> GetGeocodeAsync(decimal _lat, decimal _lng, CancellationToken _ct = default)
         {
             string _uri = "api/geocode/json?key={0}&latlng={1},{2}";
             _uri = string.Format(_uri,
