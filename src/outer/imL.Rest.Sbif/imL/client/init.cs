@@ -12,14 +12,13 @@ namespace imL.Rest.Sbif
         static readonly HttpClient _CLIENT;
         static readonly CultureInfo _CULTURE = CultureInfo.GetCultureInfo("es-cl");
         static readonly string _ISO_4217 = (new RegionInfo(_CULTURE.LCID)).ISOCurrencySymbol;
-        static readonly string _PATH = "api-sbifv3/recursos_api/";
         static SBIFClient _SINGLETON;
 
         public SBIFFormat Format { get; }
 
         static SBIFClient()
         {
-            _CLIENT = Factory.HttpJsonClient("https://api.sbif.cl");
+            _CLIENT = Factory.HttpJsonClient("https://api.sbif.cl/api-sbifv3/recursos_api/");
         }
 
         private SBIFClient(SBIFFormat _format)
@@ -40,6 +39,10 @@ namespace imL.Rest.Sbif
             }
 
             return _SINGLETON;
+        }
+        public static Uri BaseAddress()
+        {
+            return _CLIENT?.BaseAddress;
         }
         public static void Dispose()
         {

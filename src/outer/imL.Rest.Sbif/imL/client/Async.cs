@@ -49,7 +49,7 @@ namespace imL.Rest.Sbif
             if (_date == null)
                 _date = DateTime.Now.AddYears(1);
 
-            string _uri = _PATH + "{0}/anteriores/{2}?formato=json&apikey={1}";
+            string _uri = "{0}/anteriores/{2}?formato=json&apikey={1}";
             _uri = string.Format(_uri,
                 Convert.ToString(_rs).ToLower(),
                 Format.ApiKey,
@@ -63,7 +63,7 @@ namespace imL.Rest.Sbif
             if (_date == null)
                 _date = DateTime.Now.AddMonths(1);
 
-            string _uri = _PATH + "{0}/anteriores/{2}/{3}?formato=json&apikey={1}";
+            string _uri = "{0}/anteriores/{2}/{3}?formato=json&apikey={1}";
             _uri = string.Format(_uri,
                 Convert.ToString(_rs).ToLower(),
                 Format.ApiKey,
@@ -78,7 +78,7 @@ namespace imL.Rest.Sbif
             if (_date == null)
                 _date = DateTime.Now.AddDays(1);
 
-            string _uri = _PATH + "{0}/anteriores/{2}/{3}/dias/{4}?formato=json&apikey={1}";
+            string _uri = "{0}/anteriores/{2}/{3}/dias/{4}?formato=json&apikey={1}";
             _uri = string.Format(_uri,
                 Convert.ToString(_rs).ToLower(),
                 Format.ApiKey,
@@ -95,7 +95,7 @@ namespace imL.Rest.Sbif
             if (_date == null)
                 _date = DateTime.Now;
 
-            string _uri = _PATH + "{0}/{2}?formato=json&apikey={1}";
+            string _uri = "{0}/{2}?formato=json&apikey={1}";
             _uri = string.Format(_uri,
                 Convert.ToString(_rs).ToLower(),
                 Format.ApiKey,
@@ -109,7 +109,7 @@ namespace imL.Rest.Sbif
             if (_date == null)
                 _date = DateTime.Now;
 
-            string _uri = _PATH + "{0}/{2}/{3}?formato=json&apikey={1}";
+            string _uri = "{0}/{2}/{3}?formato=json&apikey={1}";
             _uri = string.Format(_uri,
                 Convert.ToString(_rs).ToLower(),
                 Format.ApiKey,
@@ -124,7 +124,7 @@ namespace imL.Rest.Sbif
             if (_date == null)
                 _date = DateTime.Now;
 
-            string _uri = _PATH + "{0}/{2}/{3}/dias/{4}?formato=json&apikey={1}";
+            string _uri = "{0}/{2}/{3}/dias/{4}?formato=json&apikey={1}";
             _uri = string.Format(_uri,
                 Convert.ToString(_rs).ToLower(),
                 Format.ApiKey,
@@ -141,7 +141,7 @@ namespace imL.Rest.Sbif
             if (_date == null)
                 _date = DateTime.Now.AddYears(-1);
 
-            string _uri = _PATH + "{0}/posteriores/{2}?formato=json&apikey={1}";
+            string _uri = "{0}/posteriores/{2}?formato=json&apikey={1}";
             _uri = string.Format(_uri,
                 Convert.ToString(_rs).ToLower(),
                 Format.ApiKey,
@@ -155,7 +155,7 @@ namespace imL.Rest.Sbif
             if (_date == null)
                 _date = DateTime.Now.AddMonths(-1);
 
-            string _uri = _PATH + "{0}/posteriores/{2}/{3}?formato=json&apikey={1}";
+            string _uri = "{0}/posteriores/{2}/{3}?formato=json&apikey={1}";
             _uri = string.Format(_uri,
                 Convert.ToString(_rs).ToLower(),
                 Format.ApiKey,
@@ -170,7 +170,7 @@ namespace imL.Rest.Sbif
             if (_date == null)
                 _date = DateTime.Now.AddDays(-1);
 
-            string _uri = _PATH + "{0}/posteriores/{2}/{3}/dias/{4}?formato=json&apikey={1}";
+            string _uri = "{0}/posteriores/{2}/{3}/dias/{4}?formato=json&apikey={1}";
             _uri = string.Format(_uri,
                 Convert.ToString(_rs).ToLower(),
                 Format.ApiKey,
@@ -192,7 +192,7 @@ namespace imL.Rest.Sbif
             if (_end == null)
                 _end = _now.AddYears(1);
 
-            string _uri = _PATH + "{0}/periodo/{2}/{3}?formato=json&apikey={1}";
+            string _uri = "{0}/periodo/{2}/{3}?formato=json&apikey={1}";
             _uri = string.Format(_uri,
                 Convert.ToString(_rs).ToLower(),
                 Format.ApiKey,
@@ -212,7 +212,7 @@ namespace imL.Rest.Sbif
             if (_end == null)
                 _end = _now.AddMonths(1);
 
-            string _uri = _PATH + "{0}/periodo/{2}/{3}/{4}/{5}?formato=json&apikey={1}";
+            string _uri = "{0}/periodo/{2}/{3}/{4}/{5}?formato=json&apikey={1}";
             _uri = string.Format(_uri,
                 Convert.ToString(_rs).ToLower(),
                 Format.ApiKey,
@@ -234,7 +234,7 @@ namespace imL.Rest.Sbif
             if (_end == null)
                 _end = _now.AddDays(1);
 
-            string _uri = _PATH + "{0}/periodo/{2}/{3}/dias_i/{4}/{5}/{6}/dias_f/{7}?formato=json&apikey={1}";
+            string _uri = "{0}/periodo/{2}/{3}/dias_i/{4}/{5}/{6}/dias_f/{7}?formato=json&apikey={1}";
             _uri = string.Format(_uri,
                 Convert.ToString(_rs).ToLower(),
                 Format.ApiKey,

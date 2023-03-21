@@ -8,14 +8,13 @@ namespace imL.Rest.Google
     public partial class GoogleMapsClient
     {
         static readonly HttpClient _CLIENT;
-        static readonly string _PATH = "maps/api/";
         static GoogleMapsClient _SINGLETON;
 
         public GoogleFormat Format { get; }
 
         static GoogleMapsClient()
         {
-            _CLIENT = Factory.HttpJsonClient("https://maps.googleapis.com");
+            _CLIENT = Factory.HttpJsonClient("https://maps.googleapis.com/maps/api/");
         }
 
         private GoogleMapsClient(GoogleFormat _format)
@@ -39,6 +38,10 @@ namespace imL.Rest.Google
             }
 
             return _SINGLETON;
+        }
+        public static Uri BaseAddress()
+        {
+            return _CLIENT?.BaseAddress;
         }
         public static void Dispose()
         {

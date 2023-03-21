@@ -9,7 +9,6 @@ namespace imL.Rest.Frotcom
     public partial class FrotcomClient
     {
         static readonly HttpClient _CLIENT;
-        static readonly string _PATH = "v2/";
         static FrotcomClient _SINGLETON;
 
         public FrotcomFormat Format { get; }
@@ -17,7 +16,7 @@ namespace imL.Rest.Frotcom
 
         static FrotcomClient()
         {
-            _CLIENT = Factory.HttpJsonClient("https://v2api.frotcom.com");
+            _CLIENT = Factory.HttpJsonClient("https://v2api.frotcom.com/v2/");
         }
 
         private FrotcomClient(FrotcomFormat _format)
@@ -38,6 +37,10 @@ namespace imL.Rest.Frotcom
             }
 
             return _SINGLETON;
+        }
+        public static Uri BaseAddress()
+        {
+            return _CLIENT?.BaseAddress;
         }
         public static void Dispose()
         {
