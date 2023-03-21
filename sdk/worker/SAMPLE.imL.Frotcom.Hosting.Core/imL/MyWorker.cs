@@ -22,6 +22,7 @@ namespace SAMPLE.imL.Frotcom.Hosting.Core
             //_logger?.LogInformation("Last: {p0}", _vehicles.Last().licensePlate);
 
             _logger?.LogInformation("HI 5");
+            _logger?.LogInformation("{p0}", FrotcomClient.GetBaseAddress());
 
             //IEnumerable<Dough> _doughs = await CoreHelperAsync.PreparedAsync(_frotcom, _logger);
             //_doughs = await _frotcom.ToPrepareAsync();

@@ -39,7 +39,7 @@ namespace imL.Rest.Google
 
             return _SINGLETON;
         }
-        public static Uri BaseAddress()
+        public static Uri GetBaseAddress()
         {
             return _CLIENT?.BaseAddress;
         }
