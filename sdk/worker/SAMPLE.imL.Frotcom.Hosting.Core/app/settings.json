@@ -3,7 +3,7 @@
     "Endpoint": null
   },
   "Frotcom": {
-    "URI": "http://v2api.frotcom.com",
+    "URI": null,
     "User": {
       "provider": "thirdparty",
       "username": null,

@@ -13,16 +13,16 @@ namespace SAMPLE.imL.Frotcom.Hosting.Core
 
             MySetting _setting = (MySetting)_settings;
             FrotcomClient _frotcom = FrotcomClient.GetSingleton(_setting.Frotcom);
-            //_frotcom.Authorize = await CoreHelperAsync.FillTokenCachedAsync(_frotcom);
-
-            //IEnumerable<Vehicle200> _vehicles = await _frotcom.GetVehiclesAsync();
-
-            //_logger?.LogInformation("Count: {p0}", _vehicles.Count());
-            //_logger?.LogInformation("First: {p0}", _vehicles.First().licensePlate);
-            //_logger?.LogInformation("Last: {p0}", _vehicles.Last().licensePlate);
 
             _logger?.LogInformation("HI 5");
             _logger?.LogInformation("{p0}", FrotcomClient.GetBaseAddress());
+
+            _frotcom.Authorize = await CoreHelperAsync.FillTokenCachedAsync(_frotcom);
+
+            IEnumerable<Vehicle200> _vehicles = await _frotcom.GetVehiclesAsync();
+            _logger?.LogInformation("Count: {p0}", _vehicles.Count());
+            _logger?.LogInformation("First: {p0}", _vehicles.First().licensePlate);
+            _logger?.LogInformation("Last: {p0}", _vehicles.Last().licensePlate);
 
             //IEnumerable<Dough> _doughs = await CoreHelperAsync.PreparedAsync(_frotcom, _logger);
             //_doughs = await _frotcom.ToPrepareAsync();
