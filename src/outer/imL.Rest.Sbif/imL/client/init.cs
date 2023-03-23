@@ -4,7 +4,7 @@ using System.Net.Http;
 
 using imL.Utility.Http;
 
-namespace imL.Rest.Sbif
+namespace imL.Rest.SBIF
 {
     public partial class SBIFClient
     {

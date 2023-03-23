@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace imL.Rest.Sbif
+namespace imL.Rest.SBIF
 {
     public static class CurrencyIndexExtension
     {

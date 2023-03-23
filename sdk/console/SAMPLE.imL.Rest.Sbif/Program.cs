@@ -1,16 +1,13 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using System.Net;
 
-using imL.Rest.Sbif;
+using imL.Rest.SBIF;
 
-SbifFormat _format = new();
-_format.URI = "https://api.sbif.cl";
+var _format = new SBIFFormat();
+_format.URI = "";
 _format.ApiKey = "";
-HttpClient _http = new(new HttpClientHandler() { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate });
-SbifClient _client = new(_http, _format);
+var _client = SBIFClient.GetSingleton(_format);
 
-//new SbifHelperAsync(EFinancialIndicator.Dolar);
-CurrencyIndex[] _indices = await SbifHelperAsync.GetLaterMonthAsync(_client);
+var _indices = await _client.GetLaterMonthAsync(EResource.UF);
 
-foreach (CurrencyIndex _item in _indices)
+foreach (var _item in _indices)
     Console.WriteLine("{0} : {1}", _item.Date.ToLocalTime().ToShortDateString(), _item.Value);

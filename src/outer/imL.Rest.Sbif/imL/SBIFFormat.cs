@@ -1,4 +1,4 @@
-﻿namespace imL.Rest.Sbif
+﻿namespace imL.Rest.SBIF
 {
     public class SBIFFormat
     {

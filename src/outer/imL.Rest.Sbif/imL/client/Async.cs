@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using imL.Rest.Sbif.Schema;
+using imL.Rest.SBIF.Schema;
 
 using imL.Utility.Http;
 
-namespace imL.Rest.Sbif
+namespace imL.Rest.SBIF
 {
     public partial class SBIFClient
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using imL.Rest.Sbif.Schema;
+using imL.Rest.SBIF.Schema;
 
-namespace imL.Rest.Sbif
+namespace imL.Rest.SBIF
 {
     public partial class SBIFClient
     {
