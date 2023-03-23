@@ -3,16 +3,16 @@ using imL.Rest.Frotcom;
 
 FrotcomFormat _format = new()
 {
-    //URI = "http://v2api.frotcom.com",
+    URI = null,
     User = new()
     {
         provider = "thirdparty",
-        username = "LrEPRefXyIv7Xzf",
-        password = "AuxyD3xShPfLqA1f3GF9YjQP21tG"
+        username = null,
+        password = null
     }
 };
 
-FrotcomClient _client = new(_format);
+var _client = FrotcomClient.GetSingleton(_format);
 
 _client.Authorize = await _client.AuthorizeUserAsync();
 Console.WriteLine(_client.Authorize.token);
@@ -20,3 +20,5 @@ Console.WriteLine(_client.Authorize.token);
 var _vehicles = await _client.GetVehiclesAsync();
 foreach (var _item in _vehicles)
     Console.WriteLine("{0} {1}", _item.licensePlate, _item.lastCommunication);
+
+FrotcomClient.Dispose();
