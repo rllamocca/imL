@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 
 using imL.JavaScript.ChartJS;
-using imL.Utility;
+using imL;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
