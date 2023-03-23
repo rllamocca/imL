@@ -1,8 +1,7 @@
 ﻿using System;
 using System.IO;
 
-using imL.Format;
-using imL.Utility;
+using imL;
 
 namespace SAMPLE.FTP.imL.Core
 {

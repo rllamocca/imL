@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using System;
 
-using imL.Format;
+using imL;
 
 namespace SAMPLE.FTP.imL.Core
 {
