@@ -1,7 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
+
 using System.Net;
 
-using imL.Enumeration.Http;
+using imL.Http;
 using imL.Rest.InsurDesign;
 using imL.Rest.InsurDesign.Schema;
 using imL.Utility.Http;
@@ -16,7 +17,7 @@ HttpClient _http = new(new HttpClientHandler() { AutomaticDecompression = Decomp
 InsurDesignClient _client = new(_http, _format);
 Login _token = await InsurDesignHelperAsync.PostLoginAsync(_client);
 _http.DefaultRequestHeaders.Authorization = HttpHelperAsync.Authentication(EAuthentication.Token, _token.token);
-Beneficiary[] _bens = await InsurDesignHelperAsync.GetBeneficiarioAsync(_client);
+IEnumerable<Beneficiary> _bens = await InsurDesignHelperAsync.GetBeneficiarioAsync(_client);
 
 foreach (Beneficiary _item in _bens)
     Console.WriteLine(_item.uuid);

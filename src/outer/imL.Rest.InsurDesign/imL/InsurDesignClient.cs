@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 
-using imL.Enumeration.Http;
+using imL.Http;
 using imL.Rest.InsurDesign.Schema;
 using imL.Utility.Http;
 
