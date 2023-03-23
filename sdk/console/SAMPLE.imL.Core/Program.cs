@@ -1,9 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using imL.Enumeration;
-using imL.Sealed;
-using imL.Struct;
-using imL.Utility;
 using imL;
 
 Console.WriteLine("Hello, World!");
