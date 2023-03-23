@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-using imL.Contract.DB;
+using imL.DB;
 using imL.Utility.Sql;
 
 namespace SAMPLE.imL.Utility.Sql
