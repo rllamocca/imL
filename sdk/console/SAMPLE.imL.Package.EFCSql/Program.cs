@@ -1,8 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Data;
 
+using imL;
 using imL.Package.EFCSql;
-using imL.Struct;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -35,7 +35,7 @@ AND CONVERT(DATE,Date) BETWEEN @_BEGIN AND @_END
 ORDER BY Date, Pk;
 ";
     await _context.Helper.Connection.OpenAsync();
-    MyTableSchema[] _query = await _context.Helper.LoadDataAsync<MyTableSchema>(_sql,
+    IEnumerable<MyTableSchema> _query = await _context.Helper.LoadDataAsync<MyTableSchema>(_sql, default,
         new SqlParameterDefault("_begin", _a.AddDays(-15), SqlDbType.Date),
         new SqlParameterDefault("_end", _a.AddDays(15), SqlDbType.Date)
         );

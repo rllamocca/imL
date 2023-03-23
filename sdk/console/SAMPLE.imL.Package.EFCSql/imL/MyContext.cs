@@ -1,16 +1,15 @@
-﻿using imL.Contract.DB;
+﻿using imL.DB;
 using imL.Package.EFCSql;
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal;
 
 namespace SAMPLE.imL.Package.EFCSql
 {
     public class MyContext : DbContext, IContext
     {
         private readonly string? _CONN;
-        private IConnection _CONNECTION;
-        private IHelperAsync _HELPER_ASYNC;
+        private IConnection _CONNECTION ;
+        private IHelper _HELPER_ASYNC;
 
         public IConnection Connection
         {
@@ -22,12 +21,12 @@ namespace SAMPLE.imL.Package.EFCSql
                 return this._CONNECTION;
             }
         }
-        public IHelperAsync Helper
+        public IHelper Helper
         {
             get
             {
                 if (this._HELPER_ASYNC == null)
-                    this._HELPER_ASYNC = new SqlHelperAsync(this.Connection);
+                    this._HELPER_ASYNC = new SqlHelper(this.Connection);
 
                 return this._HELPER_ASYNC;
             }
@@ -39,16 +38,15 @@ namespace SAMPLE.imL.Package.EFCSql
         {
             this._CONN = _conn;
         }
-        public MyContext(DbContextOptions<MyContext> _co) : base(_co)
+        public MyContext(DbContextOptions<MyContext> _co)
+            : base(_co)
         {
-            SqlServerOptionsExtension _ext = _co.FindExtension<SqlServerOptionsExtension>();
-
-            if (_ext != null)
-                this._CONN = _ext.ConnectionString;
         }
         protected override void OnConfiguring(DbContextOptionsBuilder _cob)
         {
-            _cob.UseSqlServer(this._CONN);
+            if (_cob.IsConfigured == false)
+                _cob.UseSqlServer(_CONN);
+
             _cob.AddInterceptors(
                 new TableHintCommandInterceptor(),
                 new NoTableCommandInterceptor()
