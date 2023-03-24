@@ -22,7 +22,8 @@ namespace SAMPLE.imL.Utility.Hosting
             IAppInfo _info = new AppInfoDefault(_args);
             MySetting _setting = JsonSerializer.Deserialize<MySetting>(File.ReadAllText(Path.Combine(_info.Base, "settings.json")));
 
-            await CreateHostBuilder(_args, _setting, _info).RunConsoleAsync();
+            await CreateHostBuilder(_args, _setting, _info)
+                .RunConsoleAsync();
         }
 
         static IHostBuilder CreateHostBuilder(string[] _args, IHostPeriodSetting _hosted, IAppInfo _info)
