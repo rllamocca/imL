@@ -1,6 +1,8 @@
+using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
 
-using imL.Contract;
+using imL;
 using imL.Package.Hosting;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -16,18 +18,22 @@ namespace SAMPLE.imL.Utility.Hosting
         async static Task Main()
         {
             string[] _args = new string[] { "Richie", "Tepes" };
-            MyLocked.Load(new AppInfoDefault(_args));
-            await CreateHostBuilder(_args).RunConsoleAsync();
+
+            IAppInfo _info = new AppInfoDefault(_args);
+            MySetting _setting = JsonSerializer.Deserialize<MySetting>(File.ReadAllText(Path.Combine(_info.Base, "settings.json")));
+
+            await CreateHostBuilder(_args, _setting, _info).RunConsoleAsync();
         }
 
-        static IHostBuilder CreateHostBuilder(string[] _args)
+        static IHostBuilder CreateHostBuilder(string[] _args, IHostPeriodSetting _hosted, IAppInfo _info)
         {
             return Host.CreateDefaultBuilder(_args)
                 .ConfigureServices((_hc, _sc) =>
                 {
                     _sc.AddHostedService<PeriodHostedService>();
+                    _sc.AddSingleton(_s => _hosted);
+                    _sc.AddSingleton(_s => _info);
                     _sc.AddScoped<IHostPeriodWorker, MyWorker>();
-                    _sc.AddSingleton<IHostPeriodSetting, MyHostedSetting>(_s => MyLocked.Setting.Hosted);
                 })
                 .ConfigureLogging(_lg =>
                 {
@@ -38,8 +44,6 @@ namespace SAMPLE.imL.Utility.Hosting
                     _lg.SetMinimumLevel(LogLevel.Information);
 #endif
                     _lg.AddNLog();
-
-                    NLog.LogManager.Configuration.Variables["_BASEDIR_"] = MyLocked.App.PathLog;
                 });
         }
     }
