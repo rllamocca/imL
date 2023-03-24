@@ -22,19 +22,22 @@ namespace SAMPLE.imL.Utility.Hosting
             IAppInfo _info = new AppInfoDefault(_args);
             MySetting _setting = JsonSerializer.Deserialize<MySetting>(File.ReadAllText(Path.Combine(_info.Base, "settings.json")));
 
-            await CreateHostBuilder(_args, _setting, _info)
+            await CreateHostBuilder<MyWorker>(_args, _setting, _info)
                 .RunConsoleAsync();
         }
 
-        static IHostBuilder CreateHostBuilder(string[] _args, IHostPeriodSetting _hosted, IAppInfo _info)
+        static IHostBuilder CreateHostBuilder<GClass>(string[] _args, IHostPeriodSetting _hosted, IAppInfo _info)
+            where GClass : class, IHostPeriodWorker
         {
             return Host.CreateDefaultBuilder(_args)
                 .ConfigureServices((_hc, _sc) =>
                 {
                     _sc.AddHostedService<PeriodHostedService>();
-                    _sc.AddSingleton(_s => _hosted);
-                    _sc.AddSingleton(_s => _info);
-                    _sc.AddScoped<IHostPeriodWorker, MyWorker>();
+
+                    _sc.AddSingleton(_s => _hosted)
+                    .AddSingleton(_s => _info);
+
+                    _sc.AddScoped<IHostPeriodWorker, GClass>();
                 })
                 .ConfigureLogging(_lg =>
                 {
