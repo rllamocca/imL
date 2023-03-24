@@ -30,19 +30,9 @@ namespace imL.Frotcom.Hosting.Core
 
             try
             {
-                IHostBuilder _build = Host.CreateDefaultBuilder(_info.args)
-                    .ConfigureServices(_ac =>
-                    {
-                        _ac.AddHostedService<PeriodHostedService<GExecution>>();
+                IHostBuilder _build = HostHelper.CreatePeriodHostBuilder<GExecution, GWorker>(_info, _setting);
 
-                        _ac.AddSingleton(_s => _info)
-                        .AddSingleton(_s => _setting);
-
-                        _ac.AddScoped<IHostPeriodWorker, GWorker>();
-                    })
-                    .UseConsoleLifetime();
-
-                _build.UseSimpleLogging(_formatter);
+                //_build.UseSimpleLogging(_formatter);
 
                 if (_info.InContainer != true)
                 {

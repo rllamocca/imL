@@ -5,20 +5,27 @@ namespace imL.Package.Hosting
 {
     public class HostHelper
     {
-        public static IHostBuilder CreateHostBuilder<GWorker>(IAppInfo _info, IHostPeriodSetting _setting)
+        public static IHostBuilder CreatePeriodHostBuilder<GExecution, GWorker>
+            (IAppInfo _info, IHostPeriodSetting _setting)
+            where GExecution : class, IPeriodExecution, new()
             where GWorker : class, IHostPeriodWorker
         {
             return Host.CreateDefaultBuilder(_info.args)
-                .ConfigureServices((_hc, _sc) =>
+                .ConfigureServices((_hc, _asc) =>
                 {
-                    _sc.AddHostedService<PeriodHostedService>();
+                    _asc.AddHostedService<PeriodHostedService<GExecution>>();
 
-                    _sc.AddSingleton(_s => _info)
+                    _asc.AddSingleton(_s => _info)
                     .AddSingleton(_s => _setting);
 
-                    _sc.AddScoped<IHostPeriodWorker, GWorker>();
-                })
-                .UseConsoleLifetime();
+                    _asc.AddScoped<IHostPeriodWorker, GWorker>();
+                });
+        }
+        public static IHostBuilder CreatePeriodHostBuilder<GWorker>
+            (IAppInfo _info, IHostPeriodSetting _setting)
+            where GWorker : class, IHostPeriodWorker
+        {
+            return CreatePeriodHostBuilder<PeriodExecutionDefault, GWorker>(_info, _setting);
         }
     }
 }

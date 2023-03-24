@@ -21,7 +21,7 @@ namespace SAMPLE.imL.Utility.Hosting
             var _info = new AppInfoDefault(_args);
             var _setting = JsonSerializer.Deserialize<MySetting>(File.ReadAllText(Path.Combine(_info.Base, "settings.json")));
 
-            var _app = HostHelper.CreateHostBuilder<MyWorker>(_info, _setting);
+            var _app = HostHelper.CreatePeriodHostBuilder<MyWorker>(_info, _setting);
             //_app.UseSimpleLogging(EConsoleFormatter.Simple);
             _app.ConfigureLogging(
                 _lg =>
