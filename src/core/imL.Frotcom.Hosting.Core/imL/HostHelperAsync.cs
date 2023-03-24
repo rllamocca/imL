@@ -34,9 +34,11 @@ namespace imL.Frotcom.Hosting.Core
                     .ConfigureServices(_ac =>
                     {
                         _ac.AddHostedService<PeriodHostedService<GExecution>>();
+
+                        _ac.AddSingleton(_s => _info)
+                        .AddSingleton(_s => _setting);
+
                         _ac.AddScoped<IHostPeriodWorker, GWorker>();
-                        _ac.AddSingleton(_s => _setting);
-                        _ac.AddSingleton(_s => _info);
                     })
                     .UseConsoleLifetime();
 
