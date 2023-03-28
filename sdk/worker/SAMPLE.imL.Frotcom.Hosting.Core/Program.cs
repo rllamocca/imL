@@ -6,8 +6,8 @@ using imL.Rest.Frotcom;
 
 using SAMPLE.imL.Frotcom.Hosting.Core;
 
-IAppInfo _info = new AppInfoDefault(args);
-MySetting? _SETTING = JsonSerializer.Deserialize<MySetting>(File.ReadAllText(Path.Combine(_info.Base, "settings.json")));
+var _info = new AppInfoDefault(args);
+var _SETTING = JsonSerializer.Deserialize<MySetting>(File.ReadAllText(Path.Combine(_info.Base, "settings.json")));
 
 if (_SETTING == null)
     throw new ArgumentNullException(nameof(_SETTING));
