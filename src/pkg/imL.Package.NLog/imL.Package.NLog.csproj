@@ -16,7 +16,7 @@
 		<Description>Not so free tools.</Description>
 		<AssemblyTitle>® $(TargetFramework)</AssemblyTitle>
 
-		<Version>0.0.0.4</Version>
+		<Version>0.0.0.5</Version>
 		<Authors>Ricardo Llamocca ♪♫</Authors>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
