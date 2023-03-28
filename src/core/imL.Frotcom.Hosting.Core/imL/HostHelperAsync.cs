@@ -23,16 +23,16 @@ namespace imL.Frotcom.Hosting.Core
 
             try
             {
-                IHostBuilder _build = HostHelper.CreatePeriodHostBuilder<GExecution, GWorker>(_info, _setting);
+                IHostBuilder _builder = HostHelper.CreatePeriodHostBuilder<GExecution, GWorker>(_info, _setting);
 
                 if (_info.InContainer != true)
                 {
-                    _build.UseNLog();
+                    _builder.UseNLog();
 
                     NLog.LogManager.AutoShutdown = true;
                 }
 
-                IHost _host = _build.Build();
+                IHost _host = _builder.Build();
                 _logger = _host.Services.GetRequiredService<ILogger<HostHelperAsync>>();
                 _logger?.LogInformation("Host created.");
 
