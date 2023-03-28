@@ -8,12 +8,13 @@ namespace SAMPLE.imL.Tool.Terminal
 {
     internal class MyWork
     {
+        static readonly ILogger? _LOG = LogManager.GetCurrentClassLogger();
+
         public static async Task DoWork(IProcessInfo _info, ISetting _settings)
         {
-            ILogger? _logger = LogManager.GetCurrentClassLogger();
             MySetting _setting = (MySetting)_settings;
 
-            _logger?.LetDebug()?.Debug("Debug");
+            _LOG?.LetDebug()?.Debug("Debug");
 
             await Task.Delay(1000);
             Guid _guid;
@@ -22,7 +23,7 @@ namespace SAMPLE.imL.Tool.Terminal
             {
                 await Task.Delay(10);
                 _guid = Guid.NewGuid();
-                _logger?.Info("{0}) {1}", _i.ToString("0000"), _guid);
+                _LOG?.Info("{0}) {1}", _i.ToString("0000"), _guid);
             }
 
             await Task.Delay(2000);
