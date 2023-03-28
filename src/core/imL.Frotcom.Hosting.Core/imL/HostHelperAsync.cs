@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-using imL.Logging;
 using imL.Package.Hosting;
 using imL.Package.Logging;
 
@@ -15,14 +14,8 @@ namespace imL.Frotcom.Hosting.Core
 {
     public class HostHelperAsync
     {
-        public static async Task ConsoleAsync<GWorker>
-            (IHostPeriodSetting _setting, IAppInfo _info, EConsoleFormatter _formatter = EConsoleFormatter.Simple)
-            where GWorker : class, IHostPeriodWorker
-        {
-            await ConsoleAsync<PeriodExecutionDefault, GWorker>(_setting, _info, _formatter);
-        }
         public static async Task ConsoleAsync<GExecution, GWorker>
-            (IHostPeriodSetting _setting, IAppInfo _info, EConsoleFormatter _formatter = EConsoleFormatter.Simple)
+            (IAppInfo _info, IHostPeriodSetting _setting)
             where GExecution : class, IPeriodExecution, new()
             where GWorker : class, IHostPeriodWorker
         {
@@ -31,8 +24,6 @@ namespace imL.Frotcom.Hosting.Core
             try
             {
                 IHostBuilder _build = HostHelper.CreatePeriodHostBuilder<GExecution, GWorker>(_info, _setting);
-
-                //_build.UseSimpleLogging(_formatter);
 
                 if (_info.InContainer != true)
                 {
@@ -69,6 +60,12 @@ namespace imL.Frotcom.Hosting.Core
                 if (_info.InContainer != true)
                     NLog.LogManager.Shutdown();
             }
+        }
+        public static async Task ConsoleAsync<GWorker>
+            (IAppInfo _info, IHostPeriodSetting _setting)
+            where GWorker : class, IHostPeriodWorker
+        {
+            await ConsoleAsync<PeriodExecutionDefault, GWorker>(_info, _setting);
         }
     }
 }
