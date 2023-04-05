@@ -2,13 +2,13 @@
 {
     public class ParameterDefault : IParameter
     {
-        public string Affect { get; }
-        public string Expression { get; }
+        public string? Affect { get; }
+        public string? Expression { get; }
         public bool? IsSearchCondition { get; }
 
         public ParameterDefault(
-            string _affect,
-            string _expression = null,
+            string? _affect,
+            string? _expression = null,
             bool _issearch = false
             )
         {

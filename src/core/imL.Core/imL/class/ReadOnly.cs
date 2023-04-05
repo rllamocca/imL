@@ -27,14 +27,14 @@ namespace imL
 
         public static readonly char[] _SUITS = new char[] { '♠', '♥', '♣', '♦', '☺', '☻' };
         public static readonly char[] _SQUAD = new char[] { 'A', '2', '3', '4', '5', '6', '7', '8', '9', 'X', 'J', 'Q', 'K' };
-        public static readonly string _CARD = @"
+        public static readonly string? _CARD = @"
  ╔═════╗
  ║ {0}   ║
  ║  {1}  ║
  ║   {0} ║
  ╚═════╝
 ";
-        public static readonly string _JCARD = @"
+        public static readonly string? _JCARD = @"
  ╔═════╗
  ║  {0}  ║
  ║JOKER║
@@ -45,7 +45,7 @@ namespace imL
         public static readonly Encoding _ENCODING_NO_BOM = new UTF8Encoding(false);
         public static readonly CultureInfo _CULTURE_INVARIANT = CultureInfo.InvariantCulture;
 
-        public static Encoding DefaultEncoding(string _name)
+        public static Encoding DefaultEncoding(string? _name)
         {
             if (_name == null)
                 return ReadOnly._ENCODING;

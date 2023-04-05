@@ -19,7 +19,7 @@ namespace imL
             Console.SetCursorPosition(_xy.X, _xy.Y);
             Console.Write(_value);
         }
-        public static void Write(Point _xy, string _value)
+        public static void Write(Point _xy, string? _value)
         {
             Console.SetCursorPosition(_xy.X, _xy.Y);
             Console.Write(_value);
@@ -29,7 +29,7 @@ namespace imL
             Console.SetCursorPosition(_xy.X, _xy.Y);
             Console.WriteLine(_value);
         }
-        public static void WriteLine(Point _xy, string _value)
+        public static void WriteLine(Point _xy, string? _value)
         {
             Console.SetCursorPosition(_xy.X, _xy.Y);
             Console.WriteLine(_value);

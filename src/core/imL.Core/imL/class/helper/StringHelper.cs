@@ -4,11 +4,11 @@ namespace imL
 {
     public static class StringHelper
     {
-        public static string MyFortune()
+        public static string? MyFortune()
         {
             Random _r = new Random();
             int _n = _r.Next(ReadOnly._SUITS.Length);
-            string _fortune = Convert.ToString(ReadOnly._SUITS[_n]);
+            string? _fortune = Convert.ToString(ReadOnly._SUITS[_n]);
             if (_n.Between(0, 3))
             {
                 _n = _r.Next(ReadOnly._SQUAD.Length);
@@ -17,11 +17,11 @@ namespace imL
 
             return _fortune;
         }
-        public static string MyFortuneCard()
+        public static string? MyFortuneCard()
         {
             Random _r = new Random();
             int _n = _r.Next(ReadOnly._SUITS.Length);
-            string _fortune = Convert.ToString(ReadOnly._SUITS[_n]);
+            string? _fortune = Convert.ToString(ReadOnly._SUITS[_n]);
             if (_n.Between(0, 3))
             {
                 _n = _r.Next(ReadOnly._SQUAD.Length);

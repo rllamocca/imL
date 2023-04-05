@@ -8,11 +8,11 @@ namespace imL
 {
     public static class ColorExtension
     {
-        public static string ToStringRGB(this Color _this)
+        public static string? ToStringRGB(this Color _this)
         {
             return string.Format("rgb({0},{1},{2})", _this.R, _this.G, _this.B);
         }
-        public static string ToStringRGBA(this Color _this)
+        public static string? ToStringRGBA(this Color _this)
         {
             return string.Format("rgba({0},{1},{2},{3})", _this.R, _this.G, _this.B, Convert.ToString(Math.Round(_this.A / 255.0, 4), ReadOnly._CULTURE_INVARIANT));
         }
@@ -28,7 +28,7 @@ namespace imL
             return Color.FromArgb(Convert.ToByte(_a), Convert.ToByte(_r), Convert.ToByte(_g), Convert.ToByte(_b));
         }
 
-        public static string[]
+        public static string?[]
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP
         ?
 #endif
@@ -39,7 +39,7 @@ namespace imL
 
             return _array.Select(_s => _s.ToStringRGB()).ToArray();
         }
-        public static string[] ToStringRGBA(this Color[] _array)
+        public static string?[] ToStringRGBA(this Color[] _array)
         {
             if (_array == null)
                 return null;

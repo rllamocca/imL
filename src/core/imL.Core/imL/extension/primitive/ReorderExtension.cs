@@ -13,7 +13,7 @@ namespace imL
     {
 
 #if (NETFRAMEWORK || NETSTANDARD2_0_OR_GREATER || NETCORE)
-        public static object TryGet(this DataRow _this, string _columname)
+        public static object TryGet(this DataRow _this, string? _columname)
         {
             if (_this == null)
                 return null;
@@ -29,7 +29,7 @@ namespace imL
         }
 #endif
 
-        public static string ToText(this object _this, bool _trim = true)
+        public static string? ToText(this object _this, bool _trim = true)
         {
             if (_this == null) return default;
             if (_this == default) return default;
@@ -37,7 +37,7 @@ namespace imL
             if (_this == DBNull.Value) return default;
 #endif
 
-            string _return = Convert.ToString(_this);
+            string? _return = Convert.ToString(_this);
 
             if (_return == null) return null;
             if (_trim) return _return.Trim();
@@ -64,7 +64,7 @@ namespace imL
 
             return Convert.ToInt64(_this);
         }
-        public static IEnumerable<string> Trim(this IEnumerable<string> _array)
+        public static IEnumerable<string?> Trim(this IEnumerable<string?> _array)
         {
             return from _r in _array
                    select _r.Trim()

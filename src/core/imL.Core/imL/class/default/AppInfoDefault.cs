@@ -7,25 +7,25 @@ namespace imL
 {
     public sealed class AppInfoDefault : IAppInfo
     {
-        readonly string[] _ARGS;
-        readonly string _BASE;
-        readonly string _BASE_IN;
-        readonly string _BASE_EXE;
-        readonly string _BASE_TMP;
+        readonly string?[] _ARGS;
+        readonly string? _BASE;
+        readonly string? _BASE_IN;
+        readonly string? _BASE_EXE;
+        readonly string? _BASE_TMP;
 
         readonly bool? _IN_CONTAINER = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
         readonly bool? _IN_TEMPPATH;
 
-        public string[] args { get { return _ARGS; } }
-        public string Base { get { return _BASE; } }
-        public string BaseIn { get { return _BASE_IN; } }
-        public string BaseExe { get { return _BASE_EXE; } }
-        public string BaseTmp { get { return _BASE_TMP; } }
+        public string?[] args { get { return _ARGS; } }
+        public string? Base { get { return _BASE; } }
+        public string? BaseIn { get { return _BASE_IN; } }
+        public string? BaseExe { get { return _BASE_EXE; } }
+        public string? BaseTmp { get { return _BASE_TMP; } }
 
         public bool? InContainer { get { return _IN_CONTAINER; } }
         public bool? InTempPath { get { return _IN_TEMPPATH; } }
 
-        public AppInfoDefault(string[] _args, string _basedirectory = null, bool _temppathdefault = false)
+        public AppInfoDefault(string?[] _args, string? _basedirectory = null, bool _temppathdefault = false)
         {
             _ARGS = _args;
 
@@ -49,11 +49,11 @@ namespace imL
         }
 
         //#if NETSTANDARD1_0 || NETSTANDARD1_1 || NETSTANDARD1_2 || NETSTANDARD1_3 || NETSTANDARD1_4 || NETSTANDARD1_5 || NETSTANDARD1_6
-        //        static string AssemblyDirectory()
+        //        static string? AssemblyDirectory()
         //        {
-        //            string _cb = Assembly.GetExecutingAssembly().CodeBase;
+        //            string? _cb = Assembly.GetExecutingAssembly().CodeBase;
         //            UriBuilder _uri = new UriBuilder(_cb);
-        //            string _path = Uri.UnescapeDataString(_uri.Path);
+        //            string? _path = Uri.UnescapeDataString(_uri.Path);
 
         //            return Path.GetDirectoryName(_path);
         //        }

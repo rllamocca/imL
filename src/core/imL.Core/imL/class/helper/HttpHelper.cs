@@ -4,10 +4,10 @@ namespace imL
 {
     public class HttpHelper
     {
-        public static string CheckHttp(string _from, string _to)
+        public static string? CheckHttp(string? _from, string? _to)
         {
-            string _https = "https://";
-            string _http = "http://";
+            string? _https = "https://";
+            string? _http = "http://";
             StringComparison _c = StringComparison.OrdinalIgnoreCase;
 
             if (

@@ -7,7 +7,7 @@ namespace imL
         DateTime? ExecutionStart { get; set; }
         DateTime? ExecutionStop { get; set; }
         TimeSpan? ExecutionTime { get; set; }
-        string GUID { get; set; }
+        string? GUID { get; set; }
 
         void Complement(IAppReturn _result);
     }

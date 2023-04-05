@@ -66,7 +66,7 @@ namespace imL
         //        throw new ArgumentException("The lambda expression 'property' should point to a valid Property");
         //    }
         //}
-        //static string Meth<T>(Expression<Func<T>> expression)
+        //static string? Meth<T>(Expression<Func<T>> expression)
         //{
         //    var name = ((MemberExpression)expression.Body).Member.Name;
         //    var value = expression.Compile()();

@@ -8,13 +8,13 @@ namespace imL
 {
     public class Formatter
     {
-        readonly string _FORMAT;
+        readonly string? _FORMAT;
         readonly bool _DRAW_RL;
         readonly char[] _L_R;
         readonly char[] _R_R;
-        readonly IList<KeyValuePair<int, string>> _FORMATS = new List<KeyValuePair<int, string>>();
+        readonly IList<KeyValuePair<int, string?>> _FORMATS = new List<KeyValuePair<int, string?>>();
 
-        public Formatter(string _format, bool _draw_rl = true, char[] _l_r = null, char[] _r_r = null)
+        public Formatter(string? _format, bool _draw_rl = true, char[] _l_r = null, char[] _r_r = null)
         {
             if (_draw_rl == false)
                 _format = new string(_format.Reverse().ToArray());
@@ -33,7 +33,7 @@ After
         void AfterExecution();
          */
 
-        public string Enforce(string _value)
+        public string? Enforce(string? _value)
         {
             if (string.IsNullOrEmpty(_value))
                 return _value;
@@ -74,8 +74,8 @@ After
                 _value = new string(_chars).Trim();
             }
 
-            KeyValuePair<int, string> _pair = _FORMATS.Where(_w => _w.Key == _value.Length).FirstOrDefault();
-            string _format;
+            KeyValuePair<int, string?> _pair = _FORMATS.Where(_w => _w.Key == _value.Length).FirstOrDefault();
+            string? _format;
 
             if (_pair.Key == 0)
                 _format = Analyze(_value.Length);
@@ -85,16 +85,16 @@ After
             if (_DRAW_RL == false)
                 _value = new string(_value.Reverse().ToArray());
 
-            string _return = string.Format(_format, _value.Select(_s => Convert.ToString(_s)).ToArray());
+            string? _return = string.Format(_format, _value.Select(_s => Convert.ToString(_s)).ToArray());
 
             if (_DRAW_RL == false)
                 _return = new string(_return.Reverse().ToArray());
 
             return _return;
         }
-        string Analyze(int _length)
+        string? Analyze(int _length)
         {
-            string _return = _FORMAT;
+            string? _return = _FORMAT;
 
             IList<int> _indexs = new List<int>();
 
@@ -116,7 +116,7 @@ After
                     _return = _return.Remove(_i, 1).Insert(_i, "{" + Convert.ToString(_indexs.IndexOf(_i)) + "}");
             }
 
-            _FORMATS.Add(new KeyValuePair<int, string>(_length, _return));
+            _FORMATS.Add(new KeyValuePair<int, string?>(_length, _return));
 
             return _return;
         }

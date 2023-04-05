@@ -19,8 +19,8 @@ namespace imL
         public bool Specials { set; get; } = false;
         public char[] Aggregate { set; get; }
 
-        public string Base { get { return new string(_BASE); } }
-        public string Generated { get { return new string(_GENERATED); } }
+        public string? Base { get { return new string(_BASE); } }
+        public string? Generated { get { return new string(_GENERATED); } }
 
         public Password(
             bool _numbers = true,

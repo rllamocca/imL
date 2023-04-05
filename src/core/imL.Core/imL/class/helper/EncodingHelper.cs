@@ -7,7 +7,7 @@ namespace imL
 {
     public static class EncodingHelper
     {
-        public static Encoding ReadEncoding(string _path)
+        public static Encoding ReadEncoding(string? _path)
         {
             byte[] _b = new byte[5];
             using (FileStream _fs = new FileStream(_path, FileMode.Open, FileAccess.Read))

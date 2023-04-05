@@ -13,7 +13,7 @@ namespace imL
 {
     public static partial class ConsoleHelper
     {
-        public static void Begins(bool _enc = true, string _title = null)
+        public static void Begins(bool _enc = true, string? _title = null)
         {
             if (_enc)
             {

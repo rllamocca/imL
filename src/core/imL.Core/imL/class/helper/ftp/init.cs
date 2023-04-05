@@ -27,7 +27,7 @@ namespace imL
 
             return _i;
         }
-        internal static FtpWebRequest CreateClient(string _method, string _root, FtpFormat _format)
+        internal static FtpWebRequest CreateClient(string? _method, string? _root, FtpFormat _format)
         {
             FtpWebRequest _return = (FtpWebRequest)FtpWebRequest.Create(_format.Host + _format.Path + _root);
             _return = InitFtpWebRequest(_return, _format);
@@ -105,8 +105,8 @@ namespace imL
 
     //public class FtpAsyncState
     //{
-    //    string fileName;
-    //    string status;
+    //    string? fileName;
+    //    string? status;
 
     //    ManualResetEvent wait;
     //    FtpWebRequest request;
@@ -128,7 +128,7 @@ namespace imL
     //        set { request = value; }
     //    }
 
-    //    public string FileName
+    //    public string? FileName
     //    {
     //        get { return fileName; }
     //        set { fileName = value; }
@@ -138,7 +138,7 @@ namespace imL
     //        get { return operationException; }
     //        set { operationException = value; }
     //    }
-    //    public string StatusDescription
+    //    public string? StatusDescription
     //    {
     //        get { return status; }
     //        set { status = value; }

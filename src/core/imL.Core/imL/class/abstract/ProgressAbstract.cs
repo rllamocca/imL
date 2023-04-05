@@ -24,7 +24,7 @@ namespace imL
         protected DateTime _START;
 
         const char _CHAR = '■';
-        const string _BUCLE = @"+\|/";
+        const string? _BUCLE = @"+\|/";
         byte _BLOCKS = 50;
         Point _LINE;
         Point _NEW_LINE;
@@ -81,7 +81,7 @@ namespace imL
         }
         protected void DrawProgress(decimal _per, object _value, object _length)
         {
-            string _text = string.Format("{0}  {1} /{2}",
+            string? _text = string.Format("{0}  {1} /{2}",
                 _per.ToString("P"),
                 _value,
                 _length);
@@ -92,7 +92,7 @@ namespace imL
         {
             TimeSpan _diff = _value - _START;
 
-            string _text = string.Format(
+            string? _text = string.Format(
                 "[{0}]  {1}",
                 _BUCLE[_BLOCKS++ % 4],
 #if (NET35)

@@ -62,18 +62,18 @@ namespace imL
                 _i.AlternateViews.Add(_aw);
             }
 
-            foreach (string _item in _f.TO.DefaultOrEmpty())
+            foreach (string? _item in _f.TO.DefaultOrEmpty())
                 _i.To.Add(new MailAddress(_item));
 
-            foreach (string _item in _f.CC.DefaultOrEmpty())
+            foreach (string? _item in _f.CC.DefaultOrEmpty())
                 _i.CC.Add(new MailAddress(_item));
 
-            foreach (string _item in _f.BCC.DefaultOrEmpty())
+            foreach (string? _item in _f.BCC.DefaultOrEmpty())
                 _i.Bcc.Add(new MailAddress(_item));
 
             _i.Subject = _f.Subject;
 
-            foreach (string _item in _f.PathAttachments.DefaultOrEmpty())
+            foreach (string? _item in _f.PathAttachments.DefaultOrEmpty())
                 _i.Attachments.Add(InitAttachment(_item));
 
             foreach (StreamAttachmentFormat _item in _f.StreamAttachments.DefaultOrEmpty())
@@ -81,7 +81,7 @@ namespace imL
 
             return _i;
         }
-        internal static Attachment InitAttachment(string _path)
+        internal static Attachment InitAttachment(string? _path)
         {
             Attachment _return = new Attachment(_path, MimeHelper.ContentType(_path));
             FileInfo _fi = new FileInfo(_path);

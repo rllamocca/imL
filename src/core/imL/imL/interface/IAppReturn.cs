@@ -3,8 +3,8 @@
     public interface IAppReturn
     {
         EReturn? Type { get; set; }
-        string Message { get; set; }
-        string Method { get; set; }
+        string? Message { get; set; }
+        string? Method { get; set; }
     }
 
     public interface IAppReturn<G> : IAppReturn

@@ -6,7 +6,7 @@ namespace imL
     {
         public EDataBasicType Basic { get; }
         public EDataType Generic { get; }
-        public Type Type { get; }
+        public Type? Type { get; }
 
         public DataInfo(object _obj)
         {
@@ -47,9 +47,18 @@ namespace imL
             Basic = GetBasic(Generic);
             Type = Basic == EDataBasicType.Unknown ? null : _obj.GetType();
         }
-        public DataInfo(string _code)
+        public DataInfo(string? _code)
         {
-            Type = null;
+            //Type = null;
+
+            if (_code == null)
+            {
+                Generic = EDataType.Unknown;
+                Basic = GetBasic(Generic);
+                Type = null;
+
+                return;
+            }
 
             switch (_code)
             {
@@ -118,7 +127,7 @@ namespace imL
 // var typeProcessorMap = new Dictionary<Type, Delegate>
 //{
 //    { typeof(int), new Action<int>(i => { /* do something with i */ }) },
-//    { typeof(string), new Action<string>(s => { /* do something with s */ }) },
+//    { typeof(string?), new Action<string?>(s => { /* do something with s */ }) },
 //};
 
 //void ValidateProperties(object o)

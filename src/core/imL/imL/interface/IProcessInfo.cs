@@ -6,7 +6,7 @@ namespace imL
     public interface IProcessInfo
     {
         DateTime Start { set; get; }
-        string Guid { set; get; }
+        string? Guid { set; get; }
         IAppInfo App { set; get; }
         long? Selected { set; get; }
         long? Inserted { set; get; }
@@ -14,7 +14,7 @@ namespace imL
         long? Erased { set; get; }
         long? Successes { set; get; }
         long? Errors { set; get; }
-        IList<string> PathAttachments { set; get; }
+        IList<string?> PathAttachments { set; get; }
         EAlert? Alert { set; get; }
         Exception Critical { set; get; }
         DateTime? End { set; get; }
@@ -30,8 +30,8 @@ namespace imL
         void Danger(Exception? _ex = null);
         TimeSpan? Duration();
 
-        string Base { get; }
-        string FileLog { get; }
-        string BaseOut { get; }
+        string? Base { get; }
+        string? FileLog { get; }
+        string? BaseOut { get; }
     }
 }

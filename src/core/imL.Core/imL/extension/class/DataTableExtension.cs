@@ -17,7 +17,7 @@ namespace imL
     public static class DataTableExtension
     {
         public static void FlatCreate(this DataTable _this,
-            string _path,
+            string? _path,
             char _separator = '\0',
             bool _columnnames = true,
             Encoding _enc = null,
@@ -38,7 +38,7 @@ namespace imL
         {
             ReadOnly.DefaultEncoding(ref _enc);
 
-            string _sep = Convert.ToString(_separator);
+            string? _sep = Convert.ToString(_separator);
 
             _out = new MemoryStream();
             StreamWriter _sw = new StreamWriter(_out, _enc);
@@ -46,7 +46,7 @@ namespace imL
 
             if (_columnnames)
             {
-                IList<string> _line = new List<string>();
+                IList<string?> _line = new List<string?>();
 
                 foreach (DataColumn _item in _this.Columns)
                     _line.Add(_item.Caption ?? _item.ColumnName);

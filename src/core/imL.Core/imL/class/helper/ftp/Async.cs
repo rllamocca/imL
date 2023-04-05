@@ -14,14 +14,14 @@ namespace imL
 {
     public static partial class FtpHelper
     {
-        public static async Task<IEnumerable<string>> ListDirectoryAsync(string _root, FtpFormat _format, CancellationToken _ct = default)
+        public static async Task<IEnumerable<string?>> ListDirectoryAsync(string? _root, FtpFormat _format, CancellationToken _ct = default)
         {
             //return (await ListDirectoryIAsync(_root, _format).ToIEnumerable()).ToArray();
 
 #if (NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER)
             return await ListDirectoryIAsync(_root, _format, _ct).ToIEnumerable();
 #else
-            IList<string> _return = new List<string>();
+            IList<string?> _return = new List<string?>();
             FtpWebRequest _client = CreateClient(WebRequestMethods.Ftp.ListDirectory, _root, _format);
 
             using (FtpWebResponse _r = (FtpWebResponse)(await _client.GetResponseAsync()))
@@ -33,12 +33,12 @@ namespace imL
 #endif
 
         }
-        public static async Task<IEnumerable<string>> ListDirectoryDetailsAsync(string _root, FtpFormat _format, CancellationToken _ct = default)
+        public static async Task<IEnumerable<string?>> ListDirectoryDetailsAsync(string? _root, FtpFormat _format, CancellationToken _ct = default)
         {
 #if (NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER)
             return await ListDirectoryDetailsIAsync(_root, _format, _ct).ToIEnumerable();
 #else
-            IList<string> _return = new List<string>();
+            IList<string?> _return = new List<string?>();
             FtpWebRequest _client = CreateClient(WebRequestMethods.Ftp.ListDirectoryDetails, _root, _format);
 
             using (FtpWebResponse _r = (FtpWebResponse)(await _client.GetResponseAsync()))
@@ -50,7 +50,7 @@ namespace imL
 #endif
 
         }
-        public static async Task<IEnumerable<FtpContentFormat>> ListDirectoryDetailsContentAsync(string _root, FtpFormat _format, CancellationToken _ct = default)
+        public static async Task<IEnumerable<FtpContentFormat>> ListDirectoryDetailsContentAsync(string? _root, FtpFormat _format, CancellationToken _ct = default)
         {
 #if (NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER)
             return await AnalizeListDirectoryDetailsIAsync(_root, ListDirectoryDetailsIAsync(_root, _format, _ct), _ct).ToIEnumerable();
@@ -59,7 +59,7 @@ namespace imL
 #endif
 
         }
-        public static async Task<IEnumerable<FtpContentFormat>> ListSubdirectoriesAsync(string _root, FtpFormat _format, CancellationToken _ct = default)
+        public static async Task<IEnumerable<FtpContentFormat>> ListSubdirectoriesAsync(string? _root, FtpFormat _format, CancellationToken _ct = default)
         {
 #if (NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER)
             return await ListSubdirectoriesIAsync(_root, _format, _ct).ToIEnumerable();
@@ -77,7 +77,7 @@ namespace imL
 
         }
 
-        public static async Task<FtpStatusCode> UploadFileAsync(string _root, Stream _up, FtpFormat _format, CancellationToken _ct = default)
+        public static async Task<FtpStatusCode> UploadFileAsync(string? _root, Stream _up, FtpFormat _format, CancellationToken _ct = default)
         {
             FtpWebRequest _client = CreateClient(WebRequestMethods.Ftp.UploadFile, _root, _format);
 
@@ -89,12 +89,12 @@ namespace imL
                     return _resp.StatusCode;
             }
         }
-        public static async Task<FtpStatusCode> UploadFileAsync(string _root, byte[] _up, FtpFormat _format, CancellationToken _ct = default)
+        public static async Task<FtpStatusCode> UploadFileAsync(string? _root, byte[] _up, FtpFormat _format, CancellationToken _ct = default)
         {
             using (Stream _ms = new MemoryStream(_up))
                 return await UploadFileAsync(_root, _ms, _format, _ct);
         }
-        public static async Task<Stream> DownloadFileAsync(string _root, FtpFormat _format, CancellationToken _ct = default)
+        public static async Task<Stream> DownloadFileAsync(string? _root, FtpFormat _format, CancellationToken _ct = default)
         {
             Stream _return = new MemoryStream();
             FtpWebRequest _client = CreateClient(WebRequestMethods.Ftp.DownloadFile, _root, _format);
@@ -109,12 +109,12 @@ namespace imL
                 return _return;
             }
         }
-        public static async Task<byte[]> DownloadFileBytesAsync(string _root, FtpFormat _format, CancellationToken _ct = default)
+        public static async Task<byte[]> DownloadFileBytesAsync(string? _root, FtpFormat _format, CancellationToken _ct = default)
         {
             using (Stream _s = await DownloadFileAsync(_root, _format, _ct))
                 return _s.ToBytes();
         }
-        public static async Task<FtpStatusCode> DeleteFileAsync(string _root, FtpFormat _format, CancellationToken _ct = default)
+        public static async Task<FtpStatusCode> DeleteFileAsync(string? _root, FtpFormat _format, CancellationToken _ct = default)
         {
             FtpWebRequest _client = CreateClient(WebRequestMethods.Ftp.DeleteFile, _root, _format);
 

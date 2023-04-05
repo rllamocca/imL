@@ -8,12 +8,12 @@ namespace imL
 {
     public class ProcessInfoDefault : IProcessInfo
     {
-        readonly string _PATH;
-        readonly string _FILE_LOG;
-        readonly string _PATH_OUT;
+        readonly string? _PATH;
+        readonly string? _FILE_LOG;
+        readonly string? _PATH_OUT;
 
         public DateTime Start { set; get; }
-        public string Guid { set; get; }
+        public string? Guid { set; get; }
         public IAppInfo App { set; get; }
         public long? Selected { set; get; }
         public long? Inserted { set; get; }
@@ -21,14 +21,14 @@ namespace imL
         public long? Erased { set; get; }
         public long? Successes { set; get; }
         public long? Errors { set; get; }
-        public IList<string> PathAttachments { set; get; } = new List<string>();
+        public IList<string?> PathAttachments { set; get; } = new List<string?>();
         public EAlert? Alert { set; get; }
         public Exception Critical { set; get; }
         public DateTime? End { set; get; }
 
-        public string Base { get { return _PATH; } }
-        public string FileLog { get { return _FILE_LOG; } }
-        public string BaseOut { get { return _PATH_OUT; } }
+        public string? Base { get { return _PATH; } }
+        public string? FileLog { get { return _FILE_LOG; } }
+        public string? BaseOut { get { return _PATH_OUT; } }
 
         public ProcessInfoDefault(IAppInfo _info)
         {
@@ -102,7 +102,7 @@ namespace imL
         }
 
 
-//        public static string GetPID()
+//        public static string? GetPID()
 //        {
 
 //#if NET50_OR_GREATER

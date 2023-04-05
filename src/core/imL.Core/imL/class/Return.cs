@@ -22,12 +22,12 @@ namespace imL
         readonly bool _SUCCESS;
         readonly object _RESULT;
         readonly bool _EXCEPTION;
-        readonly string _MESSAGE;
+        readonly string? _MESSAGE;
 
         public bool Success { get { return _SUCCESS; } }
         public object Result { get { return _RESULT; } }
         public bool Exception { get { return _EXCEPTION; } }
-        public string Message { get { return _MESSAGE; } }
+        public string? Message { get { return _MESSAGE; } }
 
         public Return(bool _success, object _result = null)
         {
@@ -45,7 +45,7 @@ namespace imL
                 _MESSAGE = "Undefined";
         }
 
-        public override string ToString()
+        public override string? ToString()
         {
             return string.Format("Success: {0}, {1}", (Success ? "YES" : "NO"), Message);
         }
