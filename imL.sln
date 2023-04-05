@@ -3,6 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_root_", "_root_", "{A2C38A75-B643-44D2-AA77-FC4CED547957}"
+	ProjectSection(SolutionItems) = preProject
+		_root_\LICENSE = _root_\LICENSE
+		_root_\README.md = _root_\README.md
+		_root_\remove.ps1 = _root_\remove.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,5 +17,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {46394A4C-7CB8-461C-B981-26530526984F}
 	EndGlobalSection
 EndGlobal
