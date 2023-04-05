@@ -3,8 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 
-using imL.Format;
-
 using Renci.SshNet;
 using Renci.SshNet.Sftp;
 

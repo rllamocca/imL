@@ -1,10 +1,8 @@
 ﻿using System;
 
-using imL.Enumeration;
-
-namespace imL.Struct
+namespace imL
 {
-    public struct DataInfo
+    public readonly struct DataInfo
     {
         public EDataBasicType Basic { get; }
         public EDataType Generic { get; }
@@ -45,17 +43,17 @@ namespace imL.Struct
 
             if (_g == EDataType.Unknown && _obj is string) _g = EDataType.String;
 
-            this.Generic = _g;
-            this.Basic = GetBasic(this.Generic);
-            this.Type = this.Basic == EDataBasicType.Unknown ? null : _obj.GetType();
+            Generic = _g;
+            Basic = GetBasic(Generic);
+            Type = Basic == EDataBasicType.Unknown ? null : _obj.GetType();
         }
         public DataInfo(string _code)
         {
-            this.Type = null;
+            Type = null;
 
             switch (_code)
             {
-                case "System.Boolean": this.Generic = EDataType.Boolean; break;
+                case "System.Boolean": Generic = EDataType.Boolean; break;
                 case "System.SByte":
                 case "System.Byte":
                 case "System.Int16":
@@ -66,35 +64,35 @@ namespace imL.Struct
                 case "System.UInt64":
                 case "System.IntPtr":
                 case "System.UIntPtr":
-                    this.Generic = EDataType.Integer;
+                    Generic = EDataType.Integer;
 
                     break;
                 case "System.Single":
                 case "System.Double":
                 case "System.Decimal":
-                    this.Generic = EDataType.Fraction;
+                    Generic = EDataType.Fraction;
 
                     break;
                 case "System.TimeOnly":
                 case "System.TimeSpan":
-                    this.Generic = EDataType.Time;
+                    Generic = EDataType.Time;
 
                     break;
                 case "System.DateOnly":
-                    this.Generic = EDataType.Date;
+                    Generic = EDataType.Date;
 
                     break;
                 case "System.DateTimeOffset":
                 case "System.DateTime":
-                    this.Generic = EDataType.DateTime;
+                    Generic = EDataType.DateTime;
 
                     break;
-                case "System.String": this.Generic = EDataType.String; break;
-                default: this.Generic = EDataType.Unknown; break;
+                case "System.String": Generic = EDataType.String; break;
+                default: Generic = EDataType.Unknown; break;
             }
 
-            this.Basic = GetBasic(this.Generic);
-            this.Type = this.Basic == EDataBasicType.Unknown ? null : Type.GetType(_code);
+            Basic = GetBasic(Generic);
+            Type = Basic == EDataBasicType.Unknown ? null : Type.GetType(_code);
         }
 
         internal static EDataBasicType GetBasic(EDataType _type)

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace imL.Rest.Sbif
+namespace imL.Rest.SBIF
 {
 #if (NET5_0_OR_GREATER)
     public record CurrencyIndex

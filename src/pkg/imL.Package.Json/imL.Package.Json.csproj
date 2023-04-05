@@ -1,54 +1,50 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<NoWarn>CS1701;CS1702;CS8600;CS8601;CS8602;CS8618;CS8625;IDE0063;IDE0066;IDE0090</NoWarn>
-		<CheckEolTargetFramework>false</CheckEolTargetFramework>
-	</PropertyGroup>
 	<PropertyGroup>
 		<TargetFrameworks>
-			net35
-			;net40
-			;netstandard1.0
-			;netstandard1.1
-			;netstandard1.2
-			;netstandard1.3
-			;netstandard1.4
-			;netstandard1.5
-			;netstandard1.6
-			;netstandard2.0
-			;netstandard2.1
-			;net5.0
-			;net6.0
-			;net7.0
+			net35;net40
+			;netstandard1.0;netstandard1.1;netstandard1.2;netstandard1.3;netstandard1.4;netstandard1.5;netstandard1.6;netstandard2.0;netstandard2.1
+			;net5.0;net6.0;net7.0
 		</TargetFrameworks>
 
-		<Authors>Ricardo Llamocca ♪♫</Authors>
-		<Company>imL</Company>
-		<Description>Not so free tools.</Description>
-		<Copyright>© 1984 - 8888</Copyright>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
-		<RepositoryType>git</RepositoryType>
-		<PackageTags>imL imL.Package.Json package json</PackageTags>
-		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
-
+		<Copyright>© $(TargetFramework)</Copyright>
 		<Version>84.10.2.8</Version>
 		<PackageOutputPath>$(SolutionDir)\nupkg\debug\</PackageOutputPath>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
-		<Version>0.0.0.6</Version>
-		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
+		<Company>imL</Company>
+		<Copyright>© 1984 - 8888</Copyright>
+		<Description>Not so free tools.</Description>
+		<AssemblyTitle>® $(TargetFramework)</AssemblyTitle>
+
+		<Version>0.0.0.7</Version>
+		<Authors>Ricardo Llamocca ♪♫</Authors>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
+		<PackageTags>imL imL.Package.Json package json</PackageTags>
+		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
+		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
 
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
+		<NoWarn>CS1701;CS1702;CS8600;CS8601;CS8602;CS8618;CS8625;IDE0063;IDE0066;IDE0090</NoWarn>
+		<CheckEolTargetFramework>false</CheckEolTargetFramework>
+	</PropertyGroup>
+	<PropertyGroup Condition="('$(TargetFramework)' == 'net7.0') Or ('$(TargetFramework)' == 'net6.0') Or ('$(TargetFramework)' == 'net5.0')">
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	<PropertyGroup Condition="('$(TargetFramework)' == 'netstandard2.1')">
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup Condition="('$(TargetFramework)' == 'netstandard2.1') Or ('$(TargetFramework)' == 'netstandard2.0')">
-		<PackageReference Include="System.Text.Json" Version="7.*" />
+		<PackageReference Include="System.Text.Json" Version="7.0.2" />
 	</ItemGroup>
 	<ItemGroup Condition="('$(TargetFramework)' == 'netstandard1.6') Or ('$(TargetFramework)' == 'netstandard1.5') Or ('$(TargetFramework)' == 'netstandard1.4') Or ('$(TargetFramework)' == 'netstandard1.3') Or ('$(TargetFramework)' == 'netstandard1.2') Or ('$(TargetFramework)' == 'netstandard1.1') Or ('$(TargetFramework)' == 'netstandard1.0') Or ('$(TargetFramework)' == 'net40') Or ('$(TargetFramework)' == 'net35')">
-		<PackageReference Include="Newtonsoft.Json" Version="13.*" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\core\imL.Core\imL.Core.csproj" />

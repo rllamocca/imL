@@ -1,4 +1,4 @@
-﻿namespace imL.Rest.Sbif.Schema
+﻿namespace imL.Rest.SBIF.Schema
 {
     public class Recurso_Euro
     {

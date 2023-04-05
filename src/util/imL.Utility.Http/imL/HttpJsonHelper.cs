@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 
-using imL.Enumeration.Http;
+using imL.Http;
 using imL.Package.Json;
 
 namespace imL.Utility.Http

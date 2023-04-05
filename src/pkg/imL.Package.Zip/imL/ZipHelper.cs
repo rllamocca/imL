@@ -1,7 +1,6 @@
 ﻿#if (NET35 || NET40)
 using ICSharpCode.SharpZipLib.Zip;
 
-using imL.Utility;
 #else
 using System.IO.Compression;
 #endif
@@ -9,8 +8,6 @@ using System.IO.Compression;
 using System;
 using System.IO;
 using System.Linq;
-
-using imL.Struct;
 
 namespace imL.Package.Zip
 {

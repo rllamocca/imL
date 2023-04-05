@@ -21,7 +21,7 @@ namespace imL.Utility.OldHttp
             return _body;
         }
 
-        public static T ReadAsObject<T>(this HttpWebResponse _this)
+        public static T ReadJson<T>(this HttpWebResponse _this)
         {
             string _body = _this.ReadAsString();
 

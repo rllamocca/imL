@@ -1,57 +1,38 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-using imL.Contract;
-using imL.Enumeration.Logging;
 using imL.Package.Hosting;
 using imL.Package.Logging;
-using imL.Utility;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-using NLog;
 using NLog.Extensions.Hosting;
 
 namespace imL.Frotcom.Hosting.Core
 {
     public class HostHelperAsync
     {
-        public static async Task ConsoleAsync<GWorker>
-            (IHostPeriodSetting _setting, IAppInfo _info, EConsoleFormatter _formatter = EConsoleFormatter.Simple)
-            where GWorker : class, IHostPeriodWorker
-        {
-            await ConsoleAsync<PeriodExecutionDefault, GWorker>(_setting, _info, _formatter);
-        }
         public static async Task ConsoleAsync<GExecution, GWorker>
-            (IHostPeriodSetting _setting, IAppInfo _info, EConsoleFormatter _formatter = EConsoleFormatter.Simple)
+            (IAppInfo _info, IHostPeriodSetting _setting)
             where GExecution : class, IPeriodExecution, new()
             where GWorker : class, IHostPeriodWorker
         {
-            Microsoft.Extensions.Logging.ILogger _logger = null;
+            ILogger _logger = null;
 
             try
             {
-                IHostBuilder _build = Host.CreateDefaultBuilder(_info.Args)
-                    .ConfigureServices(_ac =>
-                    {
-                        _ac.AddHostedService<PeriodHostedService<GExecution>>();
-                        _ac.AddScoped<IHostPeriodWorker, GWorker>();
-                        _ac.AddSingleton(_s => _setting);
-                        _ac.AddSingleton(_s => _info);
-                    })
-                    .UseConsoleLifetime()
-                    .UseSimpleLogging(_formatter);
+                IHostBuilder _builder = HostHelper.CreatePeriodHostBuilder<GExecution, GWorker>(_info, _setting);
 
-                if (_info.InContainer == false)
+                if (_info.InContainer != true)
                 {
-                    LogManager.AutoShutdown = true;
-                    LogManager.Configuration.Variables["_BASEDIR_"] = _info.PathLog;
-                    _build.UseNLog();
+                    _builder.UseNLog();
+
+                    NLog.LogManager.AutoShutdown = true;
                 }
 
-                IHost _host = _build.Build();
+                IHost _host = _builder.Build();
                 _logger = _host.Services.GetRequiredService<ILogger<HostHelperAsync>>();
                 _logger?.LogInformation("Host created.");
 
@@ -64,7 +45,7 @@ namespace imL.Frotcom.Hosting.Core
                 if (_logger == null)
                 {
                     Console.WriteLine(_msg);
-                    ConsoleHelper.InnerException(_ex);
+                    ConsoleHelper.WriteInnerException(_ex);
                 }
                 else
                 {
@@ -76,9 +57,15 @@ namespace imL.Frotcom.Hosting.Core
             }
             finally
             {
-                if (_info.InContainer == false)
-                    LogManager.Shutdown();
+                if (_info.InContainer != true)
+                    NLog.LogManager.Shutdown();
             }
+        }
+        public static async Task ConsoleAsync<GWorker>
+            (IAppInfo _info, IHostPeriodSetting _setting)
+            where GWorker : class, IHostPeriodWorker
+        {
+            await ConsoleAsync<PeriodExecutionDefault, GWorker>(_info, _setting);
         }
     }
 }

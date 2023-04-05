@@ -1,0 +1,75 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>
+			net35;net40;net45;net451;net452;net46
+			;netstandard2.0;netstandard2.1
+			;net5.0;net6.0;net7.0
+		</TargetFrameworks>
+
+		<Copyright>© $(TargetFramework)</Copyright>
+		<Version>84.10.2.8</Version>
+		<PackageOutputPath>$(SolutionDir)\nupkg\debug\</PackageOutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<Company>imL</Company>
+		<!--<Configuration></Configuration>-->
+		<Copyright>© 1984 - 8888</Copyright>
+		<Description>Not so free tools.</Description>
+		<!--<FileVersion></FileVersion>-->
+		<!--<InformationalVersion></InformationalVersion>-->
+		<!--<Product></Product>-->
+		<AssemblyTitle>® $(TargetFramework)</AssemblyTitle>
+		<!--<AssemblyVersion></AssemblyVersion>-->
+		<!--<NeutralLanguage></NeutralLanguage>-->
+
+		<!--<PackageId></PackageId>-->
+		<Version>0.8.8.19</Version>
+		<!--<PackageVersion></PackageVersion>-->
+		<!--<VersionPrefix></VersionPrefix>-->
+		<!--<VersionSuffix></VersionSuffix>-->
+		<Authors>Ricardo Llamocca ♪♫</Authors>
+		<!--<Title></Title>-->
+		<!--<Description></Description>-->
+		<!--<Copyright></Copyright>-->
+		<!--<PackageRequireLicenseAcceptance></PackageRequireLicenseAcceptance>-->
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<!--<PackageLicenseFile></PackageLicenseFile>-->
+		<!--<PackageLicenseUrl></PackageLicenseUrl>-->
+		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
+		<!--<PackageIcon></PackageIcon>-->
+		<!--<PackageIconUrl></PackageIconUrl>-->
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
+		<PackageTags>imL</PackageTags>
+		<PackageReleaseNotes>Notas de la versión.</PackageReleaseNotes>
+		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<!--<RepositoryBranch></RepositoryBranch>-->
+		<!--<RepositoryCommit></RepositoryCommit>-->
+		<!--<PackageType></PackageType>-->
+
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
+		<NoWarn>CS1701;CS1702;CS8600;CS8601;CS8602;CS8618;CS8625;IDE0063;IDE0066;IDE0090</NoWarn>
+		<CheckEolTargetFramework>false</CheckEolTargetFramework>
+	</PropertyGroup>
+	<PropertyGroup Condition="('$(TargetFramework)' == 'net7.0') Or ('$(TargetFramework)' == 'net6.0') Or ('$(TargetFramework)' == 'net5.0')">
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	<PropertyGroup Condition="('$(TargetFramework)' == 'netstandard2.1')">
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\imL.Core\imL.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="readme.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+</Project>

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Net;
 
-using imL.Enumeration.Http;
+using imL.Http;
 using imL.Package.Json;
 
 namespace imL.Utility.OldHttp

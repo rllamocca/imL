@@ -2,7 +2,7 @@
 
 using System;
 
-namespace imL.Struct
+namespace System.Drawing
 {
     public struct Point
     {
@@ -11,8 +11,8 @@ namespace imL.Struct
 
         public Point(int _x, int _y)
         {
-            this.X = _x;
-            this.Y = _y;
+            X = _x;
+            Y = _y;
         }
 
         public override bool Equals(object obj)

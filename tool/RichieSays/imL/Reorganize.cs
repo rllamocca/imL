@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-using imL.Sealed;
-using imL.Utility;
+using imL;
 
 namespace RichieSays
 {

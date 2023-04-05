@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 
-using imL.Contract.DB;
+using imL.DB;
 
 namespace imL.Utility.Sql
 {
@@ -10,7 +10,7 @@ namespace imL.Utility.Sql
     {
         public string Affect { get; }
         public string Expression { get; }
-        public bool IsSearchCondition { get; }
+        public bool? IsSearchCondition { get; }
 
         public SqlParameter Parameter { get; }
 
@@ -21,17 +21,17 @@ namespace imL.Utility.Sql
             bool _issearch = false
             )
         {
-            this.Affect = _affect;
-            this.IsSearchCondition = _issearch;
+            Affect = _affect;
+            IsSearchCondition = _issearch;
 
-            this.Parameter = new SqlParameter
+            Parameter = new SqlParameter
             {
-                ParameterName = "@" + this.Affect,
+                ParameterName = "@" + Affect,
                 Value = _value ?? DBNull.Value,
                 SqlDbType = _dbtype
             };
 
-            this.Expression = this.Parameter.ParameterName;
+            Expression = Parameter.ParameterName;
         }
         public SqlParameterDefault(
             string _affect,
@@ -41,7 +41,7 @@ namespace imL.Utility.Sql
             bool _issearch = false
             ) : this(_affect, _value, _dbtype, _issearch)
         {
-            this.Parameter.Size = _size;
+            Parameter.Size = _size;
         }
         public SqlParameterDefault(
             string _affect,
@@ -52,13 +52,13 @@ namespace imL.Utility.Sql
             bool _issearch = false
             ) : this(_affect, _value, _dbtype, _issearch)
         {
-            this.Parameter.Precision = _precision;
-            this.Parameter.Scale = _scale;
+            Parameter.Precision = _precision;
+            Parameter.Scale = _scale;
         }
 
         public object GetValue()
         {
-            return this.Parameter.Value;
+            return Parameter.Value;
         }
     }
 }

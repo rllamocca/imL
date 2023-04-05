@@ -1,4 +1,4 @@
-﻿namespace imL.Struct
+﻿namespace imL
 {
     public struct Lot<G1, G2>
     {
@@ -7,8 +7,8 @@
 
         public Lot(G1 _lot1, G2 _lot2)
         {
-            this.Lot1 = _lot1;
-            this.Lot2 = _lot2;
+            Lot1 = _lot1;
+            Lot2 = _lot2;
         }
     }
 }

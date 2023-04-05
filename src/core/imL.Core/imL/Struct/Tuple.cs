@@ -1,14 +1,14 @@
 ﻿#if (NET35)
 
-namespace imL.Struct
+namespace System
 {
-    public struct Tuple<T1>
+    public readonly struct Tuple<T1>
     {
         public T1 Item1 { get; }
 
         public Tuple(T1 item1)
         {
-            this.Item1 = item1;
+            Item1 = item1;
         }
 
         public override bool Equals(object obj)
@@ -32,15 +32,15 @@ namespace imL.Struct
         }
     }
 
-    public struct Tuple<T1, T2>
+    public readonly struct Tuple<T1, T2>
     {
         public T1 Item1 { get; }
         public T2 Item2 { get; }
 
         public Tuple(T1 item1, T2 item2)
         {
-            this.Item1 = item1;
-            this.Item2 = item2;
+            Item1 = item1;
+            Item2 = item2;
         }
 
         public override bool Equals(object obj)
@@ -64,7 +64,7 @@ namespace imL.Struct
         }
     }
 
-    public struct Tuple<T1, T2, T3>
+    public readonly struct Tuple<T1, T2, T3>
     {
         public T1 Item1 { get; }
         public T2 Item2 { get; }
@@ -72,9 +72,9 @@ namespace imL.Struct
 
         public Tuple(T1 item1, T2 item2, T3 item3)
         {
-            this.Item1 = item1;
-            this.Item2 = item2;
-            this.Item3 = item3;
+            Item1 = item1;
+            Item2 = item2;
+            Item3 = item3;
         }
 
         public override bool Equals(object obj)

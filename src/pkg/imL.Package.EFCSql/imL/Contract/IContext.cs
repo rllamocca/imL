@@ -1,11 +1,11 @@
-﻿using imL.Contract.DB;
+﻿using imL.DB;
 
 namespace imL.Package.EFCSql
 {
     public interface IContext : IDisposable, IAsyncDisposable
     {
-        IConnection Connection { get; }
-        IHelperAsync Helper { get; }
+        IConnection? Connection { get; }
+        IHelper? Helper { get; }
 
         DateTime CURRENT_TIMESTAMP();
         DateTime GETDATE();
