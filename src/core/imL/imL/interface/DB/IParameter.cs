@@ -6,6 +6,6 @@
         string? Expression { get; }
         bool? IsSearchCondition { get; }
 
-        object GetValue();
+        object? GetValue();
     }
 }

@@ -20,18 +20,18 @@ namespace imL
 {
     public static class StringExtension
     {
-        public static bool HasValue(this string? _this)
-        {
-            return (_this != null);
-        }
-        public static bool HasValueLength(this string? _this)
-        {
-            return (_this.HasValue() && _this.Length > 0);
-        }
-        public static bool HasValueTrim(this string? _this)
-        {
-            return (_this.HasValue() && _this.Trim().Length > 0);
-        }
+        //public static bool HasValue(this string? _this)
+        //{
+        //    return (_this != null);
+        //}
+        //public static bool HasValueLength(this string? _this)
+        //{
+        //    return (_this.HasValue() && _this.Length > 0);
+        //}
+        //public static bool HasValueTrim(this string? _this)
+        //{
+        //    return (_this.HasValue() && _this.Trim().Length > 0);
+        //}
         public static string? ReplaceEndLine(this string? _this, EEndLine _re)
         {
             if (_this == null)
@@ -56,7 +56,7 @@ namespace imL
 
             return _this;
         }
-        public static bool ArgAppear(this string?[] _array, params string?[] _params)
+        public static bool ArgAppear(this string[]? _array, params string[] _params)
         {
             if (_array == null)
                 return false;
@@ -75,7 +75,7 @@ namespace imL
 
             return _return;
         }
-        public static string? ArgValue(this string?[] _array, params string?[] _params)
+        public static string? ArgValue(this string[]? _array, params string[] _params)
         {
             if (_array == null)
                 return null;
@@ -106,7 +106,7 @@ namespace imL
 
             return _return;
         }
-        public static string? Replace(this string? _this, string? _new, params string?[] _params)
+        public static string? Replace(this string? _this, string? _new, params string[] _params)
         {
             if (_this == null)
                 return null;
@@ -117,14 +117,14 @@ namespace imL
             string? _return = _this;
             _params = _params.Distinct().ToArray();
 
-            for (int _i = 0; _i < _params.Length; _i++)
-                _return = _return.Replace(_params[_i], _new);
+            foreach (string _item in _params)
+                _return = _return.Replace(_item, _new);
 
             return _return;
         }
-        public static void ToStream(this string? _this, out Stream _out, Encoding _enc = null)
+        public static void ToStream(this string? _this, out Stream _out, Encoding? _enc = null)
         {
-            ReadOnly.DefaultEncoding_NoBOM(ref _enc);
+            _enc = ReadOnly.DefaultEncoding_NoBOM(_enc);
 
             _out = new MemoryStream();
             StreamWriter _sw = new StreamWriter(_out, _enc);
@@ -174,7 +174,7 @@ namespace imL
         }
 
 
-        public static IEnumerable<string?> GetCutsISync(string? _string, int _length)
+        public static IEnumerable<string?> GetCutsISync(string _string, int _length)
         {
             if (_length <= 0)
                 yield break;
@@ -188,7 +188,6 @@ namespace imL
 #endif
 
                 _string = _string.Remove(0, _length);
-
             }
         }
     }

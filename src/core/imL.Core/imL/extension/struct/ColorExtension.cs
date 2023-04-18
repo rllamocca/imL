@@ -39,11 +39,8 @@ namespace imL
 
             return _array.Select(_s => _s.ToStringRGB()).ToArray();
         }
-        public static string?[] ToStringRGBA(this Color[] _array)
+        public static IEnumerable<string?> ToStringRGBA(this Color[] _array)
         {
-            if (_array == null)
-                return null;
-
             return _array.Select(_s => _s.ToStringRGBA()).ToArray();
         }
         public static Color Blend(this Color[] _array)

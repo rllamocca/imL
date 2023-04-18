@@ -9,9 +9,9 @@ namespace imL
 {
     public class MimeHelper
     {
-        public static string? MediaType(string? _fileextension)
+        public static string MediaType(string? _fileextension)
         {
-            _fileextension = _fileextension.ToLower();
+            _fileextension = _fileextension?.ToLower();
 
             switch (_fileextension)
             {
@@ -60,7 +60,7 @@ namespace imL
         }
 
 #if (NET35_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
-        public static ContentType ContentType(string? _filename)
+        public static ContentType ContentType(string _filename)
         {
             FileInfo _fi = new FileInfo(_filename);
 

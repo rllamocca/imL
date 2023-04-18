@@ -28,15 +28,12 @@ namespace imL
             return _array;
         }
 
-        public static string?[] ConvertToString(this char[] _array)
+        public static IEnumerable<string> ConvertToString(this IEnumerable<char> _array)
         {
-            if (_array == null)
-                return null;
+            IList<string> _return = new List<string>();
 
-            string?[] _return = new string?[_array.Length];
-
-            for (int _i = 0; _i < _return.Length; _i++)
-                _return[_i] = Convert.ToString(_array[_i]);
+            foreach (char _item in _array)
+                _return.Add(Convert.ToString(_item));
 
             return _return;
         }

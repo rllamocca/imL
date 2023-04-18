@@ -15,6 +15,9 @@ namespace imL
         {
             await foreach (string? _item in _list)
             {
+                if (_item == null)
+                    continue;
+
                 //drwxrwxrwx   1 user     group           0 Nov 21 22:05 221117
                 //-rw-rw-rw-   1 user     group     7206316 Nov 21 15:08 20221121_7849166.zip
 

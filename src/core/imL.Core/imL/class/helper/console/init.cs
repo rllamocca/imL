@@ -21,7 +21,7 @@ namespace imL
                 Console.OutputEncoding = ReadOnly._ENCODING;
             }
 
-            if (_title.HasValue())
+            if (_title != null)
                 Console.Title = _title;
 
             Console.WriteLine(Environment.NewLine + @" Start the magic trick ... ♪♫ ");

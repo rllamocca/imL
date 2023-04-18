@@ -122,7 +122,7 @@ namespace imL
                 return new MemoryUnit(_l.To(_r.Unit).Size - _r.Size, _r.Unit);
         }
 
-        public override bool Equals(object _obj)
+        public override bool Equals(object? _obj)
         {
             if (_obj is MemoryUnit _mu)
                 return this == _mu;

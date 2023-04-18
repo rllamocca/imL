@@ -16,7 +16,7 @@ namespace imL
         long? Errors { set; get; }
         IList<string?> PathAttachments { set; get; }
         EAlert? Alert { set; get; }
-        Exception Critical { set; get; }
+        Exception? Critical { set; get; }
         DateTime? End { set; get; }
 
         void AddSelected(long _add = 1);
@@ -30,8 +30,8 @@ namespace imL
         void Danger(Exception? _ex = null);
         TimeSpan? Duration();
 
-        string? Base { get; }
+        string Base { get; }
         string? FileLog { get; }
-        string? BaseOut { get; }
+        string BaseOut { get; }
     }
 }

@@ -25,12 +25,12 @@ namespace imL
 
             return Convert.ToString(_this);
         }
-        public static string?[] DBToString(this object[] _array, bool _empty = false)
+        public static string?[]? DBToString(this object[] _array, bool _empty = false)
         {
             if (_array == null)
                 return null;
 
-            string?[] _return = new string?[_array.Length];
+            string?[] _return = new string[_array.Length];
 
             for (int _i = 0; _i < _array.Length; _i++)
                 _return[_i] = _array[_i].DBToString(_empty);
@@ -38,7 +38,7 @@ namespace imL
             return _return;
         }
 
-        public static bool IsNumber(this object _this, bool _throw = false)
+        public static bool IsNumber(this object? _this, bool _throw = false)
         {
             if (_this == null)
                 return false;
@@ -47,7 +47,7 @@ namespace imL
             {
                 string? _a = Convert.ToString(_this);
 
-                if (_a.HasValueTrim() == false)
+                if (_a == null)
                     return false;
 
                 return Regex.IsMatch(_a, @"^[-+]?[0-9]*\.?[0-9]+$");

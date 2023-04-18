@@ -27,7 +27,7 @@ namespace imL
 
             return _i;
         }
-        internal static FtpWebRequest CreateClient(string? _method, string? _root, FtpFormat _format)
+        internal static FtpWebRequest CreateClient(string _method, string? _root, FtpFormat _format)
         {
             FtpWebRequest _return = (FtpWebRequest)FtpWebRequest.Create(_format.Host + _format.Path + _root);
             _return = InitFtpWebRequest(_return, _format);

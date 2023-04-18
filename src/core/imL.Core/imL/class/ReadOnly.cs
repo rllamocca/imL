@@ -48,7 +48,7 @@ namespace imL
         public static Encoding DefaultEncoding(string? _name)
         {
             if (_name == null)
-                return ReadOnly._ENCODING;
+                return _ENCODING;
 
             return Encoding.GetEncoding(_name);
         }
@@ -56,13 +56,20 @@ namespace imL
         public static void DefaultEncoding(ref Encoding _ref)
         {
             if (_ref == null)
-                _ref = ReadOnly._ENCODING;
+                _ref = _ENCODING;
         }
 
         public static void DefaultEncoding_NoBOM(ref Encoding _ref)
         {
             if (_ref == null)
-                _ref = ReadOnly._ENCODING_NO_BOM;
+                _ref = _ENCODING_NO_BOM;
+        }
+        public static Encoding DefaultEncoding_NoBOM(Encoding? _ref)
+        {
+            if (_ref == null)
+                return _ENCODING_NO_BOM;
+
+            return _ref;
         }
     }
 }

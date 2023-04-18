@@ -18,22 +18,22 @@ namespace imL
     {
         bool _DISPOSED = false;
 
-        protected ProgressAbstract _PARENT;
+        protected ProgressAbstract? _PARENT;
         protected EReportProgress _REPORT;
         protected Point _DRAW_END;
         protected DateTime _START;
 
         const char _CHAR = '■';
-        const string? _BUCLE = @"+\|/";
+        const string _BUCLE = @"+\|/";
         byte _BLOCKS = 50;
         Point _LINE;
         Point _NEW_LINE;
         Point _DRAW_START;
-        IList<decimal> _BAR = new List<decimal>() { 0 };
+        IList<decimal>? _BAR = new List<decimal>() { 0 };
 
         public DateTime Start { get { return _START; } }
 
-        protected void Init(EReportProgress _report = EReportProgress.None, ProgressAbstract _parent = null)
+        protected void Init(EReportProgress _report = EReportProgress.None, ProgressAbstract? _parent = null)
         {
             _START = DateTime.Now;
             _PARENT = _parent;
@@ -70,7 +70,7 @@ namespace imL
             {
                 decimal _round = Math.Round(_per * _BLOCKS);
 
-                if (_BAR.Contains(_round) == false)
+                if (_BAR?.Contains(_round) == false)
                 {
                     _BAR.Add(_round);
 
@@ -134,7 +134,7 @@ namespace imL
                 _LINE = new Point(0, 0);
                 _NEW_LINE = new Point(0, 0);
                 _DRAW_START = new Point(0, 0);
-                _BAR.Clear();
+                _BAR?.Clear();
                 _BAR = null;
             }
             _DISPOSED = true;

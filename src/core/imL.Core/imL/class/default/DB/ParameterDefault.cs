@@ -17,7 +17,7 @@
             IsSearchCondition = _issearch;
         }
 
-        public object GetValue()
+        public object? GetValue()
         {
             return null;
         }

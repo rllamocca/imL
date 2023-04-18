@@ -25,10 +25,10 @@ namespace imL
         }
 
 #if (NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NET5_0_OR_GREATER)
-        public static G2 GetAttribute<G1, G2>()
+        public static G2? GetAttribute<G1, G2>()
         {
             TypeInfo _ti = typeof(G1).GetTypeInfo();
-            Attribute _a = _ti.GetCustomAttribute(typeof(G2));
+            Attribute? _a = _ti.GetCustomAttribute(typeof(G2));
 
             if (_a == null)
                 return default;

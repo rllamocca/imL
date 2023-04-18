@@ -23,7 +23,7 @@ namespace imL
         public long? Errors { set; get; }
         public IList<string?> PathAttachments { set; get; } = new List<string?>();
         public EAlert? Alert { set; get; }
-        public Exception Critical { set; get; }
+        public Exception? Critical { set; get; }
         public DateTime? End { set; get; }
 
         public string? Base { get { return _PATH; } }
@@ -90,7 +90,7 @@ namespace imL
 
             End = DateTime.Now;
         }
-        public void Danger(Exception _ex = null)
+        public void Danger(Exception? _ex = null)
         {
             Critical = _ex;
             Alert = EAlert.Danger;

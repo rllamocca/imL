@@ -18,11 +18,14 @@ namespace imL
                 "dd'/'MM'/'yyyy"
             };
 
-        static readonly string? _LF = new string(new char[] { (char)10 });
-        static readonly string? _CR = new string(new char[] { (char)13 });
+        static readonly string _LF = new string(new char[] { (char)10 });
+        static readonly string _CR = new string(new char[] { (char)13 });
 
-        public static string? GetStringNull(string? _key, string? _value, int _length = 0, params string?[] _params)
+        public static string? GetStringNull(string? _key, string? _value, int _length = 0, params string[] _params)
         {
+            if (_value == null)
+                return null;
+
             if (_length > 0 && _value.Length > _length) throw new HandledException(string.Format("{0} con largo máximo superado; ({1})", _key, _length));
 
             if (_params.Length > 0)
@@ -33,13 +36,13 @@ namespace imL
 
             return _value.Trim(); //¿?
         }
-        public static string? GetString(string? _key, string? _value, int _length = 0, params string?[] _params)
+        public static string? GetString(string? _key, string? _value, int _length = 0, params string[] _params)
         {
             if (string.IsNullOrEmpty(_value)) throw new HandledException(string.Format("{0} no informado", _key));
 
             return GetStringNull(_key, _value, _length, _params);
         }
-        public static bool GetBool(string? _key, string? _value, int _length = 0, params string?[] _params)
+        public static bool GetBool(string? _key, string? _value, int _length = 0, params string[] _params)
         {
             _value = GetString(_key, _value, _length, _params);
 
@@ -48,7 +51,7 @@ namespace imL
 
             throw new HandledException(string.Format("{0} no representa un número", _key));
         }
-        public static sbyte GetSByte(string? _key, string? _value, int _length = 0, ENumberLine _nl = ENumberLine.None, params string?[] _params)
+        public static sbyte GetSByte(string? _key, string? _value, int _length = 0, ENumberLine _nl = ENumberLine.None, params string[] _params)
         {
             _value = GetString(_key, _value, _length, _params);
 
@@ -67,7 +70,7 @@ namespace imL
 
             throw new HandledException(string.Format("{0} no representa un número", _key));
         }
-        public static short GetShort(string? _key, string? _value, int _length = 0, ENumberLine _nl = ENumberLine.None, params string?[] _params)
+        public static short GetShort(string? _key, string? _value, int _length = 0, ENumberLine _nl = ENumberLine.None, params string[] _params)
         {
             _value = GetString(_key, _value, _length, _params);
 
@@ -86,7 +89,7 @@ namespace imL
 
             throw new HandledException(string.Format("{0} no representa un número", _key));
         }
-        public static int GetInt(string? _key, string? _value, int _length = 0, ENumberLine _nl = ENumberLine.None, params string?[] _params)
+        public static int GetInt(string? _key, string? _value, int _length = 0, ENumberLine _nl = ENumberLine.None, params string[] _params)
         {
             _value = GetString(_key, _value, _length, _params);
 
@@ -105,7 +108,7 @@ namespace imL
 
             throw new HandledException(string.Format("{0} no representa un número", _key));
         }
-        public static long GetLong(string? _key, string? _value, int _length = 0, ENumberLine _nl = ENumberLine.None, params string?[] _params)
+        public static long GetLong(string? _key, string? _value, int _length = 0, ENumberLine _nl = ENumberLine.None, params string[] _params)
         {
             _value = GetString(_key, _value, _length, _params);
 
@@ -124,7 +127,7 @@ namespace imL
 
             throw new HandledException(string.Format("{0} no representa un número", _key));
         }
-        public static DateTime GetDateTime(string? _key, string? _value, int _length = 0, params string?[] _params)
+        public static DateTime GetDateTime(string? _key, string? _value, int _length = 0, params string[] _params)
         {
             _value = GetString(_key, _value, _length, _params);
 
@@ -157,6 +160,9 @@ namespace imL
         }
         public static void CheckRUN(string? _key, string? _run, int _max = 0)
         {
+            if (_run == null)
+                throw new ArgumentNullException(nameof(_run));
+
             int _a = _run.Length - 1;
 
 #if NETSTANDARD2_1_OR_GREATER
@@ -211,7 +217,7 @@ namespace imL
                 default: return Convert.ToString(_dv);
             }
         }
-        public static bool RUNIsValid(long _rut, string? _dv, int _max = 0)
+        public static bool RUNIsValid(long _rut, string _dv, int _max = 0)
         {
             if (_max > 0)
             {
@@ -221,7 +227,7 @@ namespace imL
                     return false;
             }
 
-            string? _run = string.Format("{0}-{1}", _rut, _dv);
+            string _run = string.Format("{0}-{1}", _rut, _dv);
             Regex _reg = new Regex("[0-9]+-[0-9Kk]");
 
             if (_reg.IsMatch(_run) == false)
@@ -230,7 +236,7 @@ namespace imL
             return _dv.Equals(RUTGetDV(_rut), StringComparison.OrdinalIgnoreCase);
         }
 
-        public static string? CleanEndLine(string? _value)
+        public static string CleanEndLine(string _value)
         {
             //char _null = (char)0;
             //char _lf = (char)10;
@@ -239,7 +245,7 @@ namespace imL
             return _value.Replace(_LF, string.Empty).Replace(_CR, string.Empty);
         }
 
-        public static XmlDocument LoadXml(string? _xml, bool _normalize = true)
+        public static XmlDocument LoadXml(string _xml, bool _normalize = true)
         {
             XmlDocument _return = new XmlDocument();
             _return.LoadXml(_xml);
@@ -249,7 +255,7 @@ namespace imL
 
             return _return;
         }
-        public static void AddXmlElement(XmlDocument _doc, XmlNode _nod, string? _key, object _value = null, string? _attribute = null)
+        public static void AddXmlElement(XmlDocument _doc, XmlNode _nod, string _key, object? _value = null, string? _attribute = null)
         {
             XmlElement _xe = _doc.CreateElement(_key);
 
@@ -258,7 +264,7 @@ namespace imL
                 if (_value is string _string)
                     _xe.InnerText = _string;
                 else
-                    _xe.InnerText = Convert.ToString(_value);
+                    _xe.InnerText = Convert.ToString(_value) ?? string.Empty;
             }
 
             if (_attribute != null)
