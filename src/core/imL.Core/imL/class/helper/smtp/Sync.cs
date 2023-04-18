@@ -12,11 +12,8 @@ namespace imL
 
             foreach (MailMessageFormat _item in _params)
             {
-                _item.FromAddress = _item.FromAddress ?? _smtp.UserName;
-                _item.FromDisplayName = _item.FromDisplayName ?? _smtp.UserName;
-
-                using (MailMessage _mm = InitMailMessage(new MailMessage(), _item))
-                    _client.Send(_mm);
+                using MailMessage _mm = InitMailMessage(new MailMessage(), _smtp, _item);
+                _client.Send(_mm);
             }
 
 #if (NET35) == false
