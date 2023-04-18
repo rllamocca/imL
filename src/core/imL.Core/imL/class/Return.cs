@@ -20,16 +20,16 @@ namespace imL
     public class Return
     {
         readonly bool _SUCCESS;
-        readonly object _RESULT;
+        readonly object? _RESULT;
         readonly bool _EXCEPTION;
         readonly string? _MESSAGE;
 
         public bool Success { get { return _SUCCESS; } }
-        public object Result { get { return _RESULT; } }
+        public object? Result { get { return _RESULT; } }
         public bool Exception { get { return _EXCEPTION; } }
         public string? Message { get { return _MESSAGE; } }
 
-        public Return(bool _success, object _result = null)
+        public Return(bool _success, object? _result = null)
         {
             _SUCCESS = _success;
             _RESULT = _result;

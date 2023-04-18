@@ -17,11 +17,11 @@ namespace imL
     public static class DataTableExtension
     {
         public static void FlatCreate(this DataTable _this,
-            string? _path,
+            string _path,
             char _separator = '\0',
             bool _columnnames = true,
-            Encoding _enc = null,
-            IProgress<int> _progress = null)
+            Encoding? _enc = null,
+            IProgress<int>? _progress = null)
         {
             _this.GetFlat(out Stream _out, _separator, _columnnames, _enc, _progress);
             _out.CheckBeginPosition();

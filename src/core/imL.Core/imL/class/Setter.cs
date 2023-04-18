@@ -12,8 +12,8 @@ namespace imL
 {
     public class Setter<G>
     {
-        PropertyInfo[] _PROPS;
-        string?[] _KEYS;
+        PropertyInfo[]? _PROPS;
+        string[]? _KEYS;
 
         internal G I__CREATE__()
         {
@@ -34,7 +34,7 @@ namespace imL
         {
             if (_KEYS == null)
             {
-                IList<string?> _tmp = new List<string?>();
+                IList<string> _tmp = new List<string>();
 
                 foreach (DataColumn _item in _dr.Table.Columns)
                     _tmp.Add(_item.ColumnName);
@@ -42,26 +42,34 @@ namespace imL
                 _KEYS = _tmp.ToArray();
             }
         }
-        internal void I__SET__(G _g, int _index, object _value)
+        internal void I__SET__(G _g, int _index, object? _value)
         {
+            if (_PROPS == null)
+                return;
+
             PropertyInfo _prop = _PROPS[_index];
             I__VALUE__(_g, _prop, _value);
         }
         internal void I__SET__(G _g, string? _name, object _value)
         {
-            PropertyInfo _prop = _PROPS.Where(_w => _w.Name == _name).FirstOrDefault();
+            if (_PROPS == null)
+                return;
+
+            PropertyInfo? _prop = _PROPS.Where(_w => _w.Name == _name).FirstOrDefault();
             I__VALUE__(_g, _prop, _value);
         }
-        internal static void I__VALUE__(G _g, PropertyInfo _pi, object _value)
+        internal static void I__VALUE__(G _g, PropertyInfo? _pi, object? _value)
         {
-            if (_pi.HasValue() && _pi.CanWrite)
-            {
-                if (_value.HasValue())
-                    _pi.SetValue(_g, _value, null);
-            }
+            if (_value == null)
+                return;
+
+            if (_pi == null || _pi.CanWrite == false)
+                return;
+
+            _pi.SetValue(_g, _value, null);
         }
 
-        public G Instance(params object[] _values)
+        public G? Instance(params object?[] _values)
         {
             if (_values == null)
                 return default;
@@ -73,7 +81,7 @@ namespace imL
 
             return _return;
         }
-        public G Instance(params KeyValuePair<string?, object>[] _values)
+        public G? Instance(params KeyValuePair<string?, object>[] _values)
         {
             if (_values == null)
                 return default;
@@ -85,7 +93,7 @@ namespace imL
 
             return _return;
         }
-        public G Instance(DataRow _values, bool _byindex = false)
+        public G? Instance(DataRow _values, bool _byindex = false)
         {
             if (_byindex)
                 return Instance(_values.ItemArray);
@@ -96,8 +104,9 @@ namespace imL
             I__KEY__(_values);
             G _return = I__CREATE__();
 
-            foreach (string? _item in _KEYS)
-                I__SET__(_return, _item, _values[_item]);
+            if (_KEYS != null && _KEYS.Any())
+                foreach (string? _item in _KEYS)
+                    I__SET__(_return, _item, _values[_item]);
 
             return _return;
         }

@@ -5,10 +5,10 @@ namespace imL
 {
     public static class ObjectExtension
     {
-        public static bool HasValue(this object _this)
-        {
-            return (_this != null);
-        }
+        //public static bool HasValue(this object _this)
+        //{
+        //    return (_this != null);
+        //}
         public static string? DBToString(this object _this, bool _empty = false)
         {
             if (_this == null

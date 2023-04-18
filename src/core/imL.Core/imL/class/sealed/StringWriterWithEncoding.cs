@@ -7,9 +7,9 @@ namespace imL
     {
         readonly Encoding _ENCODING;
 
-        public StringWriterWithEncoding(Encoding _enc = null)
+        public StringWriterWithEncoding(Encoding? _enc = null)
         {
-            ReadOnly.DefaultEncoding(ref _enc);
+            _enc = ReadOnly.DefaultEncoding(_enc);
 
             _ENCODING = _enc;
         }

@@ -19,7 +19,7 @@ namespace imL
                 throw new ArgumentNullException(nameof(_ds));
 
             IList<XmlElement> _return = new List<XmlElement>();
-            XmlElement _tmp;
+            XmlElement? _tmp;
 
             using (MemoryStream _ms = new MemoryStream())
             {

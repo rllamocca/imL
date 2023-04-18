@@ -3,14 +3,9 @@
 #if (NETSTANDARD1_3 || NETSTANDARD1_4 || NETSTANDARD1_5 || NETSTANDARD1_6)
 //using imL.Struct;
 #else
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 #endif
 
-using System.Drawing;
-using System;
-using System.Collections.Generic;
 
 namespace imL
 {

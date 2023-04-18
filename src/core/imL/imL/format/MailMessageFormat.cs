@@ -6,7 +6,7 @@ using System.Net.Mime;
 
 namespace imL
 {
-    public class MailMessageFormat
+    public record MailMessageFormat
     {
         public string? Encoding { set; get; }
 

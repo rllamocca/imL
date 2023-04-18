@@ -2,7 +2,7 @@
 
 namespace imL
 {
-    public class EndpointFormat
+    public record EndpointFormat
     {
         public string? Endpoint { set; get; }
         public EAuthentication? Scheme { set; get; }

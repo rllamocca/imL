@@ -63,22 +63,27 @@ namespace imL
                 _i.AlternateViews.Add(_aw);
             }
 
-            foreach (string? _item in _f.TO.DefaultOrEmpty())
-                _i.To.Add(new MailAddress(_item));
+            if (_f.TO != null && _f.TO.Any())
+                foreach (string? _item in _f.TO)
+                    _i.To.Add(new MailAddress(_item));
 
-            foreach (string? _item in _f.CC.DefaultOrEmpty())
-                _i.CC.Add(new MailAddress(_item));
+            if (_f.CC != null && _f.CC.Any())
+                foreach (string? _item in _f.CC)
+                    _i.CC.Add(new MailAddress(_item));
 
-            foreach (string? _item in _f.BCC.DefaultOrEmpty())
-                _i.Bcc.Add(new MailAddress(_item));
+            if (_f.BCC != null && _f.BCC.Any())
+                foreach (string? _item in _f.BCC)
+                    _i.Bcc.Add(new MailAddress(_item));
 
             _i.Subject = _f.Subject;
 
-            foreach (string? _item in _f.PathAttachments.DefaultOrEmpty())
-                _i.Attachments.Add(InitAttachment(_item));
+            if (_f.PathAttachments != null && _f.PathAttachments.Any())
+                foreach (string? _item in _f.PathAttachments)
+                    _i.Attachments.Add(InitAttachment(_item));
 
-            foreach (StreamAttachmentFormat _item in _f.StreamAttachments.DefaultOrEmpty())
-                _i.Attachments.Add(new Attachment(_item.Content, _item.Name, _item.MediaType ?? MimeHelper.MediaType(new FileInfo(_item.Name).Extension)));
+            if (_f.StreamAttachments != null && _f.StreamAttachments.Any())
+                foreach (StreamAttachmentFormat _item in _f.StreamAttachments)
+                    _i.Attachments.Add(new Attachment(_item.Content, _item.Name, _item.MediaType ?? MimeHelper.MediaType(new FileInfo(_item.Name).Extension)));
 
             return _i;
         }

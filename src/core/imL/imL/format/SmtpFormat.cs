@@ -4,7 +4,7 @@ using System.Net.Mail;
 
 namespace imL
 {
-    public class SmtpFormat
+    public record SmtpFormat
     {
         public int? Timeout { set; get; }
         public string? TargetName { set; get; }
@@ -19,7 +19,7 @@ namespace imL
 #endif
         public bool? UseDefaultCredentials { set; get; }
 
-        public string? UserName { set; get; }
+        public string UserName { set; get; }
         public string? Password { set; get; }
 
 

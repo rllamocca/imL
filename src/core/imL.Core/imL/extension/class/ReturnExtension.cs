@@ -11,7 +11,7 @@ namespace imL
         }
         public static void TriggerException(this Return _this)
         {
-            if (_this.Exception)
+            if (_this.Exception && _this.Result is Exception)
                 throw (Exception)_this.Result;
         }
         public static void TriggerErrorException(this Return _this)

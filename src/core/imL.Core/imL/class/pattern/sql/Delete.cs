@@ -21,6 +21,9 @@ DELETE FROM [{0}]
 
             foreach (string? _item in _affects)
             {
+                if (_item == null)
+                    continue;
+
                 string?[] _tmp2 = _array.Where(_w => _item.Equals(_w.Affect, StringComparison.OrdinalIgnoreCase) && _w.IsSearchCondition == true && _w.Expression != null).Select(_s => _s.Expression).ToArray();
                 string? _tmp3 = string.Join(" ", _tmp2.ToArray());
 

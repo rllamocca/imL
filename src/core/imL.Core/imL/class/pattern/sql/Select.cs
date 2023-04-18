@@ -20,7 +20,7 @@ FROM [{0}]
             string? _1 = null;
             string? _2 = null;
             string?[] _affects = _array.Where(_w => _w.Affect != null && _w.IsSearchCondition == false).Select(_s => _s.Affect).Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
-            IList<string?> _tmp = _affects.Select(_s => string.Format("[{0}]", _s)).ToList();
+            IList<string> _tmp = _affects.Select(_s => string.Format("[{0}]", _s)).ToList();
 
             if (_tmp.Count == 0)
                 _1 = "*";
@@ -28,10 +28,13 @@ FROM [{0}]
                 _1 = string.Join(",", _tmp.ToArray());
 
             _affects = _array.Where(_w => _w.Affect != null && _w.IsSearchCondition == true).Select(_s => _s.Affect).Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
-            _tmp = new List<string?>();
+            _tmp = new List<string>();
 
             foreach (string? _item in _affects)
             {
+                if (_item == null)
+                    continue;
+
                 string?[] _tmp2 = _array.Where(_w => _item.Equals(_w.Affect, StringComparison.OrdinalIgnoreCase) && _w.IsSearchCondition == true && _w.Expression != null).Select(_s => _s.Expression).ToArray();
                 string? _tmp3 = string.Join(" ", _tmp2.ToArray());
 

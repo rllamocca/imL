@@ -20,7 +20,7 @@ namespace imL
         public uint Length { get { return _LENGTH; } }
         public uint Value { get { return _VALUE; } }
 
-        public ProgressU32(uint _length = 50, EReportProgress _report = EReportProgress.Increment, ProgressAbstract _parent = null)
+        public ProgressU32(uint _length = 50, EReportProgress _report = EReportProgress.Increment, ProgressAbstract? _parent = null)
         {
             if (_length == 0)
                 throw new ArgumentOutOfRangeException(nameof(_length), "_length == 0");

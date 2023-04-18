@@ -10,12 +10,12 @@ namespace imL
 
         readonly System.Timers.Timer _TIMER;
 
-        void ElapsedEvent(object _source, ElapsedEventArgs _e)
+        void ElapsedEvent(object? _source, ElapsedEventArgs _e)
         {
             DrawElapsed(_e.SignalTime);
         }
 
-        public ElapsedTime(ProgressAbstract _parent = null)
+        public ElapsedTime(ProgressAbstract? _parent = null)
         {
             Init(_parent: _parent);
             Init2(0);

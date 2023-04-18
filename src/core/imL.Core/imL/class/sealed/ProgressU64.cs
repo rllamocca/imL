@@ -20,7 +20,7 @@ namespace imL
         public ulong Length { get { return _LENGTH; } }
         public ulong Value { get { return _VALUE; } }
 
-        public ProgressU64(ulong _length = 50, EReportProgress _report = EReportProgress.Increment, ProgressAbstract _parent = null)
+        public ProgressU64(ulong _length = 50, EReportProgress _report = EReportProgress.Increment, ProgressAbstract? _parent = null)
         {
             if (_length == 0)
                 throw new ArgumentOutOfRangeException(nameof(_length), "_length == 0");

@@ -25,7 +25,7 @@ namespace imL
 #endif
 
 #if (NET35_OR_GREATER || NETSTANDARD1_3_OR_GREATER || NET5_0_OR_GREATER)
-        public static void FileCreate(this Stream _this, string? _path)
+        public static void FileCreate(this Stream _this, string _path)
         {
             using (FileStream _sw = File.Create(_path))
                 _this.CopyTo(_sw);
