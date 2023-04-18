@@ -25,12 +25,9 @@ namespace imL
 
             return Convert.ToString(_this);
         }
-        public static string?[]? DBToString(this object[] _array, bool _empty = false)
+        public static string[]? DBToString(this object[] _array, bool _empty = false)
         {
-            if (_array == null)
-                return null;
-
-            string?[] _return = new string[_array.Length];
+            string[]? _return = new string[_array.Length];
 
             for (int _i = 0; _i < _array.Length; _i++)
                 _return[_i] = _array[_i].DBToString(_empty);

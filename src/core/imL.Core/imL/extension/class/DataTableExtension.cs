@@ -33,10 +33,10 @@ namespace imL
             out Stream _out,
             char _separator = '\0',
             bool _columnnames = true,
-            Encoding _enc = null,
-            IProgress<int> _progress = null)
+            Encoding? _enc = null,
+            IProgress<int>? _progress = null)
         {
-            ReadOnly.DefaultEncoding(ref _enc);
+            _enc = ReadOnly.DefaultEncoding(_enc);
 
             string? _sep = Convert.ToString(_separator);
 
@@ -85,7 +85,7 @@ namespace imL
                 throw new ArgumentNullException(nameof(_dt));
 
             IList<XmlElement> _return = new List<XmlElement>();
-            XmlElement _tmp;
+            XmlElement? _tmp;
 
             using (MemoryStream _ms = new MemoryStream())
             {

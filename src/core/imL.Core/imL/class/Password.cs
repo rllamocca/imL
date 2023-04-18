@@ -10,14 +10,14 @@ namespace imL
         bool _DISPOSED = false;
 
         const ERandomSort _SORT = ERandomSort.Fisher_Yates;
-        char[] _BASE;
-        char[] _GENERATED;
+        char[]? _BASE;
+        char[]? _GENERATED;
 
         public bool Numbers { set; get; } = true;
         public bool UpperCase { set; get; } = true;
         public bool LowerCase { set; get; } = true;
         public bool Specials { set; get; } = false;
-        public char[] Aggregate { set; get; }
+        public char[]? Aggregate { set; get; }
 
         public string? Base { get { return new string(_BASE); } }
         public string? Generated { get { return new string(_GENERATED); } }
@@ -27,7 +27,7 @@ namespace imL
             bool _uppercase = true,
             bool _lowercase = true,
             bool _specials = false,
-            char[] _aggregate = null
+            char[]? _aggregate = null
             )
         {
             Numbers = _numbers;
@@ -38,8 +38,8 @@ namespace imL
         }
         public void Generate(byte _length = 8)
         {
-            _BASE = Password.Prepare(Numbers, UpperCase, LowerCase, Specials, Aggregate, _length);
-            _GENERATED = Password.Generate(_BASE, _length);
+            _BASE = Prepare(Numbers, UpperCase, LowerCase, Specials, Aggregate, _length);
+            _GENERATED = Generate(_BASE, _length);
         }
 
         public static char[] Prepare(
@@ -47,21 +47,21 @@ namespace imL
             bool _uppercase = true,
             bool _lowercase = true,
             bool _specials = false,
-            char[] _aggregate = null,
+            char[]? _aggregate = null,
             byte _length = 8
             )
         {
             List<char> _tmp = new List<char>();
-            if (_numbers) _tmp.AddRange(ReadOnly._NUMBERS.RandomSort(Password._SORT).Take(_length));
-            if (_uppercase) _tmp.AddRange(ReadOnly._UPPERCASE.RandomSort(Password._SORT).Take(_length));
-            if (_lowercase) _tmp.AddRange(ReadOnly._LOWERCASE.RandomSort(Password._SORT).Take(_length));
-            if (_specials) _tmp.AddRange(ReadOnly._SPECIALS.RandomSort(Password._SORT).Take(_length));
-            if (_aggregate != null) _tmp.AddRange(_aggregate.RandomSort(Password._SORT));
+            if (_numbers) _tmp.AddRange(ReadOnly._NUMBERS.RandomSort(_SORT).Take(_length));
+            if (_uppercase) _tmp.AddRange(ReadOnly._UPPERCASE.RandomSort(_SORT).Take(_length));
+            if (_lowercase) _tmp.AddRange(ReadOnly._LOWERCASE.RandomSort(_SORT).Take(_length));
+            if (_specials) _tmp.AddRange(ReadOnly._SPECIALS.RandomSort(_SORT).Take(_length));
+            if (_aggregate != null) _tmp.AddRange(_aggregate.RandomSort(_SORT));
 
-            IList<char> _tmp2 = _tmp.Distinct().ToList();
-            _tmp2 = _tmp2.RemoveEndLine(EEndLine.All);
+            IEnumerable<char> _tmp2 = _tmp.Distinct().ToList();
+            //_tmp2 = _tmp2.RemoveEndLine(EEndLine.All);
 
-            _tmp2 = _tmp2.RandomSort(Password._SORT);
+            //_tmp2 = _tmp2.RandomSort(_SORT);
 
             return _tmp2.ToArray();
         }

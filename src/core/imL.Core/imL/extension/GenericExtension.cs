@@ -7,11 +7,8 @@ namespace imL
 {
     public static class GenericExtension
     {
-        public static G[] RandomSort<G>(this G[] _array, ERandomSort _sort = ERandomSort.None)
+        public static IEnumerable<G> RandomSort<G>(this G[] _array, ERandomSort _sort = ERandomSort.None)
         {
-            if (_array == null)
-                return null;
-
             G[] _return = _array;
             Random _r = new Random();
 
@@ -38,11 +35,8 @@ namespace imL
 
             return _return;
         }
-        public static IList<G> RandomSort<G>(this IList<G> _array, ERandomSort _sort = ERandomSort.None)
+        public static IEnumerable<G> RandomSort<G>(this IList<G> _array, ERandomSort _sort = ERandomSort.None)
         {
-            if (_array == null)
-                return null;
-
             IList<G> _return = _array;
             Random _r = new Random();
 
@@ -100,10 +94,10 @@ namespace imL
         }
 
 #if (NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NET5_0_OR_GREATER)
-        public static G GetAttribute<G>(this Type _this)
+        public static G? GetAttribute<G>(this Type _this)
         {
             TypeInfo _ti = _this.GetTypeInfo();
-            Attribute _a = _ti.GetCustomAttribute(typeof(G));
+            Attribute? _a = _ti.GetCustomAttribute(typeof(G));
 
             if (_a == null)
                 return default;

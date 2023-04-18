@@ -9,11 +9,11 @@
 
     public interface IAppReturn<G> : IAppReturn
     {
-        G Result { set; get; }
+        G? Result { set; get; }
     }
     public interface IAppReturn<GKey, GValue> : IAppReturn
     {
-        GKey Key { set; get; }
-        GValue Value { set; get; }
+        GKey? Key { set; get; }
+        GValue? Value { set; get; }
     }
 }

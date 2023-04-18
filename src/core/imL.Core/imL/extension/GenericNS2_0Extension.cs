@@ -10,12 +10,12 @@ namespace imL
 {
     public static class GenericNS2_0Extension
     {
-        public static string? GetXml<G>(this G _this, Encoding _enc = null)
+        public static string? GetXml<G>(this G _this, Encoding? _enc = null)
         {
             if (_this == null)
                 return null;
 
-            ReadOnly.DefaultEncoding(ref _enc);
+            _enc = ReadOnly.DefaultEncoding(_enc);
 
             XmlWriterSettings _format = new XmlWriterSettings { Encoding = _enc };
 
@@ -52,12 +52,12 @@ namespace imL
             }
         }
 
-        public static void XmlCreate<G>(this G _this, string? _path, Encoding _enc = null)
+        public static void XmlCreate<G>(this G _this, string _path, Encoding? _enc = null)
         {
             if (_this == null)
                 return;
 
-            ReadOnly.DefaultEncoding(ref _enc);
+            _enc = ReadOnly.DefaultEncoding(_enc);
 
             XmlWriterSettings _format = new XmlWriterSettings { Encoding = _enc };
 

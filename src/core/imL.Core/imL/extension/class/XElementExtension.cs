@@ -7,7 +7,7 @@ namespace imL
 {
     public static class XElementExtension
     {
-        public static XmlElement ToXmlElement(this XElement _this)
+        public static XmlElement? ToXmlElement(this XElement _this)
         {
             XmlDocument _doc = new XmlDocument();
             _doc.Load(_this.CreateReader());

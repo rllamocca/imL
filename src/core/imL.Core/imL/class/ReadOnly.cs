@@ -27,14 +27,14 @@ namespace imL
 
         public static readonly char[] _SUITS = new char[] { '♠', '♥', '♣', '♦', '☺', '☻' };
         public static readonly char[] _SQUAD = new char[] { 'A', '2', '3', '4', '5', '6', '7', '8', '9', 'X', 'J', 'Q', 'K' };
-        public static readonly string? _CARD = @"
+        public static readonly string _CARD = @"
  ╔═════╗
  ║ {0}   ║
  ║  {1}  ║
  ║   {0} ║
  ╚═════╝
 ";
-        public static readonly string? _JCARD = @"
+        public static readonly string _JCARD = @"
  ╔═════╗
  ║  {0}  ║
  ║JOKER║
@@ -52,14 +52,21 @@ namespace imL
 
             return Encoding.GetEncoding(_name);
         }
+        public static Encoding DefaultEncoding(Encoding? _ref)
+        {
+            if (_ref == null)
+                return _ENCODING;
 
-        public static void DefaultEncoding(ref Encoding _ref)
+            return _ref;
+        }
+
+        public static void DefaultEncoding(ref Encoding? _ref)
         {
             if (_ref == null)
                 _ref = _ENCODING;
         }
 
-        public static void DefaultEncoding_NoBOM(ref Encoding _ref)
+        public static void DefaultEncoding_NoBOM(ref Encoding? _ref)
         {
             if (_ref == null)
                 _ref = _ENCODING_NO_BOM;

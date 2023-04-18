@@ -8,19 +8,19 @@ namespace imL
     public sealed class AppInfoDefault : IAppInfo
     {
         readonly string[] _ARGS;
-        readonly string? _BASE;
-        readonly string? _BASE_IN;
-        readonly string? _BASE_EXE;
-        readonly string? _BASE_TMP;
+        readonly string _BASE;
+        readonly string _BASE_IN;
+        readonly string _BASE_EXE;
+        readonly string _BASE_TMP;
 
         readonly bool? _IN_CONTAINER = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
         readonly bool? _IN_TEMPPATH;
 
         public string[] args { get { return _ARGS; } }
-        public string? Base { get { return _BASE; } }
-        public string? BaseIn { get { return _BASE_IN; } }
-        public string? BaseExe { get { return _BASE_EXE; } }
-        public string? BaseTmp { get { return _BASE_TMP; } }
+        public string Base { get { return _BASE; } }
+        public string BaseIn { get { return _BASE_IN; } }
+        public string BaseExe { get { return _BASE_EXE; } }
+        public string BaseTmp { get { return _BASE_TMP; } }
 
         public bool? InContainer { get { return _IN_CONTAINER; } }
         public bool? InTempPath { get { return _IN_TEMPPATH; } }

@@ -6,7 +6,7 @@ namespace imL
 {
     public static class ExceptionExtension
     {
-        public static IEnumerable<string?> InnerMessageExceptionISync(this Exception _this)
+        public static IEnumerable<string?> InnerMessageExceptionISync(this Exception? _this)
         {
             while (_this != null)
             {
@@ -20,7 +20,7 @@ namespace imL
             return _this.InnerMessageExceptionISync().ToArray();
         }
 
-        public static IEnumerable<Exception> InnerExceptionISync(this Exception _this)
+        public static IEnumerable<Exception> InnerExceptionISync(this Exception? _this)
         {
             while (_this != null)
             {

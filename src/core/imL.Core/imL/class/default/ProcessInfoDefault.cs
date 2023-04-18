@@ -8,9 +8,9 @@ namespace imL
 {
     public class ProcessInfoDefault : IProcessInfo
     {
-        readonly string? _PATH;
+        readonly string _PATH;
         readonly string? _FILE_LOG;
-        readonly string? _PATH_OUT;
+        readonly string _PATH_OUT;
 
         public DateTime Start { set; get; }
         public string? Guid { set; get; }
@@ -26,9 +26,9 @@ namespace imL
         public Exception? Critical { set; get; }
         public DateTime? End { set; get; }
 
-        public string? Base { get { return _PATH; } }
+        public string Base { get { return _PATH; } }
         public string? FileLog { get { return _FILE_LOG; } }
-        public string? BaseOut { get { return _PATH_OUT; } }
+        public string BaseOut { get { return _PATH_OUT; } }
 
         public ProcessInfoDefault(IAppInfo _info)
         {

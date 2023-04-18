@@ -18,7 +18,7 @@ namespace imL
         public DeliveryNotificationOptions? DeliveryNotificationOptions { set; get; }
 
 
-        public string? FromAddress { set; get; }
+        public string FromAddress { set; get; }
         public string? FromDisplayName { set; get; }
 
         public IEnumerable<string>? TO { set; get; }

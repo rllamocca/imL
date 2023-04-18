@@ -71,7 +71,7 @@ namespace imL
                    ;
         }
 
-        public static G ToUnbox<G>(this object _this)
+        public static G? ToUnbox<G>(this object? _this)
         {
             if (_this == null) return default;
             if (_this == default) return default;
@@ -81,7 +81,7 @@ namespace imL
 
             return (G)_this;
         }
-        public static G ToChangeType<G>(this object _this)
+        public static G? ToChangeType<G>(this object? _this)
         {
             if (_this == null) return default;
             if (_this == default) return default;

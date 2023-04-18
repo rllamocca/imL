@@ -16,7 +16,8 @@ namespace imL
             _i.TargetName = _f.TargetName ?? _i.TargetName;
             _i.Port = _f.Port ?? _i.Port;
             _i.PickupDirectoryLocation = _f.PickupDirectoryLocation ?? _i.PickupDirectoryLocation;
-            _i.Host = _f.Host ?? _i.Host;
+            string? _host = _f.Host ?? _i.Host;
+            _i.Host = _host;
             _i.EnableSsl = _f.EnableSsl ?? _i.EnableSsl;
             _i.DeliveryMethod = _f.DeliveryMethod ?? _i.DeliveryMethod;
 
@@ -33,7 +34,7 @@ namespace imL
         }
         internal static MailMessage InitMailMessage(MailMessage _i, MailMessageFormat _f)
         {
-            Encoding _enc = _f.Encoding == null ? null : Encoding.GetEncoding(_f.Encoding);
+            Encoding? _enc = _f.Encoding == null ? null : Encoding.GetEncoding(_f.Encoding);
 
 #if (NET35) == false
             _i.HeadersEncoding = _enc ?? _i.HeadersEncoding;
@@ -81,18 +82,25 @@ namespace imL
 
             return _i;
         }
-        internal static Attachment InitAttachment(string? _path)
+        internal static Attachment InitAttachment(string _path)
         {
             Attachment _return = new Attachment(_path, MimeHelper.ContentType(_path));
+
+            if (_return.ContentDisposition == null)
+                return _return;
+
             FileInfo _fi = new FileInfo(_path);
 
-            ContentDisposition _d = _return.ContentDisposition;
-            _d.CreationDate = _fi.CreationTime;
-            _d.ModificationDate = _fi.LastWriteTime;
-            _d.ReadDate = _fi.LastAccessTime;
-            _d.FileName = _fi.Name;
-            _d.Size = _fi.Length;
-            _d.DispositionType = DispositionTypeNames.Attachment;
+            if (_fi.Exists == false)
+                return _return;
+
+            ContentDisposition _cd = _return.ContentDisposition;
+            _cd.CreationDate = _fi.CreationTime;
+            _cd.ModificationDate = _fi.LastWriteTime;
+            _cd.ReadDate = _fi.LastAccessTime;
+            _cd.FileName = _fi.Name;
+            _cd.Size = _fi.Length;
+            _cd.DispositionType = DispositionTypeNames.Attachment;
 
             return _return;
         }

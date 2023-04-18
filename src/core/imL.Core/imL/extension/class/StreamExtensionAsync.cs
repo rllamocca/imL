@@ -10,7 +10,7 @@ namespace imL
     {
 
 #if (NET45_OR_GREATER || NETSTANDARD1_3_OR_GREATER || NET5_0_OR_GREATER)
-        public static async Task FileCreateAsync(this Stream _this, string? _path, CancellationToken _token = default)
+        public static async Task FileCreateAsync(this Stream _this, string _path, CancellationToken _token = default)
         {
             int _buffer = 128;
 
