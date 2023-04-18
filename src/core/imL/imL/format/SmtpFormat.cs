@@ -6,24 +6,24 @@ namespace imL
 {
     public record SmtpFormat
     {
-        public int? Timeout { set; get; }
-        public string? TargetName { set; get; }
-        public int? Port { set; get; }
-        public string? PickupDirectoryLocation { set; get; }
-        public string? Host { set; get; }
-        public bool? EnableSsl { set; get; }
-        public SmtpDeliveryMethod? DeliveryMethod { set; get; }
+        public int? Timeout { init; get; }
+        public string? TargetName { init; get; }
+        public int? Port { init; get; }
+        public string? PickupDirectoryLocation { init; get; }
+        public string? Host { init; get; }
+        public bool? EnableSsl { init; get; }
+        public SmtpDeliveryMethod? DeliveryMethod { init; get; }
 
 #if (NET35 || NET40) == false
-        public SmtpDeliveryFormat? DeliveryFormat { set; get; }
+        public SmtpDeliveryFormat? DeliveryFormat { init; get; }
 #endif
-        public bool? UseDefaultCredentials { set; get; }
+        public bool? UseDefaultCredentials { init; get; }
 
-        public string UserName { set; get; }
-        public string? Password { set; get; }
+        public string? UserName { init; get; }
+        public string? Password { init; get; }
 
 
-        public long? MaxSizeAttachments { set; get; } //MB
+        public long? MaxSizeAttachments { init; get; } //MB
     }
 }
 

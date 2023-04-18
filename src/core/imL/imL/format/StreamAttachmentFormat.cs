@@ -6,9 +6,9 @@ namespace imL
 {
     public record StreamAttachmentFormat
     {
-        public string Name { set; get; }
-        public string? MediaType { set; get; }
-        public Stream Content { set; get; }
+        public string? Name { init; get; }
+        public string? MediaType { init; get; }
+        public Stream? Content { init; get; }
     }
 }
 

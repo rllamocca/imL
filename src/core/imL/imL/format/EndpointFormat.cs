@@ -4,9 +4,9 @@ namespace imL
 {
     public record EndpointFormat
     {
-        public string? Endpoint { set; get; }
-        public EAuthentication? Scheme { set; get; }
-        public string? Key { set; get; }
-        public string? Value { set; get; }
+        public string? Endpoint { init; get; }
+        public EAuthentication? Scheme { init; get; }
+        public string? Key { init; get; }
+        public string? Value { init; get; }
     }
 }

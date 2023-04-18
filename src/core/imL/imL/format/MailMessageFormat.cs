@@ -8,24 +8,24 @@ namespace imL
 {
     public record MailMessageFormat
     {
-        public string? Encoding { set; get; }
+        public string? Encoding { init; get; }
 
-        public string? Subject { set; get; }
-        public MailPriority? Priority { set; get; }
-        public bool? IsBodyHtml { set; get; }
-        public TransferEncoding? BodyTransferEncoding { set; get; }
-        public string? Body { set; get; }
-        public DeliveryNotificationOptions? DeliveryNotificationOptions { set; get; }
+        public string? Subject { init; get; }
+        public MailPriority? Priority { init; get; }
+        public bool? IsBodyHtml { init; get; }
+        public TransferEncoding? BodyTransferEncoding { init; get; }
+        public string? Body { init; get; }
+        public DeliveryNotificationOptions? DeliveryNotificationOptions { init; get; }
 
 
-        public string FromAddress { set; get; }
-        public string? FromDisplayName { set; get; }
+        public string? FromAddress { init; get; }
+        public string? FromDisplayName { init; get; }
 
-        public IEnumerable<string>? TO { set; get; }
-        public IEnumerable<string>? CC { set; get; }
-        public IEnumerable<string>? BCC { set; get; }
-        public IEnumerable<string>? PathAttachments { set; get; }
-        public IEnumerable<StreamAttachmentFormat>? StreamAttachments { set; get; }
+        public IEnumerable<string>? TO { init; get; }
+        public IEnumerable<string>? CC { init; get; }
+        public IEnumerable<string>? BCC { init; get; }
+        public IEnumerable<string>? PathAttachments { init; get; }
+        public IEnumerable<StreamAttachmentFormat>? StreamAttachments { init; get; }
     }
 }
 

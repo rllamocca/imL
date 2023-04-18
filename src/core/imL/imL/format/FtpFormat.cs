@@ -2,22 +2,22 @@
 {
     public record FtpFormat
     {
-        public bool? UseBinary { set; get; }
-        public int? Timeout { set; get; }
-        public int? ReadWriteTimeout { set; get; }
-        public bool? KeepAlive { set; get; }
-        public bool? EnableSsl { set; get; }
-        public bool? UsePassive { set; get; }
-        public bool? UseDefaultCredentials { set; get; }
+        public bool? UseBinary { init; get; }
+        public int? Timeout { init; get; }
+        public int? ReadWriteTimeout { init; get; }
+        public bool? KeepAlive { init; get; }
+        public bool? EnableSsl { init; get; }
+        public bool? UsePassive { init; get; }
+        public bool? UseDefaultCredentials { init; get; }
 
-        public string? ConnectionGroupName { set; get; }
-        public int? ConnectionLimit { set; get; }
+        public string? ConnectionGroupName { init; get; }
+        public int? ConnectionLimit { init; get; }
 
-        public int? Port { set; get; }
+        public int? Port { init; get; }
 
-        public string? Host { set; get; }
-        public string? Path { set; get; }
-        public string? UserName { set; get; }
-        public string? Password { set; get; }
+        public string? Host { init; get; }
+        public string? Path { init; get; }
+        public string? UserName { init; get; }
+        public string? Password { init; get; }
     }
 }
