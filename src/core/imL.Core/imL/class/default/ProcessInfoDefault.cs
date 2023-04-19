@@ -6,7 +6,7 @@ using System.IO;
 
 namespace imL
 {
-    public class ProcessInfoDefault : IProcessInfo
+    public sealed class ProcessInfoDefault : IProcessInfo
     {
         readonly string _PATH;
         readonly string? _FILE_LOG;

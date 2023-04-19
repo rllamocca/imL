@@ -1,6 +1,6 @@
 ﻿namespace imL.DB
 {
-    public class ParameterDefault : IParameter
+    public sealed class ParameterDefault : IParameter
     {
         public string? Affect { get; }
         public string? Expression { get; }
