@@ -1,17 +1,17 @@
 ﻿namespace imL
 {
-    public interface IAppReturn
+    public interface IReturn
     {
         EReturn? Type { get; set; }
         string? Message { get; set; }
         string? Method { get; set; }
     }
 
-    public interface IAppReturn<G> : IAppReturn
+    public interface IReturn<G> : IReturn
     {
         G? Result { set; get; }
     }
-    public interface IAppReturn<GKey, GValue> : IAppReturn
+    public interface IReturn<GKey, GValue> : IReturn
     {
         GKey? Key { set; get; }
         GValue? Value { set; get; }

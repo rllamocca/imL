@@ -13,10 +13,10 @@ namespace imL.DB
 {
     public partial interface IHelper
     {
-        Task<IAppReturn<object>> ExecuteAsync(string? _query, EExecute _exe = EExecute.NonQuery, CancellationToken _ct = default, params IParameter[] _params);
-        Task<IAppReturn<object>> ExecuteAsync(string? _query, EExecute _exe = EExecute.NonQuery, CancellationToken _ct = default);
-        Task<IEnumerable<IAppReturn<object>>> ExecutionsAsync(string? _query, EExecute _exe = EExecute.NonQuery, CancellationToken _ct = default, params IParameter[][] _params);
-        Task<IEnumerable<IAppReturn<object>>> ExecutionsAsync(string? _query, EExecute _exe = EExecute.NonQuery, CancellationToken _ct = default);
+        Task<IReturn<object>> ExecuteAsync(string? _query, EExecute _exe = EExecute.NonQuery, CancellationToken _ct = default, params IParameter[] _params);
+        Task<IReturn<object>> ExecuteAsync(string? _query, EExecute _exe = EExecute.NonQuery, CancellationToken _ct = default);
+        Task<IEnumerable<IReturn<object>>> ExecutionsAsync(string? _query, EExecute _exe = EExecute.NonQuery, CancellationToken _ct = default, params IParameter[][] _params);
+        Task<IEnumerable<IReturn<object>>> ExecutionsAsync(string? _query, EExecute _exe = EExecute.NonQuery, CancellationToken _ct = default);
 
 #if (NET45_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
 

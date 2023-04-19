@@ -2,18 +2,18 @@
 
 namespace imL
 {
-    public interface IAppTrack : IAppReturn
+    public interface ITrack : IReturn
     {
         DateTime? ExecutionStart { get; set; }
         DateTime? ExecutionStop { get; set; }
         TimeSpan? ExecutionTime { get; set; }
         string? GUID { get; set; }
 
-        void Complement(IAppReturn _result);
+        void Complement(IReturn _result);
     }
 
-    public interface IAppTrack<G> : IAppReturn<G>, IAppReturn, IAppTrack
+    public interface ITrack<G> : IReturn<G>, IReturn, ITrack
     {
-        void Complement(IAppReturn<G> _result);
+        void Complement(IReturn<G> _result);
     }
 }

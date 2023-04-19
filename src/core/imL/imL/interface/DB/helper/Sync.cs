@@ -10,10 +10,10 @@ namespace imL.DB
 {
     public partial interface IHelper
     {
-        IAppReturn<object> Execute(string? _query, EExecute _exe = EExecute.NonQuery, params IParameter[] _params);
-        IAppReturn<object> Execute(string? _query, EExecute _exe = EExecute.NonQuery);
-        IEnumerable<IAppReturn<object>> Executions(string? _query, EExecute _exe = EExecute.NonQuery, params IParameter[][] _params);
-        IEnumerable<IAppReturn<object>> Executions(string? _query, EExecute _exe = EExecute.NonQuery);
+        IReturn<object> Execute(string? _query, EExecute _exe = EExecute.NonQuery, params IParameter[] _params);
+        IReturn<object> Execute(string? _query, EExecute _exe = EExecute.NonQuery);
+        IEnumerable<IReturn<object>> Executions(string? _query, EExecute _exe = EExecute.NonQuery, params IParameter[][] _params);
+        IEnumerable<IReturn<object>> Executions(string? _query, EExecute _exe = EExecute.NonQuery);
 
 #if (NET35_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
 
