@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Text;
 
 namespace imL
@@ -43,7 +42,7 @@ namespace imL
 ";
         public static readonly Encoding _ENCODING = Encoding.UTF8;
         public static readonly Encoding _ENCODING_NO_BOM = new UTF8Encoding(false);
-        public static readonly CultureInfo _CULTURE_INVARIANT = CultureInfo.InvariantCulture;
+        //public static readonly CultureInfo _CULTURE_INVARIANT = CultureInfo.InvariantCulture;
 
         public static Encoding DefaultEncoding(string? _name)
         {
