@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_root_", "_root_", "{A2C38A75-B643-44D2-AA77-FC4CED547957}"
 	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
 		_root_\LICENSE = _root_\LICENSE
 		_root_\README.md = _root_\README.md
 		_root_\remove.ps1 = _root_\remove.ps1
@@ -14,9 +16,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1E3C51F3-DF3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{0FCBE4E6-248C-46FC-A61E-AEAFF8B85589}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "imL", "src\core\imL\imL.csproj", "{0C077E65-8A8D-4564-99BB-FCEADB3FEEDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL", "src\core\imL\imL.csproj", "{0C077E65-8A8D-4564-99BB-FCEADB3FEEDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "imL.Core", "src\core\imL.Core\imL.Core.csproj", "{8DF5339C-65BD-4A8A-86FB-0D7C02DFB827}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "imL.Core", "src\core\imL.Core\imL.Core.csproj", "{8DF5339C-65BD-4A8A-86FB-0D7C02DFB827}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "imL.Frotcom.Hosting.Core", "src\core\imL.Frotcom.Hosting.Core\imL.Frotcom.Hosting.Core.csproj", "{72DF562F-E3EB-4900-86E0-474C96204FB1}"
 EndProject
