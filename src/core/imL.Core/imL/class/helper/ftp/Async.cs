@@ -114,7 +114,7 @@ namespace imL
             using (Stream _s = await DownloadFileAsync(_root, _format, _ct))
                 return _s.ToBytes();
         }
-        public static async Task<FtpStatusCode> DeleteFileAsync(string? _root, FtpFormat _format, CancellationToken _ct = default)
+        public static async Task<FtpStatusCode> DeleteFileAsync(string? _root, FtpFormat _format)
         {
             FtpWebRequest _client = CreateClient(WebRequestMethods.Ftp.DeleteFile, _root, _format);
 
