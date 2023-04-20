@@ -1,7 +1,7 @@
 ﻿namespace imL.JavaScript.Select2
 {
 #pragma warning disable IDE1006 // Estilos de nombres
-    public record QueryFormat
+    public record QueryRecord
     {
         public int? page { set; get; }
 

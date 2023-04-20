@@ -11,7 +11,7 @@ namespace imL
 {
     public static partial class SmtpHelper
     {
-        internal static SmtpClient InitSmtpClient(SmtpClient _i, SmtpFormat _f)
+        internal static SmtpClient InitSmtpClient(SmtpClient _i, SmtpRecord _f)
         {
             _i.Timeout = _f.Timeout ?? _i.Timeout;
             _i.TargetName = _f.TargetName ?? _i.TargetName;
@@ -38,7 +38,7 @@ namespace imL
 
             return _i;
         }
-        internal static MailMessage InitMailMessage(MailMessage _i, SmtpFormat _f, MailMessageFormat _f1)
+        internal static MailMessage InitMailMessage(MailMessage _i, SmtpRecord _f, MailMessageRecord _f1)
         {
             string? _FromAddress = _f1.FromAddress ?? _f.UserName;
             string? _FromDisplayName = _f1.FromDisplayName ?? _f.UserName;
@@ -93,7 +93,7 @@ namespace imL
                     _i.Attachments.Add(InitAttachment(_item));
 
             if (_f1.StreamAttachments != null && _f1.StreamAttachments.Any())
-                foreach (StreamAttachmentFormat _item in _f1.StreamAttachments)
+                foreach (StreamAttachmentRecord _item in _f1.StreamAttachments)
                 {
                     if (_item.Content == null)
                         continue;

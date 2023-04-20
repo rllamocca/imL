@@ -1,6 +1,6 @@
 ﻿namespace imL.JavaScript.ChartJS
 {
-    public record SerieFormat
+    public record SerieRecord
     {
         public decimal?[]? Values { set; get; }
         public string? Name { set; get; }

@@ -11,7 +11,7 @@ namespace imL
 {
     public static partial class FtpHelper
     {
-        internal static async IAsyncEnumerable<FtpContentFormat> AnalizeListDirectoryDetailsIAsync(string? _root, IAsyncEnumerable<string?> _list, [EnumeratorCancellation] CancellationToken _ct = default)
+        internal static async IAsyncEnumerable<FtpContentRecord> AnalizeListDirectoryDetailsIAsync(string? _root, IAsyncEnumerable<string?> _list, [EnumeratorCancellation] CancellationToken _ct = default)
         {
             await foreach (string? _item in _list)
             {
@@ -44,7 +44,7 @@ namespace imL
 
                 long _size = Convert.ToInt64(_e);
 
-                yield return new FtpContentFormat()
+                yield return new FtpContentRecord()
                 {
                     IsDirectory = _size < 1,
                     Size = _size,
@@ -55,7 +55,7 @@ namespace imL
 
         }
 
-        public static async IAsyncEnumerable<string?> ListDirectoryIAsync(string? _root, FtpFormat _format, [EnumeratorCancellation] CancellationToken _ct = default)
+        public static async IAsyncEnumerable<string?> ListDirectoryIAsync(string? _root, FtpRecord _format, [EnumeratorCancellation] CancellationToken _ct = default)
         {
             FtpWebRequest _client = CreateClient(WebRequestMethods.Ftp.ListDirectory, _root, _format);
 
@@ -69,7 +69,7 @@ namespace imL
 #endif
 
         }
-        public static async IAsyncEnumerable<string?> ListDirectoryDetailsIAsync(string? _root, FtpFormat _format, [EnumeratorCancellation] CancellationToken _ct = default)
+        public static async IAsyncEnumerable<string?> ListDirectoryDetailsIAsync(string? _root, FtpRecord _format, [EnumeratorCancellation] CancellationToken _ct = default)
         {
             FtpWebRequest _client = CreateClient(WebRequestMethods.Ftp.ListDirectoryDetails, _root, _format);
 
@@ -82,19 +82,19 @@ namespace imL
                     yield return await _sr.ReadLineAsync();
 #endif
         }
-        public static async IAsyncEnumerable<FtpContentFormat> ListDirectoryDetailsContentIAsync(string? _root, FtpFormat _format, [EnumeratorCancellation] CancellationToken _ct = default)
+        public static async IAsyncEnumerable<FtpContentRecord> ListDirectoryDetailsContentIAsync(string? _root, FtpRecord _format, [EnumeratorCancellation] CancellationToken _ct = default)
         {
-            await foreach (FtpContentFormat _item in AnalizeListDirectoryDetailsIAsync(_root, ListDirectoryDetailsIAsync(_root, _format, _ct), _ct))
+            await foreach (FtpContentRecord _item in AnalizeListDirectoryDetailsIAsync(_root, ListDirectoryDetailsIAsync(_root, _format, _ct), _ct))
                 yield return _item;
         }
-        public static async IAsyncEnumerable<FtpContentFormat> ListSubdirectoriesIAsync(string? _root, FtpFormat _format, [EnumeratorCancellation] CancellationToken _ct = default)
+        public static async IAsyncEnumerable<FtpContentRecord> ListSubdirectoriesIAsync(string? _root, FtpRecord _format, [EnumeratorCancellation] CancellationToken _ct = default)
         {
-            await foreach (FtpContentFormat _item in ListDirectoryDetailsContentIAsync(_root, _format, _ct))
+            await foreach (FtpContentRecord _item in ListDirectoryDetailsContentIAsync(_root, _format, _ct))
             {
                 yield return _item;
 
                 if (_item.IsDirectory == true)
-                    await foreach (FtpContentFormat _item2 in ListSubdirectoriesIAsync(_root + "/" + _item.Name, _format, _ct))
+                    await foreach (FtpContentRecord _item2 in ListSubdirectoriesIAsync(_root + "/" + _item.Name, _format, _ct))
                         yield return _item2;
             }
         }

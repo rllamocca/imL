@@ -1,6 +1,6 @@
 ﻿namespace imL.JavaScript.ChartJS
 {
-    public record StackFormat
+    public record StackRecord
     {
         public string?[]? SerieNames { set; get; }
     }

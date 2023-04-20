@@ -1,6 +1,6 @@
 ﻿namespace imL
 {
-    public record FtpContentFormat
+    public record FtpContentRecord
     {
         public string? FullName { init; get; }
         public string? Name { init; get; }

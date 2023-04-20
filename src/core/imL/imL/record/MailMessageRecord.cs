@@ -5,7 +5,7 @@ using System.Net.Mime;
 
 namespace imL
 {
-    public record MailMessageFormat
+    public record MailMessageRecord
     {
         public string? Encoding { init; get; }
 
@@ -24,7 +24,7 @@ namespace imL
         public string?[]? CC { init; get; }
         public string?[]? BCC { init; get; }
         public string?[]? PathAttachments { init; get; }
-        public StreamAttachmentFormat?[]? StreamAttachments { init; get; }
+        public StreamAttachmentRecord?[]? StreamAttachments { init; get; }
     }
 }
 

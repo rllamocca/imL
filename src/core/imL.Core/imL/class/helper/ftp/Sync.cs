@@ -9,24 +9,24 @@ namespace imL
 {
     public static partial class FtpHelper
     {
-        public static IEnumerable<string?> ListDirectory(string? _root, FtpFormat _format)
+        public static IEnumerable<string?> ListDirectory(string? _root, FtpRecord _format)
         {
             return ListDirectoryISync(_root, _format).ToArray();
         }
-        public static IEnumerable<string?> ListDirectoryDetails(string? _root, FtpFormat _format)
+        public static IEnumerable<string?> ListDirectoryDetails(string? _root, FtpRecord _format)
         {
             return ListDirectoryDetailsISync(_root, _format).ToArray();
         }
-        public static IEnumerable<FtpContentFormat> ListDirectoryDetailsContent(string? _root, FtpFormat _format)
+        public static IEnumerable<FtpContentRecord> ListDirectoryDetailsContent(string? _root, FtpRecord _format)
         {
             return AnalizeListDirectoryDetailsISync(_root, ListDirectoryDetailsISync(_root, _format)).ToArray();
         }
-        public static IEnumerable<FtpContentFormat> ListSubdirectories(string? _root, FtpFormat _format)
+        public static IEnumerable<FtpContentRecord> ListSubdirectories(string? _root, FtpRecord _format)
         {
             return ListSubdirectoriesISync(_root, _format).ToArray();
         }
 
-        public static FtpStatusCode UploadFile(string? _root, Stream _up, FtpFormat _format)
+        public static FtpStatusCode UploadFile(string? _root, Stream _up, FtpRecord _format)
         {
             FtpWebRequest _client = CreateClient(WebRequestMethods.Ftp.UploadFile, _root, _format);
 
@@ -38,12 +38,12 @@ namespace imL
                     return _resp.StatusCode;
             }
         }
-        public static FtpStatusCode UploadFile(string? _root, byte[] _up, FtpFormat _format)
+        public static FtpStatusCode UploadFile(string? _root, byte[] _up, FtpRecord _format)
         {
             using (Stream _ms = new MemoryStream(_up))
                 return UploadFile(_root, _ms, _format);
         }
-        public static Stream DownloadFile(string? _root, FtpFormat _format)
+        public static Stream DownloadFile(string? _root, FtpRecord _format)
         {
             FtpWebRequest _client = CreateClient(WebRequestMethods.Ftp.DownloadFile, _root, _format);
             Stream _return = new MemoryStream();
@@ -58,12 +58,12 @@ namespace imL
                 return _return;
             }
         }
-        public static byte[] DownloadFileBytes(string? _root, FtpFormat _format)
+        public static byte[] DownloadFileBytes(string? _root, FtpRecord _format)
         {
             using (Stream _s = DownloadFile(_root, _format))
                 return _s.ToBytes();
         }
-        public static FtpStatusCode DeleteFile(string? _root, FtpFormat _format)
+        public static FtpStatusCode DeleteFile(string? _root, FtpRecord _format)
         {
             FtpWebRequest _client = CreateClient(WebRequestMethods.Ftp.DeleteFile, _root, _format);
 

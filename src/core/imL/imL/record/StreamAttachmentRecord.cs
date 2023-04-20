@@ -4,7 +4,7 @@ using System.IO;
 
 namespace imL
 {
-    public record StreamAttachmentFormat
+    public record StreamAttachmentRecord
     {
         public string? Name { init; get; }
         public string? MediaType { init; get; }

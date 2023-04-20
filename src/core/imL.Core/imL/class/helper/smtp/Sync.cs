@@ -6,11 +6,11 @@ namespace imL
 {
     public static partial class SmtpHelper
     {
-        public static void Send(SmtpFormat _smtp, params MailMessageFormat[] _params)
+        public static void Send(SmtpRecord _smtp, params MailMessageRecord[] _params)
         {
             SmtpClient _client = InitSmtpClient(new SmtpClient(), _smtp);
 
-            foreach (MailMessageFormat _item in _params)
+            foreach (MailMessageRecord _item in _params)
             {
                 using MailMessage _mm = InitMailMessage(new MailMessage(), _smtp, _item);
                 _client.Send(_mm);

@@ -9,7 +9,7 @@ namespace imL
 {
     public static partial class FtpHelper
     {
-        internal static IEnumerable<FtpContentFormat> AnalizeListDirectoryDetailsISync(string? _root, IEnumerable<string?> _list)
+        internal static IEnumerable<FtpContentRecord> AnalizeListDirectoryDetailsISync(string? _root, IEnumerable<string?> _list)
         {
             foreach (string? _item in _list)
             {
@@ -37,7 +37,7 @@ namespace imL
 
                 long _size = Convert.ToInt64(_e);
 
-                yield return new FtpContentFormat()
+                yield return new FtpContentRecord()
                 {
                     IsDirectory = _size < 1,
                     Size = _size,
@@ -48,7 +48,7 @@ namespace imL
 
         }
 
-        public static IEnumerable<string?> ListDirectoryISync(string? _root, FtpFormat _format)
+        public static IEnumerable<string?> ListDirectoryISync(string? _root, FtpRecord _format)
         {
             FtpWebRequest _client = CreateClient(WebRequestMethods.Ftp.ListDirectory, _root, _format);
 
@@ -57,7 +57,7 @@ namespace imL
                 while (_sr.EndOfStream == false)
                     yield return _sr.ReadLine();
         }
-        public static IEnumerable<string?> ListDirectoryDetailsISync(string? _root, FtpFormat _format)
+        public static IEnumerable<string?> ListDirectoryDetailsISync(string? _root, FtpRecord _format)
         {
             FtpWebRequest _client = CreateClient(WebRequestMethods.Ftp.ListDirectoryDetails, _root, _format);
 
@@ -66,19 +66,19 @@ namespace imL
                 while (_sr.EndOfStream == false)
                     yield return _sr.ReadLine();
         }
-        public static IEnumerable<FtpContentFormat> ListDirectoryDetailsContentISync(string? _root, FtpFormat _format)
+        public static IEnumerable<FtpContentRecord> ListDirectoryDetailsContentISync(string? _root, FtpRecord _format)
         {
-            foreach (FtpContentFormat _item in AnalizeListDirectoryDetailsISync(_root, ListDirectoryDetailsISync(_root, _format)))
+            foreach (FtpContentRecord _item in AnalizeListDirectoryDetailsISync(_root, ListDirectoryDetailsISync(_root, _format)))
                 yield return _item;
         }
-        public static IEnumerable<FtpContentFormat> ListSubdirectoriesISync(string? _root, FtpFormat _format)
+        public static IEnumerable<FtpContentRecord> ListSubdirectoriesISync(string? _root, FtpRecord _format)
         {
-            foreach (FtpContentFormat _item in ListDirectoryDetailsContentISync(_root, _format))
+            foreach (FtpContentRecord _item in ListDirectoryDetailsContentISync(_root, _format))
             {
                 yield return _item;
 
                 if (_item.IsDirectory == true)
-                    foreach (FtpContentFormat _item2 in ListSubdirectoriesISync(_root + "/" + _item.Name, _format))
+                    foreach (FtpContentRecord _item2 in ListSubdirectoriesISync(_root + "/" + _item.Name, _format))
                         yield return _item2;
             }
         }

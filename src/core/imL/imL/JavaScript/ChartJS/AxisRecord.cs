@@ -1,6 +1,6 @@
 ﻿namespace imL.JavaScript.ChartJS
 {
-    public record AxisFormat
+    public record AxisRecord
     {
         public string? Name { set; get; }
         public string?[]? Axis { set; get; }

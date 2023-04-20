@@ -8,11 +8,11 @@ namespace imL
 {
     public static partial class SmtpHelper
     {
-        public static async Task SendAsync(SmtpFormat _smtp, CancellationToken _ct = default, params MailMessageFormat[] _params)
+        public static async Task SendAsync(SmtpRecord _smtp, CancellationToken _ct = default, params MailMessageRecord[] _params)
         {
             SmtpClient _client = InitSmtpClient(new SmtpClient(), _smtp);
 
-            foreach (MailMessageFormat _item in _params)
+            foreach (MailMessageRecord _item in _params)
             {
                 using (MailMessage _mm = InitMailMessage(new MailMessage(), _smtp, _item))
 #if (NETFRAMEWORK || NETSTANDARD)

@@ -15,7 +15,7 @@ namespace imL
 {
     public static class ChartJSHelper
     {
-        static Config Create(ChartFormat _chart)
+        static Config Create(ChartRecord _chart)
         {
             Config _return = new Config
             {
@@ -89,7 +89,7 @@ namespace imL
             if (_ref.options.scales.y != null) _ref.options.scales.y = null;
             if (_ref.options.scales.z != null) _ref.options.scales.z = null;
         }
-        static void ToDataSets(ref Config _ref, ChartFormat _chart, bool _pileup = false, bool _border = true)
+        static void ToDataSets(ref Config _ref, ChartRecord _chart, bool _pileup = false, bool _border = true)
         {
             _ref.data = new Data();
 
@@ -119,7 +119,7 @@ namespace imL
 
                 for (int _i = 0; _i < _ref.data.datasets.Length; _i++)
                 {
-                    SerieFormat _item = _chart.Series.ElementAt(_i);
+                    SerieRecord _item = _chart.Series.ElementAt(_i);
                     _ref.data.datasets[_i] = new Dataset
                     {
                         label = _item.Name,
@@ -133,7 +133,7 @@ namespace imL
             }
         }
 
-        public static Config BarCharts_Vertical(ChartFormat _chart)
+        public static Config BarCharts_Vertical(ChartRecord _chart)
         {
             Config _return = ChartJSHelper.Create(_chart);
             _return.type = "bar";
@@ -146,14 +146,14 @@ namespace imL
 
             return _return;
         }
-        public static Config BarCharts_Horizontal(ChartFormat _chart)
+        public static Config BarCharts_Horizontal(ChartRecord _chart)
         {
             Config _return = ChartJSHelper.BarCharts_Vertical(_chart);
             _return.options.indexAxis = "y";
 
             return _return;
         }
-        public static Config BarCharts_Stacked(ChartFormat _chart)
+        public static Config BarCharts_Stacked(ChartRecord _chart)
         {
             Config _return = ChartJSHelper.BarCharts_Vertical(_chart);
 
@@ -165,7 +165,7 @@ namespace imL
 
             return _return;
         }
-        public static Config BarCharts_StackedWithGroups(ChartFormat _chart)
+        public static Config BarCharts_StackedWithGroups(ChartRecord _chart)
         {
             //AFINAR
             Config _return = ChartJSHelper.BarCharts_Vertical(_chart);
@@ -184,14 +184,14 @@ namespace imL
 
             return _return;
         }
-        public static Config BarCharts_Floating(ChartFormat _chart)
+        public static Config BarCharts_Floating(ChartRecord _chart)
         {
             //IMPLEMENTAR
             Config _return = ChartJSHelper.BarCharts_Vertical(_chart);
 
             return _return;
         }
-        public static Config BarCharts_BorderRadius(ChartFormat _chart)
+        public static Config BarCharts_BorderRadius(ChartRecord _chart)
         {
             Config _return = ChartJSHelper.BarCharts_Vertical(_chart);
 
@@ -204,7 +204,7 @@ namespace imL
             return _return;
         }
 
-        public static Config LineCharts(ChartFormat _chart)
+        public static Config LineCharts(ChartRecord _chart)
         {
             Config _return = ChartJSHelper.Create(_chart);
             _return.type = "line";
@@ -212,7 +212,7 @@ namespace imL
 
             return _return;
         }
-        public static Config LineCharts_MultiAxis(ChartFormat _chart)
+        public static Config LineCharts_MultiAxis(ChartRecord _chart)
         {
             //AFINAR
             Config _return = ChartJSHelper.LineCharts(_chart);
@@ -239,7 +239,7 @@ namespace imL
 
             return _return;
         }
-        public static Config LineCharts_Stepped(ChartFormat _chart)
+        public static Config LineCharts_Stepped(ChartRecord _chart)
         {
             Config _return = ChartJSHelper.LineCharts(_chart);
             _return.options.interaction.intersect = false;
@@ -253,7 +253,7 @@ namespace imL
 
             return _return;
         }
-        public static Config LineCharts_InterpolationModes(ChartFormat _chart)
+        public static Config LineCharts_InterpolationModes(ChartRecord _chart)
         {
             //AFINAR NaN
             Config _return = ChartJSHelper.LineCharts(_chart);
@@ -276,7 +276,7 @@ namespace imL
 
             return _return;
         }
-        public static Config LineCharts_Styling(ChartFormat _chart)
+        public static Config LineCharts_Styling(ChartRecord _chart)
         {
             Config _return = ChartJSHelper.LineCharts(_chart);
 
@@ -297,7 +297,7 @@ namespace imL
 
             return _return;
         }
-        public static Config LineCharts_SegmentStyling(ChartFormat _chart)
+        public static Config LineCharts_SegmentStyling(ChartRecord _chart)
         {
             //IMPLEMENTAR
             Config _return = ChartJSHelper.LineCharts(_chart);
@@ -305,7 +305,7 @@ namespace imL
             return _return;
         }
 
-        public static Config OtherCharts_Bubble(ChartFormat _chart)
+        public static Config OtherCharts_Bubble(ChartRecord _chart)
         {
             //IMPLEMENTAR
             Config _return = ChartJSHelper.Create(_chart);
@@ -314,7 +314,7 @@ namespace imL
 
             return _return;
         }
-        public static Config OtherCharts_Doughnut(ChartFormat _chart)
+        public static Config OtherCharts_Doughnut(ChartRecord _chart)
         {
             Config _return = ChartJSHelper.Create(_chart);
             _return.type = "doughnut";
@@ -323,7 +323,7 @@ namespace imL
 
             return _return;
         }
-        public static Config OtherCharts_Pie(ChartFormat _chart)
+        public static Config OtherCharts_Pie(ChartRecord _chart)
         {
             Config _return = ChartJSHelper.Create(_chart);
             _return.type = "pie";
@@ -332,7 +332,7 @@ namespace imL
 
             return _return;
         }
-        public static Config OtherCharts_PolarArea(ChartFormat _chart)
+        public static Config OtherCharts_PolarArea(ChartRecord _chart)
         {
             Config _return = ChartJSHelper.Create(_chart);
             _return.type = "polarArea";
@@ -341,7 +341,7 @@ namespace imL
 
             return _return;
         }
-        public static Config OtherCharts_Radar(ChartFormat _chart)
+        public static Config OtherCharts_Radar(ChartRecord _chart)
         {
             Config _return = ChartJSHelper.Create(_chart);
             _return.type = "radar";
@@ -350,7 +350,7 @@ namespace imL
 
             return _return;
         }
-        public static Config OtherCharts_Combo_BarLine(ChartFormat _chart)
+        public static Config OtherCharts_Combo_BarLine(ChartRecord _chart)
         {
             Config _return = ChartJSHelper.BarCharts_Vertical(_chart);
 
@@ -362,7 +362,7 @@ namespace imL
 
             return _return;
         }
-        public static Config OtherCharts_Stacked_BarLine(ChartFormat _chart)
+        public static Config OtherCharts_Stacked_BarLine(ChartRecord _chart)
         {
             Config _return = ChartJSHelper.BarCharts_Vertical(_chart);
 

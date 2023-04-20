@@ -1,6 +1,6 @@
 ﻿namespace imL
 {
-    public record FtpFormat
+    public record FtpRecord
     {
         public bool? UseBinary { init; get; }
         public int? Timeout { init; get; }
