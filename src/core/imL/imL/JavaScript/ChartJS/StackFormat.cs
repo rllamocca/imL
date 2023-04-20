@@ -2,6 +2,6 @@
 {
     public record StackFormat
     {
-        public string[]? SerieNames { set; get; }
+        public string?[]? SerieNames { set; get; }
     }
 }

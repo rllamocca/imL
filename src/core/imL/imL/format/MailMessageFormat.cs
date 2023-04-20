@@ -20,11 +20,11 @@ namespace imL
         public string? FromAddress { init; get; }
         public string? FromDisplayName { init; get; }
 
-        public string[]? TO { init; get; }
-        public string[]? CC { init; get; }
-        public string[]? BCC { init; get; }
-        public string[]? PathAttachments { init; get; }
-        public StreamAttachmentFormat[]? StreamAttachments { init; get; }
+        public string?[]? TO { init; get; }
+        public string?[]? CC { init; get; }
+        public string?[]? BCC { init; get; }
+        public string?[]? PathAttachments { init; get; }
+        public StreamAttachmentFormat?[]? StreamAttachments { init; get; }
     }
 }
 

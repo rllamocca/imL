@@ -6,7 +6,7 @@ namespace imL.JavaScript.Select2
     public record ResultFormat
     {
         public bool? more { set; get; }
-        public Option[]? results { set; get; }
+        public Option?[]? results { set; get; }
     }
 #pragma warning restore IDE1006 // Estilos de nombres
 }

@@ -3,7 +3,7 @@
     public record ChartFormat
     {
         public string? Title { set; get; }
-        public SerieFormat[]? Series { set; get; }
+        public SerieFormat?[]? Series { set; get; }
         public AxisFormat? XAxis { set; get; }
         public AxisFormat? YAxis { set; get; }
         public AxisFormat? ZAxis { set; get; }
