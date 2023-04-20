@@ -3,10 +3,10 @@
 #if (NETSTANDARD1_3 || NETSTANDARD1_4 || NETSTANDARD1_5 || NETSTANDARD1_6)
 //using imL.Struct;
 #else
-using System.Drawing;
 #endif
 
 using System;
+using System.Text;
 //using System.Diagnostics.Contracts;
 
 namespace imL
@@ -17,8 +17,8 @@ namespace imL
         {
             if (_enc)
             {
-                Console.InputEncoding = ReadOnly._ENCODING;
-                Console.OutputEncoding = ReadOnly._ENCODING;
+                Console.InputEncoding = Encoding.UTF8;
+                Console.OutputEncoding = Console.InputEncoding;
             }
 
             if (_title != null)

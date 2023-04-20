@@ -1,6 +1,5 @@
 ﻿#if (NET35_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
 
-using System.Collections.Generic;
 using System.Net.Mail;
 using System.Net.Mime;
 
@@ -21,11 +20,11 @@ namespace imL
         public string? FromAddress { init; get; }
         public string? FromDisplayName { init; get; }
 
-        public IEnumerable<string>? TO { init; get; }
-        public IEnumerable<string>? CC { init; get; }
-        public IEnumerable<string>? BCC { init; get; }
-        public IEnumerable<string>? PathAttachments { init; get; }
-        public IEnumerable<StreamAttachmentFormat>? StreamAttachments { init; get; }
+        public string[]? TO { init; get; }
+        public string[]? CC { init; get; }
+        public string[]? BCC { init; get; }
+        public string[]? PathAttachments { init; get; }
+        public StreamAttachmentFormat[]? StreamAttachments { init; get; }
     }
 }
 

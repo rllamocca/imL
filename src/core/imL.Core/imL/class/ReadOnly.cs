@@ -22,7 +22,7 @@ namespace imL
         public static readonly DateTime _TIMESTAMP = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
         //public static readonly DateTime _EXCEL_NTIME = new DateTime(1799, 12, 31, 0, 0, 0, 0, DateTimeKind.Utc);
         public static readonly DateTime _EXCEL_TIME = new DateTime(1899, 12, 31);
-        public static readonly DateTime _ANVIZ = new DateTime(2000, 1, 2, 0, 0, 0, 0, DateTimeKind.Utc);
+        //public static readonly DateTime _ANVIZ = new DateTime(2000, 1, 2, 0, 0, 0, 0, DateTimeKind.Utc);
 
         public static readonly char[] _SUITS = new char[] { '♠', '♥', '♣', '♦', '☺', '☻' };
         public static readonly char[] _SQUAD = new char[] { 'A', '2', '3', '4', '5', '6', '7', '8', '9', 'X', 'J', 'Q', 'K' };
@@ -40,21 +40,21 @@ namespace imL
  ║  {0}  ║
  ╚═════╝
 ";
-        public static readonly Encoding _ENCODING = Encoding.UTF8;
+        //public static readonly Encoding _ENCODING = Encoding.UTF8;
         public static readonly Encoding _ENCODING_NO_BOM = new UTF8Encoding(false);
         //public static readonly CultureInfo _CULTURE_INVARIANT = CultureInfo.InvariantCulture;
 
         public static Encoding DefaultEncoding(string? _name)
         {
             if (_name == null)
-                return _ENCODING;
+                return Encoding.UTF8;
 
             return Encoding.GetEncoding(_name);
         }
         public static Encoding DefaultEncoding(Encoding? _ref)
         {
             if (_ref == null)
-                return _ENCODING;
+                return Encoding.UTF8;
 
             return _ref;
         }
@@ -62,7 +62,7 @@ namespace imL
         public static void DefaultEncoding(ref Encoding? _ref)
         {
             if (_ref == null)
-                _ref = _ENCODING;
+                _ref = Encoding.UTF8;
         }
 
         public static void DefaultEncoding_NoBOM(ref Encoding? _ref)
