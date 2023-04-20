@@ -5,8 +5,8 @@
     {
         public string? label { set; get; }
         public decimal?[]? data { set; get; }
-        public string[]? backgroundColor { set; get; }
-        public string[]? borderColor { set; get; }
+        public string?[]? backgroundColor { set; get; }
+        public string?[]? borderColor { set; get; }
         public int? borderWidth { set; get; }
 
         public string? stack { set; get; }

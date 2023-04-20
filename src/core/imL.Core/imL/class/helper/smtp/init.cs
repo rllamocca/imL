@@ -76,27 +76,43 @@ namespace imL
 
             if (_f1.TO != null && _f1.TO.Any())
                 foreach (string? _item in _f1.TO)
+                {
+                    if (_item == null)
+                        continue;
                     _i.To.Add(new MailAddress(_item));
+                }
 
             if (_f1.CC != null && _f1.CC.Any())
                 foreach (string? _item in _f1.CC)
+                {
+                    if (_item == null)
+                        continue;
                     _i.CC.Add(new MailAddress(_item));
+                }
 
             if (_f1.BCC != null && _f1.BCC.Any())
                 foreach (string? _item in _f1.BCC)
+                {
+                    if (_item == null)
+                        continue;
                     _i.Bcc.Add(new MailAddress(_item));
+                }
 
             _i.Subject = _f1.Subject;
 
             if (_f1.PathAttachments != null && _f1.PathAttachments.Any())
                 foreach (string? _item in _f1.PathAttachments)
+                {
+                    if (_item == null)
+                        continue;
                     _i.Attachments.Add(InitAttachment(_item));
+                }
 
             if (_f1.StreamAttachments != null && _f1.StreamAttachments.Any())
-                foreach (StreamAttachmentRecord _item in _f1.StreamAttachments)
+                foreach (StreamAttachmentRecord? _item in _f1.StreamAttachments)
                 {
-                    if (_item.Content == null)
-                        continue;
+                    if (_item == null) continue;
+                    if (_item.Content == null) continue;
 
                     if (_item.Name == null)
                         _i.Attachments.Add(new Attachment(_item.Content, _item.Name, _item.MediaType));

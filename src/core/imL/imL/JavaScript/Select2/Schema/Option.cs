@@ -8,7 +8,7 @@
         public bool? selected { set; get; }
         public bool? disabled { set; get; }
 
-        public Option[]? children { set; get; }
+        public Option?[]? children { set; get; }
 
         public string? code { set; get; }
     }

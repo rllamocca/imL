@@ -1,382 +1,390 @@
-﻿using System.Linq;
+﻿//using System.Linq;
 
-using imL.JavaScript.ChartJS;
-using imL.JavaScript.ChartJS.Schema;
+//using imL.JavaScript.ChartJS;
+//using imL.JavaScript.ChartJS.Schema;
 
-/*
-check
+///*
+//check
 
-before
-on
-after 
-*/
+//before
+//on
+//after 
+//*/
 
-namespace imL
-{
-    public static class ChartJSHelper
-    {
-        static Config Create(ChartRecord _chart)
-        {
-            Config _return = new Config
-            {
-                options = new Options
-                {
-                    interaction = new Interaction(),
-                    scales = new Scales(),
-                    plugins = new Plugins
-                    {
-                        legend = new Legend()
-                    },
+//namespace imL
+//{
+//    public static class ChartJSHelper
+//    {
+//        static Config Create(ChartRecord _chart)
+//        {
+//            Config _return = new Config
+//            {
+//                options = new Options
+//                {
+//                    interaction = new Interaction(),
+//                    scales = new Scales(),
+//                    plugins = new Plugins
+//                    {
+//                        legend = new Legend()
+//                    },
 
-                    responsive = true
-                }
-            };
-            _return.options.plugins.legend.position = "top";
+//                    responsive = true
+//                }
+//            };
+//            _return.options.plugins.legend.position = "top";
 
-            if (string.IsNullOrEmpty(_chart.Title) == false)
-            {
-                _return.options.plugins.title = new Title
-                {
-                    display = true,
-                    text = _chart.Title
-                };
-            }
+//            if (string.IsNullOrEmpty(_chart.Title) == false)
+//            {
+//                _return.options.plugins.title = new Title
+//                {
+//                    display = true,
+//                    text = _chart.Title
+//                };
+//            }
 
-            if (_chart.XAxis != null && string.IsNullOrEmpty(_chart.XAxis.Name) == false)
-            {
-                _return.options.scales.x = new X
-                {
-                    title = new Title
-                    {
-                        display = true,
-                        text = _chart.XAxis.Name
-                    }
-                };
-            }
-            if (_chart.YAxis != null && string.IsNullOrEmpty(_chart.YAxis.Name) == false)
-            {
-                _return.options.scales.y = new Y
-                {
-                    title = new Title
-                    {
-                        display = true,
-                        text = _chart.XAxis.Name
-                    }
-                };
-            }
-            if (_chart.ZAxis != null && string.IsNullOrEmpty(_chart.ZAxis.Name) == false)
-            {
-                _return.options.scales.z = new Z
-                {
-                    title = new Title
-                    {
-                        display = true,
-                        text = _chart.XAxis.Name
-                    }
-                };
-            }
-            /*
-            if (_return.options.scales.x == null) _return.options.scales.x = new X();
-            if (_return.options.scales.y == null) _return.options.scales.y = new Y();
-            if (_return.options.scales.z == null) _return.options.scales.z = new Z();
-            */
+//            if (_chart.XAxis != null && string.IsNullOrEmpty(_chart.XAxis.Name) == false)
+//            {
+//                _return.options.scales.x = new X
+//                {
+//                    title = new Title
+//                    {
+//                        display = true,
+//                        text = _chart.XAxis.Name
+//                    }
+//                };
+//            }
+//            if (_chart.YAxis != null && string.IsNullOrEmpty(_chart.YAxis.Name) == false)
+//            {
+//                _return.options.scales.y = new Y
+//                {
+//                    title = new Title
+//                    {
+//                        display = true,
+//                        text = _chart.XAxis?.Name
+//                    }
+//                };
+//            }
+//            if (_chart.ZAxis != null && string.IsNullOrEmpty(_chart.ZAxis.Name) == false)
+//            {
+//                _return.options.scales.z = new Z
+//                {
+//                    title = new Title
+//                    {
+//                        display = true,
+//                        text = _chart.XAxis?.Name
+//                    }
+//                };
+//            }
+//            /*
+//            if (_return.options.scales.x == null) _return.options.scales.x = new X();
+//            if (_return.options.scales.y == null) _return.options.scales.y = new Y();
+//            if (_return.options.scales.z == null) _return.options.scales.z = new Z();
+//            */
 
-            return _return;
-        }
-        static void CleanScales(ref Config _ref)
-        {
-            if (_ref.options.scales.x != null) _ref.options.scales.x = null;
-            if (_ref.options.scales.y != null) _ref.options.scales.y = null;
-            if (_ref.options.scales.z != null) _ref.options.scales.z = null;
-        }
-        static void ToDataSets(ref Config _ref, ChartRecord _chart, bool _pileup = false, bool _border = true)
-        {
-            _ref.data = new Data();
+//            return _return;
+//        }
+//        static void CleanScales(ref Config _ref)
+//        {
+//            if (_ref.options?.scales?.x != null) _ref.options.scales.x = null;
+//            if (_ref.options?.scales?.y != null) _ref.options.scales.y = null;
+//            if (_ref.options?.scales?.z != null) _ref.options.scales.z = null;
+//        }
+//        static void ToDataSets(ref Config _ref, ChartRecord _chart, bool _pileup = false, bool _border = true)
+//        {
+//            _ref.data = new Data();
 
-            if (_pileup)
-            {
-                _ref.data.labels = _chart.Series.Select(_s => _s.Name).ToArray();
-                //decimal?[] _values = _chart.Series.SelectMany(_s => _s.Values).Take(_ref.data.labels.Length).ToArray();
-                decimal?[] _values = _chart.Series.Select(_s => _s.Values.FirstOrDefault()).ToArray();
+//            if (_pileup)
+//            {
+//                _ref.data.labels = (
+//                    from _r in _chart.Series
+//                    where _r != null
+//                    select _r.Name
+//                    ).ToArray();
+//                //decimal?[] _values = _chart.Series.SelectMany(_s => _s.Values).Take(_ref.data.labels.Length).ToArray();
+//                decimal?[] _values = (
+//                    from _r in _chart.Series
+//                    where _r != null
+//                    select _r.Values?.FirstOrDefault()
+//                    ).ToArray();
 
-                _ref.data.datasets = new Dataset[1];
-                _ref.data.datasets[0] = new Dataset
-                {
-                    label = "pileup",
-                    data = _values,
-                    backgroundColor = _chart.BackgroundColor.ToArray()
-                };
+//                _ref.data.datasets = new Dataset[1];
+//                _ref.data.datasets[0] = new Dataset
+//                {
+//                    label = "pileup",
+//                    data = _values,
+//                    backgroundColor = _chart.BackgroundColor
+//                };
 
-                if (_border)
-                    _ref.data.datasets[0].borderColor = _chart.BorderColor.ToArray();
-            }
-            else
-            {
-                if (_chart.XAxis != null)
-                    _ref.data.labels = _chart.XAxis.Axis.ToArray();
+//                if (_border)
+//                    _ref.data.datasets[0].borderColor = _chart.BorderColor;
+//            }
+//            else
+//            {
+//                if (_chart.XAxis != null)
+//                    _ref.data.labels = _chart.XAxis?.Axis;
 
-                _ref.data.datasets = new Dataset[_chart.Series.Count()];
+//                _ref.data.datasets = new Dataset[_chart.Series.Count()];
 
-                for (int _i = 0; _i < _ref.data.datasets.Length; _i++)
-                {
-                    SerieRecord _item = _chart.Series.ElementAt(_i);
-                    _ref.data.datasets[_i] = new Dataset
-                    {
-                        label = _item.Name,
-                        data = _item.Values.ToArray(),
-                        backgroundColor = new string[] { _chart.BackgroundColor.ElementAt(_i % _chart.BackgroundColor.Count()) }
-                    };
+//                for (int _i = 0; _i < _ref.data.datasets.Length; _i++)
+//                {
+//                    SerieRecord _item = _chart.Series.ElementAt(_i);
+//                    _ref.data.datasets[_i] = new Dataset
+//                    {
+//                        label = _item?.Name,
+//                        data = _item?.Values,
+//                        backgroundColor = new string[] { _chart.BackgroundColor.ElementAt(_i % _chart.BackgroundColor.Count()) }
+//                    };
 
-                    if (_border)
-                        _ref.data.datasets[_i].borderColor = new string[] { _chart.BorderColor.ElementAt(_i % _chart.BorderColor.Count()) };
-                }
-            }
-        }
+//                    if (_border)
+//                        _ref.data.datasets[_i].borderColor = new string[] { _chart.BorderColor.ElementAt(_i % _chart.BorderColor.Count()) };
+//                }
+//            }
+//        }
 
-        public static Config BarCharts_Vertical(ChartRecord _chart)
-        {
-            Config _return = ChartJSHelper.Create(_chart);
-            _return.type = "bar";
-            ChartJSHelper.ToDataSets(ref _return, _chart);
+//        public static Config BarCharts_Vertical(ChartRecord _chart)
+//        {
+//            Config _return = ChartJSHelper.Create(_chart);
+//            _return.type = "bar";
+//            ChartJSHelper.ToDataSets(ref _return, _chart);
 
-            for (int _i = 0; _i < _return.data.datasets.Length; _i++)
-            {
-                _return.data.datasets[_i].borderWidth = 2;
-            }
+//            for (int _i = 0; _i < _return.data.datasets.Length; _i++)
+//            {
+//                _return.data.datasets[_i].borderWidth = 2;
+//            }
 
-            return _return;
-        }
-        public static Config BarCharts_Horizontal(ChartRecord _chart)
-        {
-            Config _return = ChartJSHelper.BarCharts_Vertical(_chart);
-            _return.options.indexAxis = "y";
+//            return _return;
+//        }
+//        public static Config BarCharts_Horizontal(ChartRecord _chart)
+//        {
+//            Config _return = ChartJSHelper.BarCharts_Vertical(_chart);
+//            _return.options.indexAxis = "y";
 
-            return _return;
-        }
-        public static Config BarCharts_Stacked(ChartRecord _chart)
-        {
-            Config _return = ChartJSHelper.BarCharts_Vertical(_chart);
+//            return _return;
+//        }
+//        public static Config BarCharts_Stacked(ChartRecord _chart)
+//        {
+//            Config _return = ChartJSHelper.BarCharts_Vertical(_chart);
 
-            if (_return.options.scales.x == null) _return.options.scales.x = new X();
-            if (_return.options.scales.y == null) _return.options.scales.y = new Y();
+//            if (_return.options.scales.x == null) _return.options.scales.x = new X();
+//            if (_return.options.scales.y == null) _return.options.scales.y = new Y();
 
-            _return.options.scales.x.stacked = true;
-            _return.options.scales.y.stacked = true;
+//            _return.options.scales.x.stacked = true;
+//            _return.options.scales.y.stacked = true;
 
-            return _return;
-        }
-        public static Config BarCharts_StackedWithGroups(ChartRecord _chart)
-        {
-            //AFINAR
-            Config _return = ChartJSHelper.BarCharts_Vertical(_chart);
+//            return _return;
+//        }
+//        public static Config BarCharts_StackedWithGroups(ChartRecord _chart)
+//        {
+//            //AFINAR
+//            Config _return = ChartJSHelper.BarCharts_Vertical(_chart);
 
-            if (_return.options.scales.x == null) _return.options.scales.x = new X();
-            if (_return.options.scales.y == null) _return.options.scales.y = new Y();
+//            if (_return.options.scales.x == null) _return.options.scales.x = new X();
+//            if (_return.options.scales.y == null) _return.options.scales.y = new Y();
 
-            _return.options.interaction.intersect = false;
-            _return.options.scales.x.stacked = true;
-            _return.options.scales.y.stacked = true;
+//            _return.options.interaction.intersect = false;
+//            _return.options.scales.x.stacked = true;
+//            _return.options.scales.y.stacked = true;
 
-            for (int _i = 0; _i < _return.data.datasets.Length; _i++)
-            {
-                _return.data.datasets[_i].stack = _i % 2 == 0 ? "stack 0" : "stack 1";
-            }
+//            for (int _i = 0; _i < _return.data.datasets.Length; _i++)
+//            {
+//                _return.data.datasets[_i].stack = _i % 2 == 0 ? "stack 0" : "stack 1";
+//            }
 
-            return _return;
-        }
-        public static Config BarCharts_Floating(ChartRecord _chart)
-        {
-            //IMPLEMENTAR
-            Config _return = ChartJSHelper.BarCharts_Vertical(_chart);
+//            return _return;
+//        }
+//        public static Config BarCharts_Floating(ChartRecord _chart)
+//        {
+//            //IMPLEMENTAR
+//            Config _return = ChartJSHelper.BarCharts_Vertical(_chart);
 
-            return _return;
-        }
-        public static Config BarCharts_BorderRadius(ChartRecord _chart)
-        {
-            Config _return = ChartJSHelper.BarCharts_Vertical(_chart);
+//            return _return;
+//        }
+//        public static Config BarCharts_BorderRadius(ChartRecord _chart)
+//        {
+//            Config _return = ChartJSHelper.BarCharts_Vertical(_chart);
 
-            for (int _i = 0; _i < _return.data.datasets.Length; _i++)
-            {
-                _return.data.datasets[_i].borderRadius = 50;
-                _return.data.datasets[_i].borderSkipped = false;
-            }
+//            for (int _i = 0; _i < _return.data.datasets.Length; _i++)
+//            {
+//                _return.data.datasets[_i].borderRadius = 50;
+//                _return.data.datasets[_i].borderSkipped = false;
+//            }
 
-            return _return;
-        }
+//            return _return;
+//        }
 
-        public static Config LineCharts(ChartRecord _chart)
-        {
-            Config _return = ChartJSHelper.Create(_chart);
-            _return.type = "line";
-            ChartJSHelper.ToDataSets(ref _return, _chart);
+//        public static Config LineCharts(ChartRecord _chart)
+//        {
+//            Config _return = ChartJSHelper.Create(_chart);
+//            _return.type = "line";
+//            ChartJSHelper.ToDataSets(ref _return, _chart);
 
-            return _return;
-        }
-        public static Config LineCharts_MultiAxis(ChartRecord _chart)
-        {
-            //AFINAR
-            Config _return = ChartJSHelper.LineCharts(_chart);
+//            return _return;
+//        }
+//        public static Config LineCharts_MultiAxis(ChartRecord _chart)
+//        {
+//            //AFINAR
+//            Config _return = ChartJSHelper.LineCharts(_chart);
 
-            if (_return.options.scales.y == null) _return.options.scales.y = new Y();
-            if (_return.options.scales.z == null) _return.options.scales.z = new Z();
+//            if (_return.options.scales.y == null) _return.options.scales.y = new Y();
+//            if (_return.options.scales.z == null) _return.options.scales.z = new Z();
 
-            _return.options.scales.z.grid = new Grid();
+//            _return.options.scales.z.grid = new Grid();
 
-            _return.options.interaction.mode = "index";
-            _return.options.interaction.intersect = false;
-            _return.options.scales.y.type = "linear";
-            _return.options.scales.y.display = true;
-            _return.options.scales.y.position = "left";
-            _return.options.scales.z.type = "linear";
-            _return.options.scales.z.display = true;
-            _return.options.scales.z.position = "right";
-            _return.options.scales.z.grid.drawOnChartArea = false;
+//            _return.options.interaction.mode = "index";
+//            _return.options.interaction.intersect = false;
+//            _return.options.scales.y.type = "linear";
+//            _return.options.scales.y.display = true;
+//            _return.options.scales.y.position = "left";
+//            _return.options.scales.z.type = "linear";
+//            _return.options.scales.z.display = true;
+//            _return.options.scales.z.position = "right";
+//            _return.options.scales.z.grid.drawOnChartArea = false;
 
-            for (int _i = 0; _i < _return.data.datasets.Length; _i++)
-            {
-                _return.data.datasets[_i].yAxisID = _i % 2 == 0 ? "y" : "z";
-            }
+//            for (int _i = 0; _i < _return.data.datasets.Length; _i++)
+//            {
+//                _return.data.datasets[_i].yAxisID = _i % 2 == 0 ? "y" : "z";
+//            }
 
-            return _return;
-        }
-        public static Config LineCharts_Stepped(ChartRecord _chart)
-        {
-            Config _return = ChartJSHelper.LineCharts(_chart);
-            _return.options.interaction.intersect = false;
-            _return.options.interaction.axis = "x";
+//            return _return;
+//        }
+//        public static Config LineCharts_Stepped(ChartRecord _chart)
+//        {
+//            Config _return = ChartJSHelper.LineCharts(_chart);
+//            _return.options.interaction.intersect = false;
+//            _return.options.interaction.axis = "x";
 
-            for (int _i = 0; _i < _chart.Series.Count(); _i++)
-            {
-                _return.data.datasets[_i].fill = false;
-                _return.data.datasets[_i].stepped = true;
-            }
+//            for (int _i = 0; _i < _chart.Series.Count(); _i++)
+//            {
+//                _return.data.datasets[_i].fill = false;
+//                _return.data.datasets[_i].stepped = true;
+//            }
 
-            return _return;
-        }
-        public static Config LineCharts_InterpolationModes(ChartRecord _chart)
-        {
-            //AFINAR NaN
-            Config _return = ChartJSHelper.LineCharts(_chart);
+//            return _return;
+//        }
+//        public static Config LineCharts_InterpolationModes(ChartRecord _chart)
+//        {
+//            //AFINAR NaN
+//            Config _return = ChartJSHelper.LineCharts(_chart);
 
-            if (_return.options.scales.x == null) _return.options.scales.x = new X();
-            if (_return.options.scales.y == null) _return.options.scales.y = new Y();
+//            if (_return.options.scales.x == null) _return.options.scales.x = new X();
+//            if (_return.options.scales.y == null) _return.options.scales.y = new Y();
 
-            _return.options.interaction.intersect = false;
-            _return.options.scales.x.display = true;
-            _return.options.scales.y.display = true;
-            _return.options.scales.y.suggestedMin = -10;
-            _return.options.scales.y.suggestedMin = -200;
+//            _return.options.interaction.intersect = false;
+//            _return.options.scales.x.display = true;
+//            _return.options.scales.y.display = true;
+//            _return.options.scales.y.suggestedMin = -10;
+//            _return.options.scales.y.suggestedMin = -200;
 
-            for (int _i = 0; _i < _chart.Series.Count(); _i++)
-            {
-                _return.data.datasets[_i].cubicInterpolationMode = "monotone"; //Cubic interpolation (monotone)
-                _return.data.datasets[_i].tension = 0.5m; //Cubic interpolation
-                _return.data.datasets[_i].fill = false; //Linear interpolation (default)
-            }
+//            for (int _i = 0; _i < _chart.Series.Count(); _i++)
+//            {
+//                _return.data.datasets[_i].cubicInterpolationMode = "monotone"; //Cubic interpolation (monotone)
+//                _return.data.datasets[_i].tension = 0.5m; //Cubic interpolation
+//                _return.data.datasets[_i].fill = false; //Linear interpolation (default)
+//            }
 
-            return _return;
-        }
-        public static Config LineCharts_Styling(ChartRecord _chart)
-        {
-            Config _return = ChartJSHelper.LineCharts(_chart);
+//            return _return;
+//        }
+//        public static Config LineCharts_Styling(ChartRecord _chart)
+//        {
+//            Config _return = ChartJSHelper.LineCharts(_chart);
 
-            if (_return.options.scales.x == null) _return.options.scales.x = new X();
-            if (_return.options.scales.y == null) _return.options.scales.y = new Y();
+//            if (_return.options.scales.x == null) _return.options.scales.x = new X();
+//            if (_return.options.scales.y == null) _return.options.scales.y = new Y();
 
-            _return.options.interaction.mode = "index";
-            _return.options.interaction.intersect = false;
-            _return.options.scales.x.display = true;
-            _return.options.scales.y.display = true;
+//            _return.options.interaction.mode = "index";
+//            _return.options.interaction.intersect = false;
+//            _return.options.scales.x.display = true;
+//            _return.options.scales.y.display = true;
 
-            for (int _i = 0; _i < _chart.Series.Count(); _i++)
-            {
-                //_return.data.datasets[_i].fill = false; //Unfilled
-                _return.data.datasets[_i].borderDash = new int?[] { 5, 5 }; //Unfilled
-                _return.data.datasets[_i].fill = true; //Filled
-            }
+//            for (int _i = 0; _i < _chart.Series.Count(); _i++)
+//            {
+//                //_return.data.datasets[_i].fill = false; //Unfilled
+//                _return.data.datasets[_i].borderDash = new int?[] { 5, 5 }; //Unfilled
+//                _return.data.datasets[_i].fill = true; //Filled
+//            }
 
-            return _return;
-        }
-        public static Config LineCharts_SegmentStyling(ChartRecord _chart)
-        {
-            //IMPLEMENTAR
-            Config _return = ChartJSHelper.LineCharts(_chart);
+//            return _return;
+//        }
+//        public static Config LineCharts_SegmentStyling(ChartRecord _chart)
+//        {
+//            //IMPLEMENTAR
+//            Config _return = ChartJSHelper.LineCharts(_chart);
 
-            return _return;
-        }
+//            return _return;
+//        }
 
-        public static Config OtherCharts_Bubble(ChartRecord _chart)
-        {
-            //IMPLEMENTAR
-            Config _return = ChartJSHelper.Create(_chart);
-            _return.type = "bubble";
-            ChartJSHelper.ToDataSets(ref _return, _chart);
+//        public static Config OtherCharts_Bubble(ChartRecord _chart)
+//        {
+//            //IMPLEMENTAR
+//            Config _return = ChartJSHelper.Create(_chart);
+//            _return.type = "bubble";
+//            ChartJSHelper.ToDataSets(ref _return, _chart);
 
-            return _return;
-        }
-        public static Config OtherCharts_Doughnut(ChartRecord _chart)
-        {
-            Config _return = ChartJSHelper.Create(_chart);
-            _return.type = "doughnut";
-            ChartJSHelper.ToDataSets(ref _return, _chart, true, false);
-            ChartJSHelper.CleanScales(ref _return);
+//            return _return;
+//        }
+//        public static Config OtherCharts_Doughnut(ChartRecord _chart)
+//        {
+//            Config _return = ChartJSHelper.Create(_chart);
+//            _return.type = "doughnut";
+//            ChartJSHelper.ToDataSets(ref _return, _chart, true, false);
+//            ChartJSHelper.CleanScales(ref _return);
 
-            return _return;
-        }
-        public static Config OtherCharts_Pie(ChartRecord _chart)
-        {
-            Config _return = ChartJSHelper.Create(_chart);
-            _return.type = "pie";
-            ChartJSHelper.ToDataSets(ref _return, _chart, true, false);
-            ChartJSHelper.CleanScales(ref _return);
+//            return _return;
+//        }
+//        public static Config OtherCharts_Pie(ChartRecord _chart)
+//        {
+//            Config _return = ChartJSHelper.Create(_chart);
+//            _return.type = "pie";
+//            ChartJSHelper.ToDataSets(ref _return, _chart, true, false);
+//            ChartJSHelper.CleanScales(ref _return);
 
-            return _return;
-        }
-        public static Config OtherCharts_PolarArea(ChartRecord _chart)
-        {
-            Config _return = ChartJSHelper.Create(_chart);
-            _return.type = "polarArea";
-            ChartJSHelper.ToDataSets(ref _return, _chart, true, false);
-            ChartJSHelper.CleanScales(ref _return);
+//            return _return;
+//        }
+//        public static Config OtherCharts_PolarArea(ChartRecord _chart)
+//        {
+//            Config _return = ChartJSHelper.Create(_chart);
+//            _return.type = "polarArea";
+//            ChartJSHelper.ToDataSets(ref _return, _chart, true, false);
+//            ChartJSHelper.CleanScales(ref _return);
 
-            return _return;
-        }
-        public static Config OtherCharts_Radar(ChartRecord _chart)
-        {
-            Config _return = ChartJSHelper.Create(_chart);
-            _return.type = "radar";
-            ChartJSHelper.ToDataSets(ref _return, _chart);
-            ChartJSHelper.CleanScales(ref _return);
+//            return _return;
+//        }
+//        public static Config OtherCharts_Radar(ChartRecord _chart)
+//        {
+//            Config _return = ChartJSHelper.Create(_chart);
+//            _return.type = "radar";
+//            ChartJSHelper.ToDataSets(ref _return, _chart);
+//            ChartJSHelper.CleanScales(ref _return);
 
-            return _return;
-        }
-        public static Config OtherCharts_Combo_BarLine(ChartRecord _chart)
-        {
-            Config _return = ChartJSHelper.BarCharts_Vertical(_chart);
+//            return _return;
+//        }
+//        public static Config OtherCharts_Combo_BarLine(ChartRecord _chart)
+//        {
+//            Config _return = ChartJSHelper.BarCharts_Vertical(_chart);
 
-            for (int _i = 0; _i < _return.data.datasets.Length; _i++)
-            {
-                _return.data.datasets[_i].type = _i % 2 == 0 ? "bar" : "line";
-                _return.data.datasets[_i].order = _i % 2 == 0 ? 1 : 0;
-            }
+//            for (int _i = 0; _i < _return.data.datasets.Length; _i++)
+//            {
+//                _return.data.datasets[_i].type = _i % 2 == 0 ? "bar" : "line";
+//                _return.data.datasets[_i].order = _i % 2 == 0 ? 1 : 0;
+//            }
 
-            return _return;
-        }
-        public static Config OtherCharts_Stacked_BarLine(ChartRecord _chart)
-        {
-            Config _return = ChartJSHelper.BarCharts_Vertical(_chart);
+//            return _return;
+//        }
+//        public static Config OtherCharts_Stacked_BarLine(ChartRecord _chart)
+//        {
+//            Config _return = ChartJSHelper.BarCharts_Vertical(_chart);
 
-            if (_return.options.scales.y == null) _return.options.scales.y = new Y();
+//            if (_return.options.scales.y == null) _return.options.scales.y = new Y();
 
-            _return.options.scales.y.stacked = true;
+//            _return.options.scales.y.stacked = true;
 
-            for (int _i = 0; _i < _return.data.datasets.Length; _i++)
-            {
-                _return.data.datasets[_i].stack = "stacked";
-                _return.data.datasets[_i].type = _i % 2 == 0 ? "bar" : "line";
-            }
+//            for (int _i = 0; _i < _return.data.datasets.Length; _i++)
+//            {
+//                _return.data.datasets[_i].stack = "stacked";
+//                _return.data.datasets[_i].type = _i % 2 == 0 ? "bar" : "line";
+//            }
 
-            return _return;
-        }
-    }
-}
+//            return _return;
+//        }
+//    }
+//}
