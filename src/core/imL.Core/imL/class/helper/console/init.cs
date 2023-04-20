@@ -34,7 +34,7 @@ namespace imL
         public static void Ends(bool _rk = false, bool? _card = null)
         {
             if (_card.HasValue)
-                Console.WriteLine(Environment.NewLine + @" ♫♪ ... {0}", _card.Value ? StringHelper.MyFortuneCard() : StringHelper.MyFortune());
+                Console.WriteLine(Environment.NewLine + @" ♫♪ ... {0}", _card.Value ? RichieHelper.MyFortuneCard() : RichieHelper.MyFortune());
 
             if (_rk)
                 PressAnyKeyToExit();

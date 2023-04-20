@@ -19,7 +19,7 @@ namespace imL
             //return (await ListDirectoryIAsync(_root, _format).ToIEnumerable()).ToArray();
 
 #if (NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER)
-            return await ListDirectoryIAsync(_root, _format, _ct).ToIEnumerable();
+            return await ListDirectoryIAsync(_root, _format, _ct).ToAwaitIEnumerable();
 #else
             IList<string?> _return = new List<string?>();
             FtpWebRequest _client = CreateClient(WebRequestMethods.Ftp.ListDirectory, _root, _format);
@@ -36,7 +36,7 @@ namespace imL
         public static async Task<IEnumerable<string?>> ListDirectoryDetailsAsync(string? _root, FtpFormat _format, CancellationToken _ct = default)
         {
 #if (NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER)
-            return await ListDirectoryDetailsIAsync(_root, _format, _ct).ToIEnumerable();
+            return await ListDirectoryDetailsIAsync(_root, _format, _ct).ToAwaitIEnumerable();
 #else
             IList<string?> _return = new List<string?>();
             FtpWebRequest _client = CreateClient(WebRequestMethods.Ftp.ListDirectoryDetails, _root, _format);
@@ -53,7 +53,7 @@ namespace imL
         public static async Task<IEnumerable<FtpContentFormat>> ListDirectoryDetailsContentAsync(string? _root, FtpFormat _format, CancellationToken _ct = default)
         {
 #if (NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER)
-            return await AnalizeListDirectoryDetailsIAsync(_root, ListDirectoryDetailsIAsync(_root, _format, _ct), _ct).ToIEnumerable();
+            return await AnalizeListDirectoryDetailsIAsync(_root, ListDirectoryDetailsIAsync(_root, _format, _ct), _ct).ToAwaitIEnumerable();
 #else
             return AnalizeListDirectoryDetailsISync(_root, await ListDirectoryDetailsAsync(_root, _format)).ToArray();
 #endif
@@ -62,7 +62,7 @@ namespace imL
         public static async Task<IEnumerable<FtpContentFormat>> ListSubdirectoriesAsync(string? _root, FtpFormat _format, CancellationToken _ct = default)
         {
 #if (NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER)
-            return await ListSubdirectoriesIAsync(_root, _format, _ct).ToIEnumerable();
+            return await ListSubdirectoriesIAsync(_root, _format, _ct).ToAwaitIEnumerable();
 #else
             List<FtpContentFormat> _return = new List<FtpContentFormat>();
             IEnumerable<FtpContentFormat> _tmp = await ListDirectoryDetailsContentAsync(_root, _format, _ct);

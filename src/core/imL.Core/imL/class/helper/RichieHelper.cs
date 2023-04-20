@@ -2,7 +2,7 @@
 
 namespace imL
 {
-    public static class StringHelper
+    public static class RichieHelper
     {
         public static string? MyFortune()
         {

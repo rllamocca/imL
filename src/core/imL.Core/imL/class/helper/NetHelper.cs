@@ -1,14 +1,32 @@
-﻿#if (NET35_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NET5_0_OR_GREATER)
-
+﻿using System;
 using System.IO;
 using System.Net.Mime;
 
-#endif
-
 namespace imL
 {
-    public class MimeHelper
+    public static class NetHelper
     {
+        public static string CheckHttp(string _from, string _to)
+        {
+            string _https = "https://";
+            string _http = "http://";
+            StringComparison _c = StringComparison.OrdinalIgnoreCase;
+
+            if (
+                (_from.StartsWith(_https, _c) && _to.StartsWith(_https, _c)) ||
+                (_from.StartsWith(_http, _c) && _to.StartsWith(_http, _c))
+                )
+                return _to;
+
+            if (_from.StartsWith(_https, _c))
+                return _to.Replace(_http, _https);
+
+            if (_from.StartsWith(_http, _c))
+                return _to.Replace(_https, _http);
+
+            return _to;
+        }
+
         public static string MediaType(string? _fileextension)
         {
             _fileextension = _fileextension?.ToLower();
@@ -67,6 +85,5 @@ namespace imL
             return new ContentType(MediaType(_fi.Extension));
         }
 #endif
-
     }
 }

@@ -101,14 +101,14 @@ namespace imL
                     if (_item.Name == null)
                         _i.Attachments.Add(new Attachment(_item.Content, _item.Name, _item.MediaType));
                     else
-                        _i.Attachments.Add(new Attachment(_item.Content, _item.Name, _item.MediaType ?? MimeHelper.MediaType(new FileInfo(_item.Name).Extension)));
+                        _i.Attachments.Add(new Attachment(_item.Content, _item.Name, _item.MediaType ?? NetHelper.MediaType(new FileInfo(_item.Name).Extension)));
                 }
 
             return _i;
         }
         internal static Attachment InitAttachment(string _path)
         {
-            Attachment _return = new(_path, MimeHelper.ContentType(_path));
+            Attachment _return = new(_path, NetHelper.ContentType(_path));
 
             if (_return.ContentDisposition == null)
                 return _return;

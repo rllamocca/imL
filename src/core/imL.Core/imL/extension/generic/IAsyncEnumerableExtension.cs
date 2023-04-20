@@ -1,24 +1,30 @@
 ﻿#if (NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER)
 
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace imL
 {
     public static class IAsyncEnumerableExtension
     {
-        public static async Task<IEnumerable<T>> ToIEnumerable<T>(this IAsyncEnumerable<T> _array)
+        public static async Task<IEnumerable<G>> ToAwaitIEnumerable<G>(this IAsyncEnumerable<G> _array)
         {
-            if (_array == null)
-                throw new ArgumentNullException(nameof(_array));
+            IList<G> _return = new List<G>();
 
-            IList<T> _return = new List<T>();
-
-            await foreach (T _item in _array)
+            await foreach (G _item in _array)
                 _return.Add(_item);
 
             return _return;
+        }
+        public static async Task<G[]> ToAwaitArray<G>(this IAsyncEnumerable<G> _array)
+        {
+            IList<G> _return = new List<G>();
+
+            await foreach (G _item in _array)
+                _return.Add(_item);
+
+            return _return.ToArray();
         }
     }
 }
