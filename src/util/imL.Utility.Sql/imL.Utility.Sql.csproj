@@ -41,7 +41,7 @@
 	</PropertyGroup>
 
 	<ItemGroup Condition="('$(TargetFramework)' == 'net8.0') Or ('$(TargetFramework)' == 'net7.0') Or ('$(TargetFramework)' == 'net6.0') Or ('$(TargetFramework)' == 'net5.0') Or ('$(TargetFramework)' == 'netstandard2.1') Or ('$(TargetFramework)' == 'netstandard2.0') Or ('$(TargetFramework)' == 'netstandard1.6') Or ('$(TargetFramework)' == 'netstandard1.5') Or ('$(TargetFramework)' == 'netstandard1.4') Or ('$(TargetFramework)' == 'netstandard1.3')">
-		<PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+		<PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
 	</ItemGroup>
 
 	<ItemGroup>
