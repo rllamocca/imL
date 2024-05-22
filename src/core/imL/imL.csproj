@@ -3,7 +3,7 @@
 		<TargetFrameworks>
 			net35;net40;net45;net451;net452;net46
 			;netstandard2.0;netstandard2.1
-			;net5.0;net6.0;net7.0
+			;net5.0;net6.0;net7.0;net8.0
 		</TargetFrameworks>
 
 		<Copyright>© $(TargetFramework)</Copyright>
@@ -23,7 +23,7 @@
 		<!--<NeutralLanguage></NeutralLanguage>-->
 
 		<!--<PackageId></PackageId>-->
-		<Version>0.8.8.19</Version>
+		<Version>0.8.8.20</Version>
 		<!--<PackageVersion></PackageVersion>-->
 		<!--<VersionPrefix></VersionPrefix>-->
 		<!--<VersionSuffix></VersionSuffix>-->
@@ -54,7 +54,7 @@
 		<NoWarn>CS1701;CS1702;CS8600;CS8601;CS8602;CS8618;CS8625;IDE0063;IDE0066;IDE0090</NoWarn>
 		<CheckEolTargetFramework>false</CheckEolTargetFramework>
 	</PropertyGroup>
-	<PropertyGroup Condition="('$(TargetFramework)' == 'net7.0') Or ('$(TargetFramework)' == 'net6.0') Or ('$(TargetFramework)' == 'net5.0')">
+	<PropertyGroup Condition="('$(TargetFramework)' == 'net8.0') Or ('$(TargetFramework)' == 'net7.0') Or ('$(TargetFramework)' == 'net6.0') Or ('$(TargetFramework)' == 'net5.0')">
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 	<PropertyGroup Condition="('$(TargetFramework)' == 'netstandard2.1')">

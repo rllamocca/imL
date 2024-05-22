@@ -30,7 +30,14 @@ namespace imL.Package.SSH_Net
         public static FtpStatusCode ListDirectory(out string[] _outList, FtpFormat _format)
         {
             SftpClient _client = SftpHelper.Create(_format);
+
+#if NETCOREAPP || NETSTANDARD
+            IEnumerable<ISftpFile> _return = _client.ListDirectory(_format.Path);
+#else
             IEnumerable<SftpFile> _return = _client.ListDirectory(_format.Path);
+#endif
+
+
             _client.Disconnect();
             _outList = _return.Select(_s => _s.Name).ToArray();
 
