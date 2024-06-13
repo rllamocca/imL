@@ -80,7 +80,7 @@
             tabPage1.Location = new System.Drawing.Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            tabPage1.Size = new System.Drawing.Size(550, 407);
+            tabPage1.Size = new System.Drawing.Size(452, 342);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "General";
             tabPage1.UseVisualStyleBackColor = true;
@@ -91,6 +91,8 @@
             _SplitSeparator.Name = "_SplitSeparator";
             _SplitSeparator.Size = new System.Drawing.Size(100, 23);
             _SplitSeparator.TabIndex = 1;
+            _SplitSeparator.Text = ",";
+            _SplitSeparator.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label12
             // 
@@ -210,10 +212,12 @@
             // _1_Port
             // 
             _1_Port.Location = new System.Drawing.Point(200, 74);
+            _1_Port.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
             _1_Port.Name = "_1_Port";
             _1_Port.Size = new System.Drawing.Size(75, 23);
             _1_Port.TabIndex = 34;
             _1_Port.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            _1_Port.Value = new decimal(new int[] { 25, 0, 0, 0 });
             // 
             // _1_TargetName
             // 
@@ -225,10 +229,13 @@
             // _1_Timeout
             // 
             _1_Timeout.Location = new System.Drawing.Point(200, 16);
+            _1_Timeout.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             _1_Timeout.Name = "_1_Timeout";
             _1_Timeout.Size = new System.Drawing.Size(75, 23);
             _1_Timeout.TabIndex = 32;
             _1_Timeout.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            _1_Timeout.ThousandsSeparator = true;
+            _1_Timeout.Value = new decimal(new int[] { 100, 0, 0, 0 });
             // 
             // label11
             // 
