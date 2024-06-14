@@ -149,4 +149,12 @@ public partial class fIndex : Form
             select _r.Trim()
             ).ToArray();
     }
+
+    void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    {
+        if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            return;
+
+        MessageBox.Show(string.Format("HI: {0} {1}", e.RowIndex, e.ColumnIndex));
+    }
 }

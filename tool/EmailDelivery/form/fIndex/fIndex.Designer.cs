@@ -38,12 +38,12 @@
             tabControl1 = new System.Windows.Forms.TabControl();
             tabPage1 = new System.Windows.Forms.TabPage();
             dataGridView1 = new System.Windows.Forms.DataGridView();
-            tabPage2 = new System.Windows.Forms.TabPage();
-            richTextBox1 = new System.Windows.Forms.RichTextBox();
             Column1 = new System.Windows.Forms.DataGridViewLinkColumn();
             Column2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             Column4 = new System.Windows.Forms.DataGridViewLinkColumn();
+            tabPage2 = new System.Windows.Forms.TabPage();
+            richTextBox1 = new System.Windows.Forms.RichTextBox();
             menuStrip1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -141,27 +141,7 @@
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.Size = new System.Drawing.Size(770, 262);
             dataGridView1.TabIndex = 0;
-            // 
-            // tabPage2
-            // 
-            tabPage2.Controls.Add(richTextBox1);
-            tabPage2.Location = new System.Drawing.Point(4, 4);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            tabPage2.Size = new System.Drawing.Size(776, 309);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "Log";
-            tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // richTextBox1
-            // 
-            richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            richTextBox1.Location = new System.Drawing.Point(3, 3);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.ReadOnly = true;
-            richTextBox1.Size = new System.Drawing.Size(770, 303);
-            richTextBox1.TabIndex = 0;
-            richTextBox1.Text = "";
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // Column1
             // 
@@ -188,6 +168,27 @@
             Column4.HeaderText = "Resultado";
             Column4.Name = "Column4";
             Column4.ReadOnly = true;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Controls.Add(richTextBox1);
+            tabPage2.Location = new System.Drawing.Point(4, 4);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            tabPage2.Size = new System.Drawing.Size(776, 309);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Log";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // richTextBox1
+            // 
+            richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            richTextBox1.Location = new System.Drawing.Point(3, 3);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.ReadOnly = true;
+            richTextBox1.Size = new System.Drawing.Size(770, 303);
+            richTextBox1.TabIndex = 0;
+            richTextBox1.Text = "";
             // 
             // fIndex
             // 
