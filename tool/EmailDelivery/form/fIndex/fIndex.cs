@@ -25,6 +25,9 @@ public partial class fIndex : Form
 
     void button1_Click(object sender, EventArgs e)
     {
+        button1.Enabled = false;
+        dataGridView1.Rows.Clear();
+
         try
         {
             openFileDialog1.ShowDialog();
@@ -109,29 +112,30 @@ public partial class fIndex : Form
 
                     _add.CODIGO = _add.CODIGO?.Trim();
                     //_add.ENVIAR
-                    _add.PARA = (
-                        from _r in _add.PARA
-                        where _r != null
-                        select _r.Trim()
-                        ).ToArray()
-                    _add.ADJUNTO = (
-                        from _r in _add.ADJUNTO
-                        where _r != null
-                        select _r.Trim()
-                        ).ToArray();
+                    _add.PARA = AlgunNombreParaAlgunMetodo(_add.PARA);
+                    _add.CC = AlgunNombreParaAlgunMetodo(_add.CC);
+                    _add.CCO = AlgunNombreParaAlgunMetodo(_add.CCO);
+                    _add.ASUNTO = _add.ASUNTO?.Trim();
+                    _add.CUERPO = _add.CUERPO?.Trim();
+                    _add.ADJUNTO = AlgunNombreParaAlgunMetodo(_add.ADJUNTO);
 
                     _cookeds.Add(_add);
+
+                    int _index = dataGridView1.Rows.Add(_add.CODIGO, _add.ENVIAR, _add.ASUNTO, _add.RESULTADO);
+                    DataGridViewRow _row = dataGridView1.Rows[_index];
+                    _row.Tag = _add;
                 }
                 catch (Exception _ex)
                 {
                 }
             }
-
         }
         catch (Exception _ex)
         {
             MessageBox.Show(_ex.Message);
         }
+
+        button1.Enabled = true;
     }
 
     static string?[]? AlgunNombreParaAlgunMetodo(string?[]? _array)
@@ -141,8 +145,7 @@ public partial class fIndex : Form
 
         return (
             from _r in _array
-            where _r != null
-            && _r.Trim().Length > 0
+            where string.IsNullOrWhiteSpace(_r) == false
             select _r.Trim()
             ).ToArray();
     }

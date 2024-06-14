@@ -10,4 +10,6 @@ public class eMailCooked
     internal string? ASUNTO { set; get; }
     internal string? CUERPO { set; get; }
     internal string?[]? ADJUNTO { set; get; }
+
+    internal object? RESULTADO { set; get; }
 }
