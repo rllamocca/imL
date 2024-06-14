@@ -1,20 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+raw
+prepared
+Cooked
+*/
 
-namespace EmailDelivery
+namespace EmailDelivery;
+
+public record eMailRaw
 {
-    internal class eMailRaw
-    {
-        public object CODIGO { set;get }
-        public object ENVIAR { set; get }
-        public object PARA { set; get }
-        public object CC { set; get }
-        public object CCO { set; get }
-        public object ASUNTO { set; get }
-        public object CUERPO { set; get }
-        public object ADJUNTO { set; get }
-    }
+    public object C01 { init; get; }
+    public object C02 { init; get; }
+    public object C03 { init; get; }
+    public object C04 { init; get; }
+    public object C05 { init; get; }
+    public object C06 { init; get; }
+    public object C07 { init; get; }
+
+    public object C08 { init; get; }
+    public object C09 { init; get; }
+    public object C10 { init; get; }
+
+    public object C11 { init; get; }
+    public object C12 { init; get; }
+    public object C13 { init; get; }
+    public object C14 { init; get; }
+    public object C15 { init; get; }
+    public object C16 { init; get; }
+    public object C17 { init; get; }
+    public object C18 { init; get; }
+    public object C19 { init; get; }
+    public object C20 { init; get; }
 }

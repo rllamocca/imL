@@ -9,13 +9,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\src\core\imL.Core\imL.Core.csproj" />
+		<ProjectReference Include="..\..\src\pkg\imL.Package.NPOI\imL.Package.NPOI.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="app\settings.json">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </None>
+		<None Update="app\settings.json">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 </Project>
