@@ -1,0 +1,30 @@
+<Project>
+	<Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+
+	<PropertyGroup>
+		<Nullable>enable</Nullable>
+
+		<TargetFrameworks>
+			net8.0
+			;net7.0
+			;net6.0
+			;net5.0
+		</TargetFrameworks>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<Company>imL</Company>
+		<Copyright>© 1984 - 8888</Copyright>
+		<Description>Not so free tools.</Description>
+		<AssemblyTitle>® $(TargetFramework)</AssemblyTitle>
+		
+		<Authors>Ricardo Llamocca ♪♫</Authors>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
+
+		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
+	</PropertyGroup>
+</Project>

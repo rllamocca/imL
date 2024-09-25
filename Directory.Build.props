@@ -1,5 +1,9 @@
 <Project>
-    <PropertyGroup>
-        <Deterministic>true</Deterministic>
-    </PropertyGroup>
+	<PropertyGroup>
+		<Deterministic>true</Deterministic>
+
+		<Copyright>© $(TargetFramework)</Copyright>
+		<Version>84.10.2.8</Version>
+		<PackageOutputPath>$(SolutionDir)\nupkg\debug\</PackageOutputPath>
+	</PropertyGroup>
 </Project>
