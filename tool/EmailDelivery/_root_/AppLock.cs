@@ -13,6 +13,20 @@ internal class AppLock
 
     static AppLock()
     {
-        _PATH_JSON =  Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "app", "settings.json");
+        string _path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "app");
+        _PATH_JSON = Path.Combine(_path, "settings.json");
+
+        if (File.Exists(_PATH_JSON) == false)
+        {
+            Directory.CreateDirectory(_path);
+            File.WriteAllText(_PATH_JSON, "{}");
+        }
+
+        
+
+
+
+
+
     }
 }

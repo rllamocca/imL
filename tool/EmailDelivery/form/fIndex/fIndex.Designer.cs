@@ -200,7 +200,7 @@
             MainMenuStrip = menuStrip1;
             Name = "fIndex";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "...";
+            Text = "...:";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             tabControl1.ResumeLayout(false);

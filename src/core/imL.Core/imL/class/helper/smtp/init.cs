@@ -10,7 +10,7 @@ namespace imL
 {
     public static partial class SmtpHelper
     {
-        internal static SmtpClient InitSmtpClient(SmtpClient _i, SmtpFormat _f)
+        public static SmtpClient InitSmtpClient(SmtpClient _i, SmtpFormat _f)
         {
             _i.Timeout = _f.Timeout ?? _i.Timeout;
             _i.TargetName = _f.TargetName ?? _i.TargetName;
@@ -31,7 +31,7 @@ namespace imL
 
             return _i;
         }
-        internal static MailMessage InitMailMessage(MailMessage _i, MailMessageFormat _f)
+        public static MailMessage InitMailMessage(MailMessage _i, MailMessageFormat _f)
         {
             Encoding _enc = _f.Encoding == null ? null : Encoding.GetEncoding(_f.Encoding);
 

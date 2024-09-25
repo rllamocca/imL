@@ -2,12 +2,12 @@
 
 internal class eMailPrepared
 {
-    internal string? CODIGO { set; get; }
-    internal string? ENVIAR { set; get; }
-    internal string? PARA { set; get; }
-    internal string? CC { set; get; }
-    internal string? CCO { set; get; }
-    internal string? ASUNTO { set; get; }
-    internal string? CUERPO { set; get; }
-    internal string?[]? ADJUNTO { set; get; }
+    internal string? C00 { set; get; }
+    internal string? C01 { set; get; }
+    internal string? C02 { set; get; }
+    internal string? C03 { set; get; }
+    internal string? C04 { set; get; }
+    internal string? C05 { set; get; }
+    internal string? C06 { set; get; }
+    internal string?[]? C07n { set; get; }
 }

@@ -30,6 +30,10 @@
         {
             tabControl1 = new System.Windows.Forms.TabControl();
             tabPage1 = new System.Windows.Forms.TabPage();
+            _FromDisplayName = new System.Windows.Forms.TextBox();
+            _FromAddress = new System.Windows.Forms.TextBox();
+            label14 = new System.Windows.Forms.Label();
+            label13 = new System.Windows.Forms.Label();
             _SplitSeparator = new System.Windows.Forms.TextBox();
             label12 = new System.Windows.Forms.Label();
             tabPage2 = new System.Windows.Forms.TabPage();
@@ -55,41 +59,82 @@
             label3 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
+            tabPage3 = new System.Windows.Forms.TabPage();
+            button2 = new System.Windows.Forms.Button();
             button1 = new System.Windows.Forms.Button();
+            richTextBox1 = new System.Windows.Forms.RichTextBox();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)_1_Port).BeginInit();
             ((System.ComponentModel.ISupportInitialize)_1_Timeout).BeginInit();
+            tabPage3.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
             // 
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
+            tabControl1.Controls.Add(tabPage3);
             tabControl1.Location = new System.Drawing.Point(16, 16);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new System.Drawing.Size(460, 370);
+            tabControl1.Size = new System.Drawing.Size(530, 370);
             tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(_FromDisplayName);
+            tabPage1.Controls.Add(_FromAddress);
+            tabPage1.Controls.Add(label14);
+            tabPage1.Controls.Add(label13);
             tabPage1.Controls.Add(_SplitSeparator);
             tabPage1.Controls.Add(label12);
             tabPage1.Location = new System.Drawing.Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            tabPage1.Size = new System.Drawing.Size(452, 342);
+            tabPage1.Size = new System.Drawing.Size(522, 342);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "General";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // _FromDisplayName
+            // 
+            _FromDisplayName.Location = new System.Drawing.Point(200, 74);
+            _FromDisplayName.Name = "_FromDisplayName";
+            _FromDisplayName.Size = new System.Drawing.Size(300, 23);
+            _FromDisplayName.TabIndex = 5;
+            // 
+            // _FromAddress
+            // 
+            _FromAddress.Location = new System.Drawing.Point(200, 45);
+            _FromAddress.Name = "_FromAddress";
+            _FromAddress.Size = new System.Drawing.Size(300, 23);
+            _FromAddress.TabIndex = 4;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new System.Drawing.Point(16, 74);
+            label14.Name = "label14";
+            label14.Size = new System.Drawing.Size(108, 15);
+            label14.TabIndex = 3;
+            label14.Text = "FromDisplayName:";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new System.Drawing.Point(16, 45);
+            label13.Name = "label13";
+            label13.Size = new System.Drawing.Size(80, 15);
+            label13.TabIndex = 2;
+            label13.Text = "FromAddress:";
             // 
             // _SplitSeparator
             // 
             _SplitSeparator.Location = new System.Drawing.Point(200, 16);
             _SplitSeparator.Name = "_SplitSeparator";
-            _SplitSeparator.Size = new System.Drawing.Size(100, 23);
+            _SplitSeparator.Size = new System.Drawing.Size(50, 23);
             _SplitSeparator.TabIndex = 1;
             _SplitSeparator.Text = ",";
             _SplitSeparator.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -130,7 +175,7 @@
             tabPage2.Location = new System.Drawing.Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            tabPage2.Size = new System.Drawing.Size(452, 342);
+            tabPage2.Size = new System.Drawing.Size(522, 342);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "...";
             tabPage2.UseVisualStyleBackColor = true;
@@ -139,7 +184,7 @@
             // 
             _1_Password.Location = new System.Drawing.Point(200, 298);
             _1_Password.Name = "_1_Password";
-            _1_Password.Size = new System.Drawing.Size(225, 23);
+            _1_Password.Size = new System.Drawing.Size(300, 23);
             _1_Password.TabIndex = 43;
             _1_Password.UseSystemPasswordChar = true;
             // 
@@ -147,7 +192,7 @@
             // 
             _1_UserName.Location = new System.Drawing.Point(200, 269);
             _1_UserName.Name = "_1_UserName";
-            _1_UserName.Size = new System.Drawing.Size(225, 23);
+            _1_UserName.Size = new System.Drawing.Size(300, 23);
             _1_UserName.TabIndex = 42;
             // 
             // _1_UseDefaultCredentials
@@ -165,7 +210,7 @@
             _1_DeliveryFormat.FormattingEnabled = true;
             _1_DeliveryFormat.Location = new System.Drawing.Point(200, 215);
             _1_DeliveryFormat.Name = "_1_DeliveryFormat";
-            _1_DeliveryFormat.Size = new System.Drawing.Size(225, 23);
+            _1_DeliveryFormat.Size = new System.Drawing.Size(300, 23);
             _1_DeliveryFormat.TabIndex = 40;
             // 
             // _1_DeliveryMethod
@@ -174,7 +219,7 @@
             _1_DeliveryMethod.FormattingEnabled = true;
             _1_DeliveryMethod.Location = new System.Drawing.Point(200, 186);
             _1_DeliveryMethod.Name = "_1_DeliveryMethod";
-            _1_DeliveryMethod.Size = new System.Drawing.Size(225, 23);
+            _1_DeliveryMethod.Size = new System.Drawing.Size(300, 23);
             _1_DeliveryMethod.TabIndex = 39;
             // 
             // _1_EnableSsl
@@ -190,14 +235,14 @@
             // 
             _1_Host.Location = new System.Drawing.Point(200, 132);
             _1_Host.Name = "_1_Host";
-            _1_Host.Size = new System.Drawing.Size(150, 23);
+            _1_Host.Size = new System.Drawing.Size(300, 23);
             _1_Host.TabIndex = 37;
             // 
             // _1_PickupDirectoryLocation
             // 
             _1_PickupDirectoryLocation.Location = new System.Drawing.Point(200, 103);
             _1_PickupDirectoryLocation.Name = "_1_PickupDirectoryLocation";
-            _1_PickupDirectoryLocation.Size = new System.Drawing.Size(225, 23);
+            _1_PickupDirectoryLocation.Size = new System.Drawing.Size(300, 23);
             _1_PickupDirectoryLocation.TabIndex = 36;
             // 
             // label4
@@ -223,7 +268,7 @@
             // 
             _1_TargetName.Location = new System.Drawing.Point(200, 45);
             _1_TargetName.Name = "_1_TargetName";
-            _1_TargetName.Size = new System.Drawing.Size(150, 23);
+            _1_TargetName.Size = new System.Drawing.Size(300, 23);
             _1_TargetName.TabIndex = 33;
             // 
             // _1_Timeout
@@ -327,9 +372,31 @@
             label1.TabIndex = 22;
             label1.Text = "TimeOut:";
             // 
+            // tabPage3
+            // 
+            tabPage3.Controls.Add(richTextBox1);
+            tabPage3.Controls.Add(button2);
+            tabPage3.Location = new System.Drawing.Point(4, 24);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            tabPage3.Size = new System.Drawing.Size(522, 342);
+            tabPage3.TabIndex = 2;
+            tabPage3.Text = "OAuth 2.0";
+            tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Location = new System.Drawing.Point(6, 6);
+            button2.Name = "button2";
+            button2.Size = new System.Drawing.Size(75, 23);
+            button2.TabIndex = 0;
+            button2.Text = "google";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
             // button1
             // 
-            button1.Location = new System.Drawing.Point(401, 392);
+            button1.Location = new System.Drawing.Point(471, 392);
             button1.Name = "button1";
             button1.Size = new System.Drawing.Size(75, 23);
             button1.TabIndex = 1;
@@ -337,11 +404,19 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // richTextBox1
+            // 
+            richTextBox1.Location = new System.Drawing.Point(6, 35);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new System.Drawing.Size(510, 301);
+            richTextBox1.TabIndex = 1;
+            richTextBox1.Text = "";
+            // 
             // fSetting
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(490, 434);
+            ClientSize = new System.Drawing.Size(564, 431);
             Controls.Add(button1);
             Controls.Add(tabControl1);
             Name = "fSetting";
@@ -355,6 +430,7 @@
             tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)_1_Port).EndInit();
             ((System.ComponentModel.ISupportInitialize)_1_Timeout).EndInit();
+            tabPage3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -388,5 +464,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox _SplitSeparator;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox _FromDisplayName;
+        private System.Windows.Forms.TextBox _FromAddress;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

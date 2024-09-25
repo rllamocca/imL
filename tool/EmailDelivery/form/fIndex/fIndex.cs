@@ -2,11 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Text.Json;
 using System.Windows.Forms;
 
 using imL;
 using imL.Package.NPOI;
+
+using NPOI.SS.Formula.Functions;
 
 namespace EmailDelivery;
 
@@ -23,7 +26,7 @@ public partial class fIndex : Form
         _using.ShowDialog();
     }
 
-    void button1_Click(object sender, EventArgs e)
+    async void button1_Click(object sender, EventArgs e)
     {
         button1.Enabled = false;
         dataGridView1.Rows.Clear();
@@ -35,17 +38,18 @@ public partial class fIndex : Form
 
             if (_path == null)
                 return;
-
             textBox1.Text = _path;
+
             SettingFormat? _sf = JsonSerializer.Deserialize<SettingFormat>(File.ReadAllText(AppLock.PathJson));
 
             if (_sf == null)
                 throw new ArgumentNullException(nameof(_sf));
 
-            SmtpFormat? _op1 = _sf.Option_1;
+            MailMessageFormat? _basic_mail= _sf.MailMessageFormatBasic;
+            SmtpFormat? _basic_smtp = _sf.SmtpFormatBasic;
 
-            if (_op1 == null)
-                throw new ArgumentNullException(nameof(_op1));
+            if (_basic_smtp == null)
+                throw new ArgumentNullException(nameof(_basic_smtp));
 
             eMailRaw[] _raws = NPOIHelper.LoadGenerics<eMailRaw>(_path, _xls: false);
             IList<eMailPrepared> _prepareds = [];
@@ -56,15 +60,16 @@ public partial class fIndex : Form
                 {
                     eMailPrepared _add = new();
 
-                    _add.CODIGO = Convert.ToString(_item.C01);
-                    _add.ENVIAR = Convert.ToString(_item.C02);
-                    _add.PARA = Convert.ToString(_item.C03);
-                    _add.CC = Convert.ToString(_item.C04);
-                    _add.CCO = Convert.ToString(_item.C05);
-                    _add.ASUNTO = Convert.ToString(_item.C06);
-                    _add.CUERPO = Convert.ToString(_item.C07);
+                    _add.C00 = Convert.ToString(_item.C00);
+                    _add.C01 = Convert.ToString(_item.C01);
+                    _add.C02 = Convert.ToString(_item.C02);
+                    _add.C03 = Convert.ToString(_item.C03);
+                    _add.C04 = Convert.ToString(_item.C04);
+                    _add.C05 = Convert.ToString(_item.C05);
+                    _add.C06 = Convert.ToString(_item.C06);
 
-                    _add.ADJUNTO = [
+                    _add.C07n = [
+                        Convert.ToString(_item.C07),
                         Convert.ToString(_item.C08),
                         Convert.ToString(_item.C09),
                         Convert.ToString(_item.C10),
@@ -78,10 +83,16 @@ public partial class fIndex : Form
                         Convert.ToString(_item.C18),
                         Convert.ToString(_item.C19),
                         Convert.ToString(_item.C20),
+                        Convert.ToString(_item.C21),
+                        Convert.ToString(_item.C22),
+                        Convert.ToString(_item.C23),
+                        Convert.ToString(_item.C24),
+                        Convert.ToString(_item.C25),
+                        Convert.ToString(_item.C26),
                     ];
 
-                    _add.ADJUNTO = (
-                        from _r in _add.ADJUNTO
+                    _add.C07n = (
+                        from _r in _add.C07n
                         where _r != null
                         select _r
                         ).ToArray();
@@ -90,6 +101,7 @@ public partial class fIndex : Form
                 }
                 catch (Exception _ex)
                 {
+                    MessageBox.Show(_ex.Message);
                 }
             }
 
@@ -101,34 +113,82 @@ public partial class fIndex : Form
                 {
                     eMailCooked _add = new();
 
-                    _add.CODIGO = _item.CODIGO;
-                    _add.ENVIAR = (_item.ENVIAR == "SI");
-                    _add.PARA = _item.PARA?.Split(_sf.SplitSeparator);
-                    _add.CC = _item.CC?.Split(_sf.SplitSeparator);
-                    _add.CCO = _item.CCO?.Split(_sf.SplitSeparator);
-                    _add.ASUNTO = _item.ASUNTO;
-                    _add.CUERPO = _item.CUERPO;
-                    _add.ADJUNTO = _item.ADJUNTO;
+                    _add.Code = _item.C00;
+                    _add.Send = (_item.C01 == "SI");
+                    _add.To = _item.C02?.Split(_sf.SplitSeparator);
+                    _add.CC = _item.C03?.Split(_sf.SplitSeparator);
+                    _add.BCC = _item.C04?.Split(_sf.SplitSeparator);
+                    _add.Subject = _item.C05;
+                    _add.Body = _item.C06;
+                    _add.PathAttachments = _item.C07n;
 
-                    _add.CODIGO = _add.CODIGO?.Trim();
+                    _add.Code = _add.Code?.Trim();
                     //_add.ENVIAR
-                    _add.PARA = AlgunNombreParaAlgunMetodo(_add.PARA);
+                    _add.To = AlgunNombreParaAlgunMetodo(_add.To);
                     _add.CC = AlgunNombreParaAlgunMetodo(_add.CC);
-                    _add.CCO = AlgunNombreParaAlgunMetodo(_add.CCO);
-                    _add.ASUNTO = _add.ASUNTO?.Trim();
-                    _add.CUERPO = _add.CUERPO?.Trim();
-                    _add.ADJUNTO = AlgunNombreParaAlgunMetodo(_add.ADJUNTO);
+                    _add.BCC = AlgunNombreParaAlgunMetodo(_add.BCC);
+                    _add.Subject = _add.Subject?.Trim();
+                    _add.Body = _add.Body?.Trim();
+                    _add.PathAttachments = AlgunNombreParaAlgunMetodo(_add.PathAttachments);
 
                     _cookeds.Add(_add);
 
-                    int _index = dataGridView1.Rows.Add(_add.CODIGO, _add.ENVIAR, _add.ASUNTO, _add.RESULTADO);
+                    int _index = dataGridView1.Rows.Add(_add.Code, _add.Send, _add.Subject, _add.Result);
                     DataGridViewRow _row = dataGridView1.Rows[_index];
                     _row.Tag = _add;
                 }
                 catch (Exception _ex)
                 {
+                    MessageBox.Show(_ex.Message);
                 }
             }
+
+            using (SmtpClient _using = SmtpHelper.InitSmtpClient(new SmtpClient(), _basic_smtp))
+            {
+                foreach (eMailCooked _item in _cookeds)
+                {
+                    try
+                    {
+                        if ((_item.Send == true) == false)
+                            continue;
+
+                        MailMessageFormat _tmp = new MailMessageFormat();
+
+                        _tmp.IsBodyHtml = true;
+
+                        _tmp.FromAddress = _basic_mail?.FromAddress;
+                        _tmp.FromDisplayName = _basic_mail?.FromDisplayName;
+
+                        _tmp.TO = _item.To;
+                        _tmp.CC = _item.CC;
+                        _tmp.BCC = _item.BCC;
+
+                        _tmp.PathAttachments = _item.PathAttachments;
+
+                        _tmp.Subject = _item.Subject;
+                        _tmp.Body = _item.Body;
+
+                        _tmp.FromAddress = _tmp.FromAddress ?? _basic_smtp.UserName;
+                        //_tmp.FromDisplayName = _tmp.FromDisplayName ?? _basic_smtp.UserName;
+                        _tmp.FromDisplayName = "EL PELUCA";
+
+                        using (MailMessage _using2 = SmtpHelper.InitMailMessage(new MailMessage(), _tmp))
+                        {
+                            await _using.SendMailAsync(_using2);
+                            _item.Result = true;
+                        }
+                    }
+                    catch (Exception _ex)
+                    {
+                        _item.Result = _ex;
+                        MessageBox.Show(_ex.Message);
+                    }
+                }
+
+                dataGridView1.Refresh();
+            }
+
+            MessageBox.Show("Procesar");
         }
         catch (Exception _ex)
         {
@@ -155,6 +215,19 @@ public partial class fIndex : Form
         if (e.RowIndex < 0 || e.ColumnIndex < 0)
             return;
 
-        MessageBox.Show(string.Format("HI: {0} {1}", e.RowIndex, e.ColumnIndex));
+        //MessageBox.Show(string.Format("HI: {0} {1}", e.RowIndex, e.ColumnIndex));
+
+        if (e.ColumnIndex == 0)
+        {
+            DataGridViewRow _row = dataGridView1.Rows[e.RowIndex];
+
+            if (_row.Tag == null)
+                return;
+
+            eMailCooked _tag = (eMailCooked)_row.Tag;
+
+            using feMail _using = new(_tag);
+            _using.ShowDialog();
+        }
     }
 }

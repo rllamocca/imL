@@ -2,14 +2,14 @@
 
 public class eMailCooked
 {
-    internal string? CODIGO { set; get; }
-    internal bool? ENVIAR { set; get; }
-    internal string?[]? PARA { set; get; }
+    internal string? Code { set; get; }
+    internal bool? Send { set; get; }
+    internal string?[]? To { set; get; }
     internal string?[]? CC { set; get; }
-    internal string?[]? CCO { set; get; }
-    internal string? ASUNTO { set; get; }
-    internal string? CUERPO { set; get; }
-    internal string?[]? ADJUNTO { set; get; }
+    internal string?[]? BCC { set; get; }
+    internal string? Subject { set; get; }
+    internal string? Body { set; get; }
+    internal string?[]? PathAttachments { set; get; }
 
-    internal object? RESULTADO { set; get; }
+    internal object? Result { set; get; }
 }
