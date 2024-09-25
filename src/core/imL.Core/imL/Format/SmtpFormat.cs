@@ -22,7 +22,6 @@ namespace imL
         public string UserName { set; get; }
         public string Password { set; get; }
 
-
         public long? MaxSizeAttachments { set; get; } //MB
     }
 }

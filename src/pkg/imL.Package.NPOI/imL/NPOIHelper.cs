@@ -143,7 +143,7 @@ namespace imL.Package.NPOI
             if (_columnnames)
                 _init++;
 
-            List<T> _return = new List<T>();
+            IList<T> _return = new List<T>();
 
             for (int _i = _init; _i < _sheet.PhysicalNumberOfRows; _i++)
             {

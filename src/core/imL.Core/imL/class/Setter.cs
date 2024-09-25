@@ -44,12 +44,19 @@ namespace imL
         }
         internal void I__SET__(G _g, int _index, object _value)
         {
+            if (_index + 1 > _PROPS.Length)
+                return;
+
             PropertyInfo _prop = _PROPS[_index];
             I__VALUE__(_g, _prop, _value);
         }
         internal void I__SET__(G _g, string _name, object _value)
         {
             PropertyInfo _prop = _PROPS.Where(_w => _w.Name == _name).FirstOrDefault();
+
+            if (_prop == null)
+                return;
+
             I__VALUE__(_g, _prop, _value);
         }
         internal static void I__VALUE__(G _g, PropertyInfo _pi, object _value)
