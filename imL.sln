@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.0.32014.148
+VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_root_", "_root_", "{9617E2B0-6DBE-4971-B53D-764C3C114F90}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_root_", "_root_", "{86B20746-A275-4891-B032-2293F36D3841}"
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
@@ -19,6 +19,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {F1BE17B3-0ED9-4751-BFC3-A8E338449B8C}
+		SolutionGuid = {C2361F48-F307-4BD9-B2FC-5E384C8DD98E}
 	EndGlobalSection
 EndGlobal
