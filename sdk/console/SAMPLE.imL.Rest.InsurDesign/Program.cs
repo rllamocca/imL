@@ -8,10 +8,10 @@ using imL.Rest.InsurDesign.Schema;
 using imL.Utility.Http;
 
 InsurDesignFormat _format = new InsurDesignFormat();
-_format.AuthURI = "https://staging.insurdesign.com/api-auth";
+_format.AuthURI = "";
 _format.URI = "";
-_format.Username = "lalala";
-_format.Password = "lelele";
+_format.Username = "";
+_format.Password = "";
 
 HttpClient _http = new(new HttpClientHandler() { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate });
 InsurDesignClient _client = new(_http, _format);
