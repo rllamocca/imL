@@ -1,0 +1,17 @@
+{
+  "Endpoint": {
+    "Endpoint": null
+  },
+  "Frotcom": {
+    "URI": null,
+    "User": {
+      "provider": "thirdparty",
+      "username": null,
+      "password": null
+    },
+    "LicensePlates": null
+  },
+  "Period": 15,
+  "Delay": null,
+  "TimeOut": null
+}

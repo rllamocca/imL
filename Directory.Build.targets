@@ -1,0 +1,12 @@
+<Project>
+    <Target Name="RichieSays" BeforeTargets="Build" Condition=" $(TargetFramework) != '' Or $(TargetFrameworkVersion) != '' ">
+        <Message Importance="High"
+                 Text="================ ♫♪ Richie says ♪♫ ================
+    $(Configuration) $(MSBuildProjectFile)
+    $(MSBuildToolsVersion) $(MSBuildFileVersion)
+    $(TargetFramework) | $(TargetFrameworkVersion)
+    $(DefineConstants)
+================         ♂         ================
+"/>
+    </Target>
+</Project>
