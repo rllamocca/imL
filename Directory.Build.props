@@ -6,4 +6,21 @@
 		<Version>84.10.2.8</Version>
 		<PackageOutputPath>$(SolutionDir)\nupkg\debug\</PackageOutputPath>
 	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<Company>imL</Company>
+		<Copyright>© 1984 - 8888</Copyright>
+		<Description>Not so free tools.</Description>
+		<AssemblyTitle>® $(TargetFramework)</AssemblyTitle>
+
+		<Authors>Ricardo Llamocca ♪♫</Authors>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/rllamocca/imL</PackageProjectUrl>
+
+		<RepositoryUrl>https://github.com/rllamocca/imL</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageOutputPath>$(SolutionDir)\nupkg\</PackageOutputPath>
+	</PropertyGroup>
 </Project>
